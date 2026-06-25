@@ -1,0 +1,53 @@
+site_name: Sonnette's Notes 
+site_url: https://Sonnette51.github.io/stat_notes_sonnette/
+site_description: 清华统计课程笔记
+
+theme:
+  name: material
+  language: zh
+  palette:
+    # 浅色模式
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: 切换到深色模式
+    # 深色模式
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: 切换到浅色模式
+  features:
+    - navigation.tabs          # 顶部标签导航
+    - navigation.sections      # 侧边栏分组
+    - navigation.top           # 回到顶部按钮
+    - navigation.indexes       # 文件夹 index.md 作为章节首页
+    - toc.follow               # 目录跟随滚动高亮
+    - search.suggest           # 搜索建议
+    - search.highlight         # 搜索结果高亮
+    - content.code.copy        # 代码块一键复制
+
+plugins:
+  - search:
+      lang: zh
+
+markdown_extensions:
+  - admonition                 # 提示框 (> [!note])
+  - pymdownx.details           # 可折叠块
+  - pymdownx.superfences       # 代码块增强
+  - pymdownx.highlight:        # 代码语法高亮
+      anchor_linenums: true
+  - pymdownx.inlinehilite      # 行内代码高亮
+  - pymdownx.tabbed:           # 标签页
+      alternate_style: true
+  - tables                     # Markdown 表格
+  - attr_list                  # 给元素加属性
+  - md_in_html                 # HTML 中写 Markdown
+  - footnotes                  # 脚注
+  - toc:
+      permalink: true          # 标题加锚点链接
+
+
