@@ -33,21 +33,37 @@ theme:
 plugins:
   - search:
       lang: zh
+  - roamlinks                  # 支持 Obsidian [[wikilinks]] 内部链接
 
 markdown_extensions:
-  - admonition                 # 提示框 (> [!note])
+  - admonition                 # 提示框
   - pymdownx.details           # 可折叠块
-  - pymdownx.superfences       # 代码块增强
+  - pymdownx.superfences:      # 代码块增强
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.highlight:        # 代码语法高亮
       anchor_linenums: true
   - pymdownx.inlinehilite      # 行内代码高亮
   - pymdownx.tabbed:           # 标签页
       alternate_style: true
+  - pymdownx.arithmatex:       # 数学公式 $...$ 和 $$...$$
+      generic: true
   - tables                     # Markdown 表格
   - attr_list                  # 给元素加属性
   - md_in_html                 # HTML 中写 Markdown
   - footnotes                  # 脚注
   - toc:
       permalink: true          # 标题加锚点链接
+
+# 加载 KaTeX 渲染数学公式（比 MathJax 快）
+extra_javascript:
+  - https://unpkg.com/katex@0.16.10/dist/katex.min.js
+  - https://unpkg.com/katex@0.16.10/dist/contrib/auto-render.min.js
+  - javascripts/katex.js
+
+extra_css:
+  - https://unpkg.com/katex@0.16.10/dist/katex.min.css
 
 
