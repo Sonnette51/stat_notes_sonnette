@@ -62,6 +62,16 @@ extra_javascript:
 
 nav:
   - 首页: index.md
+  - 数据科学编程:
+    - 数据科学编程/index.md
+    - NumPy 讲义: 数据科学编程/NumPy讲义.md
+    - Pandas 讲义: 数据科学编程/Pandas讲义.md
+    - Database 讲义: 数据科学编程/Database讲义.md
+    - LLM 讲义: 数据科学编程/LLM讲义.md
+    - Mining Web Data 讲义: 数据科学编程/MiningWebData讲义.md
+    - Text Processing 讲义: 数据科学编程/TextProcessing讲义.md
+    - Data Visualization 讲义: 数据科学编程/DataVisualization讲义.md
+    - Advanced Visualization 讲义: "数据科学编程/Advanced Visualization讲义.md"
   - 初等概率论:
     - 初等概率论/index.md
     - Lecture01 概率模型与性质: "初等概率论/Lecture01 概率模型与性质.md"
