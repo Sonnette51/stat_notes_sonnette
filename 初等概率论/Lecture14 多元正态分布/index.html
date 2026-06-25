@@ -1,0 +1,2805 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="清华统计课程笔记">
+      
+      
+      
+        <link rel="canonical" href="https://Sonnette51.github.io/stat_notes_sonnette/%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture14%20%E5%A4%9A%E5%85%83%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83/">
+      
+      
+        <link rel="prev" href="../Lecture13%20%E4%B8%AD%E5%BF%83%E6%9E%81%E9%99%90%E5%AE%9A%E7%90%86%E3%80%81%E6%94%B6%E6%95%9B%E6%80%A7/">
+      
+      
+        <link rel="next" href="../%E6%9C%9F%E6%9C%AB%E8%AE%B0%E5%BF%86%E8%A6%81%E7%82%B9%E6%B1%87%E6%80%BB/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Lecture14 多元正态分布 - Sonnette's Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#lecture14" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="Sonnette&#39;s Notes" class="md-header__button md-logo" aria-label="Sonnette's Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Sonnette's Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Lecture14 多元正态分布
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  数据科学编程
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  初等概率论
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Sonnette&#39;s Notes" class="md-nav__button md-logo" aria-label="Sonnette's Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Sonnette's Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据科学编程
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数据科学编程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/NumPy%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NumPy 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/Pandas%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pandas 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/Database%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/LLM%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LLM 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/MiningWebData%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mining Web Data 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/TextProcessing%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Text Processing 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/DataVisualization%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Visualization 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/Advanced%20Visualization%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Advanced Visualization 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    初等概率论
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    初等概率论
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture01%20%E6%A6%82%E7%8E%87%E6%A8%A1%E5%9E%8B%E4%B8%8E%E6%80%A7%E8%B4%A8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture01 概率模型与性质
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture02%20%E6%A6%82%E7%8E%87%E7%A9%BA%E9%97%B4%E3%80%81%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture02 概率空间、条件概率
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture03%20%E7%8B%AC%E7%AB%8B%E6%80%A7%E3%80%81%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture03 独立性、随机变量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture04%20%E5%B8%B8%E8%A7%81%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture04 常见随机变量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture05%20%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0%E3%80%81%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E5%87%BD%E6%95%B0%E7%9A%84%E5%88%86%E5%B8%83%E3%80%81%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E7%9A%84%E5%88%86%E5%B8%83%28I%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture05 概率分布函数、随机变量函数的分布、随机向量的分布(I)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture06%20%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E7%9A%84%E5%88%86%E5%B8%83%28II%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture06 随机向量的分布(II)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture07%20%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E5%87%BD%E6%95%B0%E7%9A%84%E5%88%86%E5%B8%83%E3%80%81%E6%AC%A1%E5%BA%8F%E7%BB%9F%E8%AE%A1%E9%87%8F%E3%80%81p%E5%88%86%E4%BD%8D%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture07 随机向量函数的分布、次序统计量、p分位数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture08%20%E6%9C%9F%E6%9C%9B%E3%80%81%E6%96%B9%E5%B7%AE%E3%80%81%E7%9B%B8%E5%85%B3%E4%B8%8D%E7%AD%89%E5%BC%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture08 期望、方差、相关不等式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture09%20%E6%9D%A1%E4%BB%B6%E6%9C%9F%E6%9C%9B%E3%80%81%E6%9D%A1%E4%BB%B6%E6%96%B9%E5%B7%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture09 条件期望、条件方差
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture10%20%E5%8D%8F%E6%96%B9%E5%B7%AE%E3%80%81%E7%9B%B8%E5%85%B3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture10 协方差、相关
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture11%20%E6%A6%82%E7%8E%87%E6%AF%8D%E5%87%BD%E6%95%B0%E3%80%81%E7%9F%A9%E6%AF%8D%E5%87%BD%E6%95%B0%E3%80%81%E7%89%B9%E5%BE%81%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture11 概率母函数、矩母函数、特征函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture12%20%E5%A4%A7%E6%95%B0%E5%AE%9A%E5%BE%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture12 大数定律
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture13%20%E4%B8%AD%E5%BF%83%E6%9E%81%E9%99%90%E5%AE%9A%E7%90%86%E3%80%81%E6%94%B6%E6%95%9B%E6%80%A7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture13 中心极限定理、收敛性
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture14 多元正态分布
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture14 多元正态分布
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、随机向量的期望与协方差矩阵
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、随机向量的期望与协方差矩阵">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 随机向量的期望
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 期望的矩阵运算性质
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 随机向量的方差——协方差矩阵
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4 协方差矩阵的线性变换
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5 协方差矩阵的基本定理
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mvn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、多元正态分布（MVN）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、多元正态分布（MVN）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-mvn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 MVN 的两种等价定义
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1 MVN 的两种等价定义">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sigma" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        定义方式一：联合密度函数（\(\Sigma\) 正定时）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        定义方式二：线性变换（等价定义）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 由等价定义得到联合密度
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-mvn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 MVN 的特征函数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 边缘分布
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 线性组合
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.6 判定法则（实用工具）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#27" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.7 独立性判定
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.7 独立性判定">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        子向量间的独立性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        各分量的相互独立性
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#28-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.8 常用应用（1）：判定线性组合的独立性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#29" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.9 条件分布
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.9 条件分布">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二元正态的条件分布（特化）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#210-2mahalanobis-chi2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.10 常用应用（2）：Mahalanobis 距离与 \(\chi^2\) 分布
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#211-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.11 常用应用（3）：样本均值与样本方差
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lln-clt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、随机向量的 LLN 和 CLT
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、随机向量的 LLN 和 CLT">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 随机向量的大数定律
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 向量收敛与一维化
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 随机向量的中心极限定理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 统计推断中的重要应用
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.4 统计推断中的重要应用">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一维情形
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        多元情形（卡方检验）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、小结与题型策略
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="四、小结与题型策略">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        知识点层次
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        题型策略
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%9C%9F%E6%9C%AB%E8%AE%B0%E5%BF%86%E8%A6%81%E7%82%B9%E6%B1%87%E6%80%BB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 期末记忆要点汇总
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A8%A1%E5%9D%971%20%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E7%9A%84%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块1 随机向量的函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A8%A1%E5%9D%972%20%E6%AC%A1%E5%BA%8F%E7%BB%9F%E8%AE%A1%E9%87%8F%E4%B8%8Ep-%E5%88%86%E4%BD%8D%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块2 次序统计量与p-分位数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A8%A1%E5%9D%973%20%E6%9C%9F%E6%9C%9B%E4%B8%8E%E6%96%B9%E5%B7%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块3 期望与方差
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A8%A1%E5%9D%974%20%E6%9D%A1%E4%BB%B6%E6%9C%9F%E6%9C%9B%E3%80%81%E5%8D%8F%E6%96%B9%E5%B7%AE%E4%B8%8E%E4%B8%8D%E7%AD%89%E5%BC%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块4 条件期望、协方差与不等式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A8%A1%E5%9D%975%20%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0%E4%B8%8E%E7%89%B9%E5%BE%81%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块5 生成函数与特征函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A8%A1%E5%9D%976%20%E6%94%B6%E6%95%9B%E6%80%A7%E3%80%81%E5%A4%A7%E6%95%B0%E5%BE%8B%E4%B8%8E%E4%B8%AD%E5%BF%83%E6%9E%81%E9%99%90%E5%AE%9A%E7%90%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块6 收敛性、大数律与中心极限定理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A8%A1%E5%9D%977%20%E5%A4%9A%E5%85%83%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块7 多元正态分布
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、随机向量的期望与协方差矩阵
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、随机向量的期望与协方差矩阵">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 随机向量的期望
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 期望的矩阵运算性质
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 随机向量的方差——协方差矩阵
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4 协方差矩阵的线性变换
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5 协方差矩阵的基本定理
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mvn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、多元正态分布（MVN）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、多元正态分布（MVN）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-mvn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 MVN 的两种等价定义
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1 MVN 的两种等价定义">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sigma" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        定义方式一：联合密度函数（\(\Sigma\) 正定时）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        定义方式二：线性变换（等价定义）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 由等价定义得到联合密度
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-mvn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 MVN 的特征函数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 边缘分布
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 线性组合
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.6 判定法则（实用工具）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#27" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.7 独立性判定
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.7 独立性判定">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        子向量间的独立性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        各分量的相互独立性
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#28-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.8 常用应用（1）：判定线性组合的独立性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#29" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.9 条件分布
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.9 条件分布">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二元正态的条件分布（特化）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#210-2mahalanobis-chi2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.10 常用应用（2）：Mahalanobis 距离与 \(\chi^2\) 分布
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#211-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.11 常用应用（3）：样本均值与样本方差
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lln-clt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、随机向量的 LLN 和 CLT
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、随机向量的 LLN 和 CLT">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 随机向量的大数定律
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 向量收敛与一维化
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 随机向量的中心极限定理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 统计推断中的重要应用
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.4 统计推断中的重要应用">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一维情形
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        多元情形（卡方检验）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、小结与题型策略
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="四、小结与题型策略">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        知识点层次
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        题型策略
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="lecture14">Lecture14 多元正态分布<a class="headerlink" href="#lecture14" title="Permanent link">&para;</a></h1>
+<h2 id="_1">一、随机向量的期望与协方差矩阵<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>[!NOTE] 说明
+本节内容与 Lecture 8 期望 handout 最后部分一致，此处作为完整回顾收录。</p>
+</blockquote>
+<h3 id="11">1.1 随机向量的期望<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
+<p>设 <span class="arithmatex">\(\mathbf{X} = (X_1, \dots, X_n)^T\)</span> 是 <span class="arithmatex">\(n\)</span> 维随机向量。如果对每个 <span class="arithmatex">\(i\)</span>，<span class="arithmatex">\(\mu_i = EX_i\)</span> 存在，就称 <span class="arithmatex">\(\mathbf{X}\)</span> 的数学期望存在，并定义</p>
+<div class="arithmatex">\[
+\boldsymbol{\mu} := E\mathbf{X} = (EX_1, \dots, EX_n)^T = (\mu_1, \dots, \mu_n)^T
+\]</div>
+<p>即<strong>逐分量取期望</strong>。</p>
+<p>类似地，对随机矩阵</p>
+<div class="arithmatex">\[
+\mathbf{Y} = \begin{pmatrix} X_{11} &amp; X_{12} &amp; \cdots &amp; X_{1n} \\ X_{21} &amp; X_{22} &amp; \cdots &amp; X_{2n} \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ X_{m1} &amp; X_{m2} &amp; \cdots &amp; X_{mn} \end{pmatrix}
+\]</div>
+<p>其数学期望定义为逐元素取期望：</p>
+<div class="arithmatex">\[
+E\mathbf{Y} = \begin{pmatrix} EX_{11} &amp; EX_{12} &amp; \cdots &amp; EX_{1n} \\ EX_{21} &amp; EX_{22} &amp; \cdots &amp; EX_{2n} \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ EX_{m1} &amp; EX_{m2} &amp; \cdots &amp; EX_{mn} \end{pmatrix}
+\]</div>
+<h3 id="12">1.2 期望的矩阵运算性质<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>[!IMPORTANT] 性质 2.1（期望性质）
+设 <span class="arithmatex">\(\mathbf{X}, \mathbf{Y}\)</span> 如上定义，且数学期望都存在。对任何常数向量 <span class="arithmatex">\(\mathbf{a} = (a_1, \dots, a_n)^T\)</span>，常数矩阵 <span class="arithmatex">\(\mathbf{A}_{k \times m}\)</span>，<span class="arithmatex">\(\mathbf{B}_{n \times j}\)</span>，有</p>
+<ol>
+<li><span class="arithmatex">\(E(\mathbf{a}^T \mathbf{X}) = \mathbf{a}^T E\mathbf{X}\)</span></li>
+<li><span class="arithmatex">\((E\mathbf{Y})^T = E(\mathbf{Y}^T)\)</span></li>
+<li><span class="arithmatex">\(E(\mathbf{A}\mathbf{Y}) = \mathbf{A} E(\mathbf{Y})\)</span></li>
+<li><span class="arithmatex">\(E(\mathbf{Y}\mathbf{B}) = E(\mathbf{Y}) \mathbf{B}\)</span></li>
+<li><span class="arithmatex">\(E(\mathbf{A}\mathbf{Y}\mathbf{B}) = \mathbf{A} E(\mathbf{Y}) \mathbf{B}\)</span></li>
+</ol>
+</blockquote>
+<p>本质上都基于<strong>期望的线性性质</strong>：期望可以和常数矩阵的乘法交换顺序。</p>
+<blockquote>
+<p>[!TIP] 约定
+常见的写法是把向量都写成<strong>列向量</strong>。</p>
+</blockquote>
+<h3 id="13">1.3 随机向量的方差——协方差矩阵<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
+<p>以二维为例，设 <span class="arithmatex">\(\vec{X} = (X_1, X_2)^T\)</span>。类比一维方差 <span class="arithmatex">\(\operatorname{var}(X) = E[(X - \mu)^2]\)</span>，在向量情形中"平方"有两种理解：</p>
+<p><strong>外积</strong>（得到矩阵）：<span class="arithmatex">\((\mathbf{X} - \boldsymbol{\mu})(\mathbf{X} - \boldsymbol{\mu})^T\)</span> 是 <span class="arithmatex">\(n \times n\)</span> 矩阵——这就是<strong>协方差矩阵</strong>。</p>
+<p><strong>内积</strong>（得到标量）：<span class="arithmatex">\((\mathbf{X} - \boldsymbol{\mu})^T(\mathbf{X} - \boldsymbol{\mu})\)</span> 是 <span class="arithmatex">\(1 \times 1\)</span> 标量——这是 Mahalanobis 距离的平方（后面会用到）。</p>
+<p>以 <span class="arithmatex">\(n = 2\)</span> 展开外积：</p>
+<div class="arithmatex">\[
+\operatorname{var}(\vec{X}) = E\left[(\mathbf{X} - \boldsymbol{\mu})(\mathbf{X} - \boldsymbol{\mu})^T\right] = E\left[\begin{pmatrix} X_1 - \mu_1 \\ X_2 - \mu_2 \end{pmatrix} \begin{pmatrix} X_1 - \mu_1 &amp; X_2 - \mu_2 \end{pmatrix}\right]
+\]</div>
+<div class="arithmatex">\[
+= E\begin{pmatrix} (X_1 - \mu_1)^2 &amp; (X_1 - \mu_1)(X_2 - \mu_2) \\ (X_2 - \mu_2)(X_1 - \mu_1) &amp; (X_2 - \mu_2)^2 \end{pmatrix} = \begin{pmatrix} \operatorname{var}(X_1) &amp; \operatorname{cov}(X_1, X_2) \\ \operatorname{cov}(X_1, X_2) &amp; \operatorname{var}(X_2) \end{pmatrix}
+\]</div>
+<blockquote>
+<p>[!IMPORTANT] 定义 2.1（协方差矩阵 Covariance Matrix）
+如果随机向量 <span class="arithmatex">\(\mathbf{X}\)</span> 的数学期望 <span class="arithmatex">\(\boldsymbol{\mu} = E\mathbf{X}\)</span> 存在，对每个分量 <span class="arithmatex">\(X_i\)</span> 的方差有限，则称</p>
+<div class="arithmatex">\[\Sigma = E\left[(\mathbf{X} - \boldsymbol{\mu})(\mathbf{X} - \boldsymbol{\mu})^T\right] = (\sigma_{ij})\]</div>
+<p>为 <span class="arithmatex">\(\mathbf{X}\)</span> 的<strong>协方差矩阵</strong>，其中 <span class="arithmatex">\(\sigma_{ij} = \operatorname{cov}(X_i, X_j)\)</span>。</p>
+</blockquote>
+<p>协方差矩阵 <span class="arithmatex">\(\Sigma\)</span> 是<strong>对称矩阵</strong>（因为 <span class="arithmatex">\(\operatorname{cov}(X_i, X_j) = \operatorname{cov}(X_j, X_i)\)</span>）。如果行列式 <span class="arithmatex">\(\det(\Sigma) = 0\)</span>，就称 <span class="arithmatex">\(\Sigma\)</span> 是<strong>退化的</strong>。</p>
+<h3 id="14">1.4 协方差矩阵的线性变换<a class="headerlink" href="#14" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>[!IMPORTANT] 常用性质
+若 <span class="arithmatex">\(B\)</span> 是常数矩阵，<span class="arithmatex">\(\vec{X}\)</span> 有协方差矩阵 <span class="arithmatex">\(\Sigma\)</span>，则</p>
+<div class="arithmatex">\[\operatorname{var}(B\vec{X}) = E\left[B(\mathbf{X} - \boldsymbol{\mu})(\mathbf{X} - \boldsymbol{\mu})^T B^T\right] = B \Sigma B^T\]</div>
+</blockquote>
+<p>这个公式在后面 MVN 的线性组合、条件分布等多处都会反复使用。推导只需把常数矩阵 <span class="arithmatex">\(B\)</span> 提到期望外面。</p>
+<h3 id="15">1.5 协方差矩阵的基本定理<a class="headerlink" href="#15" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>[!IMPORTANT] 定理 2.1
+设 <span class="arithmatex">\(\Sigma\)</span> 是 <span class="arithmatex">\(\mathbf{X} = (X_1, \dots, X_n)\)</span> 的协方差矩阵，则</p>
+<ol>
+<li><span class="arithmatex">\(\Sigma\)</span> 是<strong>非负定矩阵</strong>；</li>
+<li><span class="arithmatex">\(\Sigma\)</span> 退化的充要条件是存在不全为零的常数 <span class="arithmatex">\(a_1, \dots, a_n\)</span> 使得</li>
+</ol>
+<div class="arithmatex">\[\sum_{i=1}^{n} a_i(X_i - EX_i) = 0 \quad a.s.\]</div>
+</blockquote>
+<p><strong>证明.</strong></p>
+<p>任取一个 <span class="arithmatex">\(n\)</span> 维实向量 <span class="arithmatex">\(\mathbf{a} = (a_1, \dots, a_n)^T\)</span>，有</p>
+<div class="arithmatex">\[
+\mathbf{a}^T \Sigma \mathbf{a} = \sum_{i=1}^{n}\sum_{j=1}^{n} a_i a_j \sigma_{ij} = \sum_{i=1}^{n}\sum_{j=1}^{n} a_i a_j E\left[(X_i - EX_i)(X_j - EX_j)\right]
+\]</div>
+<p>利用期望的线性性，将 <span class="arithmatex">\(\sum\sum\)</span> 合并到期望内部：</p>
+<div class="arithmatex">\[
+= E\left[\left(\sum_{i=1}^{n} a_i(X_i - EX_i)\right)^2\right] = \operatorname{var}\left[\sum_{i=1}^{n} a_i(X_i - EX_i)\right] \geq 0
+\]</div>
+<p>所以 <span class="arithmatex">\(\Sigma\)</span> 非负定。</p>
+<p><span class="arithmatex">\(\Sigma\)</span> 退化（即存在非零 <span class="arithmatex">\(\mathbf{a}\)</span> 使得 <span class="arithmatex">\(\mathbf{a}^T \Sigma \mathbf{a} = 0\)</span>）等价于</p>
+<div class="arithmatex">\[
+\operatorname{var}\left[\sum_{i=1}^{n} a_i(X_i - EX_i)\right] = 0 \quad \Longleftrightarrow \quad \sum_{i=1}^{n} a_i(X_i - EX_i) = 0 \quad a.s. \quad \blacksquare
+\]</div>
+<hr />
+<h2 id="mvn">二、多元正态分布（MVN）<a class="headerlink" href="#mvn" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>[!NOTE] 考核说明
+本节内容中，<strong>二元正态分布在考核范围内</strong>。目标：<strong>掌握结论</strong>，<strong>了解证明</strong>（证明过程主要基于特征函数和矩阵运算）。</p>
+</blockquote>
+<h3 id="21-mvn">2.1 MVN 的两种等价定义<a class="headerlink" href="#21-mvn" title="Permanent link">&para;</a></h3>
+<h4 id="sigma">定义方式一：联合密度函数（<span class="arithmatex">\(\Sigma\)</span> 正定时）<a class="headerlink" href="#sigma" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p>[!IMPORTANT] MVN 定义（密度函数形式）
+当 <span class="arithmatex">\(\Sigma\)</span> 正定时，<span class="arithmatex">\(\vec{X} \sim \mathcal{N}(\vec{\mu}, \Sigma)\)</span> 有联合密度函数</p>
+<div class="arithmatex">\[f(\vec{x}) = \frac{1}{(\sqrt{2\pi})^n \sqrt{\det(\Sigma)}} \exp\left[-\frac{1}{2}(\vec{x} - \vec{\mu})^T \Sigma^{-1}(\vec{x} - \vec{\mu})\right]\]</div>
+</blockquote>
+<p>其中 <span class="arithmatex">\(\vec{\mu} \in \mathbb{R}^n\)</span> 是均值向量，<span class="arithmatex">\(\Sigma\)</span> 是 <span class="arithmatex">\(n \times n\)</span> 正定协方差矩阵。</p>
+<h4 id="_2">定义方式二：线性变换（等价定义）<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p>[!IMPORTANT] 定义 1.1（multivariate normal distribution, MVN）
+设 <span class="arithmatex">\(\vec{\mu} = (\mu_1, \mu_2, \dots, \mu_n)^T\)</span> 是 <span class="arithmatex">\(n\)</span> 维常数列向量，<span class="arithmatex">\(\mathbf{B}\)</span> 是 <span class="arithmatex">\(n \times m\)</span> 常数矩阵，<span class="arithmatex">\(\varepsilon_1, \varepsilon_2, \dots, \varepsilon_m\)</span> 是相互独立且服从标准正态分布的随机变量。如果</p>
+<div class="arithmatex">\[\vec{X} = \vec{\mu} + \mathbf{B}\vec{\varepsilon}\]</div>
+<p>其中 <span class="arithmatex">\(\vec{\varepsilon} = (\varepsilon_1, \varepsilon_2, \dots, \varepsilon_m)^T\)</span>，且矩阵 <span class="arithmatex">\(\mathbf{B}\mathbf{B}^T\)</span> 满秩，就称 <span class="arithmatex">\(\vec{X} = (X_1, X_2, \dots, X_n)^T\)</span> 服从 <span class="arithmatex">\(n\)</span> 维正态分布，记作 <span class="arithmatex">\(\vec{X} \sim \mathcal{N}(\vec{\mu}, \mathbf{B}\mathbf{B}^T)\)</span>。</p>
+</blockquote>
+<p><strong>核心思想：</strong> 多元正态 = 均值平移 + 线性变换作用于独立标准正态。</p>
+<p><strong>验证均值和协方差：</strong> 因为 <span class="arithmatex">\(\operatorname{cov}(\vec{\varepsilon}, \vec{\varepsilon}) = E(\vec{\varepsilon}\vec{\varepsilon}^T) = \mathbf{I}\)</span>（独立标准正态），所以</p>
+<div class="arithmatex">\[
+E(\vec{X}) = \vec{\mu} + \mathbf{B} E(\vec{\varepsilon}) = \vec{\mu}
+\]</div>
+<div class="arithmatex">\[
+\Sigma := E\left[(\vec{X} - \vec{\mu})(\vec{X} - \vec{\mu})^T\right] = E\left[(\mathbf{B}\vec{\varepsilon})(\mathbf{B}\vec{\varepsilon})^T\right] = \mathbf{B} E(\vec{\varepsilon}\vec{\varepsilon}^T) \mathbf{B}^T = \mathbf{B}\mathbf{I}\mathbf{B}^T = \mathbf{B}\mathbf{B}^T
+\]</div>
+<blockquote>
+<p>[!EXAMPLE] 例子
+设 <span class="arithmatex">\(\varepsilon_1 \sim \mathcal{N}(0,1)\)</span>，<span class="arithmatex">\(\varepsilon_2 \sim \mathcal{N}(0,1)\)</span>，二者独立。令</p>
+<div class="arithmatex">\[\begin{pmatrix} X_1 \\ X_2 \end{pmatrix} = \begin{pmatrix} \mu_1 \\ \mu_2 \end{pmatrix} + \begin{pmatrix} 1 &amp; 1 \\ 1 &amp; -1 \end{pmatrix}\begin{pmatrix} \varepsilon_1 \\ \varepsilon_2 \end{pmatrix}\]</div>
+<p>则 <span class="arithmatex">\(\vec{X} \sim \mathcal{N}\left(\begin{pmatrix}\mu_1\\\mu_2\end{pmatrix},\ \begin{pmatrix}1&amp;1\\1&amp;-1\end{pmatrix}\begin{pmatrix}1&amp;1\\1&amp;-1\end{pmatrix}^T\right) = \mathcal{N}\left(\begin{pmatrix}\mu_1\\\mu_2\end{pmatrix},\ \begin{pmatrix}2&amp;0\\0&amp;2\end{pmatrix}\right)\)</span>。</p>
+</blockquote>
+<h3 id="22">2.2 由等价定义得到联合密度<a class="headerlink" href="#22" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>[!IMPORTANT] 定理 1.1（密度函数）
+当 <span class="arithmatex">\(\Sigma\)</span> 正定时，<span class="arithmatex">\(\vec{X} \sim \mathcal{N}(\vec{\mu}, \Sigma)\)</span> 有联合密度函数</p>
+<div class="arithmatex">\[f(\vec{x}) = \frac{1}{(\sqrt{2\pi})^n \sqrt{\det(\Sigma)}} \exp\left[-\frac{1}{2}(\vec{x} - \vec{\mu})^T \Sigma^{-1}(\vec{x} - \vec{\mu})\right]\]</div>
+</blockquote>
+<p><strong>证明思路：</strong></p>
+<p>因为 <span class="arithmatex">\(\Sigma\)</span> 正定，存在可逆方阵 <span class="arithmatex">\(B\)</span> 使得 <span class="arithmatex">\(\Sigma = BB^T\)</span>，且 <span class="arithmatex">\(\vec{X} = \vec{\mu} + B\vec{\varepsilon}\)</span>，其中 <span class="arithmatex">\(\vec{\varepsilon} \sim \mathcal{N}(\vec{0}, \mathbf{I})\)</span>。</p>
+<p><span class="arithmatex">\(\vec{\varepsilon}\)</span> 的密度函数为 <span class="arithmatex">\(f_{\vec{\varepsilon}}(\vec{y}) = \frac{1}{(\sqrt{2\pi})^n} \exp\left(-\frac{1}{2}\vec{y}^T\vec{y}\right)\)</span>。</p>
+<p>做变量替换 <span class="arithmatex">\(\vec{y} = B^{-1}(\vec{x} - \vec{\mu})\)</span>，这是一个可逆映射，雅克比行列式为</p>
+<div class="arithmatex">\[
+\left|\frac{\partial \vec{y}}{\partial \vec{x}}\right| = |B^{-1}| = \frac{1}{\sqrt{\det(\Sigma)}}
+\]</div>
+<p>其中最后一步用到 <span class="arithmatex">\(\det(\Sigma) = \det(BB^T) = (\det B)^2\)</span>，所以 <span class="arithmatex">\(|B^{-1}| = 1/|\det B| = 1/\sqrt{\det(\Sigma)}\)</span>。</p>
+<p>将 <span class="arithmatex">\(\vec{y} = B^{-1}(\vec{x} - \vec{\mu})\)</span> 代入 <span class="arithmatex">\(\vec{y}^T \vec{y}\)</span>：</p>
+<div class="arithmatex">\[
+\vec{y}^T \vec{y} = [B^{-1}(\vec{x}-\vec{\mu})]^T [B^{-1}(\vec{x}-\vec{\mu})] = (\vec{x}-\vec{\mu})^T (B^{-1})^T B^{-1} (\vec{x}-\vec{\mu}) = (\vec{x}-\vec{\mu})^T \Sigma^{-1} (\vec{x}-\vec{\mu})
+\]</div>
+<p>其中 <span class="arithmatex">\((B^{-1})^T B^{-1} = (BB^T)^{-1} = \Sigma^{-1}\)</span>。</p>
+<p>综合得到 <span class="arithmatex">\(f(\vec{x}) = f_{\vec{\varepsilon}}(\vec{y}) \cdot \left|\frac{\partial \vec{y}}{\partial \vec{x}}\right|\)</span>，即定理中的密度公式。<span class="arithmatex">\(\blacksquare\)</span></p>
+<h3 id="23-mvn">2.3 MVN 的特征函数<a class="headerlink" href="#23-mvn" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>[!IMPORTANT] 特征函数
+若 <span class="arithmatex">\(\vec{X} \sim \mathcal{N}(\vec{\mu}, \Sigma)\)</span>，则 <span class="arithmatex">\(\vec{X}\)</span> 的特征函数为</p>
+<div class="arithmatex">\[\phi_{\vec{X}}(\vec{t}) = E\exp(i\vec{t}^T\vec{X}) = \exp\left[i\vec{t}^T\vec{\mu} - \frac{1}{2}\vec{t}^T\Sigma\vec{t}\right]\]</div>
+</blockquote>
+<p><strong>推导：</strong></p>
+<p>先求 <span class="arithmatex">\(\vec{\varepsilon} \sim \mathcal{N}(\vec{0}, \mathbf{I})\)</span> 的特征函数。由独立性：</p>
+<div class="arithmatex">\[
+\phi_{\vec{\varepsilon}}(\vec{t}) = E\left[\exp(i\vec{t}^T\vec{\varepsilon})\right] = E\left[\prod_{i=1}^{n}\exp(it_i\varepsilon_i)\right] = \prod_{i=1}^{n}E[\exp(it_i\varepsilon_i)] = \prod_{j=1}^{n}\exp\left(\frac{-t_j^2}{2}\right) = \exp\left(-\frac{\vec{t}^T\vec{t}}{2}\right)
+\]</div>
+<p>然后对 <span class="arithmatex">\(\vec{X} = \vec{\mu} + \mathbf{B}\vec{\varepsilon}\)</span>：</p>
+<div class="arithmatex">\[
+\phi_{\vec{X}}(\vec{t}) = E\exp(i\vec{t}^T\vec{X}) = E\exp\left[i(\vec{t}^T\vec{\mu} + \vec{t}^T\mathbf{B}\vec{\varepsilon})\right] = \exp(i\vec{t}^T\vec{\mu}) \cdot E\exp\left[i(\vec{t}^T\mathbf{B})\vec{\varepsilon}\right]
+\]</div>
+<p>注意 <span class="arithmatex">\(\vec{t}^T\mathbf{B}\)</span> 是一个 <span class="arithmatex">\(1 \times m\)</span> 行向量，将其视作新的参数向量代入 <span class="arithmatex">\(\phi_{\vec{\varepsilon}}\)</span>：</p>
+<div class="arithmatex">\[
+= \exp(i\vec{t}^T\vec{\mu}) \cdot \exp\left[-\frac{1}{2}(\vec{t}^T\mathbf{B})(\vec{t}^T\mathbf{B})^T\right] = \exp\left[i\vec{t}^T\vec{\mu} - \frac{1}{2}\vec{t}^T\mathbf{B}\mathbf{B}^T\vec{t}\right]
+\]</div>
+<p>因为 <span class="arithmatex">\(\mathbf{B}\mathbf{B}^T = \Sigma\)</span>，得到最终结果。</p>
+<blockquote>
+<p>[!TIP] 重要推论
+从特征函数可以看出，<span class="arithmatex">\(\vec{X}\)</span> 的<strong>期望和协方差矩阵唯一决定了特征函数</strong>。由于随机向量的特征函数与分布函数相互唯一决定，所以 <span class="arithmatex">\(\vec{X}\)</span> 的分布由 <span class="arithmatex">\(\vec{\mu}\)</span> 和 <span class="arithmatex">\(\Sigma\)</span> <strong>唯一决定</strong>。</p>
+</blockquote>
+<h3 id="24">2.4 边缘分布<a class="headerlink" href="#24" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>[!IMPORTANT] 边缘分布性质
+如果 <span class="arithmatex">\(\vec{X}\)</span> 服从多元正态分布，则 <span class="arithmatex">\(\vec{X}\)</span> 的<strong>任何分量子向量</strong> <span class="arithmatex">\((X_{j_1}, \dots, X_{j_k})^T\)</span> 也服从（多元）正态分布。</p>
+</blockquote>
+<p>这可以直接从定义 1.1 看出：选取 <span class="arithmatex">\(\vec{X}\)</span> 的若干分量，相当于用一个选取矩阵左乘 <span class="arithmatex">\(\vec{X}\)</span>，结果仍然是正态向量加上常数的形式。</p>
+<blockquote>
+<p>[!EXAMPLE] 例子
+接上面的例子，<span class="arithmatex">\(\vec{X} = \vec{\mu} + \mathbf{B}\vec{\varepsilon}\)</span>，其中 <span class="arithmatex">\(X_1 = \mu_1 + \varepsilon_1 + \varepsilon_2\)</span>。由于 <span class="arithmatex">\(\varepsilon_1 + \varepsilon_2\)</span> 是独立标准正态的线性组合，<span class="arithmatex">\(X_1\)</span> 自然服从一元正态分布 <span class="arithmatex">\(\mathcal{N}(\mu_1, 2)\)</span>。</p>
+</blockquote>
+<h3 id="25">2.5 线性组合<a class="headerlink" href="#25" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>[!IMPORTANT] 定理 1.2（线性组合）
+如果 <span class="arithmatex">\(\vec{X} \sim \mathcal{N}(\vec{\mu}, \Sigma)\)</span>，则对任意常数矩阵 <span class="arithmatex">\(\mathbf{A}\)</span> 和常数向量 <span class="arithmatex">\(\vec{b}\)</span>，只要 <span class="arithmatex">\(\vec{b} + \mathbf{A}\vec{X}\)</span> 有意义且 <span class="arithmatex">\(\mathbf{A}\Sigma\mathbf{A}^T\)</span> 满秩，则</p>
+<div class="arithmatex">\[\vec{Y} = \vec{b} + \mathbf{A}\vec{X} \sim \mathcal{N}\left(\vec{b} + \mathbf{A}\vec{\mu},\ \mathbf{A}\Sigma\mathbf{A}^T\right)\]</div>
+</blockquote>
+<p><strong>证明：</strong></p>
+<p><span class="arithmatex">\(\vec{X} \sim \mathcal{N}(\vec{\mu}, \Sigma)\)</span> 意味着存在 <span class="arithmatex">\(\mathbf{B}\)</span> 和独立标准正态 <span class="arithmatex">\(\vec{\varepsilon}\)</span> 使得 <span class="arithmatex">\(\vec{X} = \vec{\mu} + \mathbf{B}\vec{\varepsilon}\)</span>。</p>
+<div class="arithmatex">\[
+\vec{Y} = \vec{b} + \mathbf{A}\vec{X} = (\vec{b} + \mathbf{A}\vec{\mu}) + (\mathbf{A}\mathbf{B})\vec{\varepsilon}
+\]</div>
+<p>这恰好是定义 1.1 的形式（新均值 <span class="arithmatex">\(= \vec{b} + \mathbf{A}\vec{\mu}\)</span>，新矩阵 <span class="arithmatex">\(= \mathbf{A}\mathbf{B}\)</span>），所以 <span class="arithmatex">\(\vec{Y}\)</span> 服从多元正态分布。其协方差矩阵为 <span class="arithmatex">\((\mathbf{A}\mathbf{B})(\mathbf{A}\mathbf{B})^T = \mathbf{A}\mathbf{B}\mathbf{B}^T\mathbf{A}^T = \mathbf{A}\Sigma\mathbf{A}^T\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+<blockquote>
+<p>[!EXAMPLE] 例：线性变换计算
+设 <span class="arithmatex">\(\begin{pmatrix}X_1\\X_2\end{pmatrix} \sim \mathcal{N}\left(\begin{pmatrix}1\\-5\end{pmatrix}, \begin{pmatrix}4&amp;-2\\-2&amp;9\end{pmatrix}\right)\)</span>，令</p>
+<div class="arithmatex">\[\begin{pmatrix}Y_1\\Y_2\end{pmatrix} = \begin{pmatrix}1\\0\end{pmatrix} + \begin{pmatrix}1&amp;0\\1&amp;1\end{pmatrix}\begin{pmatrix}X_1\\X_2\end{pmatrix}\]</div>
+<p>则 <span class="arithmatex">\(\vec{Y} \sim \mathcal{N}\left(\begin{pmatrix}1\\0\end{pmatrix} + \begin{pmatrix}1&amp;0\\1&amp;1\end{pmatrix}\begin{pmatrix}1\\-5\end{pmatrix},\ \begin{pmatrix}1&amp;0\\1&amp;1\end{pmatrix}\begin{pmatrix}4&amp;-2\\-2&amp;9\end{pmatrix}\begin{pmatrix}1&amp;1\\0&amp;1\end{pmatrix}\right)\)</span></p>
+<p>均值为 <span class="arithmatex">\(\begin{pmatrix}2\\-4\end{pmatrix}\)</span>，协方差矩阵需要具体计算矩阵乘法。</p>
+</blockquote>
+<h3 id="26">2.6 判定法则（实用工具）<a class="headerlink" href="#26" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>[!IMPORTANT] 定理 1.3（重要判定法则）
+<span class="arithmatex">\(\vec{X} = (X_1, X_2, \dots, X_n)^T \sim \mathcal{N}(\vec{\mu}, \Sigma)\)</span> 的<strong>充要条件</strong>是：对任何 <span class="arithmatex">\(\vec{a} = (a_1, a_2, \dots, a_n)^T \in \mathbb{R}^n\)</span>，</p>
+<div class="arithmatex">\[Y := \vec{a}^T\vec{X} \sim \mathcal{N}(\vec{a}^T\vec{\mu},\ \vec{a}^T\Sigma\vec{a})\]</div>
+</blockquote>
+<p><strong>翻译成人话：</strong> 一个随机向量是多元正态的，当且仅当它的<strong>所有一维线性组合</strong>都是一元正态的。</p>
+<p><strong>证明：</strong></p>
+<p><strong>（<span class="arithmatex">\(\Rightarrow\)</span>）</strong> 若 <span class="arithmatex">\(\vec{X} \sim \mathcal{N}(\vec{\mu}, \Sigma)\)</span>，<span class="arithmatex">\(Y = \vec{a}^T\vec{X}\)</span> 的特征函数：</p>
+<div class="arithmatex">\[
+\phi_Y(t) = E\exp(itY) = E\exp\left[i(t\vec{a}^T)\vec{X}\right] = \exp\left[it(\vec{a}^T\vec{\mu}) - \frac{1}{2}t^2 \vec{a}^T\Sigma\vec{a}\right] \tag{1}
+\]</div>
+<p>这正是 <span class="arithmatex">\(\mathcal{N}(\vec{a}^T\vec{\mu}, \vec{a}^T\Sigma\vec{a})\)</span> 的特征函数，所以 <span class="arithmatex">\(Y \sim \mathcal{N}(\vec{a}^T\vec{\mu}, \vec{a}^T\Sigma\vec{a})\)</span>。</p>
+<p><strong>（<span class="arithmatex">\(\Leftarrow\)</span>）</strong> 在 (1) 中取 <span class="arithmatex">\(t = 1\)</span>，得</p>
+<div class="arithmatex">\[
+E\exp(i\vec{a}^T\vec{X}) = \phi_Y(1) = \exp\left[i\vec{a}^T\vec{\mu} - \frac{1}{2}\vec{a}^T\Sigma\vec{a}\right]
+\]</div>
+<p>由于这对<strong>所有</strong> <span class="arithmatex">\(\vec{a}\)</span> 成立，而右端恰好是 <span class="arithmatex">\(\mathcal{N}(\vec{\mu}, \Sigma)\)</span> 的特征函数在 <span class="arithmatex">\(\vec{t} = \vec{a}\)</span> 处的值，由特征函数唯一确定分布，故 <span class="arithmatex">\(\vec{X} \sim \mathcal{N}(\vec{\mu}, \Sigma)\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+<blockquote>
+<p>[!EXAMPLE] 例
+<span class="arithmatex">\(\begin{pmatrix}X_1\\X_2\end{pmatrix} \sim \mathcal{N}\left(\begin{pmatrix}1\\-5\end{pmatrix}, \begin{pmatrix}4&amp;-2\\-2&amp;9\end{pmatrix}\right)\)</span> 等价于：对所有 <span class="arithmatex">\(\vec{a} = \begin{pmatrix}a_1\\a_2\end{pmatrix}\)</span>，</p>
+<div class="arithmatex">\[a_1 X_1 + a_2 X_2 \sim \mathcal{N}\left((a_1\ a_2)\begin{pmatrix}1\\-5\end{pmatrix},\ (a_1\ a_2)\begin{pmatrix}4&amp;-2\\-2&amp;9\end{pmatrix}\begin{pmatrix}a_1\\a_2\end{pmatrix}\right)\]</div>
+</blockquote>
+<h3 id="27">2.7 独立性判定<a class="headerlink" href="#27" title="Permanent link">&para;</a></h3>
+<h4 id="_3">子向量间的独立性<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p>[!IMPORTANT] 定理 1.4（独立性判定——子向量）
+设 <span class="arithmatex">\(\vec{X} \sim \mathcal{N}(\vec{\mu}, \Sigma)\)</span>，如果将 <span class="arithmatex">\(\vec{X}\)</span>、<span class="arithmatex">\(\vec{\mu}\)</span>、<span class="arithmatex">\(\Sigma\)</span> 分块为</p>
+<div class="arithmatex">\[\vec{X} = \begin{pmatrix}\vec{X}_1\\\vec{X}_2\end{pmatrix},\quad \vec{\mu} = \begin{pmatrix}\vec{\mu}_1\\\vec{\mu}_2\end{pmatrix},\quad \Sigma = \begin{pmatrix}\Sigma_{11}&amp;0\\0&amp;\Sigma_{22}\end{pmatrix}\]</div>
+<p>其中 <span class="arithmatex">\(\vec{X}_1\)</span>、<span class="arithmatex">\(\vec{\mu}_1\)</span> 和方阵 <span class="arithmatex">\(\Sigma_{11}\)</span> 的行数相同，则 <span class="arithmatex">\(\vec{X}_1\)</span> 和 <span class="arithmatex">\(\vec{X}_2\)</span> <strong>独立</strong>，而且</p>
+<div class="arithmatex">\[\vec{X}_1 \sim \mathcal{N}(\vec{\mu}_1, \Sigma_{11}), \quad \vec{X}_2 \sim \mathcal{N}(\vec{\mu}_2, \Sigma_{22})\]</div>
+</blockquote>
+<p><strong>证明：</strong> 将 <span class="arithmatex">\(\vec{X}\)</span> 的特征函数按分块展开：</p>
+<div class="arithmatex">\[
+\phi(\vec{t}) = \phi(\vec{t}_1, \vec{t}_2) = \exp\left[i\vec{t}^T\vec{\mu} - \frac{1}{2}\vec{t}^T\Sigma\vec{t}\right]
+\]</div>
+<p>由于 <span class="arithmatex">\(\Sigma\)</span> 的非对角块为零，二次型分解为</p>
+<div class="arithmatex">\[
+\vec{t}^T\Sigma\vec{t} = \vec{t}_1^T\Sigma_{11}\vec{t}_1 + \vec{t}_2^T\Sigma_{22}\vec{t}_2
+\]</div>
+<p>线性项也可分离：<span class="arithmatex">\(\vec{t}^T\vec{\mu} = \vec{t}_1^T\vec{\mu}_1 + \vec{t}_2^T\vec{\mu}_2\)</span>。于是</p>
+<div class="arithmatex">\[
+\phi(\vec{t}_1, \vec{t}_2) = \underbrace{\exp\left[i\vec{t}_1^T\vec{\mu}_1 - \frac{1}{2}\vec{t}_1^T\Sigma_{11}\vec{t}_1\right]}_{\phi_1(\vec{t}_1)} \times \underbrace{\exp\left[i\vec{t}_2^T\vec{\mu}_2 - \frac{1}{2}\vec{t}_2^T\Sigma_{22}\vec{t}_2\right]}_{\phi_2(\vec{t}_2)}
+\]</div>
+<p>联合特征函数 = 边缘特征函数之积，故 <span class="arithmatex">\(\vec{X}_1\)</span> 和 <span class="arithmatex">\(\vec{X}_2\)</span> 独立。<span class="arithmatex">\(\blacksquare\)</span></p>
+<blockquote>
+<p>[!EXAMPLE] 例
+$<span class="arithmatex">\(\begin{pmatrix}X_1\\X_2\\X_3\end{pmatrix} \sim \mathcal{N}\left(\begin{pmatrix}2\\7\\3\end{pmatrix}, \begin{pmatrix}4&amp;0&amp;0\\0&amp;9&amp;-3\\0&amp;-3&amp;8\end{pmatrix}\right)\)</span>$</p>
+<p>由于 <span class="arithmatex">\(X_1\)</span> 与 <span class="arithmatex">\((X_2, X_3)\)</span> 之间的协方差块为零，所以 <span class="arithmatex">\(X_1 \perp (X_2, X_3)\)</span>，且 <span class="arithmatex">\(X_1 \sim \mathcal{N}(2, 4)\)</span>，<span class="arithmatex">\(\begin{pmatrix}X_2\\X_3\end{pmatrix} \sim \mathcal{N}\left(\begin{pmatrix}7\\3\end{pmatrix}, \begin{pmatrix}9&amp;-3\\-3&amp;8\end{pmatrix}\right)\)</span>。</p>
+<p>注意 <span class="arithmatex">\(X_2\)</span> 和 <span class="arithmatex">\(X_3\)</span> 之间协方差为 <span class="arithmatex">\(-3 \neq 0\)</span>，所以 <span class="arithmatex">\(X_2\)</span> 和 <span class="arithmatex">\(X_3\)</span> 并<strong>不</strong>独立。</p>
+</blockquote>
+<h4 id="_4">各分量的相互独立性<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p>[!IMPORTANT] 定理 1.5（独立性判定——各分量）
+如果 <span class="arithmatex">\(\vec{X} \sim \mathcal{N}(\vec{\mu}, \Sigma)\)</span>，则 <span class="arithmatex">\((X_1, X_2, \dots, X_n)\)</span> 相互独立的<strong>充要条件</strong>是</p>
+<div class="arithmatex">\[\Sigma = \operatorname{diag}(\sigma_1^2, \sigma_2^2, \dots, \sigma_n^2)\]</div>
+</blockquote>
+<p>即协方差矩阵是<strong>对角矩阵</strong>。</p>
+<blockquote>
+<p>[!WARNING] 注意
+对于一般的随机变量，不相关（<span class="arithmatex">\(\operatorname{cov} = 0\)</span>）<strong>不等价于</strong>独立。但在<strong>联合正态</strong>的前提下，不相关 <span class="arithmatex">\(\Leftrightarrow\)</span> 独立。这是多元正态分布的一个非常特殊且实用的性质。</p>
+</blockquote>
+<h3 id="28-1">2.8 常用应用（1）：判定线性组合的独立性<a class="headerlink" href="#28-1" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>[!EXAMPLE] 例：<span class="arithmatex">\(X+Y\)</span> 与 <span class="arithmatex">\(X-Y\)</span> 何时独立？
+设 <span class="arithmatex">\(\begin{pmatrix}X\\Y\end{pmatrix} \sim \mathcal{N}\left(\begin{pmatrix}\mu_1\\\mu_2\end{pmatrix}, \Sigma\right)\)</span>，其中 <span class="arithmatex">\(\Sigma = \begin{pmatrix}\sigma_{11}&amp;\sigma_{12}\\\sigma_{21}&amp;\sigma_{22}\end{pmatrix}\)</span> 正定。求 <span class="arithmatex">\(X+Y\)</span> 与 <span class="arithmatex">\(X-Y\)</span> 独立的充分必要条件。</p>
+</blockquote>
+<p><strong>解题步骤：</strong></p>
+<p><strong>第一步</strong>：构造线性变换。令</p>
+<div class="arithmatex">\[
+\begin{pmatrix}Z_1\\Z_2\end{pmatrix} = \begin{pmatrix}1&amp;1\\1&amp;-1\end{pmatrix}\begin{pmatrix}X\\Y\end{pmatrix}
+\]</div>
+<p><strong>第二步</strong>：由定理 1.2，<span class="arithmatex">\(\vec{Z}\)</span> 仍服从多元正态分布，其协方差矩阵为</p>
+<div class="arithmatex">\[
+\operatorname{var}(\vec{Z}) = \begin{pmatrix}1&amp;1\\1&amp;-1\end{pmatrix}\Sigma\begin{pmatrix}1&amp;1\\1&amp;-1\end{pmatrix}^T
+\]</div>
+<p><strong>第三步</strong>：计算该矩阵。经过矩阵乘法，非对角元素为 <span class="arithmatex">\(\sigma_{11} - \sigma_{22}\)</span>。</p>
+<p><strong>第四步</strong>：由定理 1.4，<span class="arithmatex">\(Z_1 \perp Z_2\)</span> 当且仅当非对角元为零，即</p>
+<div class="arithmatex">\[
+\boxed{\sigma_{11} - \sigma_{22} = 0 \quad \Longleftrightarrow \quad \operatorname{var}(X) = \operatorname{var}(Y)}\]</div>
+<blockquote>
+<p>[!TIP] 解题模式
+遇到"判定某些线性组合独立"的题目，统一模式为：
+1. 把线性组合写成 <span class="arithmatex">\(\mathbf{A}\vec{X}\)</span> 的形式；
+2. 由定理 1.2 得到新向量的多元正态分布及其协方差 <span class="arithmatex">\(\mathbf{A}\Sigma\mathbf{A}^T\)</span>；
+3. 检查对应的协方差块是否为零。</p>
+</blockquote>
+<h3 id="29">2.9 条件分布<a class="headerlink" href="#29" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>[!IMPORTANT] 定理 1.6（条件分布）
+设 <span class="arithmatex">\(\vec{X} \sim \mathcal{N}(\vec{\mu}, \Sigma)\)</span>，<span class="arithmatex">\(\det(\Sigma) &gt; 0\)</span>，分块为</p>
+<div class="arithmatex">\[\vec{X} = \begin{pmatrix}\vec{X}_1\\\vec{X}_2\end{pmatrix},\quad \vec{\mu} = \begin{pmatrix}\vec{\mu}_1\\\vec{\mu}_2\end{pmatrix},\quad \Sigma = \begin{pmatrix}\Sigma_{11}&amp;\Sigma_{12}\\\Sigma_{21}&amp;\Sigma_{22}\end{pmatrix}\]</div>
+<p>其中 <span class="arithmatex">\(\vec{X}_1\)</span>、<span class="arithmatex">\(\vec{\mu}_1\)</span> 和方阵 <span class="arithmatex">\(\Sigma_{11}\)</span> 的行数相同。则在条件 <span class="arithmatex">\(\vec{X}_1 = \vec{x}_1\)</span> 下，<span class="arithmatex">\(\vec{X}_2\)</span> 服从多元正态分布：</p>
+<div class="arithmatex">\[\vec{X}_2 \mid \vec{X}_1 = \vec{x}_1 \sim \mathcal{N}\left(\vec{\mu}_2 + \Sigma_{21}\Sigma_{11}^{-1}(\vec{x}_1 - \vec{\mu}_1),\quad \Sigma_{22} - \Sigma_{21}\Sigma_{11}^{-1}\Sigma_{12}\right)\]</div>
+</blockquote>
+<p>条件分布的两个关键特征：</p>
+<ul>
+<li><strong>条件均值</strong>是 <span class="arithmatex">\(\vec{x}_1\)</span> 的<strong>线性函数</strong>：<span class="arithmatex">\(\vec{\mu}_2 + \Sigma_{21}\Sigma_{11}^{-1}(\vec{x}_1 - \vec{\mu}_1)\)</span></li>
+<li><strong>条件协方差</strong> <span class="arithmatex">\(\Sigma_{22} - \Sigma_{21}\Sigma_{11}^{-1}\Sigma_{12}\)</span> <strong>不依赖于</strong> <span class="arithmatex">\(\vec{x}_1\)</span> 的取值</li>
+</ul>
+<p><strong>证明思路：</strong></p>
+<p>构造变换</p>
+<div class="arithmatex">\[
+\begin{pmatrix}\vec{Y}_1\\\vec{Y}_2\end{pmatrix} = \begin{pmatrix}I_{11}&amp;0\\-\Sigma_{21}\Sigma_{11}^{-1}&amp;I_{22}\end{pmatrix}\begin{pmatrix}\vec{X}_1 - \vec{\mu}_1\\\vec{X}_2 - \vec{\mu}_2\end{pmatrix}
+\]</div>
+<p>可以验证 <span class="arithmatex">\(\vec{Y}_1 = \vec{X}_1 - \vec{\mu}_1\)</span>，<span class="arithmatex">\(\vec{Y}_2 = (\vec{X}_2 - \vec{\mu}_2) - \Sigma_{21}\Sigma_{11}^{-1}(\vec{X}_1 - \vec{\mu}_1)\)</span>。</p>
+<p>由定理 1.2，<span class="arithmatex">\((\vec{Y}_1, \vec{Y}_2)^T\)</span> 服从多元正态分布。经过矩阵计算，其协方差矩阵为</p>
+<div class="arithmatex">\[
+\begin{pmatrix}\Sigma_{11}&amp;0\\0&amp;\Sigma_{22} - \Sigma_{21}\Sigma_{11}^{-1}\Sigma_{12}\end{pmatrix}
+\]</div>
+<p>非对角块为零，所以由定理 1.4，<span class="arithmatex">\(\vec{Y}_1\)</span> 与 <span class="arithmatex">\(\vec{Y}_2\)</span> <strong>独立</strong>。</p>
+<p>由 <span class="arithmatex">\(\vec{X}_2 = \vec{Y}_2 + \vec{\mu}_2 + \Sigma_{21}\Sigma_{11}^{-1}(\vec{X}_1 - \vec{\mu}_1)\)</span>，以及 <span class="arithmatex">\(\vec{Y}_1\)</span> 与 <span class="arithmatex">\(\vec{Y}_2\)</span> 独立，得</p>
+<div class="arithmatex">\[
+P(\vec{X}_2 \leq \vec{x}_2 \mid \vec{X}_1 = \vec{x}_1) = P(\vec{Y}_2 + \vec{\mu}_2 + \Sigma_{21}\Sigma_{11}^{-1}(\vec{x}_1 - \vec{\mu}_1) \leq \vec{x}_2 \mid \vec{Y}_1 = \vec{x}_1 - \vec{\mu}_1)
+\]</div>
+<p>由独立性，条件可以去掉：<span class="arithmatex">\(= P(\vec{Y}_2 + \vec{\mu}_2 + \Sigma_{21}\Sigma_{11}^{-1}(\vec{x}_1 - \vec{\mu}_1) \leq \vec{x}_2)\)</span>。</p>
+<p>又 <span class="arithmatex">\(\vec{Y}_2 \sim \mathcal{N}(\vec{0}, \Sigma_{22} - \Sigma_{21}\Sigma_{11}^{-1}\Sigma_{12})\)</span>，故条件分布为定理所述。<span class="arithmatex">\(\blacksquare\)</span></p>
+<h4 id="_5">二元正态的条件分布（特化）<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p>[!EXAMPLE] 例 2.2（二元正态的条件密度）
+设 <span class="arithmatex">\((X, Y) \sim \mathcal{N}(\mu_1, \mu_2, \sigma_1^2, \sigma_2^2, \rho)\)</span>，已知 <span class="arithmatex">\(X = x\)</span> 时，<span class="arithmatex">\(Y\)</span> 的条件分布为</p>
+<div class="arithmatex">\[Y \mid X = x \sim \mathcal{N}\left(\mu_2 + \rho\frac{\sigma_2}{\sigma_1}(x - \mu_1),\quad (1 - \rho^2)\sigma_2^2\right)\]</div>
+<p>同理，<span class="arithmatex">\(X \mid Y = y \sim \mathcal{N}\left(\mu_1 + \rho\frac{\sigma_1}{\sigma_2}(y - \mu_2),\quad (1 - \rho^2)\sigma_1^2\right)\)</span>。</p>
+<p>当 <span class="arithmatex">\(X\)</span> 和 <span class="arithmatex">\(Y\)</span> 独立时，<span class="arithmatex">\(\rho = 0\)</span>，于是 <span class="arithmatex">\(f_{Y|X}(y|x) = f_Y(y)\)</span>，即条件分布退化为边缘分布。</p>
+</blockquote>
+<p>这是定理 1.6 在二维情形的直接应用。此时 <span class="arithmatex">\(\Sigma_{11} = \sigma_1^2\)</span>，<span class="arithmatex">\(\Sigma_{12} = \Sigma_{21} = \rho\sigma_1\sigma_2\)</span>，<span class="arithmatex">\(\Sigma_{22} = \sigma_2^2\)</span>，代入即可得到上面的结果。</p>
+<h3 id="210-2mahalanobis-chi2">2.10 常用应用（2）：Mahalanobis 距离与 <span class="arithmatex">\(\chi^2\)</span> 分布<a class="headerlink" href="#210-2mahalanobis-chi2" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>[!IMPORTANT] 马氏距离的卡方性质
+设 <span class="arithmatex">\(\vec{X} = (X_1, X_2, \dots, X_n)^T \sim \mathcal{N}(\vec{\mu}, \Sigma)\)</span>，且 <span class="arithmatex">\(\Sigma\)</span> 正定，则</p>
+<div class="arithmatex">\[(\vec{X} - \vec{\mu})^T \Sigma^{-1}(\vec{X} - \vec{\mu}) \sim \chi^2(n)\]</div>
+</blockquote>
+<p><strong>证明：</strong></p>
+<p>由于 <span class="arithmatex">\(\Sigma\)</span> 正定，对其做谱分解 <span class="arithmatex">\(\Sigma^{-1} = P\Lambda P^T\)</span>（<span class="arithmatex">\(P\)</span> 正交，<span class="arithmatex">\(\Lambda\)</span> 对角且元素为正），定义 <span class="arithmatex">\(\Sigma^{-1/2} = P\Lambda^{1/2}P^T\)</span>。</p>
+<p>令 <span class="arithmatex">\(\vec{Y} = \Sigma^{-1/2}(\vec{X} - \vec{\mu})\)</span>。由定理 1.2：</p>
+<div class="arithmatex">\[
+\vec{Y} \sim \mathcal{N}\left(\vec{0},\ \Sigma^{-1/2}\Sigma(\Sigma^{-1/2})^T\right) = \mathcal{N}(\vec{0}, \mathbf{I}_{n \times n})
+\]</div>
+<p>所以 <span class="arithmatex">\(Y_1, \dots, Y_n\)</span> 是 i.i.d. <span class="arithmatex">\(\mathcal{N}(0,1)\)</span>。</p>
+<div class="arithmatex">\[
+(\vec{X} - \vec{\mu})^T\Sigma^{-1}(\vec{X} - \vec{\mu}) = \vec{Y}^T\vec{Y} = Y_1^2 + \dots + Y_n^2 \sim \chi^2(n) \quad \blacksquare
+\]</div>
+<h3 id="211-3">2.11 常用应用（3）：样本均值与样本方差<a class="headerlink" href="#211-3" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>[!NOTE] 统计推断中的重要结论
+设 <span class="arithmatex">\(X_1, \dots, X_n\)</span> 相互独立，同服从 <span class="arithmatex">\(N(\mu, \sigma^2)\)</span> 分布。记样本均值 <span class="arithmatex">\(\bar{X} = \frac{1}{n}\sum_{i=1}^{n}X_i\)</span>，样本方差 <span class="arithmatex">\(S_n^2 = \frac{1}{n-1}\sum_{i=1}^{n}(X_i - \bar{X})^2\)</span>，则有：</p>
+<p><strong>(a)</strong> <span class="arithmatex">\(\bar{X}\)</span> 与 <span class="arithmatex">\(S_n^2\)</span> <strong>独立</strong>；</p>
+<p><strong>(b)</strong> <span class="arithmatex">\(\bar{X} \sim N\left(\mu, \frac{\sigma^2}{n}\right)\)</span>；</p>
+<p><strong>(c)</strong> <span class="arithmatex">\(\frac{(n-1)S_n^2}{\sigma^2} \sim \chi^2_{n-1}\)</span>。</p>
+</blockquote>
+<p>高维情形同理。证明详见习题课（两种方法：母函数方法；MVN 性质方法）。</p>
+<hr />
+<h2 id="lln-clt">三、随机向量的 LLN 和 CLT<a class="headerlink" href="#lln-clt" title="Permanent link">&para;</a></h2>
+<h3 id="31">3.1 随机向量的大数定律<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
+<p>设 <span class="arithmatex">\(\vec{X}_1, \vec{X}_2, \dots\)</span> 是 i.i.d. 的 <span class="arithmatex">\(k\)</span> 维随机向量，<span class="arithmatex">\(E\vec{X}_1\)</span> 存在。大数定律在向量情形中的表述很简单：<strong>对每个分量分别应用标量 LLN</strong>。</p>
+<p>以 <span class="arithmatex">\(k = 2\)</span> 为例，设 <span class="arithmatex">\(\vec{X}_i = \begin{pmatrix}X_{i1}\\X_{i2}\end{pmatrix}\)</span>，则</p>
+<div class="arithmatex">\[
+\frac{\vec{X}_1 + \dots + \vec{X}_n}{n} = \begin{pmatrix}\frac{X_{11} + \dots + X_{n1}}{n} \\ \frac{X_{12} + \dots + X_{n2}}{n}\end{pmatrix} \xrightarrow{a.s./p} \begin{pmatrix}EX_{11}\\EX_{12}\end{pmatrix} = E\vec{X}_1
+\]</div>
+<p>每个分量的收敛由标量 LLN 保证。</p>
+<h3 id="32">3.2 向量收敛与一维化<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>[!IMPORTANT] 定理 2.8（向量依分布收敛的等价刻画）
+设随机向量序列 <span class="arithmatex">\(\{\mathbf{X}_n\}\)</span> 和随机向量 <span class="arithmatex">\(\mathbf{X}\)</span> 的维度一致，则 <span class="arithmatex">\(\mathbf{X}_n \xrightarrow{d} \mathbf{X}\)</span> 的<strong>充分必要条件</strong>是：对任何常数向量 <span class="arithmatex">\(\mathbf{a}\)</span>，有</p>
+<div class="arithmatex">\[\mathbf{a}^T\mathbf{X}_n \xrightarrow{d} \mathbf{a}^T\mathbf{X}\]</div>
+<p>[!IMPORTANT] 引理 2.1（Cramér–Wold 定理）
+设 <span class="arithmatex">\(\mathbf{X}\)</span>、<span class="arithmatex">\(\mathbf{Y}\)</span> 都是 <span class="arithmatex">\(p\)</span> 维随机向量。则 <span class="arithmatex">\(\mathbf{X}\)</span>、<span class="arithmatex">\(\mathbf{Y}\)</span> <strong>同分布</strong>的充分必要条件是：对任何常数向量 <span class="arithmatex">\(\mathbf{a} \in \mathbb{R}^p\)</span>，<span class="arithmatex">\(\mathbf{a}^T\mathbf{X}\)</span> 与 <span class="arithmatex">\(\mathbf{a}^T\mathbf{Y}\)</span> 同分布。</p>
+<p>证明用特征函数即得。</p>
+<p>[!TIP] 核心思想
+<strong>向量问题都可转化为一维！</strong> 想证明向量收敛，只需对所有方向 <span class="arithmatex">\(\mathbf{a}\)</span> 证明一维投影的收敛。</p>
+</blockquote>
+<h3 id="33">3.3 随机向量的中心极限定理<a class="headerlink" href="#33" title="Permanent link">&para;</a></h3>
+<p>设 <span class="arithmatex">\(\vec{X}_1, \vec{X}_2, \dots\)</span> 是 i.i.d. 的 <span class="arithmatex">\(k\)</span> 维随机向量，<span class="arithmatex">\(E\vec{X}_1 = \vec{\mu}\)</span>，<span class="arithmatex">\(\operatorname{var}(\vec{X}_1) = \Sigma\)</span>（正定），<span class="arithmatex">\(\vec{S}_n = \vec{X}_1 + \dots + \vec{X}_n\)</span>。</p>
+<p><strong>推导思路（以 <span class="arithmatex">\(k = 2\)</span> 为例）：</strong></p>
+<p>对任意 <span class="arithmatex">\(\mathbf{a} = \begin{pmatrix}a_1\\a_2\end{pmatrix}\)</span>，考虑一维投影 <span class="arithmatex">\(\mathbf{a}^T\vec{S}_n = \mathbf{a}^T\vec{X}_1 + \dots + \mathbf{a}^T\vec{X}_n\)</span>。</p>
+<p>这是 i.i.d. 一维随机变量之和。由一维 CLT：</p>
+<div class="arithmatex">\[
+\frac{\mathbf{a}^T\vec{S}_n - E(\mathbf{a}^T\vec{S}_n)}{\sqrt{\operatorname{var}(\mathbf{a}^T\vec{S}_n)}} = \frac{\mathbf{a}^T\left\{\frac{\vec{S}_n - nE\vec{X}_1}{\sqrt{n}}\right\}}{\sqrt{\mathbf{a}^T\operatorname{var}(\vec{X}_1)\mathbf{a}}} \xrightarrow{d} \mathcal{N}(0,1)
+\]</div>
+<p>这意味着</p>
+<div class="arithmatex">\[
+\mathbf{a}^T\left\{\frac{\vec{S}_n - nE\vec{X}_1}{\sqrt{n}}\right\} \xrightarrow{d} \mathcal{N}(0,\ \mathbf{a}^T\operatorname{var}(\vec{X}_1)\mathbf{a}) = \mathbf{a}^T Z, \quad Z \sim \mathcal{N}(\vec{0}, \operatorname{var}(\vec{X}_1))
+\]</div>
+<p>由 Cramér–Wold 定理（定理 2.8），得到</p>
+<blockquote>
+<p>[!IMPORTANT] 向量版 CLT
+$<span class="arithmatex">\(\frac{\vec{S}_n - nE\vec{X}_1}{\sqrt{n}} \xrightarrow{d} \mathcal{N}(\vec{0},\ \operatorname{var}(\vec{X}_1))\)</span>$</p>
+<p>或等价地，标准化后</p>
+<div class="arithmatex">\[\operatorname{var}(\vec{X}_1)^{-1/2} \cdot \frac{\vec{S}_n - nE\vec{X}_1}{\sqrt{n}} \xrightarrow{d} \mathcal{N}(\vec{0},\ \mathbf{I}_{k \times k})\]</div>
+</blockquote>
+<h3 id="34">3.4 统计推断中的重要应用<a class="headerlink" href="#34" title="Permanent link">&para;</a></h3>
+<h4 id="_6">一维情形<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h4>
+<p>结合 MVN 性质和 CLT，若 <span class="arithmatex">\(X \sim \mathcal{N}(\mu, \sigma^2)\)</span>，则 <span class="arithmatex">\(\frac{(X-\mu)^2}{\sigma^2} = (X-\mu)^T(\sigma^2)^{-1}(X-\mu) \sim \chi^2(1)\)</span>。</p>
+<p>由 CLT + Continuous Mapping Theorem：</p>
+<div class="arithmatex">\[
+\operatorname{var}(\tilde{X}_1)^{-1/2} \cdot \frac{S_n - nE\tilde{X}_1}{\sqrt{n}} = \frac{S_n - ES_n}{\sqrt{\operatorname{var}(S_n)}} \xrightarrow{d} \mathcal{N}(0,1)
+\]</div>
+<p>平方后：<span class="arithmatex">\(\left(\frac{S_n - ES_n}{\sqrt{\operatorname{var}(S_n)}}\right)^2 \xrightarrow{d} \chi^2(1)\)</span>。</p>
+<h4 id="_7">多元情形（卡方检验）<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p>[!IMPORTANT] 卡方检验的向量推广
+记 <span class="arithmatex">\(\vec{M}_n = \frac{1}{n}\vec{S}_n = \frac{1}{n}\sum_{i=1}^{n}\vec{X}_i\)</span> 为样本均值向量。由向量 CLT 和 Continuous Mapping Theorem：</p>
+<div class="arithmatex">\[n(\vec{M}_n - E\vec{X}_1)^T \left[\operatorname{var}(\vec{X}_1)\right]^{-1}(\vec{M}_n - E\vec{X}_1) \xrightarrow{d} \chi^2(k)\]</div>
+<p>其中 <span class="arithmatex">\(k\)</span> 是随机向量的维度。</p>
+</blockquote>
+<p>这就是多元统计中<strong>卡方检验</strong>的理论基础：当样本量 <span class="arithmatex">\(n\)</span> 足够大时，样本均值向量与总体均值之间的 Mahalanobis 距离的 <span class="arithmatex">\(n\)</span> 倍近似服从 <span class="arithmatex">\(\chi^2(k)\)</span> 分布。</p>
+<hr />
+<h2 id="_8">四、小结与题型策略<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<h3 id="_9">知识点层次<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">层次</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">掌握</td>
+<td>协方差矩阵的定义与非负定性质；MVN 定义（两种）；线性组合定理；判定法则；独立性判定；条件分布公式；<span class="arithmatex">\((\vec{X}-\vec{\mu})^T\Sigma^{-1}(\vec{X}-\vec{\mu}) \sim \chi^2(n)\)</span>；向量 LLN/CLT 结论</td>
+</tr>
+<tr>
+<td style="text-align: center;">理解</td>
+<td>证明过程（基于特征函数和矩阵运算）；向量收敛一维化思想；Cramér–Wold 定理</td>
+</tr>
+<tr>
+<td style="text-align: center;">了解</td>
+<td>样本均值与样本方差独立（证明见习题课）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_10">题型策略<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<p><strong>题型 1：求多元正态的线性组合分布</strong></p>
+<p>策略：直接套定理 1.2，<span class="arithmatex">\(\vec{Y} = \vec{b} + \mathbf{A}\vec{X} \sim \mathcal{N}(\vec{b} + \mathbf{A}\vec{\mu}, \mathbf{A}\Sigma\mathbf{A}^T)\)</span>。计算矩阵乘法即可。</p>
+<p><strong>题型 2：判定线性组合是否独立</strong></p>
+<p>策略：(1) 把线性组合写成 <span class="arithmatex">\(\mathbf{A}\vec{X}\)</span>；(2) 计算 <span class="arithmatex">\(\mathbf{A}\Sigma\mathbf{A}^T\)</span>；(3) 检查对应子块是否为零。零则独立。</p>
+<p><strong>题型 3：求条件分布</strong></p>
+<p>策略：直接套定理 1.6 的公式。条件均值 = <span class="arithmatex">\(\vec{\mu}_2 + \Sigma_{21}\Sigma_{11}^{-1}(\vec{x}_1 - \vec{\mu}_1)\)</span>，条件协方差 = <span class="arithmatex">\(\Sigma_{22} - \Sigma_{21}\Sigma_{11}^{-1}\Sigma_{12}\)</span>。</p>
+<p><strong>题型 4：证明某二次型服从 <span class="arithmatex">\(\chi^2\)</span> 分布</strong></p>
+<p>策略：构造 <span class="arithmatex">\(\vec{Y} = \Sigma^{-1/2}(\vec{X} - \vec{\mu}) \sim \mathcal{N}(\vec{0}, \mathbf{I})\)</span>，则 <span class="arithmatex">\(\vec{Y}^T\vec{Y} = \sum Y_i^2 \sim \chi^2(n)\)</span>。</p>
+<p><strong>题型 5：利用向量 CLT 做近似</strong></p>
+<p>策略：先写出 <span class="arithmatex">\(\frac{\vec{S}_n - nE\vec{X}_1}{\sqrt{n}} \xrightarrow{d} \mathcal{N}(\vec{0}, \Sigma)\)</span>，再用 CMT 将二次型映射为 <span class="arithmatex">\(\chi^2(k)\)</span>。</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "navigation.indexes", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

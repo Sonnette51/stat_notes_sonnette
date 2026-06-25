@@ -1,0 +1,2779 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="清华统计课程笔记">
+      
+      
+      
+        <link rel="canonical" href="https://Sonnette51.github.io/stat_notes_sonnette/%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture03%20%E7%8B%AC%E7%AB%8B%E6%80%A7%E3%80%81%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F/">
+      
+      
+        <link rel="prev" href="../Lecture02%20%E6%A6%82%E7%8E%87%E7%A9%BA%E9%97%B4%E3%80%81%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87/">
+      
+      
+        <link rel="next" href="../Lecture04%20%E5%B8%B8%E8%A7%81%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Lecture03 独立性、随机变量 - Sonnette's Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#lecture03" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="Sonnette&#39;s Notes" class="md-header__button md-logo" aria-label="Sonnette's Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Sonnette's Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Lecture03 独立性、随机变量
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  数据科学编程
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  初等概率论
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Sonnette&#39;s Notes" class="md-nav__button md-logo" aria-label="Sonnette's Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Sonnette's Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据科学编程
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数据科学编程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/NumPy%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NumPy 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/Pandas%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pandas 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/Database%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/LLM%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LLM 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/MiningWebData%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mining Web Data 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/TextProcessing%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Text Processing 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/DataVisualization%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Visualization 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/Advanced%20Visualization%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Advanced Visualization 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    初等概率论
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    初等概率论
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture01%20%E6%A6%82%E7%8E%87%E6%A8%A1%E5%9E%8B%E4%B8%8E%E6%80%A7%E8%B4%A8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture01 概率模型与性质
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture02%20%E6%A6%82%E7%8E%87%E7%A9%BA%E9%97%B4%E3%80%81%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture02 概率空间、条件概率
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture03 独立性、随机变量
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture03 独立性、随机变量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、事件的独立性
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、事件的独立性">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 引例：有偏硬币连掷三次
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 两个事件的独立性（定义）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 两个事件的条件独立性（定义）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-vs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4 独立性 vs 条件独立性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5 一组事件的相互独立性（定义）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.6 一组事件的两两独立性（定义）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#17-vs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.7 两两独立 vs 相互独立
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.8 事件独立性的应用
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.9 条件概率及相关公式的小结
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#110" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.10 赌徒破产模型
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、随机变量
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、随机变量">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 为什么引进"随机变量"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 "随机变量"是什么？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 随机变量的应用
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 随机变量的理解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-aside" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 Aside：随机变量的独立性的定义（预告）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26-aside" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.6 Aside：集合与函数运算
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#27" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.7 随机变量的严格定义（不做考核要求）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#28" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.8 随机变量严格定义下的性质（不做考核要求）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#29" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.9 随机变量的函数
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、随机变量的独立性
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、随机变量的独立性">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 关于"随机变量相互独立"定义的补充说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 定理 2.1：独立随机变量生成的事件独立
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 随机变量序列或函数的独立性
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.4 随机变量序列或函数的独立性">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        独立序列与独立同分布序列
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        定理 2.2：独立随机变量的函数仍独立
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#40" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、小结（课件第 40 页）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        本讲方法/题型清单
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture04%20%E5%B8%B8%E8%A7%81%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture04 常见随机变量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture05%20%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0%E3%80%81%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E5%87%BD%E6%95%B0%E7%9A%84%E5%88%86%E5%B8%83%E3%80%81%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E7%9A%84%E5%88%86%E5%B8%83%28I%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture05 概率分布函数、随机变量函数的分布、随机向量的分布(I)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture06%20%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E7%9A%84%E5%88%86%E5%B8%83%28II%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture06 随机向量的分布(II)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture07%20%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E5%87%BD%E6%95%B0%E7%9A%84%E5%88%86%E5%B8%83%E3%80%81%E6%AC%A1%E5%BA%8F%E7%BB%9F%E8%AE%A1%E9%87%8F%E3%80%81p%E5%88%86%E4%BD%8D%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture07 随机向量函数的分布、次序统计量、p分位数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture08%20%E6%9C%9F%E6%9C%9B%E3%80%81%E6%96%B9%E5%B7%AE%E3%80%81%E7%9B%B8%E5%85%B3%E4%B8%8D%E7%AD%89%E5%BC%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture08 期望、方差、相关不等式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture09%20%E6%9D%A1%E4%BB%B6%E6%9C%9F%E6%9C%9B%E3%80%81%E6%9D%A1%E4%BB%B6%E6%96%B9%E5%B7%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture09 条件期望、条件方差
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture10%20%E5%8D%8F%E6%96%B9%E5%B7%AE%E3%80%81%E7%9B%B8%E5%85%B3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture10 协方差、相关
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture11%20%E6%A6%82%E7%8E%87%E6%AF%8D%E5%87%BD%E6%95%B0%E3%80%81%E7%9F%A9%E6%AF%8D%E5%87%BD%E6%95%B0%E3%80%81%E7%89%B9%E5%BE%81%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture11 概率母函数、矩母函数、特征函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture12%20%E5%A4%A7%E6%95%B0%E5%AE%9A%E5%BE%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture12 大数定律
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture13%20%E4%B8%AD%E5%BF%83%E6%9E%81%E9%99%90%E5%AE%9A%E7%90%86%E3%80%81%E6%94%B6%E6%95%9B%E6%80%A7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture13 中心极限定理、收敛性
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture14%20%E5%A4%9A%E5%85%83%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture14 多元正态分布
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%9C%9F%E6%9C%AB%E8%AE%B0%E5%BF%86%E8%A6%81%E7%82%B9%E6%B1%87%E6%80%BB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 期末记忆要点汇总
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A8%A1%E5%9D%971%20%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E7%9A%84%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块1 随机向量的函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A8%A1%E5%9D%972%20%E6%AC%A1%E5%BA%8F%E7%BB%9F%E8%AE%A1%E9%87%8F%E4%B8%8Ep-%E5%88%86%E4%BD%8D%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块2 次序统计量与p-分位数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A8%A1%E5%9D%973%20%E6%9C%9F%E6%9C%9B%E4%B8%8E%E6%96%B9%E5%B7%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块3 期望与方差
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A8%A1%E5%9D%974%20%E6%9D%A1%E4%BB%B6%E6%9C%9F%E6%9C%9B%E3%80%81%E5%8D%8F%E6%96%B9%E5%B7%AE%E4%B8%8E%E4%B8%8D%E7%AD%89%E5%BC%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块4 条件期望、协方差与不等式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A8%A1%E5%9D%975%20%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0%E4%B8%8E%E7%89%B9%E5%BE%81%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块5 生成函数与特征函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A8%A1%E5%9D%976%20%E6%94%B6%E6%95%9B%E6%80%A7%E3%80%81%E5%A4%A7%E6%95%B0%E5%BE%8B%E4%B8%8E%E4%B8%AD%E5%BF%83%E6%9E%81%E9%99%90%E5%AE%9A%E7%90%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块6 收敛性、大数律与中心极限定理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A8%A1%E5%9D%977%20%E5%A4%9A%E5%85%83%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块7 多元正态分布
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、事件的独立性
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、事件的独立性">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 引例：有偏硬币连掷三次
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 两个事件的独立性（定义）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 两个事件的条件独立性（定义）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-vs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4 独立性 vs 条件独立性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5 一组事件的相互独立性（定义）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.6 一组事件的两两独立性（定义）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#17-vs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.7 两两独立 vs 相互独立
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.8 事件独立性的应用
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.9 条件概率及相关公式的小结
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#110" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.10 赌徒破产模型
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、随机变量
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、随机变量">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 为什么引进"随机变量"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 "随机变量"是什么？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 随机变量的应用
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 随机变量的理解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-aside" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 Aside：随机变量的独立性的定义（预告）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26-aside" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.6 Aside：集合与函数运算
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#27" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.7 随机变量的严格定义（不做考核要求）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#28" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.8 随机变量严格定义下的性质（不做考核要求）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#29" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.9 随机变量的函数
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、随机变量的独立性
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、随机变量的独立性">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 关于"随机变量相互独立"定义的补充说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 定理 2.1：独立随机变量生成的事件独立
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 随机变量序列或函数的独立性
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.4 随机变量序列或函数的独立性">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        独立序列与独立同分布序列
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        定理 2.2：独立随机变量的函数仍独立
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#40" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、小结（课件第 40 页）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        本讲方法/题型清单
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="lecture03">Lecture03 独立性、随机变量<a class="headerlink" href="#lecture03" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>[!ABSTRACT] 本讲概要
+本讲两条主线：一是把"<span class="arithmatex">\(B\)</span> 的发生不给 <span class="arithmatex">\(A\)</span> 带来新信息"这一直觉数学化为<strong>事件的独立性</strong>（含条件独立、相互独立、两两独立的层层辨析）；二是引入概率论的核心语言——<strong>随机变量</strong>，并定义随机变量的独立性。教材对应 Bertsekas &amp; Tsitsiklis Ch2 2.1, 2.7, Ch3 3.5.4。</p>
+</blockquote>
+<h2 id="_1">一、事件的独立性<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h3 id="11">1.1 引例：有偏硬币连掷三次<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
+<p>有一枚有偏的硬币，连续抛掷 3 次：<span class="arithmatex">\(\mathbb{P}(H)=p\)</span>，<span class="arithmatex">\(\mathbb{P}(T)=1-p\)</span>。课件用树状图列出 8 个结果（HHH, HHT, HTH, HTT, THH, THT, TTH, TTT），每条树枝标注 <span class="arithmatex">\(p\)</span> 或 <span class="arithmatex">\(1-p\)</span>。</p>
+<p>记 <span class="arithmatex">\(H_k\)</span> 为"第 <span class="arithmatex">\(k\)</span> 次正面向上"，<span class="arithmatex">\(T_k\)</span> 为"第 <span class="arithmatex">\(k\)</span> 次反面向上"，则：</p>
+<ul>
+<li><span class="arithmatex">\(\mathbb{P}(H_2\mid H_1)=p\)</span>；</li>
+<li><span class="arithmatex">\(\mathbb{P}(H_2\mid T_1)=p\)</span>；</li>
+<li><span class="arithmatex">\(\mathbb{P}(H_2)=\mathbb{P}(H_2\mid H_1)\mathbb{P}(H_1)+\mathbb{P}(H_2\mid T_1)\mathbb{P}(T_1)=p\)</span>。</li>
+</ul>
+<p><strong>直觉</strong>：无论第一次结果如何，第二次正面的概率都还是 <span class="arithmatex">\(p\)</span>——第一次的结果没有给第二次带来任何信息，这就是"独立"。</p>
+<hr />
+<h3 id="12">1.2 两个事件的独立性（定义）<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
+<p><strong>"独立性"的直观定义</strong>：事件 <span class="arithmatex">\(B\)</span> 的发生并没有给事件 <span class="arithmatex">\(A\)</span> 带来新的信息，它没有改变事件 <span class="arithmatex">\(A\)</span> 发生的概率，即 <span class="arithmatex">\(\mathbb{P}(A\mid B)=\mathbb{P}(A)\)</span>。</p>
+<blockquote>
+<p>[!IMPORTANT] 定义（独立性 independence）【常用】
+设 <span class="arithmatex">\((\Omega,\mathcal{F},\mathbb{P})\)</span> 是概率空间，<span class="arithmatex">\(A,B\in\mathcal{F}\)</span>。如果</p>
+<div class="arithmatex">\[
+\mathbb{P}(A\cap B)=\mathbb{P}(A)\mathbb{P}(B),
+\]</div>
+<p>则称 <span class="arithmatex">\(A\)</span> 与 <span class="arithmatex">\(B\)</span> <strong>相互独立</strong>，简称<strong>独立</strong>。</p>
+</blockquote>
+<p><strong>直觉</strong>：交事件的概率恰好等于概率的乘积，意味着两个事件互相不提供任何信息。</p>
+<p><strong>几点备注（课件逐条）：</strong></p>
+<ul>
+<li>乘积式定义对 <span class="arithmatex">\(A\)</span>、<span class="arithmatex">\(B\)</span> <strong>对称</strong>；对 <span class="arithmatex">\(\mathbb{P}(B)=0\)</span> 的情形同样适用；它<strong>蕴含</strong>直观定义 <span class="arithmatex">\(\mathbb{P}(A\mid B)=\mathbb{P}(A)\)</span>（当 <span class="arithmatex">\(\mathbb{P}(B)&gt;0\)</span> 时两者等价）。</li>
+<li>显然，<strong>不可能事件、必然事件与任何事件独立</strong>。</li>
+<li>若 <span class="arithmatex">\(A\)</span> 与 <span class="arithmatex">\(B\)</span> 独立，则：(i) <span class="arithmatex">\(A\)</span> 与 <span class="arithmatex">\(B^c\)</span> 独立；(ii) <span class="arithmatex">\(A^c\)</span> 与 <span class="arithmatex">\(B\)</span> 独立；(iii) <span class="arithmatex">\(A^c\)</span> 与 <span class="arithmatex">\(B^c\)</span> 独立。</li>
+</ul>
+<p><strong>性质 (i)–(iii) 的证明思路</strong>（注：此步补全了课件未写出的推导）：以 (i) 为例，</p>
+<div class="arithmatex">\[
+\mathbb{P}(A\cap B^c)=\mathbb{P}(A)-\mathbb{P}(A\cap B)=\mathbb{P}(A)-\mathbb{P}(A)\mathbb{P}(B)=\mathbb{P}(A)\big(1-\mathbb{P}(B)\big)=\mathbb{P}(A)\mathbb{P}(B^c).
+\]</div>
+<p>(ii) 由对称性即得；(iii) 对 (i) 再用一次 (ii) 即得。</p>
+<blockquote>
+<p>[!WARNING] 辨析：独立 ≠ 不相交
+注意独立性与<strong>不相交（互斥）</strong>的区别：互斥是集合关系 <span class="arithmatex">\(A\cap B=\varnothing\)</span>，此时 <span class="arithmatex">\(\mathbb{P}(A\cap B)=0\)</span>；若 <span class="arithmatex">\(\mathbb{P}(A)&gt;0,\mathbb{P}(B)&gt;0\)</span>，互斥的两个事件<strong>必不独立</strong>（一个发生则另一个必不发生，信息量极大）。独立是概率（测度）关系，与集合是否相交无关。</p>
+</blockquote>
+<p><strong>什么情况可能出现独立？</strong></p>
+<ul>
+<li>同一试验可以有相互独立的事件；</li>
+<li>不同试验也可以有相互独立的事件。</li>
+</ul>
+<blockquote>
+<p>[!EXAMPLE]- 例题 1：两个互不相干试验中的事件独立
+用 <span class="arithmatex">\(\Omega_1\)</span> 和 <span class="arithmatex">\(\Omega_2\)</span> 分别表示互不相干的试验 <span class="arithmatex">\(S_1\)</span> 和 <span class="arithmatex">\(S_2\)</span> 的样本空间，设 <span class="arithmatex">\(\Omega_1\)</span> 和 <span class="arithmatex">\(\Omega_2\)</span> 的样本点分别是等可能的，并且</p>
+<div class="arithmatex">\[
+\Omega_1=\{\mu_i\mid 1\le i\le n\},\qquad \Omega_2=\{\eta_j\mid 1\le j\le m\}.
+\]</div>
+<p>则对 <span class="arithmatex">\(A\subset\Omega_1\)</span>，<span class="arithmatex">\(B\subset\Omega_2\)</span>，有 <span class="arithmatex">\(A,B\)</span> 独立。</p>
+<p><strong>解</strong>（注：此步补全了课件未展开的验证）：把两个试验合在一起看，复合试验的样本空间为 <span class="arithmatex">\(\Omega_1\times\Omega_2\)</span>，共 <span class="arithmatex">\(nm\)</span> 个等可能样本点。</p>
+<p>事件 <span class="arithmatex">\(A\)</span> 在复合试验中对应 <span class="arithmatex">\(A\times\Omega_2\)</span>，含 <span class="arithmatex">\(|A|\cdot m\)</span> 个点，故 <span class="arithmatex">\(\mathbb{P}(A)=\dfrac{|A|m}{nm}=\dfrac{|A|}{n}\)</span>；同理 <span class="arithmatex">\(\mathbb{P}(B)=\dfrac{|B|}{m}\)</span>。</p>
+<p>事件 <span class="arithmatex">\(A\cap B\)</span> 对应 <span class="arithmatex">\(A\times B\)</span>，含 <span class="arithmatex">\(|A|\cdot|B|\)</span> 个点，故</p>
+<div class="arithmatex">\[
+\mathbb{P}(A\cap B)=\frac{|A||B|}{nm}=\frac{|A|}{n}\cdot\frac{|B|}{m}=\mathbb{P}(A)\mathbb{P}(B),
+\]</div>
+<p>即 <span class="arithmatex">\(A\)</span> 与 <span class="arithmatex">\(B\)</span> 独立。</p>
+</blockquote>
+<hr />
+<h3 id="13">1.3 两个事件的条件独立性（定义）<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>[!IMPORTANT] 定义（条件独立性 conditional independence）
+设 <span class="arithmatex">\((\Omega,\mathcal{F},\mathbb{P})\)</span> 是概率空间，<span class="arithmatex">\(A,B,C\in\mathcal{F}\)</span>，且 <span class="arithmatex">\(\mathbb{P}(C)&gt;0\)</span>。如果</p>
+<div class="arithmatex">\[
+\mathbb{P}(A\cap B\mid C)=\mathbb{P}(A\mid C)\mathbb{P}(B\mid C),
+\]</div>
+<p>则称 <span class="arithmatex">\(A\)</span> 与 <span class="arithmatex">\(B\)</span> 在给定 <span class="arithmatex">\(C\)</span> 之下<strong>条件独立</strong>。</p>
+</blockquote>
+<p><strong>直觉</strong>：在"已知 <span class="arithmatex">\(C\)</span> 发生"的新世界（条件概率测度 <span class="arithmatex">\(\mathbb{P}(\cdot\mid C)\)</span>）里，<span class="arithmatex">\(A\)</span> 与 <span class="arithmatex">\(B\)</span> 互不提供信息。</p>
+<p>课件提出的核心问题：<strong>条件独立性是否蕴含独立性？反之是否成立？</strong>——下一节用两个反例说明：<strong>两个方向都不成立</strong>。</p>
+<hr />
+<h3 id="14-vs">1.4 独立性 vs 条件独立性<a class="headerlink" href="#14-vs" title="Permanent link">&para;</a></h3>
+<p><strong>图示反例（课件 Venn 图）</strong>：即使假定 <span class="arithmatex">\(A\)</span>、<span class="arithmatex">\(B\)</span> 相互独立，给定 <span class="arithmatex">\(C\)</span> 之后，<span class="arithmatex">\(A\)</span>、<span class="arithmatex">\(B\)</span> 未必还相互独立——条件化会改变 <span class="arithmatex">\(A\)</span>、<span class="arithmatex">\(B\)</span> 在新样本空间 <span class="arithmatex">\(C\)</span> 内的"比例结构"。</p>
+<blockquote>
+<p>[!EXAMPLE]- 例题 2：独立但不条件独立（两枚均匀硬币）
+考虑抛掷两次均匀的硬币，这个试验的四种可能结果都是等可能的。令 <span class="arithmatex">\(H_1=\{\text{第一枚硬币正面向上}\}\)</span>，<span class="arithmatex">\(H_2=\{\text{第二枚硬币正面向上}\}\)</span>，<span class="arithmatex">\(D=\{\text{两枚硬币的试验结果不同}\}\)</span>。则事件 <span class="arithmatex">\(H_1\)</span> 和事件 <span class="arithmatex">\(H_2\)</span> 是独立的，但是</p>
+<div class="arithmatex">\[
+\mathbb{P}(H_i\mid D)=\frac{1}{2},\qquad \mathbb{P}(H_1\cap H_2\mid D)=0,\qquad i=1,2.
+\]</div>
+<p>这样 <span class="arithmatex">\(\mathbb{P}(H_1\cap H_2\mid D)\neq\mathbb{P}(H_1\mid D)\mathbb{P}(H_2\mid D)\)</span>，即 <span class="arithmatex">\(H_1\)</span> 和 <span class="arithmatex">\(H_2\)</span> 并不条件独立。</p>
+<p><strong>解</strong>（注：此步补全了各概率的逐一验证）：样本空间 <span class="arithmatex">\(\Omega=\{HH,HT,TH,TT\}\)</span>，每点概率 <span class="arithmatex">\(\frac{1}{4}\)</span>。</p>
+<p><span class="arithmatex">\(H_1=\{HH,HT\}\)</span>，<span class="arithmatex">\(H_2=\{HH,TH\}\)</span>，<span class="arithmatex">\(D=\{HT,TH\}\)</span>。</p>
+<p>独立性：<span class="arithmatex">\(\mathbb{P}(H_1)=\mathbb{P}(H_2)=\frac{1}{2}\)</span>，<span class="arithmatex">\(\mathbb{P}(H_1\cap H_2)=\mathbb{P}(\{HH\})=\frac{1}{4}=\frac{1}{2}\times\frac{1}{2}\)</span>，故 <span class="arithmatex">\(H_1,H_2\)</span> 独立。</p>
+<p>条件概率：<span class="arithmatex">\(\mathbb{P}(H_1\mid D)=\dfrac{\mathbb{P}(\{HT\})}{\mathbb{P}(D)}=\dfrac{1/4}{1/2}=\dfrac{1}{2}\)</span>；同理 <span class="arithmatex">\(\mathbb{P}(H_2\mid D)=\dfrac{1}{2}\)</span>。</p>
+<p>而 <span class="arithmatex">\(H_1\cap H_2\cap D=\{HH\}\cap D=\varnothing\)</span>，故 <span class="arithmatex">\(\mathbb{P}(H_1\cap H_2\mid D)=0\neq\dfrac{1}{4}=\mathbb{P}(H_1\mid D)\mathbb{P}(H_2\mid D)\)</span>。</p>
+<p><strong>结论</strong>：给定 <span class="arithmatex">\(D\)</span> 后，知道第一枚是正面就完全确定第二枚是反面——条件之下两事件信息量拉满，不再独立。</p>
+<p>[!EXAMPLE]- 例题 3：条件独立但不独立（两枚不均匀硬币）
+考虑两枚不均匀的硬币 <span class="arithmatex">\(A\)</span> 和 <span class="arithmatex">\(B\)</span>：<span class="arithmatex">\(\mathbb{P}(H\mid \text{coin }A)=0.9\)</span>，<span class="arithmatex">\(\mathbb{P}(H\mid \text{coin }B)=0.1\)</span>。等概率选择两硬币之一进行抛掷（课件配树状图：先以 <span class="arithmatex">\(0.5\)</span>、<span class="arithmatex">\(0.5\)</span> 分叉选硬币，再按 <span class="arithmatex">\(0.9/0.1\)</span> 分叉各次抛掷）。</p>
+<ul>
+<li>如果我们知道是硬币 <span class="arithmatex">\(A\)</span>，不同的抛掷之间独立么？</li>
+<li>如果我们不知道是哪枚硬币，不同的抛掷之间独立么？</li>
+</ul>
+<p><strong>解</strong>：记 <span class="arithmatex">\(C=\{\text{选中硬币 }A\}\)</span>，<span class="arithmatex">\(H_i=\{\text{第 }i\text{ 次正面}\}\)</span>，<span class="arithmatex">\(\mathbb{P}(C)=\mathbb{P}(C^c)=\dfrac{1}{2}\)</span>。</p>
+<p>（1）给定选中的是硬币 <span class="arithmatex">\(A\)</span>：每次抛掷正面概率恒为 <span class="arithmatex">\(0.9\)</span>，且各次抛掷条件独立，</p>
+<div class="arithmatex">\[
+\mathbb{P}(H_1\cap H_2\mid C)=0.9\times 0.9=\mathbb{P}(H_1\mid C)\mathbb{P}(H_2\mid C).
+\]</div>
+<p>故<strong>给定硬币后，不同抛掷之间（条件）独立</strong>。</p>
+<p>（2）不知道是哪枚硬币时（注：此步补全了数值验证）：由全概率公式，</p>
+<div class="arithmatex">\[
+\mathbb{P}(H_1)=\frac{1}{2}\times 0.9+\frac{1}{2}\times 0.1=0.5,\qquad \mathbb{P}(H_2)=0.5,
+\]</div>
+<div class="arithmatex">\[
+\mathbb{P}(H_1\cap H_2)=\frac{1}{2}\times 0.9^2+\frac{1}{2}\times 0.1^2=\frac{1}{2}(0.81+0.01)=0.41\neq 0.25=\mathbb{P}(H_1)\mathbb{P}(H_2).
+\]</div>
+<p>故<strong>不知道硬币时，不同抛掷之间不独立</strong>。</p>
+<p><strong>直觉</strong>：第一次出现正面强烈暗示手里是硬币 <span class="arithmatex">\(A\)</span>，从而抬高了第二次正面的概率——信息通过"是哪枚硬币"传递。</p>
+<p>[!WARNING] 辨析：独立与条件独立互不蕴含
+- 独立 <span class="arithmatex">\(\not\Rightarrow\)</span> 条件独立（例题 2：均匀硬币 + 条件 <span class="arithmatex">\(D\)</span>）；
+- 条件独立 <span class="arithmatex">\(\not\Rightarrow\)</span> 独立（例题 3：不均匀硬币，给定硬币后条件独立，整体不独立）。
+拿到题目时，"在谁的条件下独立"必须先问清楚。</p>
+</blockquote>
+<hr />
+<h3 id="15">1.5 一组事件的相互独立性（定义）<a class="headerlink" href="#15" title="Permanent link">&para;</a></h3>
+<p><strong>直观定义</strong>："一组事件的独立性"：任选其中一些事件，其信息不能为我们提供任何关于剩余事件的信息，或者说不改变剩余事件发生的概率。例如</p>
+<div class="arithmatex">\[
+\mathbb{P}\big(A_1\cap(A_2^c\cup A_3)\mid A_5\cap A_6^c\big)=\mathbb{P}\big(A_1\cap(A_2^c\cup A_3)\big).
+\]</div>
+<blockquote>
+<p>[!IMPORTANT] 定义（一组事件的独立性）【常用】
+设 <span class="arithmatex">\((\Omega,\mathcal{F},\mathbb{P})\)</span> 是概率空间，<span class="arithmatex">\(A_1,\ldots,A_n\in\mathcal{F}\)</span>。如果对任意非空子集 <span class="arithmatex">\(S\subset\{1,2,\ldots,n\}\)</span>，都有</p>
+<div class="arithmatex">\[
+\mathbb{P}\Big(\bigcap_{i\in S}A_i\Big)=\prod_{i\in S}\mathbb{P}(A_i),
+\]</div>
+<p>则称 <span class="arithmatex">\(A_1,A_2,\ldots,A_n\)</span> 是<strong>相互独立</strong>的。</p>
+</blockquote>
+<p><strong>直觉</strong>：不是只要求"全体连乘"成立，而是<strong>任挑一撮</strong>事件，其交的概率都要能拆成乘积——这才保证任意组合之间互不提供信息。</p>
+<blockquote>
+<p>[!NOTE] 思考题（课件）
+一定要任意非空子集 <span class="arithmatex">\(S\)</span> 么？
+提示（注：此为补充说明）：<span class="arithmatex">\(|S|=1\)</span> 时等式平凡成立，真正需要验证的是所有 <span class="arithmatex">\(|S|\ge 2\)</span> 的子集，共 <span class="arithmatex">\(2^n-n-1\)</span> 条等式；只验证"全体连乘"一条是不够的，下面的两两独立反例正说明缺少某些子集等式会出问题。</p>
+</blockquote>
+<hr />
+<h3 id="16">1.6 一组事件的两两独立性（定义）<a class="headerlink" href="#16" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>[!IMPORTANT] 定义（两两独立性 Pairwise independence）
+设 <span class="arithmatex">\((\Omega,\mathcal{F},\mathbb{P})\)</span> 是概率空间，<span class="arithmatex">\(A_1,\ldots,A_n\in\mathcal{F}\)</span>。如果</p>
+<div class="arithmatex">\[
+\mathbb{P}(A_i\cap A_j)=\mathbb{P}(A_i)\mathbb{P}(A_j),\qquad i,j\in\{1,2,\ldots,n\},
+\]</div>
+<p>则称 <span class="arithmatex">\(A_1,A_2,\ldots,A_n\)</span> 是<strong>两两独立</strong>的。</p>
+</blockquote>
+<p><strong>直觉</strong>：只检查"任意两个"事件之间互不提供信息，不管三个及以上的组合——这是比相互独立<strong>弱</strong>的条件。</p>
+<hr />
+<h3 id="17-vs">1.7 两两独立 vs 相互独立<a class="headerlink" href="#17-vs" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>[!EXAMPLE]- 例题 4：两两独立但不相互独立（正四面体染色，Bernstein 反例）
+将一个均匀的正四面体的第一面染上红、黄、蓝三色，将其它三面分别染上红色、黄色、蓝色。设 <span class="arithmatex">\(A,B,C\)</span> 分别表示掷一次四面体红色、黄色、蓝色与桌面接触的事件，则</p>
+<div class="arithmatex">\[
+\mathbb{P}(A)=\mathbb{P}(B)=\mathbb{P}(C)=\frac{1}{2},
+\]</div>
+<div class="arithmatex">\[
+\mathbb{P}(A\cap B)=\frac{1}{4}=\mathbb{P}(A)\mathbb{P}(B),\quad
+\mathbb{P}(B\cap C)=\frac{1}{4}=\mathbb{P}(B)\mathbb{P}(C),\quad
+\mathbb{P}(A\cap C)=\frac{1}{4}=\mathbb{P}(A)\mathbb{P}(C).
+\]</div>
+<p>但是 <span class="arithmatex">\(\mathbb{P}(A\cap B\cap C)=\dfrac{1}{4}\neq\dfrac{1}{8}=\mathbb{P}(A)\mathbb{P}(B)\mathbb{P}(C)\)</span>。</p>
+<p><strong>解</strong>（注：此步补全了各概率的来源）：四个面等可能（各 <span class="arithmatex">\(\frac{1}{4}\)</span>）。红色出现在"三色面"和"纯红面"上，故 <span class="arithmatex">\(\mathbb{P}(A)=\frac{2}{4}=\frac{1}{2}\)</span>，黄、蓝同理。两种颜色同时与桌面接触只能发生在三色面落地时，故 <span class="arithmatex">\(\mathbb{P}(A\cap B)=\mathbb{P}(B\cap C)=\mathbb{P}(A\cap C)=\frac{1}{4}\)</span>，两两独立的等式逐对成立。三色同时接触也只能是三色面落地，故 <span class="arithmatex">\(\mathbb{P}(A\cap B\cap C)=\frac{1}{4}\neq\frac{1}{8}\)</span>。</p>
+<p><strong>即：两两独立并不能保证相互独立！</strong></p>
+<p>[!WARNING] 辨析：相互独立 ⊋ 两两独立
+相互独立 <span class="arithmatex">\(\Rightarrow\)</span> 两两独立（取 <span class="arithmatex">\(|S|=2\)</span> 的子集即可），但反向不成立（例题 4）。说"<span class="arithmatex">\(n\)</span> 个事件独立"时务必区分是哪一种。</p>
+</blockquote>
+<hr />
+<h3 id="18">1.8 事件独立性的应用<a class="headerlink" href="#18" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>[!EXAMPLE]- 例题 5：检测纸连测 20 人
+设某地区某时期每人携带爆炸物或毒品的概率为 <span class="arithmatex">\(0.04\%\)</span>，用一张新的检测纸连测 20 人，求此纸条含有爆炸物或毒品的概率。</p>
+<p><strong>解</strong>：设 <span class="arithmatex">\(A_i\)</span> 为"第 <span class="arithmatex">\(i\)</span> 个人携带爆炸物或毒品"，<span class="arithmatex">\(i=1,\ldots,20\)</span>，设可以认为诸 <span class="arithmatex">\(A_i\)</span> 是相互独立的。则所求的概率为</p>
+<div class="arithmatex">\[
+\begin{align}
+\mathbb{P}\Big(\bigcup_{i=1}^{20}A_i\Big)&amp;=1-\mathbb{P}\Big(\bigcap_{i=1}^{20}A_i^c\Big)\\
+&amp;=1-\prod_{i=1}^{20}\mathbb{P}(A_i^c)\\
+&amp;=1-(1-0.0004)^{20}\\
+&amp;\approx 0.008.
+\end{align}
+\]</div>
+<p><strong>What if 1000 persons?</strong> 课件给出答案 <span class="arithmatex">\(33\%\)</span>。（注：此步补全了计算）</p>
+<div class="arithmatex">\[
+1-(1-0.0004)^{1000}=1-e^{1000\ln 0.9996}\approx 1-e^{-0.4}\approx 0.33,
+\]</div>
+<p>即连测 1000 人时，检测纸有约 <span class="arithmatex">\(33\%\)</span> 的概率沾上爆炸物或毒品——小概率事件在大量重复下几乎必然出现。</p>
+<p>[!TIP] 方法：至少发生一个 → 取补集拆乘积
+求"<span class="arithmatex">\(n\)</span> 个独立事件至少发生一个"的概率，套路是 <span class="arithmatex">\(\mathbb{P}(\bigcup A_i)=1-\prod(1-\mathbb{P}(A_i))\)</span>：先取补集化为"全都不发生"，再用独立性把交拆成乘积。</p>
+</blockquote>
+<hr />
+<h3 id="19">1.9 条件概率及相关公式的小结<a class="headerlink" href="#19" title="Permanent link">&para;</a></h3>
+<p>课件把第 2 讲以来的核心公式汇总如下（<strong>条件概率依然是概率测度：所有关于概率的性质对条件概率都成立</strong>）：</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>条件</th>
+<th>公式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>条件概率</td>
+<td><span class="arithmatex">\(A,B\in\mathcal{F}\)</span>，<span class="arithmatex">\(\mathbb{P}(A)&gt;0\)</span></td>
+<td><span class="arithmatex">\(\mathbb{P}(B\mid A)=\dfrac{\mathbb{P}(A\cap B)}{\mathbb{P}(A)}\)</span></td>
+</tr>
+<tr>
+<td>乘法公式</td>
+<td><span class="arithmatex">\(A_i\in\mathcal{F}\)</span>，<span class="arithmatex">\(\mathbb{P}(A_1\cap\cdots\cap A_{n-1})&gt;0\)</span></td>
+<td><span class="arithmatex">\(\mathbb{P}\Big(\displaystyle\bigcap_{i=1}^{n}A_i\Big)=\mathbb{P}(A_1)\displaystyle\prod_{i=2}^{n}\mathbb{P}(A_i\mid A_1\cap A_2\cap\cdots\cap A_{i-1})\)</span></td>
+</tr>
+<tr>
+<td>全概率公式</td>
+<td><span class="arithmatex">\(\{A_i\}\)</span> 是 <span class="arithmatex">\(\Omega\)</span> 的一个分割，<span class="arithmatex">\(\mathbb{P}(A_i)&gt;0\)</span></td>
+<td><span class="arithmatex">\(\mathbb{P}(B)=\mathbb{P}(A_1)\mathbb{P}(B\mid A_1)+\cdots+\mathbb{P}(A_n)\mathbb{P}(B\mid A_n)\)</span></td>
+</tr>
+<tr>
+<td>Bayes 公式</td>
+<td><span class="arithmatex">\(\{A_i\}\)</span> 是 <span class="arithmatex">\(\Omega\)</span> 的分割，<span class="arithmatex">\(\mathbb{P}(B)&gt;0\)</span>，<span class="arithmatex">\(\mathbb{P}(A_i)&gt;0\)</span></td>
+<td><span class="arithmatex">\(\mathbb{P}(A_i\mid B)=\dfrac{\mathbb{P}(A_i)\mathbb{P}(B\mid A_i)}{\sum_{j=1}^{n}\mathbb{P}(A_j)\mathbb{P}(B\mid A_j)}\)</span></td>
+</tr>
+<tr>
+<td>独立性</td>
+<td><span class="arithmatex">\(A,B\in\mathcal{F}\)</span></td>
+<td><span class="arithmatex">\(\mathbb{P}(A\cap B)=\mathbb{P}(A)\mathbb{P}(B)\)</span></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="110">1.10 赌徒破产模型<a class="headerlink" href="#110" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>[!EXAMPLE]- 例题 6：赌徒破产模型（递归公式 + 边界条件）
+甲有本金 <span class="arithmatex">\(a\)</span> 元，决心再赢 <span class="arithmatex">\(b\)</span> 元停止赌博。设甲每局赢得概率是 <span class="arithmatex">\(p=1/2\)</span>，每局输赢都是一元钱，甲输光后停止赌博，求甲输光的概率 <span class="arithmatex">\(q(a)\)</span>。</p>
+<p><strong>解</strong>：用 <span class="arithmatex">\(A\)</span> 表示甲第一局赢，<span class="arithmatex">\(B_k\)</span> 表示甲有本金 <span class="arithmatex">\(k\)</span> 元时最后输光。由题意，<span class="arithmatex">\(q(0)=1\)</span>，<span class="arithmatex">\(q(a+b)=0\)</span>（注：此步补全了边界条件的含义——本金为 <span class="arithmatex">\(0\)</span> 即已输光，概率为 <span class="arithmatex">\(1\)</span>；本金达到 <span class="arithmatex">\(a+b\)</span> 即赢满目标后收手，再无输光可能，概率为 <span class="arithmatex">\(0\)</span>），并且记 <span class="arithmatex">\(q(k)=\mathbb{P}(B_k)\)</span>。</p>
+<p><strong>递归公式</strong>：对第一局的结果用全概率公式：</p>
+<div class="arithmatex">\[
+\begin{align}
+q(k)=\mathbb{P}(B_k)&amp;=\mathbb{P}(A)\mathbb{P}(B_k\mid A)+\mathbb{P}(A^c)\mathbb{P}(B_k\mid A^c)\\
+&amp;=\frac{1}{2}\mathbb{P}(B_{k+1})+\frac{1}{2}\mathbb{P}(B_{k-1})=\frac{1}{2}\big[q(k+1)+q(k-1)\big].
+\end{align}
+\]</div>
+<p>（注：此步补全了 <span class="arithmatex">\(\mathbb{P}(B_k\mid A)=q(k+1)\)</span> 的理由——第一局赢后本金变为 <span class="arithmatex">\(k+1\)</span> 元，且其后的赌局与之前独立，输光概率与"从 <span class="arithmatex">\(k+1\)</span> 元起步"相同。）</p>
+<p>于是有 <span class="arithmatex">\(2q(k)=q(k+1)+q(k-1)\)</span>，从而差分相等：</p>
+<div class="arithmatex">\[
+q(k+1)-q(k)=q(k)-q(k-1)=\cdots=q(1)-q(0)=q(1)-1.
+\]</div>
+<p>因此把差分从 <span class="arithmatex">\(0\)</span> 累加到 <span class="arithmatex">\(n\)</span>（注：此步补全了叠加过程：<span class="arithmatex">\(q(n)-q(0)=\sum_{k=0}^{n-1}[q(k+1)-q(k)]=n[q(1)-1]\)</span>）：</p>
+<div class="arithmatex">\[
+q(n)-1=n\big[q(1)-1\big].
+\]</div>
+<p><strong>边界条件</strong>：取 <span class="arithmatex">\(n=a+b\)</span>，得到</p>
+<div class="arithmatex">\[
+0-1=(a+b)\big[q(1)-1\big],\quad\text{i.e.,}\quad q(1)-1=-\frac{1}{a+b}.
+\]</div>
+<p>故</p>
+<div class="arithmatex">\[
+q(a)=1+a\big[q(1)-1\big]=1-\frac{a}{a+b}=\frac{b}{a+b}.
+\]</div>
+<p><strong>此概率说明</strong>：当甲的本金 <span class="arithmatex">\(a\)</span> 有限，则贪心 <span class="arithmatex">\(b\)</span> 越大，输光的概率越大。如果一直赌下去（<span class="arithmatex">\(b\to\infty\)</span>），必定输光（<span class="arithmatex">\(q(a)\to 1\)</span>）。</p>
+<p>[!TIP] 方法：递归 + 边界条件
+步数或步数不确定的随机试验（赌局、随机游走），用"对第一步条件化（首步分析）"建立递归公式，再用问题给出的边界条件解出通项——这是本讲技巧"归纳法求解非有限步或步数不确定的随机试验"的典型代表。</p>
+</blockquote>
+<hr />
+<h2 id="_2">二、随机变量<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="21">2.1 为什么引进"随机变量"<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
+<p><strong>动机（来自赌徒破产模型）：</strong></p>
+<ul>
+<li>在赌徒破产模型中，若关心"赌徒在某个特定时间还有多少赌金"，按之前的语言只能用记号 <span class="arithmatex">\(A_{jk}\)</span> 表示"赌徒在 <span class="arithmatex">\(k\)</span> 轮赌博后刚好有 <span class="arithmatex">\(j\)</span> 元"这样的事件——多个时间点就需要一大堆不同的记号。</li>
+<li>更复杂地，若感兴趣"赌博了多少轮输光"的事件，用上述记号表示将会很复杂。</li>
+<li>而下面的记号则相对轻松许多：用 <span class="arithmatex">\(X_k\)</span> 表示"赌徒在 <span class="arithmatex">\(k\)</span> 轮赌博之后剩的赌金"，用 <span class="arithmatex">\(R=\min\{n:\ X_n=0\ \text{or}\ X_n=a+b\}\)</span> 表示赌博持续的时间/轮数。</li>
+</ul>
+<p><strong>四个引例（课件逐一给出）：</strong></p>
+<ul>
+<li><strong>血压</strong>：人的血压总在不断变化之中。设甲的收缩压的变化范围是 90–180 mmHg，用 <span class="arithmatex">\(X\)</span> 表示甲的收缩压的测量结果，称 <span class="arithmatex">\(X\)</span> 是<strong>随机变量</strong>；<span class="arithmatex">\(X=125\)</span> 表示甲的收缩压是 125 mmHg。这里试验的样本空间是 <span class="arithmatex">\(\Omega=[90,180]\)</span>，随机变量 <span class="arithmatex">\(X\)</span> 是 <span class="arithmatex">\(\Omega\)</span> 上的函数，满足 <span class="arithmatex">\(X(\omega)=\omega\)</span>。</li>
+<li><strong>扑克</strong>：在一副扑克的 52 张中任取 1 张，样本空间的每个点表示 1 张扑克。用 <span class="arithmatex">\(X\)</span> 表示所取扑克的大小，如 <span class="arithmatex">\(X=3\)</span> 表示所取到的扑克是 3。将 <span class="arithmatex">\(X\)</span> 视为样本空间上的函数 <span class="arithmatex">\(X:\Omega\mapsto\mathbb{N}\)</span>，则</li>
+</ul>
+<div class="arithmatex">\[
+\{X=3\}\triangleq\{\omega\mid X(\omega)=3\}=\{\clubsuit 3,\ \diamondsuit 3,\ \heartsuit 3,\ \spadesuit 3\}.
+\]</div>
+<p>显然，对 <span class="arithmatex">\(\forall x\in\mathbb{R}\)</span>，<span class="arithmatex">\(\{X\le x\}\)</span> 是一个事件，称 <span class="arithmatex">\(X\)</span> 是<strong>随机变量</strong>。由于 <span class="arithmatex">\(X\)</span> 的取值是数，可对 <span class="arithmatex">\(X\)</span> 进行数学运算。
+- <strong>抛硬币</strong>：将一枚均匀的硬币连续抛掷两次，用 <span class="arithmatex">\(X\)</span> 表示得到正面的个数。这里试验的样本空间是 <span class="arithmatex">\(\Omega=\{HH,HT,TH,TT\}\)</span>，随机变量 <span class="arithmatex">\(X\)</span> 是 <span class="arithmatex">\(\Omega\)</span> 上的函数，取值范围是 <span class="arithmatex">\(\{0,1,2\}\)</span>。
+- <strong>两个孩子</strong>：一个家庭计划连续要两个孩子，假设每个孩子的性别相互独立，且生男孩女孩是等可能的。用 <span class="arithmatex">\(X\)</span> 表示得到女孩的个数。样本空间是 <span class="arithmatex">\(\Omega=\{BB,BG,GB,GG\}\)</span>，随机变量 <span class="arithmatex">\(X\)</span> 是 <span class="arithmatex">\(\Omega\)</span> 上的函数，取值范围是 <span class="arithmatex">\(\{0,1,2\}\)</span>。</p>
+<p><strong>引入随机变量的三大理由（课件强调）：</strong></p>
+<ul>
+<li><strong>（简化性）</strong>"事件"是用来描述随机试验的某些现象是否出现的，要说明比较复杂的试验结果需要定义许多事件；随机变量让我们集中力量在关注的重点上。</li>
+<li><strong>（数值化）</strong> 在许多概率模型中，试验结果是数值化的，比如仪器的仪表板的读数、股票的价格、气温等；还有其它的试验结果虽不是数值的，但这些试验结果与某些数值紧密相连。</li>
+<li><strong>（通用性）</strong> 对随机试验来说，不仅关心试验出现什么结果，更重要的是要知道这些结果将以什么概率出现；可能多个场景通用一个模型，即"房子 vs 蓝图"。</li>
+</ul>
+<hr />
+<h3 id="22">2.2 "随机变量"是什么？<a class="headerlink" href="#22" title="Permanent link">&para;</a></h3>
+<p><strong>给每个可能的试验结果分配一个数</strong>。即，一个从样本空间 <span class="arithmatex">\(\Omega\)</span> 到实数轴 <span class="arithmatex">\(\mathbb{R}\)</span> 的函数（课件配图：<span class="arithmatex">\(\Omega\)</span> 中的样本点经 <span class="arithmatex">\(X\)</span> 映到数轴上的 <span class="arithmatex">\(x\)</span>）。离散、连续均可能。</p>
+<p><strong>讨论（课件三问）：</strong></p>
+<ul>
+<li>随机变量也是映射，和概率（测度 <span class="arithmatex">\(\mathbb{P}:\mathcal{F}\to[0,1]\)</span>）有什么区别？——定义域不同：随机变量定义在样本点上，概率定义在事件（集合）上。</li>
+<li>随机性来自哪里？——来自 <span class="arithmatex">\(\omega\)</span>：试验结果 <span class="arithmatex">\(\omega\)</span> 是随机的，<span class="arithmatex">\(X(\omega)\)</span> 本身是确定的函数。</li>
+<li>对同一个样本空间，可以定义不同的随机变量。本质上，随机变量是一个试验某一方面的数值上的总结。</li>
+</ul>
+<hr />
+<h3 id="23">2.3 随机变量的应用<a class="headerlink" href="#23" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>[!EXAMPLE]- 例题 7：13 张牌中恰好 5 张梅花
+在 52 张扑克牌中任取 13 张，求这 13 张牌中恰好有 5 张梅花的概率。</p>
+<p><strong>解</strong>：</p>
+<p><strong>第一步（定义随机变量）</strong>：用 <span class="arithmatex">\(X\)</span> 表示"这 13 张牌中梅花的张数"，则 <span class="arithmatex">\(X=5\)</span> 是关心的事件（<strong>明确关心事件</strong>）。</p>
+<p>为了弄清 <span class="arithmatex">\(X(\omega)\)</span>，设试验的样本空间 <span class="arithmatex">\(\Omega=\{\omega\}\)</span>，即 <span class="arithmatex">\(\Omega\)</span> 由 <span class="arithmatex">\(\binom{52}{13}\)</span> 个样本点组成，每个样本点 <span class="arithmatex">\(\omega\)</span> 是不分次序的 13 张牌。<span class="arithmatex">\(X(\omega)\)</span> 是定义在 <span class="arithmatex">\(\Omega\)</span> 上的函数：</p>
+<div class="arithmatex">\[
+X(\omega)=\text{“}\omega\text{ 中的梅花数”},\ \omega\in\Omega,\qquad \{X=5\}=\{\omega\mid\omega\text{ 中有 5 张梅花}\}.
+\]</div>
+<p><strong>第二步（计算对应概率）</strong>：易得（梅花 13 张中选 5、非梅花 39 张中选 8）</p>
+<div class="arithmatex">\[
+\mathbb{P}(X=5)=\frac{\binom{13}{5}\binom{39}{8}}{\binom{52}{13}}.
+\]</div>
+<p>课件之问："多此一举？"——见下节：写出 <span class="arithmatex">\(X(\omega)\)</span> 对算出数值帮助不大，但它把"事件语言"统一成了"随机变量语言"。</p>
+</blockquote>
+<hr />
+<h3 id="24">2.4 随机变量的理解<a class="headerlink" href="#24" title="Permanent link">&para;</a></h3>
+<ul>
+<li>尽管将 <span class="arithmatex">\(X\)</span> 的函数关系表示出来了，但对于问题 <span class="arithmatex">\(\mathbb{P}(X=5)=?\)</span> 的解决并没有很多的帮助。因此，人们并不十分看重函数 <span class="arithmatex">\(X=X(\omega)\)</span> 在 <span class="arithmatex">\(\Omega\)</span> 上是如何具体定义的，<strong>只是在必要的时候才将自变元 <span class="arithmatex">\(\omega\)</span> 写出来</strong>。</li>
+<li>此后，相对于原始概率空间 <span class="arithmatex">\((\Omega,\mathcal{F},\mathbb{P})\)</span>，我们将更多关注经过 <span class="arithmatex">\(X\)</span> 映射后的概率空间 <span class="arithmatex">\((\mathbb{R},\mathcal{B},\mathbb{P})\)</span>——课件戏称"<strong>沙子转移大法</strong>"：把 <span class="arithmatex">\(\Omega\)</span> 上的概率（沙子）通过 <span class="arithmatex">\(X\)</span> 搬运到实数轴上。</li>
+<li>思考：<span class="arithmatex">\(\mathcal{B}\)</span> 该如何定义？（见 2.7 节 Borel 域。）</li>
+</ul>
+<hr />
+<h3 id="25-aside">2.5 Aside：随机变量的独立性的定义（预告）<a class="headerlink" href="#25-aside" title="Permanent link">&para;</a></h3>
+<p><strong>直观</strong>：设 <span class="arithmatex">\(X_1,\ldots,X_n\)</span> 是 <span class="arithmatex">\((\Omega,\mathcal{F})\)</span> 上的随机变量，如何定义随机变量间的独立性？</p>
+<blockquote>
+<p>[!IMPORTANT] 定义（随机变量的相互独立性）【常用】
+设 <span class="arithmatex">\(X_1,\ldots,X_n\)</span> 是 <span class="arithmatex">\((\Omega,\mathcal{F})\)</span> 上的随机变量，如果对任意的实数 <span class="arithmatex">\(x_1,\ldots,x_n\)</span> 都有</p>
+<div class="arithmatex">\[
+\mathbb{P}(X_1\le x_1,\ldots,X_n\le x_n)=\mathbb{P}(X_1\le x_1)\cdots\mathbb{P}(X_n\le x_n),
+\]</div>
+<p>称随机变量 <span class="arithmatex">\(X_1,\ldots,X_n\)</span> <strong>相互独立</strong>。</p>
+</blockquote>
+<ul>
+<li>思考 1：是否 <span class="arithmatex">\(\Omega\)</span> 上的任意函数都可以做随机变量？</li>
+<li>思考 2：解决问题？例如，学生、身高、<span class="arithmatex">\([165,170]\)</span> 的概率——要让 <span class="arithmatex">\(\mathbb{P}(X\in[165,170])\)</span> 这类问题有意义，必须保证 <span class="arithmatex">\(\{X\in[165,170]\}\)</span> 是 <span class="arithmatex">\(\mathcal{F}\)</span> 中的事件。这两问引出下面的严格定义。</li>
+</ul>
+<hr />
+<h3 id="26-aside">2.6 Aside：集合与函数运算<a class="headerlink" href="#26-aside" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>[!IMPORTANT] 定理（原像与集合运算可交换）
+设 <span class="arithmatex">\(A,B\)</span> 是 <span class="arithmatex">\(\mathbb{R}\)</span> 上的子集，<span class="arithmatex">\(f(\omega)\)</span> 是 <span class="arithmatex">\(\Omega\)</span> 上的函数，若用 <span class="arithmatex">\(f^{-1}(C)\)</span> 表示 <span class="arithmatex">\(f\)</span> 的对应值域 <span class="arithmatex">\(C\)</span> 的定义域范围，则</p>
+<div class="arithmatex">\[
+f^{-1}(A\cup B)=f^{-1}(A)\cup f^{-1}(B),
+\]</div>
+<div class="arithmatex">\[
+f^{-1}(A\cap B)=f^{-1}(A)\cap f^{-1}(B),
+\]</div>
+<div class="arithmatex">\[
+f^{-1}(A^c)=\big[f^{-1}(A)\big]^c.
+\]</div>
+</blockquote>
+<p><strong>直觉</strong>：取原像这个操作与并、交、补完全交换——这是后面"<span class="arithmatex">\(\{X\in A\}\)</span> 都是事件"的集合论引擎。（注：补充一句证明思路——逐点验证，例如 <span class="arithmatex">\(\omega\in f^{-1}(A\cup B)\iff f(\omega)\in A\cup B\iff f(\omega)\in A\)</span> 或 <span class="arithmatex">\(f(\omega)\in B\iff\omega\in f^{-1}(A)\cup f^{-1}(B)\)</span>。）</p>
+<hr />
+<h3 id="27">2.7 随机变量的严格定义（不做考核要求）<a class="headerlink" href="#27" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>[!IMPORTANT] 定义（随机变量 random variable, r.v., rv）
+设 <span class="arithmatex">\((\Omega,\mathcal{F})\)</span> 为可测空间，如果 <span class="arithmatex">\(\Omega\)</span> 上的函数 <span class="arithmatex">\(X(\omega)\)</span> 满足：对 <span class="arithmatex">\(\forall x\in\mathbb{R}\)</span>，</p>
+<div class="arithmatex">\[
+\{\omega\mid X(\omega)\le x\}\in\mathcal{F},
+\]</div>
+<p>则称 <span class="arithmatex">\(X(\omega)\)</span> 为 <span class="arithmatex">\((\Omega,\mathcal{F})\)</span> 上的随机变量，简称<strong>随机变量</strong>。通常将随机变量 <span class="arithmatex">\(X(\omega)\)</span> 简记为 <span class="arithmatex">\(X\)</span>。</p>
+</blockquote>
+<p><strong>直觉</strong>：不是任意函数都行——必须保证每个"<span class="arithmatex">\(X\)</span> 不超过 <span class="arithmatex">\(x\)</span>"的集合都是合法事件，概率才有得算（回应思考 1、2）。</p>
+<p><strong>记号约定</strong>：习惯上使用大写的 <span class="arithmatex">\(X,Y,Z,\ldots\)</span> 或小写的 <span class="arithmatex">\(\varepsilon,\xi,\eta\)</span> 等表示随机变量，不够用的时候可以使用下标，如 <span class="arithmatex">\(X_1,X_2,\ldots\)</span>；以后用 <span class="arithmatex">\(\{X\le x\}\)</span> 来表示事件 <span class="arithmatex">\(\{\omega\mid X(\omega)\le x\}\)</span>。</p>
+<p><strong>显然（由 <span class="arithmatex">\(\mathcal{F}\)</span> 是 <span class="arithmatex">\(\sigma\)</span>-域）：</strong></p>
+<ol>
+<li><span class="arithmatex">\(\{X&gt;x\}=\{X\le x\}^c\in\mathcal{F}\)</span>；</li>
+<li><span class="arithmatex">\(\{X&lt;x\}=\bigcup_{n=1}^{\infty}\{X\le x-\frac{1}{n}\}\in\mathcal{F}\)</span>；</li>
+<li><span class="arithmatex">\(\{X\ge x\}=\{X&lt;x\}^c\in\mathcal{F}\)</span>。</li>
+</ol>
+<hr />
+<h3 id="28">2.8 随机变量严格定义下的性质（不做考核要求）<a class="headerlink" href="#28" title="Permanent link">&para;</a></h3>
+<ul>
+<li>用 <span class="arithmatex">\(\mathcal{R}\)</span> 表示全体实数，用 <span class="arithmatex">\(\mathcal{C}\)</span> 表示 <span class="arithmatex">\(\mathcal{R}\)</span> 中左开右闭的子区间的全体，即 <span class="arithmatex">\(\mathcal{C}=\{(a,b]\}\)</span>。令 <span class="arithmatex">\(\mathcal{B}=\sigma(\mathcal{C})\)</span>，通常称 <span class="arithmatex">\(\mathcal{B}\)</span> 为 <strong>Borel 域</strong>，称 <span class="arithmatex">\(\mathcal{B}\)</span> 的元素为 <strong>Borel 集</strong>。</li>
+<li>当 <span class="arithmatex">\((\Omega,\mathcal{F},\mathbb{P})\)</span> 是概率空间，下面的定理表明，<strong>对任何 Borel 集 <span class="arithmatex">\(A\)</span>，<span class="arithmatex">\(\{X\in A\}\)</span> 都是事件，于是可以计算概率 <span class="arithmatex">\(\mathbb{P}(X\in A)\)</span></strong>。</li>
+</ul>
+<blockquote>
+<p>[!IMPORTANT] 定理 1.1
+设 <span class="arithmatex">\(X\)</span> 是可测空间 <span class="arithmatex">\((\Omega,\mathcal{F})\)</span> 上的随机变量，则对任意的 Borel 集 <span class="arithmatex">\(A\)</span>，有</p>
+<div class="arithmatex">\[
+\{X\in A\}\triangleq\{\omega\mid X(\omega)\in A\}\in\mathcal{F}.
+\]</div>
+</blockquote>
+<p><strong>证明</strong>（课件注明"不要求掌握"，略）：课件思路是对 <span class="arithmatex">\(A\subset\mathcal{R}\)</span> 令 <span class="arithmatex">\(X^{-1}(A)=\{\omega\mid X(\omega)\in A\}\)</span>，<span class="arithmatex">\(\mathcal{A}=\{A\mid X^{-1}(A)\in\mathcal{F},A\subset\mathcal{R}\}\)</span>，再分 (a)(b)(c) 三步验证 <span class="arithmatex">\(\mathcal{A}\)</span> 是 <span class="arithmatex">\(\sigma\)</span>-域且 <span class="arithmatex">\(\mathcal{B}\subset\mathcal{A}\)</span>（利用 2.6 节原像与并、交、补可交换，及 <span class="arithmatex">\((a,b]=\{X\le b\}-\{X\le a\}\)</span> 型分解）。（不要求，略）</p>
+<ul>
+<li>此后，相对于原始概率空间 <span class="arithmatex">\((\Omega,\mathcal{F},\mathbb{P})\)</span>，我们将更多关注经过 <span class="arithmatex">\(X\)</span> 映射后的概率空间 <span class="arithmatex">\((\mathbb{R},\mathcal{B},\mathbb{P})\)</span>。</li>
+</ul>
+<blockquote>
+<p>[!NOTE] 备注
+在随机变量的定义中，"<span class="arithmatex">\(\{X\le x\}\in\mathcal{F}\)</span>"可用其他形式代替，如：
+1. <span class="arithmatex">\(\{X&gt;x\}\in\mathcal{F}\)</span>；
+2. <span class="arithmatex">\(\{X&lt;x\}\in\mathcal{F}\)</span>；
+3. <span class="arithmatex">\(\{X\ge x\}\in\mathcal{F}\)</span>。
+任取其一作定义都与原定义等价（由 2.7 节的三条"显然"互推）。</p>
+</blockquote>
+<hr />
+<h3 id="29">2.9 随机变量的函数<a class="headerlink" href="#29" title="Permanent link">&para;</a></h3>
+<p><strong>Borel 可测函数（简称可测函数）的定义</strong>：若 <span class="arithmatex">\(g:\mathbb{R}\to\mathbb{R}\)</span> 把 Borel 集的原像仍映为 Borel 集（即 <span class="arithmatex">\(g\)</span> 作为 <span class="arithmatex">\((\mathbb{R},\mathcal{B})\)</span> 上的"随机变量"），称 <span class="arithmatex">\(g\)</span> 是可测函数。</p>
+<blockquote>
+<p>[!IMPORTANT] 定理 1.2【常用】
+如果 <span class="arithmatex">\(X\)</span> 是可测空间 <span class="arithmatex">\((\Omega,\mathcal{F})\)</span> 上的随机变量，<span class="arithmatex">\(g(x)\)</span> 是可测函数，则 <span class="arithmatex">\(Y=g(X)\)</span> 是 <span class="arithmatex">\((\Omega,\mathcal{F})\)</span> 上的随机变量。</p>
+</blockquote>
+<p><strong>证明</strong>（课件完整给出）：只要验证对任意的 <span class="arithmatex">\(a\in\mathbb{R}\)</span>，有 <span class="arithmatex">\(\{Y\le a\}\in\mathcal{F}\)</span>。对任意给定的 <span class="arithmatex">\(a\)</span>，定义</p>
+<div class="arithmatex">\[
+B=\{x\mid g(x)\le a\},
+\]</div>
+<p>则 <span class="arithmatex">\(B\in\mathcal{B}\)</span>（因为 <span class="arithmatex">\(g\)</span> 可测）。注意到 <span class="arithmatex">\(Y(\omega)=g\big(X(\omega)\big)\)</span> 是 <span class="arithmatex">\(\Omega\)</span> 上的函数，再利用定理 1.1 得到</p>
+<div class="arithmatex">\[
+\{Y\le a\}=\{\omega\mid Y(\omega)\le a\}=\big\{\omega\mid g\big(X(\omega)\big)\le a\big\}=\{\omega\mid X(\omega)\in B\}=\{X\in B\}\in\mathcal{F}.
+\]</div>
+<blockquote>
+<p>[!NOTE] 备注
+<strong>连续函数、阶梯函数、单调函数以及这些函数的线性组合都是可测函数</strong>——实践中遇到的函数基本都可测。</p>
+</blockquote>
+<p><strong>多元推广（课件）</strong>：完全类似的可以证明，如果 <span class="arithmatex">\(X_1,X_2,\ldots,X_n\)</span> 都是可测空间 <span class="arithmatex">\((\Omega,\mathcal{F})\)</span> 上的随机变量，<span class="arithmatex">\(g(x_1,x_2,\ldots,x_n)\)</span> 是 <span class="arithmatex">\(n\)</span> 元可测函数（<span class="arithmatex">\(n\)</span> 维 Borel 域意义下），则 <span class="arithmatex">\(Y=g(X_1,X_2,\ldots,X_n)\)</span> 是 <span class="arithmatex">\((\Omega,\mathcal{F})\)</span> 上的随机变量。<strong>无特殊说明，本课以后用到的一元和多元实函数都是指可测函数。</strong></p>
+<p><strong>构造随机变量的方式（课件四条）：</strong></p>
+<ol>
+<li>四则运算：<span class="arithmatex">\(aX+bY\)</span>，<span class="arithmatex">\(XY\)</span>，<span class="arithmatex">\(\dfrac{X}{Y}\)</span>，对任意 <span class="arithmatex">\(a,b\in\mathbb{R}\)</span>；</li>
+<li>极限：<span class="arithmatex">\(\sup_n X_n\)</span>，<span class="arithmatex">\(\inf_n X_n\)</span>，<span class="arithmatex">\(\limsup_n X_n\)</span>，<span class="arithmatex">\(\liminf_n X_n\)</span>，<span class="arithmatex">\(\lim_n X_n\)</span>（如果存在）；</li>
+<li>变换：<span class="arithmatex">\(\max\{X,Y\}\)</span>，<span class="arithmatex">\(\min\{X,Y\}\)</span>，<span class="arithmatex">\(\sin(X)\)</span>，<span class="arithmatex">\(e^X\)</span>，<span class="arithmatex">\(X^+\)</span>，<span class="arithmatex">\(X^-\)</span>，<span class="arithmatex">\(|X|^p\)</span> 等；</li>
+<li>函数复合。</li>
+</ol>
+<hr />
+<h2 id="_3">三、随机变量的独立性<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h3 id="31">3.1 定义<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>[!IMPORTANT] 定义（随机变量的相互独立性）【常用】
+设 <span class="arithmatex">\(X_1,\ldots,X_n\)</span> 是 <span class="arithmatex">\((\Omega,\mathcal{F})\)</span> 上的随机变量，如果对任意的实数 <span class="arithmatex">\(x_1,\ldots,x_n\)</span> 都有</p>
+<div class="arithmatex">\[
+\mathbb{P}(X_1\le x_1,\ldots,X_n\le x_n)=\mathbb{P}(X_1\le x_1)\cdots\mathbb{P}(X_n\le x_n),
+\]</div>
+<p>称随机变量 <span class="arithmatex">\(X_1,\ldots,X_n\)</span> <strong>相互独立</strong>。</p>
+</blockquote>
+<p><strong>直觉</strong>：<span class="arithmatex">\(n\)</span> 个随机变量的"联合行为"完全由各自的"个体行为"相乘而得——任何一个的取值信息都不影响其余。</p>
+<blockquote>
+<p>[!NOTE] 思考（课件）
+为什么事件的独立性时（只验证全体连乘）不行，随机变量的独立性时（只验证全体 <span class="arithmatex">\(n\)</span> 个的联合分解）可以？
+答案藏在下一小节：因为 <span class="arithmatex">\(x_i\)</span> 可以<strong>任意取</strong>，让某些 <span class="arithmatex">\(x_i\to+\infty\)</span> 就能把对应的变量"挤出"等式，自动得到所有子集版本的分解式；而事件独立性中每个事件是固定的，没有这个自由度。</p>
+</blockquote>
+<hr />
+<h3 id="32">3.2 关于"随机变量相互独立"定义的补充说明<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
+<p><strong>命题（课件）</strong>：若有</p>
+<div class="arithmatex">\[
+\mathbb{P}(X_1\le x_1,X_2\le x_2,X_3\le x_3)=\mathbb{P}(X_1\le x_1)\mathbb{P}(X_2\le x_2)\mathbb{P}(X_3\le x_3),\quad\forall x_1,x_2,x_3,
+\]</div>
+<p>则</p>
+<div class="arithmatex">\[
+\mathbb{P}(X_1\le x_1,X_2\le x_2)=\mathbb{P}(X_1\le x_1)\mathbb{P}(X_2\le x_2),\quad\forall x_1,x_2.
+\]</div>
+<p><strong>证明</strong>（课件逐行，含补注）：</p>
+<div class="arithmatex">\[
+\begin{align}
+\mathbb{P}(X_1\le x_1,X_2\le x_2)&amp;=\mathbb{P}(X_1\le x_1,X_2\le x_2,X_3\in\mathbb{R})\\
+&amp;=\mathbb{P}\big(X_1\le x_1,X_2\le x_2,\textstyle\bigcup_{n=1}^{\infty}\{X_3\le n\}\big)\\
+&amp;=\mathbb{P}\big(\textstyle\bigcup_{n=1}^{\infty}\{X_1\le x_1,X_2\le x_2,X_3\le n\}\big)\\
+&amp;=\lim_{n\to\infty}\mathbb{P}(X_1\le x_1,X_2\le x_2,X_3\le n)\\
+&amp;=\lim_{n\to\infty}\mathbb{P}(X_1\le x_1)\mathbb{P}(X_2\le x_2)\mathbb{P}(X_3\le n)\\
+&amp;=\mathbb{P}(X_1\le x_1)\mathbb{P}(X_2\le x_2)\Big(\lim_{n\to\infty}\mathbb{P}(X_3\le n)\Big)\\
+&amp;=\mathbb{P}(X_1\le x_1)\mathbb{P}(X_2\le x_2)\mathbb{P}\big(\textstyle\bigcup_{n=1}^{\infty}\{X_3\le n\}\big)\\
+&amp;=\mathbb{P}(X_1\le x_1)\mathbb{P}(X_2\le x_2)\mathbb{P}(X_3\in\mathbb{R})\\
+&amp;=\mathbb{P}(X_1\le x_1)\mathbb{P}(X_2\le x_2).
+\end{align}
+\]</div>
+<p>（注：此步补全了第 4 行与第 7 行用到的依据——事件列 <span class="arithmatex">\(\{X_1\le x_1,X_2\le x_2,X_3\le n\}\)</span> 关于 <span class="arithmatex">\(n\)</span> 单调上升，故由<strong>概率的下连续性</strong>可把概率与极限交换；末尾 <span class="arithmatex">\(\mathbb{P}(X_3\in\mathbb{R})=1\)</span>。）</p>
+<p><strong>结论</strong>：<span class="arithmatex">\(n\)</span> 个变量的联合分解式自动蕴含任何子集的分解式，所以随机变量独立性的定义只需写"全体"一条。</p>
+<hr />
+<h3 id="33-21">3.3 定理 2.1：独立随机变量生成的事件独立<a class="headerlink" href="#33-21" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>[!IMPORTANT] 定理 2.1【常用】
+设 <span class="arithmatex">\(X_1,\ldots,X_n\)</span> 相互独立，则对任何 Borel 集 <span class="arithmatex">\(A_1,\ldots,A_n\)</span>，事件</p>
+<div class="arithmatex">\[
+\{X_1\in A_1\},\ \{X_2\in A_2\},\ \ldots,\ \{X_n\in A_n\}
+\]</div>
+<p>相互独立。</p>
+</blockquote>
+<p><strong>直觉</strong>：独立性从"半直线事件 <span class="arithmatex">\(\{X_i\le x_i\}\)</span>"自动升级到"任意 Borel 集事件 <span class="arithmatex">\(\{X_i\in A_i\}\)</span>"——独立随机变量身上挖出的任何事件都互相独立。（证明超出本课范围，课件未给出。）</p>
+<hr />
+<h3 id="34">3.4 随机变量序列或函数的独立性<a class="headerlink" href="#34" title="Permanent link">&para;</a></h3>
+<h4 id="_4">独立序列与独立同分布序列<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p>[!IMPORTANT] 定义（独立序列）
+如果对任意的 <span class="arithmatex">\(n\)</span>，<span class="arithmatex">\(X_1,\ldots,X_n\)</span> 相互独立，则称随机变量序列 <span class="arithmatex">\(\{X_i\}\)</span> 相互独立，此时称 <span class="arithmatex">\(\{X_i\}\)</span> 为<strong>独立序列</strong>。</p>
+<p>[!IMPORTANT] 定义（独立同分布序列）【常用】
+如果随机变量 <span class="arithmatex">\(X_1,X_2,\ldots\)</span> 是相互独立并且有相同的<strong>分布函数</strong>，则称 <span class="arithmatex">\(X_1,X_2,\cdots\)</span> <strong>独立同分布</strong>（independent and identically distributed, <strong>i.i.d.</strong>）。</p>
+</blockquote>
+<p><strong>直觉</strong>：i.i.d. 序列就是"同一个试验独立重复无穷次"的数学模型，是后面大数定律、中心极限定理的基本设定。</p>
+<h4 id="22_1">定理 2.2：独立随机变量的函数仍独立<a class="headerlink" href="#22_1" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p>[!IMPORTANT] 定理 2.2【常用】
+设随机变量 <span class="arithmatex">\(X_1,\ldots,X_n\)</span> 相互独立，<span class="arithmatex">\(g_1(x),\ldots,g_n(x)\)</span> 是一元实可测函数，<span class="arithmatex">\(\varphi(x_1,x_2,\ldots,x_k)\)</span> 是 <span class="arithmatex">\(k\)</span> 元实可测函数，则
+1. 随机变量 <span class="arithmatex">\(g_1(X_1),\ldots,g_n(X_n)\)</span> 相互独立；
+2. 随机变量 <span class="arithmatex">\(\varphi(X_1,X_2,\ldots,X_k),X_{k+1},\ldots,X_n\)</span> 相互独立。</p>
+</blockquote>
+<p><strong>直觉</strong>：各自加工各自的（每个 <span class="arithmatex">\(g_i\)</span> 只吃 <span class="arithmatex">\(X_i\)</span>），或把前 <span class="arithmatex">\(k\)</span> 个打包加工成一个新变量，都不会"串味"——独立性沿函数加工传递。（证明思路：用定理 2.1，<span class="arithmatex">\(\{g_i(X_i)\le y_i\}=\{X_i\in g_i^{-1}((-\infty,y_i])\}\)</span> 是 Borel 集事件，故仍相互独立。注：此为补充思路，课件未展开。）</p>
+<p><strong>应用举例（课件）</strong>：若 <span class="arithmatex">\((X_1,X_2)\)</span> 与 <span class="arithmatex">\((X_3,X_4)\)</span> 独立，则 <span class="arithmatex">\(X_2/X_1^2\)</span> 与 <span class="arithmatex">\(\dfrac{X_3+X_4}{X_4}\)</span> 独立。</p>
+<hr />
+<h2 id="40">四、小结（课件第 40 页）<a class="headerlink" href="#40" title="Permanent link">&para;</a></h2>
+<p><strong>知识点：</strong></p>
+<ul>
+<li>事件的独立性：独立 vs 条件独立；相互独立 vs 两两独立。</li>
+<li>随机变量：数值化、可度量概率；引申——随机变量的函数。</li>
+<li>随机变量的独立性；引申——随机变量函数的独立性。</li>
+<li>上述三者共同点：<ul>
+<li>若未知结论，要用<strong>定义</strong>验证；</li>
+<li>若已知结论，可直接使用性质做后续推理！</li>
+</ul>
+</li>
+</ul>
+<p><strong>技巧：</strong></p>
+<ul>
+<li><strong>反例法</strong>认识概念的细微差异（e.g. 不同独立性定义）；</li>
+<li><strong>类比法</strong>掌握新概念（e.g. 事件的独立性 → 随机变量的独立性）；</li>
+<li><strong>归纳法</strong>求解非有限步或步数不确定的随机试验对应问题（e.g. 赌徒破产模型）。</li>
+</ul>
+<hr />
+<h2 id="_5">本讲方法/题型清单<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<ul>
+<li>验证两个/一组事件是否独立 → 回到定义逐条验证乘积式 → 算出 <span class="arithmatex">\(\mathbb{P}(A\cap B)\)</span> 与 <span class="arithmatex">\(\mathbb{P}(A)\mathbb{P}(B)\)</span> 比对；一组事件须对<strong>所有 <span class="arithmatex">\(\ge 2\)</span> 元子集</strong>验证，缺一不可（警惕只验证两两或只验证全体连乘）。</li>
+<li>判断"给定 <span class="arithmatex">\(C\)</span> 后 <span class="arithmatex">\(A,B\)</span> 是否独立" → 用条件独立定义 → 在条件测度 <span class="arithmatex">\(\mathbb{P}(\cdot\mid C)\)</span> 下重算 <span class="arithmatex">\(\mathbb{P}(A\cap B\mid C)\)</span> 与 <span class="arithmatex">\(\mathbb{P}(A\mid C)\mathbb{P}(B\mid C)\)</span>；切勿由（无条件）独立直接下结论，两者互不蕴含。</li>
+<li>求"<span class="arithmatex">\(n\)</span> 个独立事件至少发生一个"的概率 → 补集 + 独立拆乘积 → <span class="arithmatex">\(\mathbb{P}(\bigcup A_i)=1-\prod(1-\mathbb{P}(A_i))\)</span>；大 <span class="arithmatex">\(n\)</span> 时用 <span class="arithmatex">\((1-p)^n\approx e^{-np}\)</span> 估算。</li>
+<li>步数不确定的赌局/游走类问题（如赌徒破产） → 首步分析 + 全概率建立递归 → 写出 <span class="arithmatex">\(q(k)\)</span> 的差分方程，配上边界条件（<span class="arithmatex">\(q(0)=1\)</span>，<span class="arithmatex">\(q(a+b)=0\)</span>），叠加差分解出通项。</li>
+<li>题目语言繁琐、涉及多个时刻/多种取值的事件 → 定义随机变量翻译题目 → 三步：定义随机变量 <span class="arithmatex">\(X(\omega)\)</span> → 明确关心事件（如 <span class="arithmatex">\(\{X=5\}\)</span>）→ 计算对应概率。</li>
+<li>判断某函数能否当随机变量、<span class="arithmatex">\(\{X\in A\}\)</span> 是否可算概率 → 用严格定义 <span class="arithmatex">\(\{X\le x\}\in\mathcal{F}\)</span> 与定理 1.1 → 可测函数加工（定理 1.2）保持随机变量身份。</li>
+<li>验证/使用随机变量的独立性 → 未知时用定义（联合 <span class="arithmatex">\(\le\)</span> 概率分解为乘积，只需验证全体一条）；已知独立时用定理 2.1、2.2 直接推出"任意 Borel 集事件独立""函数加工后仍独立"。</li>
+</ul>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "navigation.indexes", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

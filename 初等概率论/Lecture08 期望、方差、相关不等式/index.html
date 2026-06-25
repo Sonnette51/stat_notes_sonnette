@@ -1,0 +1,3982 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="清华统计课程笔记">
+      
+      
+      
+        <link rel="canonical" href="https://Sonnette51.github.io/stat_notes_sonnette/%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture08%20%E6%9C%9F%E6%9C%9B%E3%80%81%E6%96%B9%E5%B7%AE%E3%80%81%E7%9B%B8%E5%85%B3%E4%B8%8D%E7%AD%89%E5%BC%8F/">
+      
+      
+        <link rel="prev" href="../Lecture07%20%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E5%87%BD%E6%95%B0%E7%9A%84%E5%88%86%E5%B8%83%E3%80%81%E6%AC%A1%E5%BA%8F%E7%BB%9F%E8%AE%A1%E9%87%8F%E3%80%81p%E5%88%86%E4%BD%8D%E6%95%B0/">
+      
+      
+        <link rel="next" href="../Lecture09%20%E6%9D%A1%E4%BB%B6%E6%9C%9F%E6%9C%9B%E3%80%81%E6%9D%A1%E4%BB%B6%E6%96%B9%E5%B7%AE/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Lecture08 期望、方差、相关不等式 - Sonnette's Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#lecture08" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="Sonnette&#39;s Notes" class="md-header__button md-logo" aria-label="Sonnette's Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Sonnette's Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Lecture08 期望、方差、相关不等式
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  数据科学编程
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  初等概率论
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Sonnette&#39;s Notes" class="md-nav__button md-logo" aria-label="Sonnette's Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Sonnette's Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据科学编程
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数据科学编程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/NumPy%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NumPy 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/Pandas%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pandas 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/Database%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/LLM%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LLM 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/MiningWebData%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mining Web Data 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/TextProcessing%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Text Processing 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/DataVisualization%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Visualization 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/Advanced%20Visualization%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Advanced Visualization 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    初等概率论
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    初等概率论
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture01%20%E6%A6%82%E7%8E%87%E6%A8%A1%E5%9E%8B%E4%B8%8E%E6%80%A7%E8%B4%A8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture01 概率模型与性质
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture02%20%E6%A6%82%E7%8E%87%E7%A9%BA%E9%97%B4%E3%80%81%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture02 概率空间、条件概率
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture03%20%E7%8B%AC%E7%AB%8B%E6%80%A7%E3%80%81%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture03 独立性、随机变量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture04%20%E5%B8%B8%E8%A7%81%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture04 常见随机变量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture05%20%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0%E3%80%81%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E5%87%BD%E6%95%B0%E7%9A%84%E5%88%86%E5%B8%83%E3%80%81%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E7%9A%84%E5%88%86%E5%B8%83%28I%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture05 概率分布函数、随机变量函数的分布、随机向量的分布(I)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture06%20%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E7%9A%84%E5%88%86%E5%B8%83%28II%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture06 随机向量的分布(II)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture07%20%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E5%87%BD%E6%95%B0%E7%9A%84%E5%88%86%E5%B8%83%E3%80%81%E6%AC%A1%E5%BA%8F%E7%BB%9F%E8%AE%A1%E9%87%8F%E3%80%81p%E5%88%86%E4%BD%8D%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture07 随机向量函数的分布、次序统计量、p分位数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture08 期望、方差、相关不等式
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture08 期望、方差、相关不等式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、期望的来源——赌金分配问题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、期望的来源——赌金分配问题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 引例
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、离散型随机变量的数学期望
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、离散型随机变量的数学期望">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 正式定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、常见离散分布的期望
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、常见离散分布的期望">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-b1-p" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 两点分布 \(B(1, p)\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-bn-p" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 二项分布 \(B(n, p)\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-poisson-mathcalplambda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Poisson 分布 \(\mathcal{P}(\lambda)\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-gp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 几何分布 \(G(p)\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、连续型随机变量的数学期望
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="四、连续型随机变量的数学期望">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 正式定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、常见连续分布的期望
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="五、常见连续分布的期望">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-ua-b" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 均匀分布 \(U(a, b)\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-mathcalelambda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 指数分布 \(\mathcal{E}(\lambda)\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-gamma-gammaalpha-beta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Gamma 分布 \(\Gamma(\alpha, \beta)\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-mathcalnmu-sigma2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4 正态分布 \(\mathcal{N}(\mu, \sigma^2)\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、一般随机变量的期望（了解）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七、期望的性质
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="七、期望的性质">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-lotus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 随机变量函数的期望（LOTUS 定理）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 期望的重要性质
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 期望的优化解释
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#74" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.4 中位数与期望的比较
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        八、期望性质的应用
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="八、期望性质的应用">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-gamma" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 利用线性性重新推导二项分布和 Gamma 分布的期望
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 质量抽查（例 2.4）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 机器人打字问题（例 2.5）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#84" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.4 金融投资例
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        九、高阶矩
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="九、高阶矩">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十、期望的补充性质
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="十、期望的补充性质">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-27ex-0-x-0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 例 2.7：\(E|X| = 0\) 则 \(X = 0\)（几乎处处）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-26cauchy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 例 2.6：Cauchy 分布的期望不存在
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十一、几个重要例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="十一、几个重要例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#22x-sim-mathcaln01-exalpha" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例 2.2：\(X \sim \mathcal{N}(0,1)\)，计算 \(E(|X|^{\alpha})\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23xy-exey" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例 2.3：\((X,Y)\) 在单位圆内均匀分布，求 \(E(X)\)，\(E(Y)\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十二、本讲知识框架总结
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#variance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、方差（Variance）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、方差（Variance）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 计算公式（两种等价形式）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、常见分布的方差（重点记忆）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、常见分布的方差（重点记忆）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-b1-p" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 两点分布 \(B(1, p)\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-bn-p" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 二项分布 \(B(n, p)\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-poisson-mathcalplambda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Poisson 分布 \(\mathcal{P}(\lambda)\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-gp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 几何分布 \(G(p)\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-ua-b" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 均匀分布 \(U(a, b)\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26-varepsilonlambda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.6 指数分布 \(\varepsilon(\lambda)\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#27-mathcalnmu-sigma2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.7 正态分布 \(\mathcal{N}(\mu, \sigma^2)\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#28-gamma-gammaalpha-beta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.8 Gamma 分布 \(\Gamma(\alpha, \beta)\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        常见分布方差汇总表
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、方差的性质（定理 3.1）⭐ 要求掌握证明
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、应用例：配对问题（示范指示函数法）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、标准差与标准化
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="五、标准差与标准化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 标准差（定义 3.2）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 标准化（定义 3.3）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 标准化的意义：提供可比性
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、高阶矩：偏度与峰度（了解）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七、不等式
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="七、不等式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-markov-41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Markov 不等式（定理 4.1）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-chebyshev-41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Chebyshev 不等式（推论 4.1）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-cauchy-schwarz-42" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 内积不等式（Cauchy-Schwarz 不等式，定理 4.2）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#74-jensen-43" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.4 Jensen 不等式（定理 4.3）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        八、本讲小结与解题策略
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="八、本讲小结与解题策略">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-p58" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 期望小结（课件 P58 重点）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 方差计算策略
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 不等式应用策略
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#84_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.4 标准化的用途
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture09%20%E6%9D%A1%E4%BB%B6%E6%9C%9F%E6%9C%9B%E3%80%81%E6%9D%A1%E4%BB%B6%E6%96%B9%E5%B7%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture09 条件期望、条件方差
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture10%20%E5%8D%8F%E6%96%B9%E5%B7%AE%E3%80%81%E7%9B%B8%E5%85%B3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture10 协方差、相关
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture11%20%E6%A6%82%E7%8E%87%E6%AF%8D%E5%87%BD%E6%95%B0%E3%80%81%E7%9F%A9%E6%AF%8D%E5%87%BD%E6%95%B0%E3%80%81%E7%89%B9%E5%BE%81%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture11 概率母函数、矩母函数、特征函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture12%20%E5%A4%A7%E6%95%B0%E5%AE%9A%E5%BE%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture12 大数定律
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture13%20%E4%B8%AD%E5%BF%83%E6%9E%81%E9%99%90%E5%AE%9A%E7%90%86%E3%80%81%E6%94%B6%E6%95%9B%E6%80%A7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture13 中心极限定理、收敛性
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture14%20%E5%A4%9A%E5%85%83%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture14 多元正态分布
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%9C%9F%E6%9C%AB%E8%AE%B0%E5%BF%86%E8%A6%81%E7%82%B9%E6%B1%87%E6%80%BB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 期末记忆要点汇总
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A8%A1%E5%9D%971%20%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E7%9A%84%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块1 随机向量的函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A8%A1%E5%9D%972%20%E6%AC%A1%E5%BA%8F%E7%BB%9F%E8%AE%A1%E9%87%8F%E4%B8%8Ep-%E5%88%86%E4%BD%8D%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块2 次序统计量与p-分位数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A8%A1%E5%9D%973%20%E6%9C%9F%E6%9C%9B%E4%B8%8E%E6%96%B9%E5%B7%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块3 期望与方差
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A8%A1%E5%9D%974%20%E6%9D%A1%E4%BB%B6%E6%9C%9F%E6%9C%9B%E3%80%81%E5%8D%8F%E6%96%B9%E5%B7%AE%E4%B8%8E%E4%B8%8D%E7%AD%89%E5%BC%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块4 条件期望、协方差与不等式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A8%A1%E5%9D%975%20%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0%E4%B8%8E%E7%89%B9%E5%BE%81%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块5 生成函数与特征函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A8%A1%E5%9D%976%20%E6%94%B6%E6%95%9B%E6%80%A7%E3%80%81%E5%A4%A7%E6%95%B0%E5%BE%8B%E4%B8%8E%E4%B8%AD%E5%BF%83%E6%9E%81%E9%99%90%E5%AE%9A%E7%90%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块6 收敛性、大数律与中心极限定理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A8%A1%E5%9D%977%20%E5%A4%9A%E5%85%83%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块7 多元正态分布
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、期望的来源——赌金分配问题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、期望的来源——赌金分配问题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 引例
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、离散型随机变量的数学期望
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、离散型随机变量的数学期望">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 正式定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、常见离散分布的期望
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、常见离散分布的期望">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-b1-p" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 两点分布 \(B(1, p)\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-bn-p" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 二项分布 \(B(n, p)\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-poisson-mathcalplambda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Poisson 分布 \(\mathcal{P}(\lambda)\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-gp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 几何分布 \(G(p)\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、连续型随机变量的数学期望
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="四、连续型随机变量的数学期望">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 正式定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、常见连续分布的期望
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="五、常见连续分布的期望">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-ua-b" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 均匀分布 \(U(a, b)\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-mathcalelambda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 指数分布 \(\mathcal{E}(\lambda)\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-gamma-gammaalpha-beta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Gamma 分布 \(\Gamma(\alpha, \beta)\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-mathcalnmu-sigma2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4 正态分布 \(\mathcal{N}(\mu, \sigma^2)\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、一般随机变量的期望（了解）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七、期望的性质
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="七、期望的性质">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-lotus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 随机变量函数的期望（LOTUS 定理）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 期望的重要性质
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 期望的优化解释
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#74" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.4 中位数与期望的比较
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        八、期望性质的应用
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="八、期望性质的应用">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-gamma" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 利用线性性重新推导二项分布和 Gamma 分布的期望
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 质量抽查（例 2.4）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 机器人打字问题（例 2.5）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#84" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.4 金融投资例
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        九、高阶矩
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="九、高阶矩">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十、期望的补充性质
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="十、期望的补充性质">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-27ex-0-x-0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 例 2.7：\(E|X| = 0\) 则 \(X = 0\)（几乎处处）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-26cauchy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 例 2.6：Cauchy 分布的期望不存在
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十一、几个重要例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="十一、几个重要例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#22x-sim-mathcaln01-exalpha" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例 2.2：\(X \sim \mathcal{N}(0,1)\)，计算 \(E(|X|^{\alpha})\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23xy-exey" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例 2.3：\((X,Y)\) 在单位圆内均匀分布，求 \(E(X)\)，\(E(Y)\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十二、本讲知识框架总结
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#variance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、方差（Variance）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、方差（Variance）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 计算公式（两种等价形式）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、常见分布的方差（重点记忆）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、常见分布的方差（重点记忆）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-b1-p" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 两点分布 \(B(1, p)\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-bn-p" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 二项分布 \(B(n, p)\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-poisson-mathcalplambda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Poisson 分布 \(\mathcal{P}(\lambda)\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-gp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 几何分布 \(G(p)\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-ua-b" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 均匀分布 \(U(a, b)\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26-varepsilonlambda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.6 指数分布 \(\varepsilon(\lambda)\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#27-mathcalnmu-sigma2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.7 正态分布 \(\mathcal{N}(\mu, \sigma^2)\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#28-gamma-gammaalpha-beta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.8 Gamma 分布 \(\Gamma(\alpha, \beta)\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        常见分布方差汇总表
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、方差的性质（定理 3.1）⭐ 要求掌握证明
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、应用例：配对问题（示范指示函数法）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、标准差与标准化
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="五、标准差与标准化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 标准差（定义 3.2）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 标准化（定义 3.3）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 标准化的意义：提供可比性
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、高阶矩：偏度与峰度（了解）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七、不等式
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="七、不等式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-markov-41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Markov 不等式（定理 4.1）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-chebyshev-41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Chebyshev 不等式（推论 4.1）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-cauchy-schwarz-42" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 内积不等式（Cauchy-Schwarz 不等式，定理 4.2）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#74-jensen-43" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.4 Jensen 不等式（定理 4.3）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        八、本讲小结与解题策略
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="八、本讲小结与解题策略">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-p58" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 期望小结（课件 P58 重点）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 方差计算策略
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 不等式应用策略
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#84_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.4 标准化的用途
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="lecture08">Lecture08 期望、方差、相关不等式<a class="headerlink" href="#lecture08" title="Permanent link">&para;</a></h1>
+<h2 id="_1">一、期望的来源——赌金分配问题<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h3 id="11">1.1 引例<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
+<p>甲、乙二人对赌，水平相当（即每局各自赢的概率均为 <span class="arithmatex">\(\frac{1}{2}\)</span>），先赢满 5 局者获得全部赌金 100 个金币。当甲赢了 4 局、乙赢了 3 局时，他们被迫中断赌局。<strong>该如何分配赌金？</strong></p>
+<p>会计师建议按已赢局数 4:3 的比例分配，但这公平吗？</p>
+<p><strong>正确思路：</strong> 考虑从当前局面继续玩下去的所有可能结果。</p>
+<p>从 4:3 的局面出发，最多还需要再打 2 局：</p>
+<ul>
+<li>若接下来甲赢（概率 <span class="arithmatex">\(\frac{1}{2}\)</span>），变成 5:3，甲赢得全部赌金。</li>
+<li>若接下来乙赢（概率 <span class="arithmatex">\(\frac{1}{2}\)</span>），变成 4:4，再打一局：<ul>
+<li>甲赢（概率 <span class="arithmatex">\(\frac{1}{2}\)</span>），变成 5:4，甲赢。</li>
+<li>乙赢（概率 <span class="arithmatex">\(\frac{1}{2}\)</span>），变成 4:5，乙赢。</li>
+</ul>
+</li>
+</ul>
+<p>因此：</p>
+<ul>
+<li>甲最终获胜的概率 = <span class="arithmatex">\(\frac{1}{2} + \frac{1}{2} \times \frac{1}{2} = \frac{3}{4}\)</span></li>
+<li>乙最终获胜的概率 = <span class="arithmatex">\(\frac{1}{2} \times \frac{1}{2} = \frac{1}{4}\)</span></li>
+</ul>
+<p>设甲的收益 <span class="arithmatex">\(X\)</span>：</p>
+<div class="arithmatex">\[X = \begin{cases} 100, &amp; \text{概率 } \dfrac{3}{4} \ 0, &amp; \text{概率 } \dfrac{1}{4} \end{cases}\]</div>
+<p>甲的<strong>预期收益</strong>（即加权平均值）：</p>
+<div class="arithmatex">\[100 \times \frac{3}{4} + 0 \times \frac{1}{4} = 75\]</div>
+<p>所以应按 <strong>75:25 = 3:1</strong> 的比例分配，而不是 4:3。这个"预期收益"就是<strong>数学期望</strong>。</p>
+<hr />
+<h2 id="_2">二、离散型随机变量的数学期望<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="21">2.1 正式定义<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>[!INFO] 定义 1.1（离散型随机变量的期望）</p>
+<p>设 <span class="arithmatex">\(X\)</span> 有概率分布 <span class="arithmatex">\(\mathbb{P}(X = x_j)\)</span>，<span class="arithmatex">\(j = 1, 2, \ldots\)</span></p>
+<p>如果 <span class="arithmatex">\(\displaystyle\sum_{j=1}^{\infty} |x_j| \mathbb{P}(X = x_j) &lt; +\infty\)</span>，则称</p>
+<div class="arithmatex">\[E(X) = \sum_{j=1}^{\infty} x_j \mathbb{P}(X = x_j)\]</div>
+<p>为 <span class="arithmatex">\(X\)</span> 的<strong>数学期望</strong>（Mathematical Expectation）或<strong>均值</strong>（Mean）。</p>
+</blockquote>
+<p><strong>几点说明：</strong></p>
+<ol>
+<li>
+<p><strong>存在性条件</strong>：要求绝对值之和收敛（绝对收敛），这是为了确保无穷级数的和不依赖于求和顺序。只取有限个值的随机变量，期望一定存在。</p>
+</li>
+<li>
+<p><strong>直观含义</strong>：期望是 <span class="arithmatex">\(X\)</span> 分布的<strong>加权平均</strong>，权重就是各取值的概率。物理上，期望可以理解为 <span class="arithmatex">\(X\)</span> 的概率分布的<strong>质心</strong>（重心）——想象在数轴上，每个点 <span class="arithmatex">\(x_j\)</span> 处放一个质量为 <span class="arithmatex">\(\mathbb{P}(X = x_j)\)</span> 的砝码，质心所在的位置就是 <span class="arithmatex">\(E(X)\)</span>。</p>
+</li>
+</ol>
+<hr />
+<h2 id="_3">三、常见离散分布的期望<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h3 id="31-b1-p">3.1 两点分布 <span class="arithmatex">\(B(1, p)\)</span><a class="headerlink" href="#31-b1-p" title="Permanent link">&para;</a></h3>
+<p>设 <span class="arithmatex">\(X \sim B(1, p)\)</span>，即</p>
+<div class="arithmatex">\[\mathbb{P}(X = 1) = p, \quad \mathbb{P}(X = 0) = 1 - p\]</div>
+<p>则</p>
+<div class="arithmatex">\[E(X) = 1 \cdot p + 0 \cdot (1-p) = p\]</div>
+<p><strong>直观</strong>：抛一枚正面概率为 <span class="arithmatex">\(p\)</span> 的硬币，平均得到正面的次数就是 <span class="arithmatex">\(p\)</span>。</p>
+<p><strong>推论</strong>：设 <span class="arithmatex">\(A\)</span> 是事件，<span class="arithmatex">\(I_A\)</span> 是 <span class="arithmatex">\(A\)</span> 的示性函数（<span class="arithmatex">\(A\)</span> 发生时 <span class="arithmatex">\(I_A = 1\)</span>，否则 <span class="arithmatex">\(I_A = 0\)</span>）。则 <span class="arithmatex">\(I_A\)</span> 服从两点分布，且</p>
+<div class="arithmatex">\[E(I_A) = \mathbb{P}(A)\]</div>
+<p>这说明<strong>事件概率等于其示性函数的期望</strong>，是一个非常有用的视角。</p>
+<hr />
+<h3 id="32-bn-p">3.2 二项分布 <span class="arithmatex">\(B(n, p)\)</span><a class="headerlink" href="#32-bn-p" title="Permanent link">&para;</a></h3>
+<p>设 <span class="arithmatex">\(X \sim B(n, p)\)</span>，即</p>
+<div class="arithmatex">\[\mathbb{P}(X = j) = \binom{n}{j} p^j (1-p)^{n-j}, \quad 0 \leq j \leq n\]</div>
+<p>则 <span class="arithmatex">\(E(X) = np\)</span>。</p>
+<p><strong>证明：</strong> 按定义展开，利用组合恒等式 <span class="arithmatex">\(j \binom{n}{j} = n \binom{n-1}{j-1}\)</span>：</p>
+<div class="arithmatex">\[E(X) = \sum_{j=0}^{n} j \binom{n}{j} p^j (1-p)^{n-j} = np \sum_{j=1}^{n} \binom{n-1}{j-1} p^{j-1} (1-p)^{n-j}\]</div>
+<p>令 <span class="arithmatex">\(k = j-1\)</span>，上式变为：</p>
+<div class="arithmatex">\[= np \sum_{k=0}^{n-1} \binom{n-1}{k} p^k (1-p)^{n-1-k} = np \cdot (p + (1-p))^{n-1} = np\]</div>
+<p><strong>直观</strong>：<span class="arithmatex">\(n\)</span> 次独立试验，每次成功概率为 <span class="arithmatex">\(p\)</span>，平均成功次数当然是 <span class="arithmatex">\(np\)</span>。后面学了期望的线性性质，可以用更简洁的方法推导这个结论。</p>
+<hr />
+<h3 id="33-poisson-mathcalplambda">3.3 Poisson 分布 <span class="arithmatex">\(\mathcal{P}(\lambda)\)</span><a class="headerlink" href="#33-poisson-mathcalplambda" title="Permanent link">&para;</a></h3>
+<p>设 <span class="arithmatex">\(X \sim \mathcal{P}(\lambda)\)</span>，即</p>
+<div class="arithmatex">\[\mathbb{P}(X = k) = \frac{\lambda^k}{k!} e^{-\lambda}, \quad k = 0, 1, 2, \ldots\]</div>
+<p>则（由归一化性质）：</p>
+<div class="arithmatex">\[E(X) = \sum_{k=0}^{\infty} k \cdot \frac{\lambda^k}{k!} e^{-\lambda} = \lambda \sum_{k=1}^{\infty} \frac{\lambda^{k-1}}{(k-1)!} e^{-\lambda} = \lambda \cdot e^{\lambda} \cdot e^{-\lambda} = \lambda\]</div>
+<p><strong>直观</strong>：Poisson 分布的参数 <span class="arithmatex">\(\lambda\)</span> 本身就是平均发生次数，这也是 <span class="arithmatex">\(\lambda\)</span> 在实际中被称为"强度"的原因。</p>
+<hr />
+<h3 id="34-gp">3.4 几何分布 <span class="arithmatex">\(G(p)\)</span><a class="headerlink" href="#34-gp" title="Permanent link">&para;</a></h3>
+<p>设 <span class="arithmatex">\(X \sim G(p)\)</span>，即</p>
+<div class="arithmatex">\[\mathbb{P}(X = k) = p(1-p)^{k-1}, \quad k = 1, 2, \ldots\]</div>
+<p><span class="arithmatex">\(X\)</span> 的含义是：独立重复进行伯努利试验，直到第一次成功所需的试验次数。</p>
+<div class="arithmatex">\[E(X) = \sum_{k=1}^{\infty} k \cdot p(1-p)^{k-1} = \frac{1}{p}\]</div>
+<p>（推导过程利用幂级数求导：<span class="arithmatex">\(\sum_{k=1}^{\infty} k x^{k-1} = \frac{1}{(1-x)^2}\)</span>，令 <span class="arithmatex">\(x = 1-p\)</span> 即可。）</p>
+<p><strong>直观</strong>：每次成功概率为 <span class="arithmatex">\(p\)</span>，平均需要 <span class="arithmatex">\(\frac{1}{p}\)</span> 次才能第一次成功。比如掷骰子，掷出 6 的概率为 <span class="arithmatex">\(\frac{1}{6}\)</span>，平均需要 6 次。</p>
+<hr />
+<h2 id="_4">四、连续型随机变量的数学期望<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<h3 id="41">4.1 正式定义<a class="headerlink" href="#41" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>[!INFO] 定义 1.2（连续型随机变量的期望）</p>
+<p>设 <span class="arithmatex">\(X\)</span> 有概率密度函数 <span class="arithmatex">\(f(x)\)</span>，如果</p>
+<div class="arithmatex">\[\int_{-\infty}^{\infty} |x| f(x)dx &lt; +\infty\]</div>
+<p>则称</p>
+<div class="arithmatex">\[E(X) = \int_{-\infty}^{\infty} x f(x)dx\]</div>
+<p>为 <span class="arithmatex">\(X\)</span> 的<strong>数学期望</strong>或<strong>均值</strong>。</p>
+</blockquote>
+<p><strong>与离散情况的对比：</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>离散型</th>
+<th>连续型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>期望公式</td>
+<td><span class="arithmatex">\(\displaystyle\sum_j x_j \mathbb{P}(X = x_j)\)</span></td>
+<td><span class="arithmatex">\(\displaystyle\int_{-\infty}^{\infty} x f(x)dx\)</span></td>
+</tr>
+<tr>
+<td>类比关系</td>
+<td>求和</td>
+<td>积分</td>
+</tr>
+<tr>
+<td>权重</td>
+<td>概率 <span class="arithmatex">\(\mathbb{P}(X = x_j)\)</span></td>
+<td>密度 <span class="arithmatex">\(f(x),dx\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>两者的含义一致，都是<strong>加权平均</strong>，只是求和方式不同。</p>
+<hr />
+<h2 id="_5">五、常见连续分布的期望<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<h3 id="51-ua-b">5.1 均匀分布 <span class="arithmatex">\(U(a, b)\)</span><a class="headerlink" href="#51-ua-b" title="Permanent link">&para;</a></h3>
+<p>设 <span class="arithmatex">\(X \sim U(a, b)\)</span>，即</p>
+<div class="arithmatex">\[f(x) = \frac{1}{b-a} \cdot I_{(a,b)}(x)\]</div>
+<p>则</p>
+<div class="arithmatex">\[E(X) = \int_a^b \frac{x}{b-a}dx = \frac{1}{b-a} \cdot \frac{b^2 - a^2}{2} = \frac{a+b}{2}\]</div>
+<p><strong>直观</strong>：均匀分布关于 <span class="arithmatex">\(\frac{a+b}{2}\)</span> 对称，质心当然在中点。</p>
+<hr />
+<h3 id="52-mathcalelambda">5.2 指数分布 <span class="arithmatex">\(\mathcal{E}(\lambda)\)</span><a class="headerlink" href="#52-mathcalelambda" title="Permanent link">&para;</a></h3>
+<p>设 <span class="arithmatex">\(X \sim \mathcal{E}(\lambda)\)</span>，即 <span class="arithmatex">\(f(x) = \lambda e^{-\lambda x}\)</span>（<span class="arithmatex">\(x &gt; 0\)</span>）。</p>
+<p>由分部积分（令 <span class="arithmatex">\(u = x\)</span>，<span class="arithmatex">\(dv = \lambda e^{-\lambda x}dx\)</span>）并利用归一化：</p>
+<div class="arithmatex">\[E(X) = \int_0^{\infty} x \lambda e^{-\lambda x}dx = \frac{1}{\lambda}\]</div>
+<p><strong>直观</strong>：<span class="arithmatex">\(\lambda\)</span> 是事件发生的"速率"（单位时间内平均发生次数），那么两次事件之间的平均等待时间就是 <span class="arithmatex">\(\frac{1}{\lambda}\)</span>。</p>
+<hr />
+<h3 id="53-gamma-gammaalpha-beta">5.3 Gamma 分布 <span class="arithmatex">\(\Gamma(\alpha, \beta)\)</span><a class="headerlink" href="#53-gamma-gammaalpha-beta" title="Permanent link">&para;</a></h3>
+<p>设 <span class="arithmatex">\(X \sim \Gamma(\alpha, \beta)\)</span>，即</p>
+<div class="arithmatex">\[f(x) = \frac{\beta^{\alpha}}{\Gamma(\alpha)} x^{\alpha-1} e^{-\beta x}, \quad x &gt; 0\]</div>
+<p>其中 <span class="arithmatex">\(\Gamma(\alpha) = \int_0^{\infty} t^{\alpha-1} e^{-t}dt\)</span> 是 Gamma 函数，满足 <span class="arithmatex">\(\Gamma(\alpha + 1) = \alpha \Gamma(\alpha)\)</span>。</p>
+<p>利用换元 <span class="arithmatex">\(t = \beta x\)</span>：</p>
+<div class="arithmatex">\[E(X) = \int_0^{\infty} \frac{\beta^{\alpha}}{\Gamma(\alpha)} x^{\alpha} e^{-\beta x}dx = \frac{1}{\beta \Gamma(\alpha)} \int_0^{\infty} t^{(\alpha+1)-1} e^{-t}dt = \frac{\Gamma(\alpha+1)}{\beta \Gamma(\alpha)} = \frac{\alpha}{\beta}\]</div>
+<p><strong>特殊情况</strong>：当 <span class="arithmatex">\(\alpha = 1\)</span> 时，<span class="arithmatex">\(\Gamma(1, \beta)\)</span> 退化为 <span class="arithmatex">\(\mathcal{E}(\beta)\)</span>，期望为 <span class="arithmatex">\(\frac{1}{\beta}\)</span>，与上节一致。</p>
+<hr />
+<h3 id="54-mathcalnmu-sigma2">5.4 正态分布 <span class="arithmatex">\(\mathcal{N}(\mu, \sigma^2)\)</span><a class="headerlink" href="#54-mathcalnmu-sigma2" title="Permanent link">&para;</a></h3>
+<p>设 <span class="arithmatex">\(X \sim \mathcal{N}(\mu, \sigma^2)\)</span>，即</p>
+<div class="arithmatex">\[f(x) = \frac{1}{\sigma\sqrt{2\pi}} \exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)\]</div>
+<p>利用对称性和归一化：</p>
+<div class="arithmatex">\[E(X) = \int_{-\infty}^{\infty} \mu f(x),dx + \int_{-\infty}^{\infty} (x-\mu) f(x),dx = \mu + \frac{1}{\sigma\sqrt{2\pi}} \int_{-\infty}^{\infty} t \exp\left(-\frac{t^2}{2\sigma^2}\right)dt = \mu\]</div>
+<p>最后一个积分为 0，因为被积函数 <span class="arithmatex">\(t \exp(-t^2 / 2\sigma^2)\)</span> 是<strong>奇函数</strong>，在 <span class="arithmatex">\((-\infty, +\infty)\)</span> 上的积分为零。</p>
+<p><strong>结论</strong>：<span class="arithmatex">\(\mathcal{N}(\mu, \sigma^2)\)</span> 的期望就是参数 <span class="arithmatex">\(\mu\)</span>，这正是 <span class="arithmatex">\(\mu\)</span> 被称为"均值参数"的原因。</p>
+<p><strong>一般结论（例 1.10）</strong>：设 <span class="arithmatex">\(X\)</span> 的期望存在，若 <span class="arithmatex">\(X\)</span> 的概率密度 <span class="arithmatex">\(f(x)\)</span> 关于 <span class="arithmatex">\(x = \mu\)</span> 对称（即 <span class="arithmatex">\(f(x + \mu) = f(\mu - x)\)</span>），则 <span class="arithmatex">\(E(X) = \mu\)</span>。这把正态分布的计算技巧一般化了——只要分布关于 <span class="arithmatex">\(\mu\)</span> 对称，期望就等于 <span class="arithmatex">\(\mu\)</span>。</p>
+<hr />
+<h2 id="_6">六、一般随机变量的期望（了解）<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<p>对于既不纯离散也不纯连续的随机变量（如例 1.11：抛硬币决定获得固定值还是连续分布随机值），期望的统一定义为：</p>
+<div class="arithmatex">\[E(X) = \int_{\Omega} Xd\mathbb{P} = \int_{\mathbb{R}} xdF(x)\]</div>
+<p>其中 <span class="arithmatex">\(F(x)\)</span> 是 <span class="arithmatex">\(X\)</span> 的分布函数。如果分布函数可以分解为连续部分 <span class="arithmatex">\(F_1\)</span> 和离散跳跃部分 <span class="arithmatex">\(F_2\)</span>，则：</p>
+<div class="arithmatex">\[E(X) = \int_{-\infty}^{\infty} x f_0(x)dx + \sum_{j=1}^{\infty} x_j \mathbb{P}(X = x_j)\]</div>
+<p>即连续部分的积分加上离散部分的求和。</p>
+<p><strong>重要结论</strong>：同分布的随机变量有相同的期望（如果期望存在）。</p>
+<blockquote>
+<p><strong>注</strong>：这部分内容课件标注为"不要求"，了解即可。</p>
+</blockquote>
+<hr />
+<h2 id="_7">七、期望的性质<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<h3 id="71-lotus">7.1 随机变量函数的期望（LOTUS 定理）<a class="headerlink" href="#71-lotus" title="Permanent link">&para;</a></h3>
+<p>在计算 <span class="arithmatex">\(Y = g(X)\)</span> 的期望时，有一个非常方便的定理，让我们<strong>不需要先求 <span class="arithmatex">\(Y\)</span> 的分布</strong>。</p>
+<blockquote>
+<p>[!NOTE] 定理 2.1（LOTUS）</p>
+<p>设 <span class="arithmatex">\(\boldsymbol{X} = (X_1, \ldots, X_n)\)</span> 是随机向量，联合分布函数为 <span class="arithmatex">\(F(\boldsymbol{x})\)</span>，<span class="arithmatex">\(g\)</span> 是实值函数，且 <span class="arithmatex">\(\int_{\mathbb{R}^n} |g(\boldsymbol{x})|,dF(\boldsymbol{x}) &lt; \infty\)</span>，则</p>
+<div class="arithmatex">\[E(g(\boldsymbol{X})) = \int_{\mathbb{R}^n} g(\boldsymbol{x}),dF(\boldsymbol{x})\]</div>
+</blockquote>
+<p><strong>对一元情况</strong>，这就变成了：</p>
+<ul>
+<li><strong><span class="arithmatex">\(X\)</span> 离散</strong>：<span class="arithmatex">\(E(g(X)) = \displaystyle\sum_j g(x_j) \mathbb{P}(X = x_j)\)</span></li>
+<li><strong><span class="arithmatex">\(X\)</span> 连续</strong>：<span class="arithmatex">\(E(g(X)) = \displaystyle\int_{-\infty}^{\infty} g(x) f(x),dx\)</span></li>
+</ul>
+<p><strong>为什么这个定理很重要？</strong> 原本计算 <span class="arithmatex">\(E(g(X))\)</span> 需要：</p>
+<ol>
+<li>推导 <span class="arithmatex">\(Y = g(X)\)</span> 的分布</li>
+<li>用 <span class="arithmatex">\(Y\)</span> 的分布和期望定义计算 <span class="arithmatex">\(E(Y)\)</span></li>
+</ol>
+<p>LOTUS 告诉我们可以跳过第一步，直接用 <span class="arithmatex">\(X\)</span> 的分布计算。</p>
+<p><strong>例（验证 LOTUS 的直觉）</strong>：设 <span class="arithmatex">\(g(x) = x^2\)</span>，<span class="arithmatex">\(X\)</span> 取值 <span class="arithmatex">\(-1, 1, 2\)</span>，概率分别为 <span class="arithmatex">\(\frac{1}{8}, \frac{1}{8}, \frac{3}{4}\)</span>。</p>
+<ul>
+<li><span class="arithmatex">\(Y = X^2\)</span> 取值 <span class="arithmatex">\(1, 4\)</span>，概率分别为 <span class="arithmatex">\(\frac{1}{8}+\frac{1}{8}=\frac{1}{4}\)</span> 和 <span class="arithmatex">\(\frac{3}{4}\)</span>。</li>
+<li><span class="arithmatex">\(E(Y) = 1 \cdot \frac{1}{4} + 4 \cdot \frac{3}{4} = \frac{13}{4}\)</span>。</li>
+</ul>
+<p>用 LOTUS 直接算：<span class="arithmatex">\(E(X^2) = (-1)^2 \cdot \frac{1}{8} + 1^2 \cdot \frac{1}{8} + 2^2 \cdot \frac{3}{4} = \frac{1}{8} + \frac{1}{8} + 3 = \frac{13}{4}\)</span>。结果一致，且 LOTUS 更简洁。</p>
+<hr />
+<h3 id="72">7.2 期望的重要性质<a class="headerlink" href="#72" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>[!NOTE] 定理 2.2</p>
+<p>设 <span class="arithmatex">\(E|X| &lt; +\infty\)</span>，<span class="arithmatex">\(E|Y| &lt; +\infty\)</span>，<span class="arithmatex">\(a, b, C\)</span> 均为实数，则：</p>
+<ol>
+<li><span class="arithmatex">\(E(C) = C\)</span>（常数的期望是常数本身）</li>
+<li><span class="arithmatex">\(|EX| \leq E|X|\)</span>（期望的绝对值不超过绝对值的期望）</li>
+<li><span class="arithmatex">\(E(aX + bY) = aEX + bEY\)</span>（<strong>线性性</strong>，Linearity）</li>
+<li>若 <span class="arithmatex">\(X \leq Y\)</span>（几乎处处），则 <span class="arithmatex">\(EX \leq EY\)</span>（<strong>单调性</strong>）</li>
+<li>若 <span class="arithmatex">\(X\)</span> 和 <span class="arithmatex">\(Y\)</span> <strong>独立</strong>，则 <span class="arithmatex">\(E(XY) = (EX)(EY)\)</span>（独立则乘积的期望等于期望的乘积）</li>
+</ol>
+</blockquote>
+<p><strong>性质 3（线性性）</strong> 是最重要的，几乎用于每个期望计算。注意：这里 <span class="arithmatex">\(X\)</span> 和 <span class="arithmatex">\(Y\)</span> <strong>不需要独立</strong>，对任意两个期望存在的随机变量都成立。</p>
+<p><strong>性质 5 的反向不成立</strong>：<span class="arithmatex">\(E(XY) = (EX)(EY)\)</span> 不能推出 <span class="arithmatex">\(X\)</span> 和 <span class="arithmatex">\(Y\)</span> 独立。</p>
+<p><strong>⚠️ 一般来说 <span class="arithmatex">\(E(g(X)) \neq g(E(X))\)</span></strong>（除非 <span class="arithmatex">\(g\)</span> 是线性函数）。例如：<span class="arithmatex">\(E(X^2) \neq (EX)^2\)</span>（这正是方差 <span class="arithmatex">\(Var(X) = E(X^2) - (EX)^2 \geq 0\)</span> 的由来）。</p>
+<hr />
+<h3 id="73">7.3 期望的优化解释<a class="headerlink" href="#73" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>[!NOTE] 定理 2.3</p>
+<p>设 <span class="arithmatex">\(EX = \mu\)</span>，<span class="arithmatex">\(E(X^2) &lt; \infty\)</span>，则对所有 <span class="arithmatex">\(c \in \mathbb{R}\)</span>，</p>
+<div class="arithmatex">\[E(X - \mu)^2 \leq E(X - c)^2\]</div>
+</blockquote>
+<p>等价地（从最优化角度）：</p>
+<div class="arithmatex">\[E(X) = \underset{c \in \mathbb{R}}{\arg\min}; E(X - c)^2\]</div>
+<p><strong>意义</strong>：在用常数 <span class="arithmatex">\(c\)</span> 来预测随机变量 <span class="arithmatex">\(X\)</span> 时，若损失函数是均方误差 <span class="arithmatex">\(E(X-c)^2\)</span>，那么<strong>最优的常数预测就是期望 <span class="arithmatex">\(E(X)\)</span></strong>。这也解释了为什么期望在统计学中如此核心。</p>
+<p><strong>证明</strong>（简洁）：</p>
+<div class="arithmatex">\[E(X-c)^2 = E((X-\mu) + (\mu - c))^2 = E(X-\mu)^2 + 2(\mu-c)E(X-\mu) + (\mu-c)^2\]</div>
+<p>注意 <span class="arithmatex">\(E(X-\mu) = EX - \mu = 0\)</span>，所以</p>
+<div class="arithmatex">\[E(X-c)^2 = E(X-\mu)^2 + (\mu-c)^2 \geq E(X-\mu)^2\]</div>
+<p>当且仅当 <span class="arithmatex">\(c = \mu\)</span> 时等号成立。</p>
+<hr />
+<h3 id="74">7.4 中位数与期望的比较<a class="headerlink" href="#74" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>[!NOTE] 定理 2.4</p>
+<p>设 <span class="arithmatex">\(X\)</span> 有概率密度 <span class="arithmatex">\(f(x)\)</span>，<span class="arithmatex">\(m\)</span> 是其中位数，则</p>
+<div class="arithmatex">\[m = \underset{c \in \mathbb{R}}{\arg\min}; E|X - c|\]</div>
+</blockquote>
+<p>即<strong>中位数</strong>是在 <span class="arithmatex">\(L^1\)</span> 损失（绝对值损失）意义下的最优预测，而<strong>期望</strong>是在 <span class="arithmatex">\(L^2\)</span> 损失（均方损失）意义下的最优预测。</p>
+<p><strong>为什么概率统计中期望比中位数更重要？</strong></p>
+<ul>
+<li><strong>期望有优良的数学性质</strong>：尤其是线性性，使其在推导和计算中极为方便。中位数不满足线性性（<span class="arithmatex">\(\text{median}(X+Y) \neq \text{median}(X) + \text{median}(Y)\)</span>）。</li>
+<li><strong>中位数可能不唯一</strong>：例如，当 <span class="arithmatex">\(F(x)\)</span> 在某段区间上取 <span class="arithmatex">\(\frac{1}{2}\)</span> 时，中位数有无穷多个（如右图所示，两个分开的密度峰的情况）。</li>
+</ul>
+<p>中位数的优点：不易受极端值（outlier）影响，社会经济统计中常用（如"居民中位数收入"比均值更能反映多数人的收入水平）。</p>
+<hr />
+<h2 id="_8">八、期望性质的应用<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<h3 id="81-gamma">8.1 利用线性性重新推导二项分布和 Gamma 分布的期望<a class="headerlink" href="#81-gamma" title="Permanent link">&para;</a></h3>
+<p><strong>二项分布 <span class="arithmatex">\(B(n,p)\)</span></strong>：</p>
+<p>设 <span class="arithmatex">\(X \sim B(n,p)\)</span>，将 <span class="arithmatex">\(X\)</span> 写成 <span class="arithmatex">\(n\)</span> 个独立两点随机变量之和：<span class="arithmatex">\(X = X_1 + X_2 + \cdots + X_n\)</span>，其中 <span class="arithmatex">\(X_k \sim B(1,p)\)</span>。</p>
+<p>由线性性：</p>
+<div class="arithmatex">\[E(X) = E(X_1) + \cdots + E(X_n) = n \cdot p = np\]</div>
+<p>比直接用定义计算要简洁得多！</p>
+<p><strong>Gamma 分布 <span class="arithmatex">\(\Gamma(k, \lambda)\)</span>（<span class="arithmatex">\(k\)</span> 为整数）</strong>：</p>
+<p><span class="arithmatex">\(\Gamma(k, \lambda)\)</span> 可以理解为 <span class="arithmatex">\(k\)</span> 个独立 <span class="arithmatex">\(\mathcal{E}(\lambda)\)</span> 随机变量之和。由线性性：</p>
+<div class="arithmatex">\[E(X) = k \cdot \frac{1}{\lambda} = \frac{k}{\lambda}\]</div>
+<hr />
+<h3 id="82-24">8.2 质量抽查（例 2.4）<a class="headerlink" href="#82-24" title="Permanent link">&para;</a></h3>
+<p><span class="arithmatex">\(N\)</span> 件产品中有 <span class="arithmatex">\(M\)</span> 件正品，从中无放回取 <span class="arithmatex">\(n\)</span> 件，期望抽到几件正品？</p>
+<p>设 <span class="arithmatex">\(X\)</span> 是抽到正品的件数，<span class="arithmatex">\(X\)</span> 服从超几何分布，直接用定义计算 <span class="arithmatex">\(E(X)\)</span> 非常复杂。</p>
+<p><strong>用线性性的技巧</strong>：记 <span class="arithmatex">\(X_k\)</span> 为"第 <span class="arithmatex">\(k\)</span> 次抽到的是否为正品"（<span class="arithmatex">\(k = 1, \ldots, n\)</span>），则 <span class="arithmatex">\(X = X_1 + \cdots + X_n\)</span>。</p>
+<p>由对称性（无放回抽取时每件产品被抽到的概率相同），</p>
+<div class="arithmatex">\[E(X_k) = \mathbb{P}(\text{第 } k \text{ 次抽到正品}) = \frac{M}{N}\]</div>
+<p>由线性性：</p>
+<div class="arithmatex">\[E(X) = \sum_{k=1}^{n} E(X_k) = n \cdot \frac{M}{N}\]</div>
+<p><strong>结论</strong>：从 <span class="arithmatex">\(N\)</span> 件产品中无放回取 <span class="arithmatex">\(n\)</span> 件，期望抽到正品 <span class="arithmatex">\(\frac{nM}{N}\)</span> 件，这与按比例缩放的直觉完全一致。</p>
+<hr />
+<h3 id="83-25">8.3 机器人打字问题（例 2.5）<a class="headerlink" href="#83-25" title="Permanent link">&para;</a></h3>
+<p>一个机器人在只有 26 个小写字母的键盘上打字，每次独立等可能地选择一个字母。要打出 <span class="arithmatex">\(k\)</span> 个不同的字母，期望打字多少次？</p>
+<p><strong>思路</strong>：设 <span class="arithmatex">\(S_k\)</span> 为打出第 <span class="arithmatex">\(k\)</span> 个新字母时的总打字次数（<span class="arithmatex">\(S_0 = 0\)</span>）。令 <span class="arithmatex">\(X_k = S_k - S_{k-1}\)</span> 为等待第 <span class="arithmatex">\(k\)</span> 个新字母的次数。</p>
+<p>在已出现 <span class="arithmatex">\(k-1\)</span> 个不同字母后，还有 <span class="arithmatex">\(N - (k-1) = N - k + 1\)</span> 个新字母（<span class="arithmatex">\(N = 26\)</span>），所以下一次打字打到新字母的概率为 <span class="arithmatex">\(p_k = \frac{N - k + 1}{N}\)</span>。</p>
+<p><span class="arithmatex">\(X_k\)</span> 服从几何分布 <span class="arithmatex">\(G(p_k)\)</span>，期望为 <span class="arithmatex">\(E(X_k) = \frac{1}{p_k} = \frac{N}{N-k+1}\)</span>。</p>
+<p>由线性性：</p>
+<div class="arithmatex">\[E(S_k) = \sum_{j=1}^{k} E(X_j) = \sum_{j=1}^{k} \frac{N}{N-j+1} = N\sum_{j=N-k+1}^{N} \frac{1}{j} \approx N \ln\frac{N+1}{N-k+1}\]</div>
+<p><strong>特殊情况</strong>：</p>
+<ul>
+<li>打出全部 <span class="arithmatex">\(N = 26\)</span> 个字母：<span class="arithmatex">\(E(S_N) \approx N \ln(N+1) \approx 26 \times 3.26 \approx 84.8\)</span> 次。</li>
+<li>打出前一半（13 个不同字母）：<span class="arithmatex">\(E(S_{N/2}) \approx N \ln 2 \approx 26 \times 0.693 \approx 18\)</span> 次。</li>
+</ul>
+<p><strong>结论</strong>：打出前一半字母相对容易，而要凑齐全部字母则需要多得多的次数（因为越到后面，每次碰巧打出新字母的概率越小）。</p>
+<hr />
+<h3 id="84">8.4 金融投资例<a class="headerlink" href="#84" title="Permanent link">&para;</a></h3>
+<p>某公司可选择 A、B 两家银行的三款投资产品（对应各自独立的项目）：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>产品一(获利/概率)</th>
+<th>产品二(获利/概率)</th>
+<th>产品三(获利/概率)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A 银行</td>
+<td>281 万 / 67%</td>
+<td>236 万 / 10%</td>
+<td>259 万 / 23%</td>
+</tr>
+<tr>
+<td>B 银行</td>
+<td>283 万 / 66%</td>
+<td>242 万 / 15%</td>
+<td>260 万 / 19%</td>
+</tr>
+</tbody>
+</table>
+<p>（各产品只有获利或零两种结果）</p>
+<p><strong>A 银行总获利</strong> <span class="arithmatex">\(X = X_1 + X_2 + X_3\)</span>：</p>
+<div class="arithmatex">\[EX = 281 \times 0.67 + 236 \times 0.10 + 259 \times 0.23 = 271.44 \text{ 万元}\]</div>
+<p><strong>B 银行总获利</strong> <span class="arithmatex">\(Y = Y_1 + Y_2 + Y_3\)</span>：</p>
+<div class="arithmatex">\[EY = 283 \times 0.66 + 242 \times 0.15 + 260 \times 0.19 = 271 \text{ 万元}\]</div>
+<p><strong>结论</strong>：A 银行期望获利略高，应选择 A 银行。</p>
+<hr />
+<h2 id="_9">九、高阶矩<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<h3 id="91">9.1 定义<a class="headerlink" href="#91" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>[!INFO] 定义 2.1（矩，Moment）</p>
+<p>设 <span class="arithmatex">\(X\)</span> 是随机变量，<span class="arithmatex">\(m\)</span> 是正整数。若 <span class="arithmatex">\(E(|X|^m) &lt; \infty\)</span>，则：</p>
+<ul>
+<li>称 <span class="arithmatex">\(E(X^m)\)</span> 为 <span class="arithmatex">\(X\)</span> 的 <strong><span class="arithmatex">\(m\)</span> 阶原点矩</strong></li>
+<li>称 <span class="arithmatex">\(E(X - EX)^m\)</span> 为 <span class="arithmatex">\(X\)</span> 的 <strong><span class="arithmatex">\(m\)</span> 阶中心矩</strong></li>
+</ul>
+<p>当 <span class="arithmatex">\(m &gt; 2\)</span> 时，统称为<strong>高阶矩</strong>。</p>
+</blockquote>
+<p><strong>各阶矩的含义：</strong></p>
+<ul>
+<li><strong><span class="arithmatex">\(m = 1\)</span> 阶原点矩</strong>：<span class="arithmatex">\(E(X)\)</span>，即均值/期望。</li>
+<li><strong><span class="arithmatex">\(m = 2\)</span> 阶中心矩</strong>：<span class="arithmatex">\(E(X - EX)^2 = Var(X)\)</span>，即<strong>方差</strong>（衡量随机变量的离散程度）。</li>
+<li><strong><span class="arithmatex">\(m = 3\)</span> 阶中心矩（标准化后）</strong>——<strong>偏度（Skewness）</strong>：</li>
+</ul>
+<div class="arithmatex">\[\text{Skewness} = \frac{E(X - EX)^3}{[E(X-EX)^2]^{3/2}}\]</div>
+<p>偏度衡量分布的<strong>不对称程度</strong>。偏度为负（左偏）、零（对称）、正（右偏）分别对应分布左侧尾巴长、两侧对称、右侧尾巴长的情形。</p>
+<ul>
+<li><strong><span class="arithmatex">\(m = 4\)</span> 阶中心矩（标准化后）</strong>——<strong>峰度（Kurtosis）</strong>：</li>
+</ul>
+<div class="arithmatex">\[\text{Kurtosis} = \frac{E(X - EX)^4}{[E(X-EX)^2]^2} - 3\]</div>
+<p>峰度衡量分布<strong>尾部的厚重程度</strong>，减 3 是为了让正态分布的峰度为 0（作为基准）。峰度大于 0（尖峰厚尾）、等于 0（正态）、小于 0（平峰薄尾）。</p>
+<hr />
+<h2 id="_10">十、期望的补充性质<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
+<h3 id="101-27ex-0-x-0">10.1 例 2.7：<span class="arithmatex">\(E|X| = 0\)</span> 则 <span class="arithmatex">\(X = 0\)</span>（几乎处处）<a class="headerlink" href="#101-27ex-0-x-0" title="Permanent link">&para;</a></h3>
+<p>这说明：如果一个非负随机变量的期望为 0，则它几乎处处等于 0。</p>
+<p><strong>证明</strong>：对任意正整数 <span class="arithmatex">\(n\)</span>，</p>
+<div class="arithmatex">\[\mathbb{P}\left(|X| &gt; \frac{1}{n}\right) = \mathbb{P}(n|X| &gt; 1) = E\left[I_{{n|X|&gt;1}}\right] \leq E\left[n|X| \cdot I_{{n|X|&gt;1}}\right] \leq n E|X| = 0\]</div>
+<p>由概率的连续性，</p>
+<div class="arithmatex">\[\mathbb{P}(|X| &gt; 0) = \mathbb{P}\lbrace(\bigcup_{n=1}^{\infty}\lbrace{|X| &gt; \frac{1}{n}\rbrace}\rbrace) = \lim_{n\to\infty} \mathbb{P}\lbrace(|X| &gt; \frac{1}{n}\rbrace) = 0\]</div>
+<p>因此 <span class="arithmatex">\(\mathbb{P}(X = 0) = 1 - \mathbb{P}(|X| &gt; 0) = 1\)</span>。</p>
+<h3 id="102-26cauchy">10.2 例 2.6：Cauchy 分布的期望不存在<a class="headerlink" href="#102-26cauchy" title="Permanent link">&para;</a></h3>
+<p>设 <span class="arithmatex">\(X, Y \sim \mathcal{N}(0,1)\)</span> 且相互独立，则 <span class="arithmatex">\(T = X/Y\)</span> 服从 <span class="arithmatex">\(t_1\)</span>（即 Cauchy）分布。</p>
+<p>注意：<strong>不能</strong>因为 <span class="arithmatex">\(EX = EY = 0\)</span> 就认为 <span class="arithmatex">\(E(X/Y) = 0/0\)</span> 不存在！</p>
+<p>期望的性质 <span class="arithmatex">\(E(XY) = (EX)(EY)\)</span>（独立时）要求 <span class="arithmatex">\(X, Y\)</span> 独立，但 <span class="arithmatex">\(\frac{X}{Y}\)</span> 是 <span class="arithmatex">\(X, Y\)</span> 的函数，不能套用。</p>
+<p>实际上直接计算：</p>
+<div class="arithmatex">\[E|T| = \int_{-\infty}^{\infty} |t| \cdot \frac{1}{\pi(1+t^2)},dt = \frac{2}{\pi} \int_0^{\infty} \frac{t}{1+t^2},dt = \frac{1}{\pi} \left[\ln(1+t^2)\right]_0^{\infty} = +\infty\]</div>
+<p>所以 Cauchy 分布的期望<strong>不存在</strong>（积分发散）。这是一个反直觉的例子：分布关于 0 对称，直觉上"均值应该是 0"，但期望在数学意义上不存在。</p>
+<hr />
+<h2 id="_11">十一、几个重要例题<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
+<h3 id="22x-sim-mathcaln01-exalpha">例 2.2：<span class="arithmatex">\(X \sim \mathcal{N}(0,1)\)</span>，计算 <span class="arithmatex">\(E(|X|^{\alpha})\)</span><a class="headerlink" href="#22x-sim-mathcaln01-exalpha" title="Permanent link">&para;</a></h3>
+<p><span class="arithmatex">\(X\)</span> 的密度为 <span class="arithmatex">\(\varphi(x) = \frac{1}{\sqrt{2\pi}} e^{-x^2/2}\)</span>。对 <span class="arithmatex">\(\alpha &gt; -1\)</span>：</p>
+<div class="arithmatex">\[E(|X|^{\alpha}) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} |x|^{\alpha} e^{-x^2/2},dx = \sqrt{\frac{2^{\alpha}}{\pi}} \cdot \Gamma!\left(\frac{\alpha+1}{2}\right)\]</div>
+<p>（利用换元 <span class="arithmatex">\(x = \sqrt{2t}\)</span>，然后利用 Gamma 函数的定义化简。）</p>
+<p><strong>特别地</strong>：</p>
+<ul>
+<li><span class="arithmatex">\(\alpha = 2\)</span>：<span class="arithmatex">\(E(X^2) = 1\)</span>（标准正态的二阶矩为 1）</li>
+<li><span class="arithmatex">\(\alpha = 1\)</span>：<span class="arithmatex">\(E|X| = \sqrt{2/\pi}\)</span></li>
+<li><span class="arithmatex">\(\alpha \leq -1\)</span>：<span class="arithmatex">\(E(|X|^{\alpha}) = +\infty\)</span>（期望不存在）</li>
+</ul>
+<p>注意：<span class="arithmatex">\(\Gamma(1/2) = \sqrt{\pi}\)</span> 是一个常用结论。</p>
+<h3 id="23xy-exey">例 2.3：<span class="arithmatex">\((X,Y)\)</span> 在单位圆内均匀分布，求 <span class="arithmatex">\(E(X)\)</span>，<span class="arithmatex">\(E(Y)\)</span><a class="headerlink" href="#23xy-exey" title="Permanent link">&para;</a></h3>
+<p><span class="arithmatex">\((X,Y)\)</span> 的联合密度为 <span class="arithmatex">\(f(x,y) = \frac{1}{\pi} I_D\)</span>，其中 <span class="arithmatex">\(D = {(x,y) : x^2 + y^2 \leq 1}\)</span>。</p>
+<div class="arithmatex">\[E(X) = \frac{1}{\pi} \int_{-1}^{1} \left(\int_{-\sqrt{1-y^2}}^{\sqrt{1-y^2}} x,dx\right) dy = \frac{1}{\pi} \int_{-1}^{1} 0,dy = 0\]</div>
+<p><strong>直观</strong>：单位圆关于 <span class="arithmatex">\(y\)</span> 轴对称，<span class="arithmatex">\(x\)</span> 的"质心"当然在 0；同理 <span class="arithmatex">\(E(Y) = 0\)</span>。</p>
+<hr />
+<h2 id="_12">十二、本讲知识框架总结<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
+<p><strong>一、期望的定义</strong></p>
+<ul>
+<li>离散：<span class="arithmatex">\(E(X) = \sum_j x_j \mathbb{P}(X = x_j)\)</span>（需绝对收敛）</li>
+<li>连续：<span class="arithmatex">\(E(X) = \int_{-\infty}^{\infty} x f(x),dx\)</span>（需绝对可积）</li>
+<li>一般：<span class="arithmatex">\(E(X) = \int_{\mathbb{R}} x,dF(x)\)</span>（了解）</li>
+</ul>
+<p><strong>二、直观含义</strong>：加权平均值 = 分布的质心</p>
+<p><strong>三、常见分布的期望</strong></p>
+<table>
+<thead>
+<tr>
+<th>分布</th>
+<th>参数</th>
+<th>期望</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>两点分布 <span class="arithmatex">\(B(1,p)\)</span></td>
+<td><span class="arithmatex">\(p\)</span></td>
+<td><span class="arithmatex">\(p\)</span></td>
+</tr>
+<tr>
+<td>二项分布 <span class="arithmatex">\(B(n,p)\)</span></td>
+<td><span class="arithmatex">\(n,p\)</span></td>
+<td><span class="arithmatex">\(np\)</span></td>
+</tr>
+<tr>
+<td>Poisson <span class="arithmatex">\(\mathcal{P}(\lambda)\)</span></td>
+<td><span class="arithmatex">\(\lambda\)</span></td>
+<td><span class="arithmatex">\(\lambda\)</span></td>
+</tr>
+<tr>
+<td>几何分布 <span class="arithmatex">\(G(p)\)</span></td>
+<td><span class="arithmatex">\(p\)</span></td>
+<td><span class="arithmatex">\(1/p\)</span></td>
+</tr>
+<tr>
+<td>均匀分布 <span class="arithmatex">\(U(a,b)\)</span></td>
+<td><span class="arithmatex">\(a,b\)</span></td>
+<td><span class="arithmatex">\((a+b)/2\)</span></td>
+</tr>
+<tr>
+<td>指数分布 <span class="arithmatex">\(\mathcal{E}(\lambda)\)</span></td>
+<td><span class="arithmatex">\(\lambda\)</span></td>
+<td><span class="arithmatex">\(1/\lambda\)</span></td>
+</tr>
+<tr>
+<td>Gamma <span class="arithmatex">\(\Gamma(\alpha,\beta)\)</span></td>
+<td><span class="arithmatex">\(\alpha,\beta\)</span></td>
+<td><span class="arithmatex">\(\alpha/\beta\)</span></td>
+</tr>
+<tr>
+<td>正态 <span class="arithmatex">\(\mathcal{N}(\mu,\sigma^2)\)</span></td>
+<td><span class="arithmatex">\(\mu,\sigma^2\)</span></td>
+<td><span class="arithmatex">\(\mu\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>四、LOTUS 定理</strong>：<span class="arithmatex">\(E(g(X)) = \int g(x) f(x),dx\)</span>，无需先求 <span class="arithmatex">\(g(X)\)</span> 的分布。</p>
+<p><strong>五、重要性质</strong>：线性性（最常用）、单调性、独立则乘积拆分。</p>
+<p><strong>六、优化解释</strong>：<span class="arithmatex">\(E(X)\)</span> 是 <span class="arithmatex">\(L^2\)</span> 损失下最优预测；中位数是 <span class="arithmatex">\(L^1\)</span> 损失下最优预测。</p>
+<p><strong>七、高阶矩</strong>：方差（2 阶）、偏度（3 阶标准化）、峰度（4 阶标准化）。</p>
+<hr />
+<blockquote>
+<p>[!ABSTRACT] 方差、标准化与不等式</p>
+</blockquote>
+<hr />
+<h2 id="variance">一、方差（Variance）<a class="headerlink" href="#variance" title="Permanent link">&para;</a></h2>
+<h3 id="11_1">1.1 定义<a class="headerlink" href="#11_1" title="Permanent link">&para;</a></h3>
+<p><strong>定义 3.1</strong>：若随机变量 <span class="arithmatex">\(X\)</span> 的期望 <span class="arithmatex">\(\mu = EX\)</span> 有限，则定义 <span class="arithmatex">\(X\)</span> 的<strong>方差</strong>为：</p>
+<div class="arithmatex">\[\text{var}(X) = E(X - \mu)^2\]</div>
+<p>记作 <span class="arithmatex">\(\text{var}(X)\)</span> 或 <span class="arithmatex">\(\sigma_X^2\)</span>。当 <span class="arithmatex">\(\text{var}(X) &lt; \infty\)</span> 时，称 <span class="arithmatex">\(X\)</span> 的方差有限。</p>
+<blockquote>
+<p><strong>直观理解</strong>：方差衡量随机变量 <span class="arithmatex">\(X\)</span> 在其期望附近的"分散程度"。方差越小，<span class="arithmatex">\(X\)</span> 的取值越集中在均值附近；方差越大，取值越分散。</p>
+</blockquote>
+<h3 id="12">1.2 计算公式（两种等价形式）<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>形式</th>
+<th>公式</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>定义式</td>
+<td><span class="arithmatex">\(\text{var}(X) = E(X - EX)^2\)</span></td>
+<td>理论推导、证明</td>
+</tr>
+<tr>
+<td><strong>展开式</strong>（常用）</td>
+<td><span class="arithmatex">\(\text{var}(X) = E(X^2) - (EX)^2\)</span></td>
+<td><strong>实际计算首选</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>展开式推导</strong>（补充课件未注明的步骤）：</p>
+<div class="arithmatex">\[\text{var}(X) = E(X-\mu)^2 = E(X^2 - 2\mu X + \mu^2) = EX^2 - 2\mu \cdot EX + \mu^2 = EX^2 - \mu^2\]</div>
+<p>即 <span class="arithmatex">\(\text{var}(X) = E(X^2) - (EX)^2\)</span>。</p>
+<blockquote>
+<p><strong>解题策略</strong>：计算方差时，先分别算 <span class="arithmatex">\(E(X^2)\)</span> 和 <span class="arithmatex">\((EX)^2\)</span>，再相减。</p>
+</blockquote>
+<hr />
+<h2 id="_13">二、常见分布的方差（重点记忆）<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
+<h3 id="21-b1-p">2.1 两点分布 <span class="arithmatex">\(B(1, p)\)</span><a class="headerlink" href="#21-b1-p" title="Permanent link">&para;</a></h3>
+<p><span class="arithmatex">\(X \sim B(1,p)\)</span>，即 <span class="arithmatex">\(P(X=1)=p,\ P(X=0)=q=1-p\)</span>。</p>
+<p><strong>关键观察</strong>：<span class="arithmatex">\(X\)</span> 只取 0 和 1，故 <span class="arithmatex">\(X^2 = X\)</span>，因此 <span class="arithmatex">\(E(X^2) = EX = p\)</span>。</p>
+<div class="arithmatex">\[\text{var}(X) = E(X^2) - (EX)^2 = p - p^2 = p(1-p) = pq\]</div>
+<h3 id="22-bn-p">2.2 二项分布 <span class="arithmatex">\(B(n, p)\)</span><a class="headerlink" href="#22-bn-p" title="Permanent link">&para;</a></h3>
+<p><span class="arithmatex">\(X \sim B(n,p)\)</span>。将 <span class="arithmatex">\(X = X_1 + X_2 + \cdots + X_n\)</span>（<span class="arithmatex">\(n\)</span> 个独立两点分布之和），利用方差的可加性（见定理 3.1 性质 4）：</p>
+<div class="arithmatex">\[\text{var}(X) = n \cdot \text{var}(X_i) = npq\]</div>
+<h3 id="23-poisson-mathcalplambda">2.3 Poisson 分布 <span class="arithmatex">\(\mathcal{P}(\lambda)\)</span><a class="headerlink" href="#23-poisson-mathcalplambda" title="Permanent link">&para;</a></h3>
+<p><span class="arithmatex">\(X \sim \mathcal{P}(\lambda)\)</span>，即 <span class="arithmatex">\(P(X=k) = \frac{\lambda^k}{k!}e^{-\lambda}\)</span>，<span class="arithmatex">\(k=0,1,\ldots\)</span></p>
+<p><strong>计算技巧</strong>：利用分解 <span class="arithmatex">\(X^2 = X(X-1) + X\)</span>，可以把二阶矩转化为"阶乘矩"：</p>
+<div class="arithmatex">\[E(X^2) = E[X(X-1)] + EX\]</div>
+<p>计算 <span class="arithmatex">\(E[X(X-1)]\)</span>：</p>
+<div class="arithmatex">\[E[X(X-1)] = \sum_{k=0}^{\infty} k(k-1) \frac{\lambda^k}{k!}e^{-\lambda} = \lambda^2 \sum_{k=2}^{\infty} \frac{\lambda^{k-2}}{(k-2)!}e^{-\lambda} = \lambda^2\]</div>
+<p>（最后一步利用 Poisson 分布的归一性：<span class="arithmatex">\(\sum_{j=0}^{\infty}\frac{\lambda^j}{j!}e^{-\lambda}=1\)</span>）</p>
+<p>故 <span class="arithmatex">\(E(X^2) = \lambda^2 + \lambda\)</span>，因此：</p>
+<div class="arithmatex">\[\text{var}(X) = \lambda^2 + \lambda - \lambda^2 = \lambda\]</div>
+<blockquote>
+<p><strong>Poisson 分布的特点</strong>：均值 = 方差 = <span class="arithmatex">\(\lambda\)</span>。</p>
+</blockquote>
+<h3 id="24-gp">2.4 几何分布 <span class="arithmatex">\(G(p)\)</span><a class="headerlink" href="#24-gp" title="Permanent link">&para;</a></h3>
+<p><span class="arithmatex">\(X \sim G(p)\)</span>，即 <span class="arithmatex">\(P(X=k) = p(1-p)^{k-1}\)</span>，<span class="arithmatex">\(k=1,2,\ldots\)</span>，其中 <span class="arithmatex">\(q=1-p\)</span>。</p>
+<p>已知 <span class="arithmatex">\(EX = \frac{1}{p}\)</span>。同样利用 <span class="arithmatex">\(E(X^2) = E[X(X-1)] + EX\)</span>：</p>
+<div class="arithmatex">\[E[X(X-1)] = \sum_{j=1}^{\infty} j(j-1)pq^{j-1} = pq \cdot \left(\sum_{j=0}^{\infty} q^j\right)''\]</div>
+<p>对等比级数 <span class="arithmatex">\(\frac{1}{1-q}\)</span> 求两次导数（关于 <span class="arithmatex">\(q\)</span>），得 <span class="arithmatex">\(\left(\frac{1}{1-q}\right)'' = \frac{2}{(1-q)^3} = \frac{2}{p^3}\)</span>。</p>
+<p>故 <span class="arithmatex">\(E[X(X-1)] = pq \cdot \frac{2}{p^3} = \frac{2q}{p^2}\)</span>，从而 <span class="arithmatex">\(E(X^2) = \frac{2q}{p^2} + \frac{1}{p}\)</span>。</p>
+<div class="arithmatex">\[\text{var}(X) = \frac{2q}{p^2} + \frac{1}{p} - \frac{1}{p^2} = \frac{2q - 1}{p^2} + \frac{1}{p} = \frac{q}{p^2}\]</div>
+<h3 id="25-ua-b">2.5 均匀分布 <span class="arithmatex">\(U(a, b)\)</span><a class="headerlink" href="#25-ua-b" title="Permanent link">&para;</a></h3>
+<p><span class="arithmatex">\(X \sim U(a,b)\)</span>，密度 <span class="arithmatex">\(f(x) = \frac{1}{b-a} \mathbf{1}_{(a,b)}(x)\)</span>。已知 <span class="arithmatex">\(EX = \frac{a+b}{2}\)</span>。</p>
+<div class="arithmatex">\[E(X^2) = \int_a^b \frac{x^2}{b-a}dx = \frac{b^3-a^3}{3(b-a)} = \frac{a^2+ab+b^2}{3}\]</div>
+<p>（利用因式分解 <span class="arithmatex">\(b^3-a^3=(b-a)(b^2+ab+a^2)\)</span>）</p>
+<div class="arithmatex">\[\text{var}(X) = \frac{a^2+ab+b^2}{3} - \left(\frac{a+b}{2}\right)^2 = \frac{(b-a)^2}{12}\]</div>
+<h3 id="26-varepsilonlambda">2.6 指数分布 <span class="arithmatex">\(\varepsilon(\lambda)\)</span><a class="headerlink" href="#26-varepsilonlambda" title="Permanent link">&para;</a></h3>
+<p><span class="arithmatex">\(X \sim \varepsilon(\lambda)\)</span>，密度 <span class="arithmatex">\(f(x) = \lambda e^{-\lambda x}\)</span>，<span class="arithmatex">\(x&gt;0\)</span>。已知 <span class="arithmatex">\(EX = \frac{1}{\lambda}\)</span>。</p>
+<div class="arithmatex">\[E(X^2) = \int_0^\infty x^2 \lambda e^{-\lambda x}dx = \frac{1}{\lambda^2}\Gamma(3) = \frac{2}{\lambda^2}\]</div>
+<p>（利用 Gamma 函数：<span class="arithmatex">\(\int_0^\infty t^{n-1}e^{-t}dt = \Gamma(n)\)</span>；令 <span class="arithmatex">\(t=\lambda x\)</span>，<span class="arithmatex">\(\Gamma(3)=2!=2\)</span>）</p>
+<div class="arithmatex">\[\text{var}(X) = \frac{2}{\lambda^2} - \frac{1}{\lambda^2} = \frac{1}{\lambda^2}\]</div>
+<h3 id="27-mathcalnmu-sigma2">2.7 正态分布 <span class="arithmatex">\(\mathcal{N}(\mu, \sigma^2)\)</span><a class="headerlink" href="#27-mathcalnmu-sigma2" title="Permanent link">&para;</a></h3>
+<p><span class="arithmatex">\(X \sim \mathcal{N}(\mu,\sigma^2)\)</span>，密度 <span class="arithmatex">\(f(x) = \frac{1}{\sigma\sqrt{2\pi}}\exp!\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)\)</span>。</p>
+<div class="arithmatex">\[\text{var}(X) = \int_{-\infty}^\infty (x-\mu)^2 f(x)dx\]</div>
+<p>令 <span class="arithmatex">\(t = \frac{x-\mu}{\sigma}\)</span>（换元），得：</p>
+<div class="arithmatex">\[\text{var}(X) = \frac{\sigma^2}{\sqrt{2\pi}}\int_{-\infty}^\infty t^2 e^{-t^2/2}dt = \sigma^2\]</div>
+<p>（最后一步利用标准正态的归一化性质：<span class="arithmatex">\(\frac{1}{\sqrt{2\pi}}\int t^2 e^{-t^2/2}dt = 1\)</span>，可由分部积分或 Gamma 函数验证）</p>
+<h3 id="28-gamma-gammaalpha-beta">2.8 Gamma 分布 <span class="arithmatex">\(\Gamma(\alpha, \beta)\)</span><a class="headerlink" href="#28-gamma-gammaalpha-beta" title="Permanent link">&para;</a></h3>
+<p><span class="arithmatex">\(X \sim \Gamma(\alpha,\beta)\)</span>，密度 <span class="arithmatex">\(f(x) = \frac{\beta^\alpha}{\Gamma(\alpha)}x^{\alpha-1}e^{-\beta x}\)</span>，<span class="arithmatex">\(x&gt;0\)</span>。已知 <span class="arithmatex">\(EX = \frac{\alpha}{\beta}\)</span>。</p>
+<p>令 <span class="arithmatex">\(t=\beta x\)</span> 换元，利用 <span class="arithmatex">\(\Gamma\)</span> 函数的递推关系 <span class="arithmatex">\(\Gamma(\alpha+1)=\alpha\Gamma(\alpha)\)</span>：</p>
+<div class="arithmatex">\[E(X^2) = \frac{\Gamma(\alpha+2)}{\beta^2\Gamma(\alpha)} = \frac{(\alpha+1)\alpha}{\beta^2}\]</div>
+<div class="arithmatex">\[\text{var}(X) = \frac{\alpha(\alpha+1)}{\beta^2} - \left(\frac{\alpha}{\beta}\right)^2 = \frac{\alpha}{\beta^2}\]</div>
+<h3 id="_14">常见分布方差汇总表<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>分布</th>
+<th>参数</th>
+<th>期望</th>
+<th>方差</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(B(1,p)\)</span></td>
+<td><span class="arithmatex">\(p\)</span></td>
+<td><span class="arithmatex">\(p\)</span></td>
+<td><span class="arithmatex">\(pq\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(B(n,p)\)</span></td>
+<td><span class="arithmatex">\(n,p\)</span></td>
+<td><span class="arithmatex">\(np\)</span></td>
+<td><span class="arithmatex">\(npq\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\mathcal{P}(\lambda)\)</span></td>
+<td><span class="arithmatex">\(\lambda\)</span></td>
+<td><span class="arithmatex">\(\lambda\)</span></td>
+<td><span class="arithmatex">\(\lambda\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(G(p)\)</span></td>
+<td><span class="arithmatex">\(p\)</span></td>
+<td><span class="arithmatex">\(1/p\)</span></td>
+<td><span class="arithmatex">\(q/p^2\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(U(a,b)\)</span></td>
+<td><span class="arithmatex">\(a,b\)</span></td>
+<td><span class="arithmatex">\((a+b)/2\)</span></td>
+<td><span class="arithmatex">\((b-a)^2/12\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\varepsilon(\lambda)\)</span></td>
+<td><span class="arithmatex">\(\lambda\)</span></td>
+<td><span class="arithmatex">\(1/\lambda\)</span></td>
+<td><span class="arithmatex">\(1/\lambda^2\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\mathcal{N}(\mu,\sigma^2)\)</span></td>
+<td><span class="arithmatex">\(\mu,\sigma^2\)</span></td>
+<td><span class="arithmatex">\(\mu\)</span></td>
+<td><span class="arithmatex">\(\sigma^2\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\Gamma(\alpha,\beta)\)</span></td>
+<td><span class="arithmatex">\(\alpha,\beta\)</span></td>
+<td><span class="arithmatex">\(\alpha/\beta\)</span></td>
+<td><span class="arithmatex">\(\alpha/\beta^2\)</span></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="31">三、方差的性质（定理 3.1）⭐ 要求掌握证明<a class="headerlink" href="#31" title="Permanent link">&para;</a></h2>
+<p>设 <span class="arithmatex">\(EX = \mu\)</span>，<span class="arithmatex">\(\text{var}(X) &lt; \infty\)</span>，则：</p>
+<p><strong>性质 1（线性变换）</strong>：<span class="arithmatex">\(\text{var}(aX+b) = a^2\text{var}(X)\)</span>，<span class="arithmatex">\(\forall a,b \in \mathbb{R}\)</span></p>
+<blockquote>
+<p><strong>证明</strong>：<span class="arithmatex">\(\text{var}(aX+b) = E[(aX+b - E(aX+b))^2] = E[(aX+b-a\mu-b)^2] = a^2E[(X-\mu)^2] = a^2\text{var}(X)\)</span>。注意常数 <span class="arithmatex">\(b\)</span> 对方差无影响，只有系数 <span class="arithmatex">\(a\)</span> 影响方差（且取平方）。</p>
+</blockquote>
+<p><strong>性质 2（最小性）</strong>：<span class="arithmatex">\(\text{var}(X) = E(X-\mu)^2 \leq E(X-c)^2\)</span>，<span class="arithmatex">\(\forall c \in \mathbb{R}\)</span></p>
+<blockquote>
+<p><strong>理解</strong>：期望是使均方误差最小的预测值。即在所有常数中，用均值 <span class="arithmatex">\(\mu\)</span> 来"预测" <span class="arithmatex">\(X\)</span> 的均方误差最小。</p>
+</blockquote>
+<p><strong>性质 3（零方差的含义）</strong>：<span class="arithmatex">\(\text{var}(X) = 0 \iff X = \mu \text{ a.s.}\)</span></p>
+<blockquote>
+<p><strong>理解</strong>：方差为零意味着 <span class="arithmatex">\(X\)</span> 几乎处处等于常数（其期望），即 <span class="arithmatex">\(X\)</span> 是退化的随机变量。</p>
+</blockquote>
+<p><strong>性质 4（独立变量之和）</strong>：若 <span class="arithmatex">\(X_1, \ldots, X_n\)</span> 相互独立，则</p>
+<div class="arithmatex">\[\text{var}!\left(\sum_{k=1}^n X_k\right) = \sum_{k=1}^n \text{var}(X_k)\]</div>
+<blockquote>
+<p><strong>注意</strong>：此性质<strong>要求独立</strong>！不独立时需要引入协方差修正项（后续课程内容）。</p>
+<p><strong>性质 4 证明思路</strong>：利用独立性 <span class="arithmatex">\(\Rightarrow\)</span> <span class="arithmatex">\(E(X_iX_j) = EX_i \cdot EX_j\)</span>（<span class="arithmatex">\(i\neq j\)</span>），展开 <span class="arithmatex">\(\text{var}(\sum X_k)\)</span> 后交叉项全消。</p>
+</blockquote>
+<hr />
+<h2 id="_15">四、应用例：配对问题（示范指示函数法）<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h2>
+<p><strong>题目</strong>：某人写了 <span class="arithmatex">\(n\)</span> 封信，随机装入 <span class="arithmatex">\(n\)</span> 个信封（随机排列），记 <span class="arithmatex">\(X\)</span> 为正确匹配的封数。求 <span class="arithmatex">\(EX\)</span> 和 <span class="arithmatex">\(\text{var}(X)\)</span>。</p>
+<p><strong>方法：指示函数分解</strong>（标准做法）</p>
+<p>令 <span class="arithmatex">\(X_i = \mathbf{1}_{{\text{第}i\text{封信正确匹配}}}\)</span>，则 <span class="arithmatex">\(X = \sum_{i=1}^n X_i\)</span>。</p>
+<p><strong>求 <span class="arithmatex">\(EX\)</span></strong>：<span class="arithmatex">\(P(X_i = 1) = \frac{1}{n}\)</span>，故 <span class="arithmatex">\(EX_i = \frac{1}{n}\)</span>，由线性性 <span class="arithmatex">\(EX = n \cdot \frac{1}{n} = 1\)</span>。</p>
+<p><strong>求 <span class="arithmatex">\(\text{var}(X)\)</span></strong>：注意 <span class="arithmatex">\(X_i\)</span> 不独立，需用展开式：</p>
+<div class="arithmatex">\[\text{var}(X) = E(X^2) - (EX)^2\]</div>
+<p>先求 <span class="arithmatex">\(E(X^2) = E!\left(\sum_i X_i\right)^2 = \sum_i E(X_i^2) + \sum_{i\neq j} E(X_iX_j)\)</span>。</p>
+<ul>
+<li><span class="arithmatex">\(E(X_i^2) = E(X_i) = \frac{1}{n}\)</span>（因为 <span class="arithmatex">\(X_i^2 = X_i\)</span> 是指示变量）</li>
+<li><span class="arithmatex">\(E(X_iX_j) = P(X_i=1, X_j=1) = P(\text{第}i\text{和}j\text{均正确}) = \frac{1}{n} \cdot \frac{1}{n-1} = \frac{1}{n(n-1)}\)</span></li>
+</ul>
+<div class="arithmatex">\[E(X^2) = n \cdot \frac{1}{n} + n(n-1) \cdot \frac{1}{n(n-1)} = 1 + 1 = 2\]</div>
+<div class="arithmatex">\[\text{var}(X) = 2 - 1^2 = 1\]</div>
+<blockquote>
+<p><strong>结论</strong>：无论 <span class="arithmatex">\(n\)</span> 多大，正确匹配数的均值恒为 1，方差也恒为 1。</p>
+</blockquote>
+<hr />
+<h2 id="_16">五、标准差与标准化<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h2>
+<h3 id="51-32">5.1 标准差（定义 3.2）<a class="headerlink" href="#51-32" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[\sigma_X = \sqrt{\text{var}(X)}\]</div>
+<p>称为 <span class="arithmatex">\(X\)</span> 的<strong>标准差</strong>（Standard deviation）。标准差与 <span class="arithmatex">\(X\)</span> 量纲相同，比方差更直观。</p>
+<p>例：若 <span class="arithmatex">\(X \sim \mathcal{N}(\mu, \sigma^2)\)</span>，则标准差恰为参数 <span class="arithmatex">\(\sigma\)</span>。</p>
+<h3 id="52-33">5.2 标准化（定义 3.3）<a class="headerlink" href="#52-33" title="Permanent link">&para;</a></h3>
+<p>设 <span class="arithmatex">\(\text{var}(X) &lt; \infty\)</span>，令：</p>
+<div class="arithmatex">\[Y = \frac{X - EX}{\sqrt{\text{var}(X)}}\]</div>
+<p>则 <span class="arithmatex">\(EY = 0\)</span>，<span class="arithmatex">\(\text{var}(Y) = 1\)</span>。称 <span class="arithmatex">\(Y\)</span> 为 <span class="arithmatex">\(X\)</span> 的<strong>标准化</strong>（Standardization）。</p>
+<p><strong>验证</strong>（课件未列出的步骤）：</p>
+<ul>
+<li><span class="arithmatex">\(EY = \frac{EX - EX}{\sqrt{\text{var}(X)}} = 0\)</span>（用期望线性性）</li>
+<li><span class="arithmatex">\(\text{var}(Y) = \text{var}!\left(\frac{X}{\sqrt{\text{var}(X)}}\right) = \frac{1}{\text{var}(X)}\text{var}(X) = 1\)</span>（用方差性质 1）</li>
+</ul>
+<p><strong>特例</strong>：<span class="arithmatex">\(X \sim \mathcal{N}(\mu, \sigma^2)\)</span> 时，<span class="arithmatex">\(Y = \frac{X-\mu}{\sigma} \sim \mathcal{N}(0,1)\)</span>（标准正态）。</p>
+<h3 id="53">5.3 标准化的意义：提供可比性<a class="headerlink" href="#53" title="Permanent link">&para;</a></h3>
+<p>不同量纲、不同尺度的随机变量，经标准化后均转化为均值 0、方差 1 的变量，从而可以在同一尺度下比较其相对位置。</p>
+<blockquote>
+<p><strong>例</strong>：两个班级考试，甲班均值 50 分，乙班均值 65 分。某学生在甲班考了 65 分，另一学生在乙班考了 70 分，直接比分数不合理；标准化后才能客观比较各自在班级中的相对水平。</p>
+</blockquote>
+<hr />
+<h2 id="_17">六、高阶矩：偏度与峰度（了解）<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h2>
+<p>方差是二阶中心矩，更高阶矩刻画分布形状的更精细特征：</p>
+<p><strong>偏度（Skewness，<span class="arithmatex">\(m=3\)</span>）</strong>：</p>
+<div class="arithmatex">\[\text{Skewness} = \frac{E(X-EX)^3}{[E(X-EX)^2]^{3/2}} = E\left[\left(\frac{X-\mu}{\sigma}\right)^3\right]\]</div>
+<ul>
+<li>偏度 <span class="arithmatex">\(&gt; 0\)</span>：右偏（右尾长）</li>
+<li>偏度 <span class="arithmatex">\(= 0\)</span>：对称</li>
+<li>偏度 <span class="arithmatex">\(&lt; 0\)</span>：左偏（左尾长）</li>
+</ul>
+<p><strong>峰度（Kurtosis，<span class="arithmatex">\(m=4\)</span>）</strong>：</p>
+<div class="arithmatex">\[\text{Kurtosis} = \frac{E(X-EX)^4}{[E(X-EX)^2]^2} - 3 = E\left[\left(\frac{X-\mu}{\sigma}\right)^4\right] - 3\]</div>
+<ul>
+<li>减 3 是为了使正态分布峰度为 0（以正态为基准）</li>
+<li>峰度 <span class="arithmatex">\(&gt; 0\)</span>：比正态更"尖峰厚尾"</li>
+<li>峰度 <span class="arithmatex">\(&lt; 0\)</span>：比正态更"平坦"</li>
+</ul>
+<hr />
+<h2 id="_18">七、不等式<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h2>
+<h3 id="71-markov-41">7.1 Markov 不等式（定理 4.1）<a class="headerlink" href="#71-markov-41" title="Permanent link">&para;</a></h3>
+<p><strong>结论</strong>：对随机变量 <span class="arithmatex">\(X\)</span> 和 <span class="arithmatex">\(\varepsilon &gt; 0\)</span>，有</p>
+<div class="arithmatex">\[P(|X| \geq \varepsilon) \leq \frac{E|X|^\alpha}{\varepsilon^\alpha}, \quad \alpha &gt; 0\]</div>
+<p><strong>证明</strong>（理解思路）：</p>
+<div class="arithmatex">\[P(|X| \geq \varepsilon) = E\mathbf{1}_{{|X|\geq\varepsilon}} = E\mathbf{1}_{{|X|^\alpha \geq \varepsilon^\alpha}} \leq E\left[\frac{|X|^\alpha}{\varepsilon^\alpha}\mathbf{1}_{{|X|^\alpha \geq \varepsilon^\alpha}}\right] \leq E\frac{|X|^\alpha}{\varepsilon^\alpha} = \frac{E|X|^\alpha}{\varepsilon^\alpha}\]</div>
+<p>关键步骤：在集合 <span class="arithmatex">\({|X|^\alpha \geq \varepsilon^\alpha}\)</span> 上，有 <span class="arithmatex">\(1 \leq \frac{|X|^\alpha}{\varepsilon^\alpha}\)</span>，故第一个不等号成立；去掉指示函数只会变大，故第二个不等号成立。</p>
+<blockquote>
+<p><strong>直觉</strong>：知道均值有限，就能控制大偏差的概率。</p>
+</blockquote>
+<h3 id="72-chebyshev-41">7.2 Chebyshev 不等式（推论 4.1）<a class="headerlink" href="#72-chebyshev-41" title="Permanent link">&para;</a></h3>
+<p>Markov 不等式取 <span class="arithmatex">\(\alpha=2\)</span>，令 <span class="arithmatex">\(X \leftarrow X - EX\)</span>：</p>
+<div class="arithmatex">\[P(|X - EX| \geq \varepsilon) \leq \frac{\text{var}(X)}{\varepsilon^2}\]</div>
+<blockquote>
+<p><strong>意义</strong>：<strong>定量刻画 <span class="arithmatex">\(X\)</span> 在均值附近的集中程度</strong>。方差越小，<span class="arithmatex">\(X\)</span> 偏离均值超过 <span class="arithmatex">\(\varepsilon\)</span> 的概率越小。</p>
+</blockquote>
+<p><strong>应用场景</strong>：</p>
+<ul>
+<li>在不知道分布的具体形式时，只需知道均值和方差，就可以估计尾概率</li>
+<li>是大数定律的证明工具</li>
+</ul>
+<p><strong>解题模板</strong>：已知 <span class="arithmatex">\(EX\)</span> 和 <span class="arithmatex">\(\text{var}(X)\)</span>，求 <span class="arithmatex">\(P(|X - EX| \geq \varepsilon)\)</span> 的上界，直接套 Chebyshev 不等式。</p>
+<h3 id="73-cauchy-schwarz-42">7.3 内积不等式（Cauchy-Schwarz 不等式，定理 4.2）<a class="headerlink" href="#73-cauchy-schwarz-42" title="Permanent link">&para;</a></h3>
+<p><strong>结论</strong>：若 <span class="arithmatex">\(EX^2 &lt; \infty\)</span> 且 <span class="arithmatex">\(EY^2 &lt; \infty\)</span>，则</p>
+<div class="arithmatex">\[|E(XY)| \leq \sqrt{EX^2 \cdot EY^2}\]</div>
+<p>等号成立 <span class="arithmatex">\(\iff\)</span> 存在不全为零的常数 <span class="arithmatex">\(a,b\)</span> 使得 <span class="arithmatex">\(aX + bY = 0\)</span> a.s.（即 <span class="arithmatex">\(X\)</span> 与 <span class="arithmatex">\(Y\)</span> 成比例）。</p>
+<p><strong>证明思路</strong>：构造关于实参数 <span class="arithmatex">\((a,b)\)</span> 的二次型：</p>
+<div class="arithmatex">\[E(aX+bY)^2 = a^2EX^2 + 2abE(XY) + b^2EY^2 = (a,b)\Sigma(a,b)^T \geq 0\]</div>
+<p>其中 <span class="arithmatex">\(\Sigma = \begin{pmatrix}EX^2 &amp; E(XY)\ E(XY) &amp; EY^2\end{pmatrix}\)</span>。<span class="arithmatex">\(\Sigma\)</span> 非负定 <span class="arithmatex">\(\Rightarrow\)</span> <span class="arithmatex">\(\det(\Sigma) \geq 0\)</span> <span class="arithmatex">\(\Rightarrow\)</span> <span class="arithmatex">\(EX^2 \cdot EY^2 - [E(XY)]^2 \geq 0\)</span>，即得结论。</p>
+<p>等号成立时 <span class="arithmatex">\(\det(\Sigma)=0\)</span>，意味着 <span class="arithmatex">\(E(aX+bY)^2=0\)</span>，即 <span class="arithmatex">\(aX+bY=0\)</span> a.s.。</p>
+<h3 id="74-jensen-43">7.4 Jensen 不等式（定理 4.3）<a class="headerlink" href="#74-jensen-43" title="Permanent link">&para;</a></h3>
+<p><strong>结论</strong>：设 <span class="arithmatex">\(\psi\)</span> 是 <span class="arithmatex">\(\mathbb{R}\)</span> 上的<strong>凸函数</strong>，且 <span class="arithmatex">\(X\)</span> 和 <span class="arithmatex">\(\psi(X)\)</span> 都有有限期望，则</p>
+<div class="arithmatex">\[\psi(EX) \leq E[\psi(X)]\]</div>
+<p>对于严格凸的 <span class="arithmatex">\(\psi\)</span>，等号成立当且仅当 <span class="arithmatex">\(X = EX\)</span> a.s.。</p>
+<p><strong>证明思路</strong>：凸函数有性质：对任意点 <span class="arithmatex">\(a\)</span>，存在切线斜率 <span class="arithmatex">\(c = \psi'_r(a)\)</span>（右导数），使得</p>
+<div class="arithmatex">\[\psi(b) - \psi(a) \geq c(b-a), \quad \forall b\]</div>
+<p>令 <span class="arithmatex">\(a = EX\)</span>，<span class="arithmatex">\(b = X\)</span>（<span class="arithmatex">\(b\)</span> 是随机变量）：</p>
+<div class="arithmatex">\[\psi(X) - \psi(EX) \geq c(X - EX)\]</div>
+<p>两边取期望：<span class="arithmatex">\(E[\psi(X)] - \psi(EX) \geq cE(X-EX) = 0\)</span>，得证。</p>
+<p><strong>常见应用</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>凸函数 <span class="arithmatex">\(\psi\)</span></th>
+<th>Jensen 不等式的含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\psi(x) = x^2\)</span></td>
+<td><span class="arithmatex">\((EX)^2 \leq EX^2\)</span>，即 <span class="arithmatex">\(\text{var}(X) \geq 0\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\psi(x) = e^x\)</span></td>
+<td><span class="arithmatex">\(e^{EX} \leq Ee^X\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\psi(x) = -\ln x\)</span></td>
+<td><span class="arithmatex">\(-\ln(EX) \leq E(-\ln X)\)</span>，即 <span class="arithmatex">\(\ln(EX) \geq E\ln X\)</span></td>
+</tr>
+<tr>
+<td>$\psi(x) =</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+<p><strong>重要应用</strong>：EM 算法（其中利用 <span class="arithmatex">\(\ln\)</span> 的凹性）；证明最大似然估计（MLE）的一致性。</p>
+<hr />
+<h2 id="_19">八、本讲小结与解题策略<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h2>
+<h3 id="81-p58">8.1 期望小结（课件 P58 重点）<a class="headerlink" href="#81-p58" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>知识点</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>定义</td>
+<td>离散：<span class="arithmatex">\(\sum x_i p_i\)</span>；连续：<span class="arithmatex">\(\int x f(x)dx\)</span></td>
+</tr>
+<tr>
+<td>线性性</td>
+<td><span class="arithmatex">\(E(c+aX+bY) = c + aEX + bEY\)</span></td>
+</tr>
+<tr>
+<td>乘法性</td>
+<td><span class="arithmatex">\(X,Y\)</span> 独立 <span class="arithmatex">\(\Rightarrow\)</span> <span class="arithmatex">\(E(XY) = EXEY\)</span></td>
+</tr>
+<tr>
+<td>解读</td>
+<td>代数平均 / 物理质心 / 最优预测</td>
+</tr>
+<tr>
+<td>计算技巧</td>
+<td>归一性（分布归一）、对称性（关于均值对称时高次奇数阶矩为零）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="82">8.2 方差计算策略<a class="headerlink" href="#82" title="Permanent link">&para;</a></h3>
+<p>遇到"求 <span class="arithmatex">\(\text{var}(X)\)</span>"类题目，按以下步骤：</p>
+<ol>
+<li><strong>展开式优先</strong>：计算 <span class="arithmatex">\(E(X^2)\)</span> 和 <span class="arithmatex">\((EX)^2\)</span>，作差</li>
+<li><strong>计算 <span class="arithmatex">\(E(X^2)\)</span> 的技巧</strong>：<ul>
+<li>离散型：直接求和 <span class="arithmatex">\(\sum x_i^2 p_i\)</span></li>
+<li>连续型：直接积分 <span class="arithmatex">\(\int x^2 f(x)dx\)</span></li>
+<li>若 <span class="arithmatex">\(X\)</span> 只取 0/1（指示变量），利用 <span class="arithmatex">\(X^2=X\)</span></li>
+<li>若分布复杂，用 <span class="arithmatex">\(E[X(X-1)] + EX\)</span> 分解</li>
+</ul>
+</li>
+<li><strong>独立变量之和</strong>：各方差相加（前提：独立！）</li>
+<li><strong>不独立时</strong>（如配对问题）：用指示变量分解，展开 <span class="arithmatex">\(E(X^2)\)</span></li>
+</ol>
+<h3 id="83">8.3 不等式应用策略<a class="headerlink" href="#83" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>题型</th>
+<th>使用不等式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>已知期望，求尾概率上界 <span class="arithmatex">\(P(X \geq a)\)</span></td>
+<td>Markov 不等式</td>
+</tr>
+<tr>
+<td>已知均值和方差，求 <span class="arithmatex">\(P(\|X-\mu\| \geq \varepsilon)\)</span> 上界</td>
+<td>Chebyshev 不等式</td>
+</tr>
+<tr>
+<td>证明 <span class="arithmatex">\(\|E(XY)\| \leq \sqrt{EX^2 \cdot EY^2}\)</span></td>
+<td>Cauchy-Schwarz（内积不等式）</td>
+</tr>
+<tr>
+<td>凸函数与期望的大小关系</td>
+<td>Jensen 不等式</td>
+</tr>
+<tr>
+<td>证明 <span class="arithmatex">\(\text{var}(X) \geq 0\)</span></td>
+<td>Jensen（<span class="arithmatex">\(\psi=x^2\)</span> 是凸函数）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="84_1">8.4 标准化的用途<a class="headerlink" href="#84_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>统一尺度</strong>：不同分布的随机变量标准化后均为均值 0、方差 1，可直接比较</li>
+<li><strong>正态分布查表</strong>：<span class="arithmatex">\(X \sim \mathcal{N}(\mu,\sigma^2)\)</span> 的概率计算，先标准化为 <span class="arithmatex">\(\mathcal{N}(0,1)\)</span> 再查表</li>
+<li><strong>理论基础</strong>：中心极限定理的表述需要用到标准化</li>
+</ul>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "navigation.indexes", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

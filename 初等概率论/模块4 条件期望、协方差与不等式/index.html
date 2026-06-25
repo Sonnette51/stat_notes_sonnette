@@ -1,0 +1,2705 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="清华统计课程笔记">
+      
+      
+      
+        <link rel="canonical" href="https://Sonnette51.github.io/stat_notes_sonnette/%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%A8%A1%E5%9D%974%20%E6%9D%A1%E4%BB%B6%E6%9C%9F%E6%9C%9B%E3%80%81%E5%8D%8F%E6%96%B9%E5%B7%AE%E4%B8%8E%E4%B8%8D%E7%AD%89%E5%BC%8F/">
+      
+      
+        <link rel="prev" href="../%E6%A8%A1%E5%9D%973%20%E6%9C%9F%E6%9C%9B%E4%B8%8E%E6%96%B9%E5%B7%AE/">
+      
+      
+        <link rel="next" href="../%E6%A8%A1%E5%9D%975%20%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0%E4%B8%8E%E7%89%B9%E5%BE%81%E5%87%BD%E6%95%B0/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>复习 模块4 条件期望、协方差与不等式 - Sonnette's Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#4" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="Sonnette&#39;s Notes" class="md-header__button md-logo" aria-label="Sonnette's Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Sonnette's Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              复习 模块4 条件期望、协方差与不等式
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  数据科学编程
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  初等概率论
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Sonnette&#39;s Notes" class="md-nav__button md-logo" aria-label="Sonnette's Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Sonnette's Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据科学编程
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数据科学编程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/NumPy%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NumPy 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/Pandas%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pandas 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/Database%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/LLM%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LLM 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/MiningWebData%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mining Web Data 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/TextProcessing%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Text Processing 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/DataVisualization%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Visualization 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/Advanced%20Visualization%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Advanced Visualization 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    初等概率论
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    初等概率论
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture01%20%E6%A6%82%E7%8E%87%E6%A8%A1%E5%9E%8B%E4%B8%8E%E6%80%A7%E8%B4%A8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture01 概率模型与性质
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture02%20%E6%A6%82%E7%8E%87%E7%A9%BA%E9%97%B4%E3%80%81%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture02 概率空间、条件概率
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture03%20%E7%8B%AC%E7%AB%8B%E6%80%A7%E3%80%81%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture03 独立性、随机变量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture04%20%E5%B8%B8%E8%A7%81%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture04 常见随机变量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture05%20%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0%E3%80%81%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E5%87%BD%E6%95%B0%E7%9A%84%E5%88%86%E5%B8%83%E3%80%81%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E7%9A%84%E5%88%86%E5%B8%83%28I%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture05 概率分布函数、随机变量函数的分布、随机向量的分布(I)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture06%20%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E7%9A%84%E5%88%86%E5%B8%83%28II%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture06 随机向量的分布(II)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture07%20%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E5%87%BD%E6%95%B0%E7%9A%84%E5%88%86%E5%B8%83%E3%80%81%E6%AC%A1%E5%BA%8F%E7%BB%9F%E8%AE%A1%E9%87%8F%E3%80%81p%E5%88%86%E4%BD%8D%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture07 随机向量函数的分布、次序统计量、p分位数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture08%20%E6%9C%9F%E6%9C%9B%E3%80%81%E6%96%B9%E5%B7%AE%E3%80%81%E7%9B%B8%E5%85%B3%E4%B8%8D%E7%AD%89%E5%BC%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture08 期望、方差、相关不等式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture09%20%E6%9D%A1%E4%BB%B6%E6%9C%9F%E6%9C%9B%E3%80%81%E6%9D%A1%E4%BB%B6%E6%96%B9%E5%B7%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture09 条件期望、条件方差
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture10%20%E5%8D%8F%E6%96%B9%E5%B7%AE%E3%80%81%E7%9B%B8%E5%85%B3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture10 协方差、相关
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture11%20%E6%A6%82%E7%8E%87%E6%AF%8D%E5%87%BD%E6%95%B0%E3%80%81%E7%9F%A9%E6%AF%8D%E5%87%BD%E6%95%B0%E3%80%81%E7%89%B9%E5%BE%81%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture11 概率母函数、矩母函数、特征函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture12%20%E5%A4%A7%E6%95%B0%E5%AE%9A%E5%BE%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture12 大数定律
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture13%20%E4%B8%AD%E5%BF%83%E6%9E%81%E9%99%90%E5%AE%9A%E7%90%86%E3%80%81%E6%94%B6%E6%95%9B%E6%80%A7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture13 中心极限定理、收敛性
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture14%20%E5%A4%9A%E5%85%83%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture14 多元正态分布
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%9C%9F%E6%9C%AB%E8%AE%B0%E5%BF%86%E8%A6%81%E7%82%B9%E6%B1%87%E6%80%BB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 期末记忆要点汇总
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A8%A1%E5%9D%971%20%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E7%9A%84%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块1 随机向量的函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A8%A1%E5%9D%972%20%E6%AC%A1%E5%BA%8F%E7%BB%9F%E8%AE%A1%E9%87%8F%E4%B8%8Ep-%E5%88%86%E4%BD%8D%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块2 次序统计量与p-分位数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A8%A1%E5%9D%973%20%E6%9C%9F%E6%9C%9B%E4%B8%8E%E6%96%B9%E5%B7%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块3 期望与方差
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块4 条件期望、协方差与不等式
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块4 条件期望、协方差与不等式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#part-a" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part A：公式与方法速查
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part A：公式与方法速查">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a1-exa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.1 给定事件的条件期望 \(E(X|A)\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a2-exyy-exy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.2 条件期望 \(E(X|Y=y)\) 与 \(E(X|Y)\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.3 条件期望的性质（设各期望有限）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.4 条件方差与全方差公式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.5 协方差
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.6 相关系数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a7-vs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.7 不相关 vs 独立
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.8 三大不等式（会用即可，不要求证明）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.9 常用分布期望方差表（须熟记）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-b" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part B：判断题精选
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part C：典型计算/证明题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part C：典型计算/证明题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-hw10-1-ch3-318" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        题 4.1（来源：作业 HW10 第 1 题（教材 Ch3 3.18），样卷第一大题同型）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-hw9-8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        题 4.2（来源：作业 HW9 第 8 题）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-hw10-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        题 4.3（来源：作业 HW10 第 2 题）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-25-hw9-9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        题 4.4（来源：例题，课堂例 2.5 密室逃脱；HW9 第 9 题任务策略题同方法）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45-hw10-3-333" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        题 4.5（来源：作业 HW10 第 3 题（教材 3.33 随机和），样卷第六大题为其直接应用）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#46-hw10-9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        题 4.6（来源：作业 HW10 第 9 题，样卷第九大题原题）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#47-hw10-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        题 4.7（来源：作业 HW10 第 10 题）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#481" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        题 4.8（来源：样卷第三大题(1)）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#49-hw9-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        题 4.9（来源：作业 HW9 第 5 题，必做）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#410-hw10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        题 4.10（来源：作业 HW10 思考题）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-d" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part D：模块小结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A8%A1%E5%9D%975%20%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0%E4%B8%8E%E7%89%B9%E5%BE%81%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块5 生成函数与特征函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A8%A1%E5%9D%976%20%E6%94%B6%E6%95%9B%E6%80%A7%E3%80%81%E5%A4%A7%E6%95%B0%E5%BE%8B%E4%B8%8E%E4%B8%AD%E5%BF%83%E6%9E%81%E9%99%90%E5%AE%9A%E7%90%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块6 收敛性、大数律与中心极限定理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A8%A1%E5%9D%977%20%E5%A4%9A%E5%85%83%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块7 多元正态分布
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#part-a" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part A：公式与方法速查
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part A：公式与方法速查">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a1-exa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.1 给定事件的条件期望 \(E(X|A)\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a2-exyy-exy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.2 条件期望 \(E(X|Y=y)\) 与 \(E(X|Y)\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.3 条件期望的性质（设各期望有限）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.4 条件方差与全方差公式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.5 协方差
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.6 相关系数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a7-vs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.7 不相关 vs 独立
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.8 三大不等式（会用即可，不要求证明）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.9 常用分布期望方差表（须熟记）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-b" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part B：判断题精选
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part C：典型计算/证明题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part C：典型计算/证明题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-hw10-1-ch3-318" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        题 4.1（来源：作业 HW10 第 1 题（教材 Ch3 3.18），样卷第一大题同型）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-hw9-8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        题 4.2（来源：作业 HW9 第 8 题）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-hw10-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        题 4.3（来源：作业 HW10 第 2 题）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-25-hw9-9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        题 4.4（来源：例题，课堂例 2.5 密室逃脱；HW9 第 9 题任务策略题同方法）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45-hw10-3-333" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        题 4.5（来源：作业 HW10 第 3 题（教材 3.33 随机和），样卷第六大题为其直接应用）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#46-hw10-9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        题 4.6（来源：作业 HW10 第 9 题，样卷第九大题原题）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#47-hw10-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        题 4.7（来源：作业 HW10 第 10 题）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#481" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        题 4.8（来源：样卷第三大题(1)）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#49-hw9-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        题 4.9（来源：作业 HW9 第 5 题，必做）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#410-hw10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        题 4.10（来源：作业 HW10 思考题）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-d" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part D：模块小结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="4">模块 4：条件期望、协方差与不等式<a class="headerlink" href="#4" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>对应 Lec 09–10；约 25 分。核心主线：<strong>条件期望（给定事件 / 给定随机变量）→ 全期望公式 → 条件方差与全方差公式 → 协方差与相关系数 → 三大不等式</strong>。不等式只要求会用，不要求证明；Jensen 不等式为选修，不考。</p>
+</blockquote>
+<h2 id="part-a">Part A：公式与方法速查<a class="headerlink" href="#part-a" title="Permanent link">&para;</a></h2>
+<h3 id="a1-exa">A.1 给定事件的条件期望 <span class="arithmatex">\(E(X|A)\)</span><a class="headerlink" href="#a1-exa" title="Permanent link">&para;</a></h3>
+<p>把条件分布当普通分布求期望，结果是一个<strong>数</strong>。</p>
+<ul>
+<li>离散型：</li>
+</ul>
+<div class="arithmatex">\[
+E(X|A)=\sum_i x_i P(X=x_i|A)
+\]</div>
+<ul>
+<li>连续型：</li>
+</ul>
+<div class="arithmatex">\[
+E(X|A)=\int_{-\infty}^{\infty} x f_{X|A}(x)\,dx
+\]</div>
+<p><strong>核心计算公式</strong>（条件事件由不等式给出时首选，如 <span class="arithmatex">\(\{X&gt;a\}\)</span>、<span class="arithmatex">\(\{X&lt;Y\}\)</span>）：设 <span class="arithmatex">\(P(A)&gt;0\)</span>，则</p>
+<div class="arithmatex">\[
+E(X|A)=\frac{E(XI_A)}{P(A)}
+\]</div>
+<p>其中 <span class="arithmatex">\(I_A\)</span> 为 <span class="arithmatex">\(A\)</span> 的示性函数。</p>
+<p><strong>无记忆性捷径</strong>（指数分布、几何分布专属）：</p>
+<div class="arithmatex">\[
+X\sim\mathcal{E}(\lambda):\ E(X|X&gt;a)=a+\frac{1}{\lambda};\qquad X\sim G(p):\ E(X|X&gt;k)=k+\frac{1}{p}
+\]</div>
+<p><strong>全期望定理（按事件分割）</strong>：设 <span class="arithmatex">\(A_1,\ldots,A_n\)</span> 构成 <span class="arithmatex">\(\Omega\)</span> 的分割，则</p>
+<div class="arithmatex">\[
+E(X)=\sum_{i=1}^n P(A_i)E(X|A_i)
+\]</div>
+<blockquote>
+<p>[!WARNING] 易错
+条件密度要<strong>归一化</strong>：<span class="arithmatex">\(f_{X|A}(x)=\dfrac{f_X(x)}{P(A)}\)</span>（<span class="arithmatex">\(x\in A\)</span> 时），漏除 <span class="arithmatex">\(P(A)\)</span> 是最常见失分点。</p>
+</blockquote>
+<h3 id="a2-exyy-exy">A.2 条件期望 <span class="arithmatex">\(E(X|Y=y)\)</span> 与 <span class="arithmatex">\(E(X|Y)\)</span><a class="headerlink" href="#a2-exyy-exy" title="Permanent link">&para;</a></h3>
+<ul>
+<li><span class="arithmatex">\(E(X|Y=y)\)</span>：把条件分布 <span class="arithmatex">\(f_{X|Y}(x|y)=\dfrac{f(x,y)}{f_Y(y)}\)</span>（或 <span class="arithmatex">\(P(X=x|Y=y)\)</span>）当普通分布求期望，是关于 <span class="arithmatex">\(y\)</span> 的<strong>函数</strong> <span class="arithmatex">\(m(y)\)</span>，固定 <span class="arithmatex">\(y\)</span> 后是一个数：</li>
+</ul>
+<div class="arithmatex">\[
+E(X|Y=y)=\int_{-\infty}^{\infty} x f_{X|Y}(x|y)\,dx \quad\text{或}\quad \sum_i x_i P(X=x_i|Y=y)
+\]</div>
+<ul>
+<li><span class="arithmatex">\(E(X|Y)\)</span>：把 <span class="arithmatex">\(m(y)\)</span> 中的 <span class="arithmatex">\(y\)</span> 换回 <span class="arithmatex">\(Y\)</span>，得到<strong>随机变量</strong> <span class="arithmatex">\(m(Y)\)</span>：</li>
+</ul>
+<div class="arithmatex">\[
+E(X|Y):=m(Y),\qquad m(y)=E(X|Y=y)
+\]</div>
+<p><strong>计算口诀</strong>：先固定 <span class="arithmatex">\(Y=y\)</span> 算出 <span class="arithmatex">\(m(y)\)</span>，再把 <span class="arithmatex">\(y\)</span> 换回 <span class="arithmatex">\(Y\)</span>。</p>
+<p><strong>两个须熟记的条件分布</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>模型</th>
+<th>条件分布</th>
+<th>条件期望</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>二元正态 <span class="arithmatex">\((X,Y)\sim\mathcal{N}(\mu_1,\mu_2,\sigma_1^2,\sigma_2^2,\rho)\)</span></td>
+<td><span class="arithmatex">\(X\mid Y=y\sim\mathcal{N}\left(\mu_1+\rho\frac{\sigma_1}{\sigma_2}(y-\mu_2),\,(1-\rho^2)\sigma_1^2\right)\)</span></td>
+<td><span class="arithmatex">\(E(X\mid Y)=\mu_1+\rho\frac{\sigma_1}{\sigma_2}(Y-\mu_2)\)</span></td>
+</tr>
+<tr>
+<td>Poisson 拆分：<span class="arithmatex">\(X,Y\)</span> 独立同 <span class="arithmatex">\(\mathcal{P}(\lambda)\)</span></td>
+<td><span class="arithmatex">\(X\mid X+Y=n\sim B\left(n,\frac{1}{2}\right)\)</span></td>
+<td><span class="arithmatex">\(E(X\mid X+Y)=\frac{X+Y}{2}\)</span></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>[!WARNING] 易错
+<span class="arithmatex">\(E(X|Y=y)\)</span> 是<strong>数</strong>（<span class="arithmatex">\(y\)</span> 的函数值），<span class="arithmatex">\(E(X|Y)\)</span> 是<strong>随机变量</strong>（<span class="arithmatex">\(Y\)</span> 的函数）。判断题常考"<span class="arithmatex">\(E(X|Y)\)</span> 是一个常数"——错。</p>
+</blockquote>
+<h3 id="a3">A.3 条件期望的性质（设各期望有限）<a class="headerlink" href="#a3" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>性质</th>
+<th>公式</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>线性</td>
+<td><span class="arithmatex">\(E\left(c+\sum_i c_iX_i\mid Y\right)=c+\sum_i c_iE(X_i\mid Y)\)</span></td>
+<td>与普通期望完全类比</td>
+</tr>
+<tr>
+<td>提出已知因子</td>
+<td><span class="arithmatex">\(E[h(Y)g(X)\mid Y]=h(Y)E[g(X)\mid Y]\)</span></td>
+<td>给定 <span class="arithmatex">\(Y\)</span> 时 <span class="arithmatex">\(h(Y)\)</span> 视为常数</td>
+</tr>
+<tr>
+<td>独立退化</td>
+<td><span class="arithmatex">\(X,Y\)</span> 独立 <span class="arithmatex">\(\Rightarrow E[g(X)\mid Y]=Eg(X)\)</span></td>
+<td>条件不提供信息</td>
+</tr>
+<tr>
+<td>塔性质（重期望法则）</td>
+<td><span class="arithmatex">\(E[E(X\mid Y)]=E(X)\)</span></td>
+<td><strong>全期望公式</strong>，最重要</td>
+</tr>
+<tr>
+<td>单调性</td>
+<td><span class="arithmatex">\(X_1\le X_2\Rightarrow E(X_1\mid Y)\le E(X_2\mid Y)\)</span></td>
+<td></td>
+</tr>
+<tr>
+<td>自身条件</td>
+<td><span class="arithmatex">\(E[g(Y)\mid Y]=g(Y)\)</span></td>
+<td>已知就照抄</td>
+</tr>
+</tbody>
+</table>
+<p><strong>正交性 / 最佳预测</strong>（证明题素材）：若 <span class="arithmatex">\(E(X^2)&lt;\infty\)</span>，<span class="arithmatex">\(m(Y)=E(X|Y)\)</span>，则对任意 <span class="arithmatex">\(h\)</span>、<span class="arithmatex">\(g\)</span>：</p>
+<div class="arithmatex">\[
+E\big[(X-m(Y))h(Y)\big]=0,\qquad E[X-m(Y)]^2\le E[X-g(Y)]^2
+\]</div>
+<p>即条件期望是用 <span class="arithmatex">\(Y\)</span> 预测 <span class="arithmatex">\(X\)</span> 的均方误差最小的预测（<span class="arithmatex">\(X\)</span> 在 <span class="arithmatex">\(Y\)</span> 的函数空间上的投影）。</p>
+<p><strong>使用全期望公式的信号</strong>：直接求 <span class="arithmatex">\(E(X)\)</span> 困难；问题分层次（先随机出一个参数/个数，再生成 <span class="arithmatex">\(X\)</span>）；问题有"回到原点"的递归结构（此时 <span class="arithmatex">\(E(X|A_i)\)</span> 含 <span class="arithmatex">\(E(X)\)</span> 本身，列方程解出）。</p>
+<h3 id="a4">A.4 条件方差与全方差公式<a class="headerlink" href="#a4" title="Permanent link">&para;</a></h3>
+<p><strong>条件方差</strong>（随机变量，<span class="arithmatex">\(Y\)</span> 的函数）：</p>
+<div class="arithmatex">\[
+\text{var}(X|Y):=E\big[(X-E(X|Y))^2\mid Y\big]=E(X^2|Y)-[E(X|Y)]^2
+\]</div>
+<p><strong>全方差公式（全方差法则）</strong>：</p>
+<div class="arithmatex">\[
+\text{var}(X)=E[\text{var}(X|Y)]+\text{var}[E(X|Y)]
+\]</div>
+<p>记忆口诀："总方差 = 组内方差的均值 + 组间（条件均值的）方差"。</p>
+<p><strong>随机和模板（必会）</strong>：<span class="arithmatex">\(X_1,X_2,\ldots\)</span> i.i.d.，与取非负整数值的 <span class="arithmatex">\(N\)</span> 独立，<span class="arithmatex">\(T=\sum_{i=1}^N X_i\)</span>，则</p>
+<div class="arithmatex">\[
+E(T)=E(N)E(X_1),\qquad \text{var}(T)=E(N)\text{var}(X_1)+[E(X_1)]^2\text{var}(N)
+\]</div>
+<blockquote>
+<p>[!WARNING] 易错
+全方差公式两项一个是"先 var 后 E"，一个是"先 E 后 var"，不可写反、不可漏项。求 <span class="arithmatex">\(\text{var}(T)\)</span> 时只用 <span class="arithmatex">\(\text{var}(T|N)\)</span> 取期望（漏掉 <span class="arithmatex">\(\text{var}[E(T|N)]\)</span> 项）是高频错误。</p>
+</blockquote>
+<h3 id="a5">A.5 协方差<a class="headerlink" href="#a5" title="Permanent link">&para;</a></h3>
+<p><strong>定义与计算式</strong>：</p>
+<div class="arithmatex">\[
+\text{cov}(X,Y)=E[(X-EX)(Y-EY)]=E(XY)-(EX)(EY)
+\]</div>
+<p><strong>性质</strong>（均源于期望线性性）：</p>
+<table>
+<thead>
+<tr>
+<th>性质</th>
+<th>公式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>与方差关系</td>
+<td><span class="arithmatex">\(\text{cov}(X,X)=\text{var}(X)\)</span></td>
+</tr>
+<tr>
+<td>对称</td>
+<td><span class="arithmatex">\(\text{cov}(X,Y)=\text{cov}(Y,X)\)</span></td>
+</tr>
+<tr>
+<td>常数</td>
+<td><span class="arithmatex">\(\text{cov}(X,c)=0\)</span>；<span class="arithmatex">\(\text{cov}(X+c,Y)=\text{cov}(X,Y)\)</span></td>
+</tr>
+<tr>
+<td><strong>双线性</strong></td>
+<td><span class="arithmatex">\(\text{cov}\left(\sum_i a_iX_i,\sum_j b_jY_j\right)=\sum_i\sum_j a_ib_j\,\text{cov}(X_i,Y_j)\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>方差的和公式</strong>：</p>
+<div class="arithmatex">\[
+\text{var}(X+Y)=\text{var}(X)+\text{var}(Y)+2\,\text{cov}(X,Y)
+\]</div>
+<div class="arithmatex">\[
+\text{var}\left(\sum_i X_i\right)=\sum_i\text{var}(X_i)+\sum_{i\ne j}\text{cov}(X_i,X_j)
+\]</div>
+<p>两两不相关（不必独立）时交叉项为零，方差可加。</p>
+<p><strong>指示变量分解套路</strong>：当 <span class="arithmatex">\(X,Y\)</span> 是"计数"型变量（多项分布、超几何、掷骰子点数计数等），写 <span class="arithmatex">\(X=\sum_k I_{A_k}\)</span>、<span class="arithmatex">\(Y=\sum_l I_{B_l}\)</span>，用双线性展开，独立的交叉对协方差为零，只剩同一次试验的对：<span class="arithmatex">\(\text{cov}(I_A,I_B)=P(A\cap B)-P(A)P(B)\)</span>。</p>
+<blockquote>
+<p>[!WARNING] 易错
+<span class="arithmatex">\(\text{var}(X-Y)=\text{var}(X)+\text{var}(Y)-2\,\text{cov}(X,Y)\)</span>，两个方差仍是<strong>相加</strong>；独立时 <span class="arithmatex">\(\text{var}(X-Y)=\text{var}(X)+\text{var}(Y)\)</span>，不是相减。</p>
+</blockquote>
+<h3 id="a6">A.6 相关系数<a class="headerlink" href="#a6" title="Permanent link">&para;</a></h3>
+<p><strong>定义</strong>（<span class="arithmatex">\(0&lt;\text{var}(X)\text{var}(Y)&lt;\infty\)</span>）：先标准化再求协方差，</p>
+<div class="arithmatex">\[
+\text{corr}(X,Y)=\rho_{XY}=\frac{\text{cov}(X,Y)}{\sqrt{\text{var}(X)}\sqrt{\text{var}(Y)}}
+\]</div>
+<p><strong>基本事实</strong>：</p>
+<ul>
+<li><span class="arithmatex">\(|\rho_{XY}|\le 1\)</span>（由 Cauchy–Schwarz 不等式）。</li>
+<li><span class="arithmatex">\(|\rho_{XY}|=1\iff\)</span> 存在不全为零的常数 <span class="arithmatex">\(a,b,c\)</span> 使 <span class="arithmatex">\(aX+bY=c\)</span> a.s.，即 <span class="arithmatex">\(X,Y\)</span> <strong>线性相关</strong>（<span class="arithmatex">\(\rho=1\)</span> 同向，<span class="arithmatex">\(\rho=-1\)</span> 反向）。</li>
+<li>平移缩放不变性：<span class="arithmatex">\(\text{corr}(aX+b,cY+d)=\text{sgn}(ac)\cdot\text{corr}(X,Y)\)</span>（<span class="arithmatex">\(ac\ne 0\)</span>）。</li>
+<li>几何解释：<span class="arithmatex">\(\rho=\cos\varphi\)</span>，去均值后两"向量"的夹角余弦；<span class="arithmatex">\(\rho\)</span> 只度量<strong>线性</strong>关联强度。</li>
+<li>二元正态 <span class="arithmatex">\(\mathcal{N}(\mu_1,\mu_2,\sigma_1^2,\sigma_2^2,\rho)\)</span> 中参数 <span class="arithmatex">\(\rho\)</span> 恰为 <span class="arithmatex">\(\text{corr}(X,Y)\)</span>。</li>
+</ul>
+<h3 id="a7-vs">A.7 不相关 vs 独立<a class="headerlink" href="#a7-vs" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+\text{独立}\Longrightarrow\text{不相关}\ (\text{cov}=0);\qquad \text{不相关}\not\Longrightarrow\text{独立}
+\]</div>
+<ul>
+<li>反例（须会写）：<span class="arithmatex">\((X,Y)\)</span> 在单位圆盘 <span class="arithmatex">\(\{x^2+y^2\le 1\}\)</span> 内均匀分布，由对称性 <span class="arithmatex">\(\text{cov}(X,Y)=0\)</span> 不相关，但知道 <span class="arithmatex">\(X\)</span> 限制了 <span class="arithmatex">\(Y\)</span> 的范围，不独立。</li>
+<li><strong>例外</strong>：二元正态分布中，不相关 <span class="arithmatex">\(\iff\)</span> 独立（<span class="arithmatex">\(\rho=0\)</span> 时联合密度分解为边缘之积）。</li>
+<li>推论链：<span class="arithmatex">\(E(X|Y)=EX\)</span>（常数）<span class="arithmatex">\(\Rightarrow X,Y\)</span> 不相关（见题 4.10）；反之不成立。</li>
+</ul>
+<blockquote>
+<p>[!WARNING] 易错
+"协方差为正"只说明<strong>线性趋势</strong>为正（一个偏大时另一个倾向偏大），不能推出逐点单调关系，更不能推出因果。判断题中"不独立 <span class="arithmatex">\(\Rightarrow\rho\ne 0\)</span>"是错的：不独立可以是纯非线性关联，<span class="arithmatex">\(\rho\)</span> 仍为 0。</p>
+</blockquote>
+<h3 id="a8">A.8 三大不等式（会用即可，不要求证明）<a class="headerlink" href="#a8" title="Permanent link">&para;</a></h3>
+<p><strong>Markov 不等式</strong>：对 <span class="arithmatex">\(\varepsilon&gt;0\)</span>、<span class="arithmatex">\(\alpha&gt;0\)</span>，</p>
+<div class="arithmatex">\[
+P(|X|\ge\varepsilon)\le\frac{E|X|^{\alpha}}{\varepsilon^{\alpha}}
+\]</div>
+<p>最常用 <span class="arithmatex">\(\alpha=1\)</span>、<span class="arithmatex">\(X\ge 0\)</span> 情形：<span class="arithmatex">\(P(X\ge\varepsilon)\le\dfrac{EX}{\varepsilon}\)</span>。适用场景：只知道期望，估非负变量的尾概率。</p>
+<p><strong>Chebyshev 不等式</strong>：</p>
+<div class="arithmatex">\[
+P(|X-EX|\ge\varepsilon)\le\frac{\text{var}(X)}{\varepsilon^{2}}
+\]</div>
+<p>适用场景：知道均值与方差，估"偏离均值"的概率上界；通常比 Markov 更紧。</p>
+<p><strong>Cauchy–Schwarz（内积）不等式</strong>：若 <span class="arithmatex">\(EX^2&lt;\infty\)</span>，<span class="arithmatex">\(EY^2&lt;\infty\)</span>，</p>
+<div class="arithmatex">\[
+|E(XY)|\le\sqrt{EX^2\cdot EY^2}
+\]</div>
+<p>等号成立 <span class="arithmatex">\(\iff\)</span> 存在不全为零的常数 <span class="arithmatex">\(a,b\)</span> 使 <span class="arithmatex">\(aX+bY=0\)</span> a.s.。适用场景：估交叉矩（如 <span class="arithmatex">\(E(X^3)\le\sqrt{EX^2\cdot EX^4}\)</span>，取 <span class="arithmatex">\(U=X\)</span>，<span class="arithmatex">\(V=X^2\)</span>）；证明 <span class="arithmatex">\(|\rho|\le 1\)</span>。</p>
+<blockquote>
+<p>[!WARNING] 易错
+1. 不等式方向都是给<strong>上界</strong>（<span class="arithmatex">\(\le\)</span>），判断题常把方向写反。
+2. 用 Chebyshev 估单侧事件 <span class="arithmatex">\(P(X\ge a)\)</span> 时，先放大为双侧：<span class="arithmatex">\(\{X-\mu\ge a-\mu\}\subseteq\{|X-\mu|\ge a-\mu\}\)</span>（需 <span class="arithmatex">\(a&gt;\mu\)</span>）。
+3. 套 Markov 时确认变量非负（或先取绝对值/平方）。</p>
+</blockquote>
+<h3 id="a9">A.9 常用分布期望方差表（须熟记）<a class="headerlink" href="#a9" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>分布</th>
+<th>期望</th>
+<th>方差</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(B(1,p)\)</span></td>
+<td><span class="arithmatex">\(p\)</span></td>
+<td><span class="arithmatex">\(p(1-p)\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(B(n,p)\)</span></td>
+<td><span class="arithmatex">\(np\)</span></td>
+<td><span class="arithmatex">\(np(1-p)\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\mathcal{P}(\lambda)\)</span></td>
+<td><span class="arithmatex">\(\lambda\)</span></td>
+<td><span class="arithmatex">\(\lambda\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(G(p)\)</span></td>
+<td><span class="arithmatex">\(1/p\)</span></td>
+<td><span class="arithmatex">\((1-p)/p^2\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(U(a,b)\)</span></td>
+<td><span class="arithmatex">\((a+b)/2\)</span></td>
+<td><span class="arithmatex">\((b-a)^2/12\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\mathcal{E}(\lambda)\)</span></td>
+<td><span class="arithmatex">\(1/\lambda\)</span></td>
+<td><span class="arithmatex">\(1/\lambda^2\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\mathcal{N}(\mu,\sigma^2)\)</span></td>
+<td><span class="arithmatex">\(\mu\)</span></td>
+<td><span class="arithmatex">\(\sigma^2\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\Gamma(\alpha,\beta)\)</span></td>
+<td><span class="arithmatex">\(\alpha/\beta\)</span></td>
+<td><span class="arithmatex">\(\alpha/\beta^2\)</span></td>
+</tr>
+</tbody>
+</table>
+<h2 id="part-b">Part B：判断题精选<a class="headerlink" href="#part-b" title="Permanent link">&para;</a></h2>
+<p><strong>B1</strong>（样卷判断 1 改编）设各期望存在，则 <span class="arithmatex">\(P(|X+Y|&gt;2)\ge\frac{1}{4}E\big((X+Y)^2\big)\)</span>。</p>
+<blockquote>
+<p>[!TIP]- 答案
+<strong>错</strong>。不等号方向反了。令 <span class="arithmatex">\(Z=X+Y\)</span>，由 Markov 不等式（<span class="arithmatex">\(\alpha=2\)</span>）应为</p>
+<div class="arithmatex">\[
+P(|Z|&gt;2)\le P(|Z|\ge 2)\le\frac{E(Z^2)}{4}
+\]</div>
+<p>且左边是概率不超过 1，而右边 <span class="arithmatex">\(\frac{1}{4}E(Z^2)\)</span> 可以任意大，原式不可能恒成立。</p>
+</blockquote>
+<p><strong>B2</strong>（样卷判断 2）设各期望存在，则 <span class="arithmatex">\(E(X^3)\le\sqrt{E(X^2)E(X^4)}\)</span>。</p>
+<blockquote>
+<p>[!TIP]- 答案
+<strong>对</strong>。在 Cauchy–Schwarz 不等式 <span class="arithmatex">\(|E(UV)|\le\sqrt{EU^2\cdot EV^2}\)</span> 中取 <span class="arithmatex">\(U=X\)</span>，<span class="arithmatex">\(V=X^2\)</span>，得</p>
+<div class="arithmatex">\[
+E(X^3)\le|E(X\cdot X^2)|\le\sqrt{E(X^2)\cdot E(X^4)}
+\]</div>
+</blockquote>
+<p><strong>B3</strong>（样卷判断 3）设各期望存在，则 <span class="arithmatex">\(E(X^3Y)=E\big(X^3E(Y|X)\big)\)</span>。</p>
+<blockquote>
+<p>[!TIP]- 答案
+<strong>对</strong>。由提出已知因子性质，给定 <span class="arithmatex">\(X\)</span> 时 <span class="arithmatex">\(X^3\)</span> 是常数：<span class="arithmatex">\(E(X^3Y|X)=X^3E(Y|X)\)</span>；再对两边取期望，用塔性质：</p>
+<div class="arithmatex">\[
+E(X^3Y)=E\big[E(X^3Y|X)\big]=E\big[X^3E(Y|X)\big]
+\]</div>
+</blockquote>
+<p><strong>B4</strong>（样卷判断 4）已知 <span class="arithmatex">\(X,Y\)</span> 不独立，则 <span class="arithmatex">\(X,Y\)</span> 的相关系数不为 0。</p>
+<blockquote>
+<p>[!TIP]- 答案
+<strong>错</strong>。不独立只排除"独立"，不排除"不相关"。反例：<span class="arithmatex">\((X,Y)\)</span> 在单位圆盘内均匀分布，由对称性 <span class="arithmatex">\(\text{cov}(X,Y)=0\)</span>，故 <span class="arithmatex">\(\rho_{XY}=0\)</span>；但 <span class="arithmatex">\(X^2+Y^2\le 1\)</span> 的约束使两者不独立。相关系数只刻画<strong>线性</strong>关联。</p>
+</blockquote>
+<p><strong>B5</strong>（概念辨析）<span class="arithmatex">\(E(X|Y)\)</span> 是一个常数，且总有 <span class="arithmatex">\(E(X|Y)=E(X)\)</span>。</p>
+<blockquote>
+<p>[!TIP]- 答案
+<strong>错</strong>。<span class="arithmatex">\(E(X|Y)=m(Y)\)</span> 是 <span class="arithmatex">\(Y\)</span> 的函数，是<strong>随机变量</strong>；<span class="arithmatex">\(E(X|Y=y)\)</span> 才是数。一般 <span class="arithmatex">\(E(X|Y)\ne E(X)\)</span>，只有取期望后才有塔性质 <span class="arithmatex">\(E[E(X|Y)]=E(X)\)</span>；当 <span class="arithmatex">\(X,Y\)</span> 独立时才退化为 <span class="arithmatex">\(E(X|Y)=E(X)\)</span>。</p>
+</blockquote>
+<h2 id="part-c">Part C：典型计算/证明题<a class="headerlink" href="#part-c" title="Permanent link">&para;</a></h2>
+<h3 id="41-hw10-1-ch3-318">题 4.1（来源：作业 HW10 第 1 题（教材 Ch3 3.18），样卷第一大题同型）<a class="headerlink" href="#41-hw10-1-ch3-318" title="Permanent link">&para;</a></h3>
+<p><strong>题目</strong>：设 <span class="arithmatex">\(X\)</span> 的密度为 <span class="arithmatex">\(f_X(x)=\dfrac{x}{4}\)</span>（<span class="arithmatex">\(1&lt;x\le 3\)</span>），其余处为 0。令 <span class="arithmatex">\(A=\{X\ge 2\}\)</span>。
+(a) 求 <span class="arithmatex">\(E(X)\)</span>、<span class="arithmatex">\(P(A)\)</span>、<span class="arithmatex">\(f_{X|A}(x)\)</span> 和 <span class="arithmatex">\(E(X|A)\)</span>。
+(b) 令 <span class="arithmatex">\(Y=X^2\)</span>，求 <span class="arithmatex">\(E(Y)\)</span> 和 <span class="arithmatex">\(\text{var}(Y)\)</span>。</p>
+<blockquote>
+<p>[!EXAMPLE]- 详细解答
+<strong>方法点拨</strong>：条件密度 = 原密度限制在 <span class="arithmatex">\(A\)</span> 上再除以 <span class="arithmatex">\(P(A)\)</span> 归一化，然后按定义积分。</p>
+<p><strong>解</strong>：
+(a) 先求无条件期望（按定义积分）：</p>
+<div class="arithmatex">\[
+E(X)=\int_1^3 x\cdot\frac{x}{4}\,dx=\frac{1}{4}\cdot\frac{x^3}{3}\Big|_1^3=\frac{27-1}{12}=\frac{13}{6}
+\]</div>
+<p>事件概率（密度在 <span class="arithmatex">\([2,3]\)</span> 上积分）：</p>
+<div class="arithmatex">\[
+P(A)=P(X\ge 2)=\int_2^3\frac{x}{4}\,dx=\frac{9-4}{8}=\frac{5}{8}
+\]</div>
+<p>条件密度（原密度限制在 <span class="arithmatex">\(A\)</span> 上，除以 <span class="arithmatex">\(P(A)\)</span> 归一化）：</p>
+<div class="arithmatex">\[
+f_{X|A}(x)=\frac{f_X(x)}{P(A)}=\frac{x/4}{5/8}=\frac{2x}{5},\quad 2\le x\le 3;\qquad\text{其余处为}0
+\]</div>
+<p>条件期望（把条件密度当普通密度求期望）：</p>
+<div class="arithmatex">\[
+E(X|A)=\int_2^3 x\cdot\frac{2x}{5}\,dx=\frac{2}{5}\cdot\frac{x^3}{3}\Big|_2^3=\frac{2}{15}(27-8)=\frac{38}{15}
+\]</div>
+<p>(b) 用"函数的期望"公式（不必先求 <span class="arithmatex">\(Y\)</span> 的分布）：</p>
+<div class="arithmatex">\[
+E(Y)=E(X^2)=\int_1^3 x^2\cdot\frac{x}{4}\,dx=\frac{1}{4}\cdot\frac{x^4}{4}\Big|_1^3=\frac{81-1}{16}=5
+\]</div>
+<div class="arithmatex">\[
+E(Y^2)=E(X^4)=\int_1^3 x^4\cdot\frac{x}{4}\,dx=\frac{1}{4}\cdot\frac{x^6}{6}\Big|_1^3=\frac{729-1}{24}=\frac{91}{3}
+\]</div>
+<p>由方差展开式 <span class="arithmatex">\(\text{var}(Y)=E(Y^2)-(EY)^2\)</span>：</p>
+<div class="arithmatex">\[
+\text{var}(Y)=\frac{91}{3}-25=\frac{16}{3}
+\]</div>
+<p><strong>答</strong>：<span class="arithmatex">\(E(X)=\dfrac{13}{6}\)</span>；<span class="arithmatex">\(P(A)=\dfrac{5}{8}\)</span>；<span class="arithmatex">\(f_{X|A}(x)=\dfrac{2x}{5}\)</span>（<span class="arithmatex">\(2\le x\le 3\)</span>）；<span class="arithmatex">\(E(X|A)=\dfrac{38}{15}\)</span>；<span class="arithmatex">\(E(Y)=5\)</span>，<span class="arithmatex">\(\text{var}(Y)=\dfrac{16}{3}\)</span>。</p>
+<p>[!TIP] 技巧/易错
+该题在样卷中原样出现（第一大题 10 分），属必拿分题。条件密度别忘除以 <span class="arithmatex">\(P(A)\)</span>，且要写清支撑区间 <span class="arithmatex">\(2\le x\le 3\)</span>。</p>
+</blockquote>
+<h3 id="42-hw9-8">题 4.2（来源：作业 HW9 第 8 题）<a class="headerlink" href="#42-hw9-8" title="Permanent link">&para;</a></h3>
+<p><strong>题目</strong>：设 <span class="arithmatex">\(X\sim\mathcal{E}(\lambda)\)</span>，求 <span class="arithmatex">\(E(X|X&lt;3)\)</span>。</p>
+<blockquote>
+<p>[!EXAMPLE]- 详细解答
+<strong>方法点拨</strong>：条件事件是不等式 <span class="arithmatex">\(\{X&lt;3\}\)</span>，用公式 <span class="arithmatex">\(E(X|A)=\dfrac{E(XI_A)}{P(A)}\)</span> 最直接。</p>
+<p><strong>解</strong>：
+第一步，求分母（指数分布的分布函数）：</p>
+<div class="arithmatex">\[
+P(X&lt;3)=1-e^{-3\lambda}
+\]</div>
+<p>第二步，求分子（分部积分，取 <span class="arithmatex">\(u=x\)</span>，<span class="arithmatex">\(dv=\lambda e^{-\lambda x}dx\)</span>）：</p>
+<div class="arithmatex">\[
+E(XI_{\{X&lt;3\}})=\int_0^3 x\lambda e^{-\lambda x}\,dx=\left[-xe^{-\lambda x}\right]_0^3+\int_0^3 e^{-\lambda x}\,dx=-3e^{-3\lambda}+\frac{1-e^{-3\lambda}}{\lambda}
+\]</div>
+<p>第三步，相除：</p>
+<div class="arithmatex">\[
+E(X|X&lt;3)=\frac{\dfrac{1-e^{-3\lambda}}{\lambda}-3e^{-3\lambda}}{1-e^{-3\lambda}}=\frac{1}{\lambda}-\frac{3e^{-3\lambda}}{1-e^{-3\lambda}}
+\]</div>
+<p><strong>验算</strong>（用全期望定理 + 无记忆性）：<span class="arithmatex">\(E(X)=E(X|X&lt;3)P(X&lt;3)+E(X|X\ge 3)P(X\ge 3)\)</span>，其中由无记忆性 <span class="arithmatex">\(E(X|X\ge 3)=3+\frac{1}{\lambda}\)</span>，代入解出的 <span class="arithmatex">\(E(X|X&lt;3)\)</span> 恰使等式两边均为 <span class="arithmatex">\(\frac{1}{\lambda}\)</span>，一致。</p>
+<p><strong>答</strong>：<span class="arithmatex">\(E(X|X&lt;3)=\dfrac{1}{\lambda}-\dfrac{3e^{-3\lambda}}{1-e^{-3\lambda}}\)</span>。</p>
+<p>[!TIP] 技巧/易错
+无记忆性捷径只对 <span class="arithmatex">\(\{X&gt;a\}\)</span> 这类"右尾"条件成立；本题条件是 <span class="arithmatex">\(\{X&lt;3\}\)</span>，不能直接套 <span class="arithmatex">\(E(X|X&gt;a)=a+1/\lambda\)</span>，但可用它配合全期望定理来反解或验算。</p>
+</blockquote>
+<h3 id="43-hw10-2">题 4.3（来源：作业 HW10 第 2 题）<a class="headerlink" href="#43-hw10-2" title="Permanent link">&para;</a></h3>
+<p><strong>题目</strong>：设 <span class="arithmatex">\(X,Y\)</span> 相互独立，均服从参数为 <span class="arithmatex">\(\lambda\)</span> 的指数分布。令 <span class="arithmatex">\(Z=X+Y\)</span>。
+(a) 求条件概率密度函数 <span class="arithmatex">\(f_{X|Z}(x|z)\)</span>。
+(b) 求 <span class="arithmatex">\(E(X^2|Z)\)</span>。</p>
+<blockquote>
+<p>[!EXAMPLE]- 详细解答
+<strong>方法点拨</strong>：先写 <span class="arithmatex">\((X,Z)\)</span> 的联合密度与 <span class="arithmatex">\(Z\)</span> 的边缘密度，相除得条件密度，再按定义积分求条件期望。</p>
+<p><strong>解</strong>：
+(a) 第一步，求 <span class="arithmatex">\((X,Z)\)</span> 的联合密度。由 <span class="arithmatex">\(Z=X+Y\)</span> 且 <span class="arithmatex">\(X,Y\)</span> 独立，对 <span class="arithmatex">\(0&lt;x&lt;z\)</span>：</p>
+<div class="arithmatex">\[
+f_{X,Z}(x,z)=f_X(x)f_Y(z-x)=\lambda e^{-\lambda x}\cdot\lambda e^{-\lambda(z-x)}=\lambda^2 e^{-\lambda z}
+\]</div>
+<p>（依据：<span class="arithmatex">\((X,Y)\mapsto(X,Z)\)</span> 是线性变换，Jacobi 行列式为 1；也可由卷积思路直接写出。）</p>
+<p>第二步，求 <span class="arithmatex">\(Z\)</span> 的边缘密度（对 <span class="arithmatex">\(x\)</span> 从 0 到 <span class="arithmatex">\(z\)</span> 积分）：</p>
+<div class="arithmatex">\[
+f_Z(z)=\int_0^z\lambda^2e^{-\lambda z}\,dx=\lambda^2 z e^{-\lambda z},\quad z&gt;0
+\]</div>
+<p>（即 <span class="arithmatex">\(Z\sim\Gamma(2,\lambda)\)</span>。）</p>
+<p>第三步，相除：</p>
+<div class="arithmatex">\[
+f_{X|Z}(x|z)=\frac{f_{X,Z}(x,z)}{f_Z(z)}=\frac{\lambda^2e^{-\lambda z}}{\lambda^2ze^{-\lambda z}}=\frac{1}{z},\quad 0&lt;x&lt;z
+\]</div>
+<p>即给定 <span class="arithmatex">\(Z=z\)</span> 时，<span class="arithmatex">\(X\)</span> 在 <span class="arithmatex">\((0,z)\)</span> 上<strong>均匀分布</strong>。</p>
+<p>(b) 按定义对条件密度积分：</p>
+<div class="arithmatex">\[
+E(X^2|Z=z)=\int_0^z x^2\cdot\frac{1}{z}\,dx=\frac{z^2}{3}
+\]</div>
+<p>把 <span class="arithmatex">\(z\)</span> 换回 <span class="arithmatex">\(Z\)</span>：</p>
+<div class="arithmatex">\[
+E(X^2|Z)=\frac{Z^2}{3}
+\]</div>
+<p><strong>答</strong>：<span class="arithmatex">\(f_{X|Z}(x|z)=\dfrac{1}{z}\)</span>（<span class="arithmatex">\(0&lt;x&lt;z\)</span>），即 <span class="arithmatex">\(X\mid Z=z\sim U(0,z)\)</span>；<span class="arithmatex">\(E(X^2|Z)=\dfrac{Z^2}{3}\)</span>。</p>
+<p>[!TIP] 技巧/易错
+"独立同指数之和给定后，单个变量条件均匀"是经典结论，值得记住。最后一步务必把 <span class="arithmatex">\(z\)</span> 换回随机变量 <span class="arithmatex">\(Z\)</span>——答案 <span class="arithmatex">\(E(X^2|Z)\)</span> 是随机变量。</p>
+</blockquote>
+<h3 id="44-25-hw9-9">题 4.4（来源：例题，课堂例 2.5 密室逃脱；HW9 第 9 题任务策略题同方法）<a class="headerlink" href="#44-25-hw9-9" title="Permanent link">&para;</a></h3>
+<p><strong>题目</strong>：密室有三扇门：门 1 走 3 小时到达出口；门 2 走 5 小时回到原地；门 3 走 7 小时回到原地。每次在三扇门中等可能随机选择（与历史无关）。设 <span class="arithmatex">\(X\)</span> 为逃脱所需总时间，求 <span class="arithmatex">\(E(X)\)</span>。</p>
+<blockquote>
+<p>[!EXAMPLE]- 详细解答
+<strong>方法点拨</strong>：递归结构问题用全期望定理按"第一步的选择"分割，条件期望中会出现 <span class="arithmatex">\(E(X)\)</span> 本身，列方程解之。</p>
+<p><strong>解</strong>：
+令 <span class="arithmatex">\(Y\)</span> 为首次选择的门编号，则 <span class="arithmatex">\(P(Y=i)=\frac{1}{3}\)</span>，<span class="arithmatex">\(i=1,2,3\)</span>。</p>
+<p>分别求条件期望：</p>
+<ul>
+<li><span class="arithmatex">\(E(X|Y=1)=3\)</span>（直接到出口）。</li>
+<li><span class="arithmatex">\(E(X|Y=2)=5+E(X)\)</span>（走 5 小时回到原地，由于每次选择独立且环境不变，问题完全重置，剩余平均时间仍为 <span class="arithmatex">\(E(X)\)</span>）。</li>
+<li><span class="arithmatex">\(E(X|Y=3)=7+E(X)\)</span>（同理）。</li>
+</ul>
+<p>由全期望定理：</p>
+<div class="arithmatex">\[
+E(X)=\sum_{i=1}^3 P(Y=i)E(X|Y=i)=\frac{1}{3}\big[3+(5+E(X))+(7+E(X))\big]=\frac{15+2E(X)}{3}
+\]</div>
+<p>解方程：<span class="arithmatex">\(3E(X)=15+2E(X)\)</span>，得 <span class="arithmatex">\(E(X)=15\)</span>。</p>
+<p><strong>答</strong>：<span class="arithmatex">\(E(X)=15\)</span> 小时。</p>
+<p>[!TIP] 技巧/易错
+"回到原点"结构的合法性依赖于<strong>无记忆的重置</strong>：每次选门独立同分布。HW9 的任务策略题（执行任务 A、B，失败重启，比较不同执行顺序的平均次数）与本题方法完全相同：按第一阶段结果分割 + 含 <span class="arithmatex">\(E(X)\)</span> 的方程。</p>
+</blockquote>
+<h3 id="45-hw10-3-333">题 4.5（来源：作业 HW10 第 3 题（教材 3.33 随机和），样卷第六大题为其直接应用）<a class="headerlink" href="#45-hw10-3-333" title="Permanent link">&para;</a></h3>
+<p><strong>题目</strong>：设 <span class="arithmatex">\(X_1,X_2,\ldots\)</span> 独立同分布，期望 <span class="arithmatex">\(E(X_1)\)</span>、方差 <span class="arithmatex">\(\text{var}(X_1)\)</span> 有限；<span class="arithmatex">\(N\)</span> 取正整数值，与所有 <span class="arithmatex">\(X_i\)</span> 独立。令 <span class="arithmatex">\(T=X_1+\cdots+X_N\)</span>。
+(1) 证明 <span class="arithmatex">\(E(T)=E(N)E(X_1)\)</span> 与 <span class="arithmatex">\(\text{var}(T)=E(N)\text{var}(X_1)+[E(X_1)]^2\text{var}(N)\)</span>。
+(2) （样卷六(2)）若 <span class="arithmatex">\(X_i\sim B(1,p)\)</span>，<span class="arithmatex">\(N\sim G(s)\)</span>，求 <span class="arithmatex">\(E(T)\)</span>。</p>
+<blockquote>
+<p>[!EXAMPLE]- 详细解答
+<strong>方法点拨</strong>：随机个数求和，固定 <span class="arithmatex">\(N=n\)</span> 化为普通独立和，再用塔性质与全方差公式。</p>
+<p><strong>解</strong>：
+(1) 第一步，求条件期望与条件方差。给定 <span class="arithmatex">\(N=n\)</span>，由 <span class="arithmatex">\(N\)</span> 与诸 <span class="arithmatex">\(X_i\)</span> 独立，<span class="arithmatex">\(T\)</span> 的条件分布就是 <span class="arithmatex">\(X_1+\cdots+X_n\)</span> 的分布；由期望线性性与独立和的方差可加性：</p>
+<div class="arithmatex">\[
+E(T|N=n)=nE(X_1),\qquad \text{var}(T|N=n)=n\,\text{var}(X_1)
+\]</div>
+<p>把 <span class="arithmatex">\(n\)</span> 换回 <span class="arithmatex">\(N\)</span>：</p>
+<div class="arithmatex">\[
+E(T|N)=N\,E(X_1),\qquad \text{var}(T|N)=N\,\text{var}(X_1)
+\]</div>
+<p>第二步，求 <span class="arithmatex">\(E(T)\)</span>（塔性质，<span class="arithmatex">\(E(X_1)\)</span> 是常数可提出）：</p>
+<div class="arithmatex">\[
+E(T)=E[E(T|N)]=E[N\,E(X_1)]=E(N)E(X_1)
+\]</div>
+<p>第三步，求 <span class="arithmatex">\(\text{var}(T)\)</span>（全方差公式）：</p>
+<div class="arithmatex">\[
+\text{var}(T)=E[\text{var}(T|N)]+\text{var}[E(T|N)]=E[N\,\text{var}(X_1)]+\text{var}[N\,E(X_1)]
+\]</div>
+<p>第一项中 <span class="arithmatex">\(\text{var}(X_1)\)</span> 是常数，提出得 <span class="arithmatex">\(E(N)\text{var}(X_1)\)</span>；第二项中 <span class="arithmatex">\(E(X_1)\)</span> 是常数，由 <span class="arithmatex">\(\text{var}(cN)=c^2\text{var}(N)\)</span> 得 <span class="arithmatex">\([E(X_1)]^2\text{var}(N)\)</span>。故</p>
+<div class="arithmatex">\[
+\text{var}(T)=E(N)\text{var}(X_1)+[E(X_1)]^2\text{var}(N)
+\]</div>
+<p>(2) <span class="arithmatex">\(X_i\sim B(1,p)\)</span> 故 <span class="arithmatex">\(E(X_1)=p\)</span>；<span class="arithmatex">\(N\sim G(s)\)</span> 故 <span class="arithmatex">\(E(N)=\dfrac{1}{s}\)</span>。代入 (1)：</p>
+<div class="arithmatex">\[
+E(T)=E(N)E(X_1)=\frac{p}{s}
+\]</div>
+<p><strong>答</strong>：(1) 见上证明；(2) <span class="arithmatex">\(E(T)=\dfrac{p}{s}\)</span>。</p>
+<p>[!TIP] 技巧/易错
+这是本模块最高频的"综合套路"：<strong>随机和的 E 用塔性质、var 用全方差公式</strong>。样卷六(1)还问 <span class="arithmatex">\(N\sim\mathcal{P}(\lambda)\)</span> 时 <span class="arithmatex">\(T\)</span> 的分布（Poisson 拆分，<span class="arithmatex">\(T\sim\mathcal{P}(\lambda p)\)</span>，属模块 5 母函数法或直接全概率求和），两问共用同一模型。</p>
+</blockquote>
+<h3 id="46-hw10-9">题 4.6（来源：作业 HW10 第 9 题，样卷第九大题原题）<a class="headerlink" href="#46-hw10-9" title="Permanent link">&para;</a></h3>
+<p><strong>题目</strong>：箱中有 <span class="arithmatex">\(N\)</span> 个球，其中 <span class="arithmatex">\(M\)</span> 个红球、<span class="arithmatex">\(N-M\)</span> 个黑球。无放回地任取 <span class="arithmatex">\(n\)</span> 个，记 <span class="arithmatex">\(X\)</span> 为取出的红球个数（超几何分布）。求 <span class="arithmatex">\(\text{var}(X)\)</span>。</p>
+<blockquote>
+<p>[!EXAMPLE]- 详细解答
+<strong>方法点拨</strong>：指示变量分解 + 方差和公式（交叉项用协方差），不要硬算超几何分布的二阶矩。</p>
+<p><strong>解</strong>：
+第一步，分解。把抽取看成依次取出 <span class="arithmatex">\(n\)</span> 个球，令 <span class="arithmatex">\(X_i=I_{\{\text{第 }i\text{ 次取到红球}\}}\)</span>，则 <span class="arithmatex">\(X=\sum_{i=1}^n X_i\)</span>。</p>
+<p>第二步，求单项。由对称性（每个位置上出现各球等可能），<span class="arithmatex">\(P(X_i=1)=\dfrac{M}{N}\)</span>，故</p>
+<div class="arithmatex">\[
+E(X_i)=\frac{M}{N},\qquad \text{var}(X_i)=\frac{M}{N}\left(1-\frac{M}{N}\right)
+\]</div>
+<p>（指示变量 <span class="arithmatex">\(X_i^2=X_i\)</span>，方差即 <span class="arithmatex">\(p(1-p)\)</span>。）</p>
+<p>第三步，求交叉项。对 <span class="arithmatex">\(i\ne j\)</span>，两次都取到红球的概率（按顺序数排列数）：</p>
+<div class="arithmatex">\[
+E(X_iX_j)=P(X_i=1,X_j=1)=\frac{M}{N}\cdot\frac{M-1}{N-1}
+\]</div>
+<div class="arithmatex">\[
+\text{cov}(X_i,X_j)=\frac{M(M-1)}{N(N-1)}-\frac{M^2}{N^2}=\frac{M(M-1)N-M^2(N-1)}{N^2(N-1)}=-\frac{M(N-M)}{N^2(N-1)}
+\]</div>
+<p>第四步，套方差和公式（共 <span class="arithmatex">\(n\)</span> 个对角项、<span class="arithmatex">\(n(n-1)\)</span> 个交叉项）：</p>
+<div class="arithmatex">\[
+\text{var}(X)=\sum_{i=1}^n\text{var}(X_i)+\sum_{i\ne j}\text{cov}(X_i,X_j)=n\frac{M}{N}\left(1-\frac{M}{N}\right)-n(n-1)\frac{M(N-M)}{N^2(N-1)}
+\]</div>
+<p>提取公因子 <span class="arithmatex">\(n\frac{M}{N}\left(1-\frac{M}{N}\right)\)</span>：</p>
+<div class="arithmatex">\[
+\text{var}(X)=n\frac{M}{N}\left(1-\frac{M}{N}\right)\left(1-\frac{n-1}{N-1}\right)=n\frac{M}{N}\left(1-\frac{M}{N}\right)\frac{N-n}{N-1}
+\]</div>
+<p><strong>答</strong>：<span class="arithmatex">\(\text{var}(X)=n\dfrac{M}{N}\left(1-\dfrac{M}{N}\right)\dfrac{N-n}{N-1}\)</span>。</p>
+<p>[!TIP] 技巧/易错
+与二项分布（有放回）相比多了修正因子 <span class="arithmatex">\(\frac{N-n}{N-1}&lt;1\)</span>：无放回时各次抽取<strong>负相关</strong>，方差变小。交叉项个数是 <span class="arithmatex">\(n(n-1)\)</span>（有序对），别漏算一半。</p>
+</blockquote>
+<h3 id="47-hw10-10">题 4.7（来源：作业 HW10 第 10 题）<a class="headerlink" href="#47-hw10-10" title="Permanent link">&para;</a></h3>
+<p><strong>题目</strong>：独立掷 <span class="arithmatex">\(n\)</span> 颗均匀骰子。令 <span class="arithmatex">\(X_k=I_{\{\text{第 }k\text{ 颗掷出 }1\text{ 点}\}}\)</span>，<span class="arithmatex">\(Y_k=I_{\{\text{第 }k\text{ 颗掷出 }2\text{ 点}\}}\)</span>，<span class="arithmatex">\(X=\sum_{k=1}^n X_k\)</span>（出 1 点的颗数），<span class="arithmatex">\(Y=\sum_{k=1}^n Y_k\)</span>（出 2 点的颗数）。
+(a) 求 <span class="arithmatex">\(E(X)\)</span> 和 <span class="arithmatex">\(\text{var}(X)\)</span>。
+(b) 求 <span class="arithmatex">\(\text{cov}(X_i,Y_j)\)</span>（<span class="arithmatex">\(1\le i,j\le n\)</span>）与 <span class="arithmatex">\(\text{cov}(X,Y)\)</span>。
+(c) 求相关系数 <span class="arithmatex">\(\rho_{XY}\)</span>，并说明 <span class="arithmatex">\(X,Y\)</span> 是正相关、不相关还是负相关。</p>
+<blockquote>
+<p>[!EXAMPLE]- 详细解答
+<strong>方法点拨</strong>：协方差双线性展开，独立对为零，只剩同一颗骰子的对；互斥事件指示变量乘积为零。</p>
+<p><strong>解</strong>：
+(a) <span class="arithmatex">\(X\)</span> 是 <span class="arithmatex">\(n\)</span> 次独立试验中"出 1 点"的次数，<span class="arithmatex">\(X\sim B\left(n,\frac{1}{6}\right)\)</span>，由二项分布公式：</p>
+<div class="arithmatex">\[
+E(X)=\frac{n}{6},\qquad \text{var}(X)=n\cdot\frac{1}{6}\cdot\frac{5}{6}=\frac{5n}{36}
+\]</div>
+<p>(b) 当 <span class="arithmatex">\(i\ne j\)</span>：不同骰子的结果独立，独立推出不相关，故 <span class="arithmatex">\(\text{cov}(X_i,Y_j)=0\)</span>。</p>
+<p>当 <span class="arithmatex">\(i=j\)</span>：同一颗骰子不能同时出 1 点和 2 点，事件互斥，<span class="arithmatex">\(X_iY_i=0\)</span> 恒成立，故 <span class="arithmatex">\(E(X_iY_i)=0\)</span>，</p>
+<div class="arithmatex">\[
+\text{cov}(X_i,Y_i)=E(X_iY_i)-E(X_i)E(Y_i)=0-\frac{1}{6}\cdot\frac{1}{6}=-\frac{1}{36}
+\]</div>
+<p>由双线性展开（<span class="arithmatex">\(n^2\)</span> 项中只有 <span class="arithmatex">\(n\)</span> 个 <span class="arithmatex">\(i=j\)</span> 的项非零）：</p>
+<div class="arithmatex">\[
+\text{cov}(X,Y)=\sum_{i=1}^n\sum_{j=1}^n\text{cov}(X_i,Y_j)=n\cdot\left(-\frac{1}{36}\right)=-\frac{n}{36}
+\]</div>
+<p>(c) 由对称性 <span class="arithmatex">\(\text{var}(Y)=\text{var}(X)=\frac{5n}{36}\)</span>，代入相关系数定义：</p>
+<div class="arithmatex">\[
+\rho_{XY}=\frac{\text{cov}(X,Y)}{\sqrt{\text{var}(X)}\sqrt{\text{var}(Y)}}=\frac{-n/36}{5n/36}=-\frac{1}{5}
+\]</div>
+<p><strong>答</strong>：<span class="arithmatex">\(E(X)=\dfrac{n}{6}\)</span>，<span class="arithmatex">\(\text{var}(X)=\dfrac{5n}{36}\)</span>；<span class="arithmatex">\(\text{cov}(X_i,Y_j)=0\)</span>（<span class="arithmatex">\(i\ne j\)</span>），<span class="arithmatex">\(\text{cov}(X_i,Y_i)=-\dfrac{1}{36}\)</span>，<span class="arithmatex">\(\text{cov}(X,Y)=-\dfrac{n}{36}\)</span>；<span class="arithmatex">\(\rho_{XY}=-\dfrac{1}{5}\)</span>，负相关——出 1 点的骰子多了，留给出 2 点的骰子就少了，直观上合理。</p>
+<p>[!TIP] 技巧/易错
+<span class="arithmatex">\(\rho_{XY}\)</span> 与 <span class="arithmatex">\(n\)</span> 无关——标准化消去了规模因素。本题与多项分布协方差 <span class="arithmatex">\(\text{cov}(X_i,X_j)=-np_ip_j\)</span>（笔记例 1.1）是同一套路。</p>
+</blockquote>
+<h3 id="481">题 4.8（来源：样卷第三大题(1)）<a class="headerlink" href="#481" title="Permanent link">&para;</a></h3>
+<p><strong>题目</strong>：设 <span class="arithmatex">\(Y_1,Y_2\)</span> 独立同分布，<span class="arithmatex">\(Y_i\sim U(0,1)\)</span>。令 <span class="arithmatex">\(V_1=Y_1+Y_2\)</span>，<span class="arithmatex">\(V_2=Y_1-Y_2\)</span>，计算相关系数 <span class="arithmatex">\(\text{corr}(V_1,V_2)\)</span>。</p>
+<blockquote>
+<p>[!EXAMPLE]- 详细解答
+<strong>方法点拨</strong>：先用双线性算协方差，若为零则相关系数直接为零，无需算方差的具体值（只需确认方差非零有限）。</p>
+<p><strong>解</strong>：
+由协方差的双线性展开：</p>
+<div class="arithmatex">\[
+\text{cov}(V_1,V_2)=\text{cov}(Y_1+Y_2,\,Y_1-Y_2)=\text{cov}(Y_1,Y_1)-\text{cov}(Y_1,Y_2)+\text{cov}(Y_2,Y_1)-\text{cov}(Y_2,Y_2)
+\]</div>
+<p>由 <span class="arithmatex">\(Y_1,Y_2\)</span> 独立（推出不相关），<span class="arithmatex">\(\text{cov}(Y_1,Y_2)=\text{cov}(Y_2,Y_1)=0\)</span>；又 <span class="arithmatex">\(\text{cov}(Y_i,Y_i)=\text{var}(Y_i)=\frac{1}{12}\)</span>（均匀分布方差），且两者同分布、方差相等：</p>
+<div class="arithmatex">\[
+\text{cov}(V_1,V_2)=\text{var}(Y_1)-\text{var}(Y_2)=\frac{1}{12}-\frac{1}{12}=0
+\]</div>
+<p>另外 <span class="arithmatex">\(\text{var}(V_1)=\text{var}(V_2)=\text{var}(Y_1)+\text{var}(Y_2)=\frac{1}{6}\in(0,\infty)\)</span>，相关系数有定义：</p>
+<div class="arithmatex">\[
+\text{corr}(V_1,V_2)=\frac{0}{\sqrt{1/6}\sqrt{1/6}}=0
+\]</div>
+<p><strong>答</strong>：<span class="arithmatex">\(\text{corr}(V_1,V_2)=0\)</span>，即 <span class="arithmatex">\(V_1\)</span> 与 <span class="arithmatex">\(V_2\)</span> 不相关。</p>
+<p>[!TIP] 技巧/易错
+结论对任意同分布且方差有限的独立 <span class="arithmatex">\(Y_1,Y_2\)</span> 都成立（和与差总不相关）。但 <span class="arithmatex">\(V_1,V_2\)</span> 一般<strong>不独立</strong>（本题中知道 <span class="arithmatex">\(V_1\)</span> 接近 2 就迫使 <span class="arithmatex">\(V_2\)</span> 接近 0），这是"不相关 ⇏ 独立"的又一例；仅当 <span class="arithmatex">\(Y_i\)</span> 为正态时和与差才独立。</p>
+</blockquote>
+<h3 id="49-hw9-5">题 4.9（来源：作业 HW9 第 5 题，必做）<a class="headerlink" href="#49-hw9-5" title="Permanent link">&para;</a></h3>
+<p><strong>题目</strong>：抛掷一枚均匀的硬币 <span class="arithmatex">\(N\)</span> 次，请用 Chebyshev 不等式给出"得到至少 <span class="arithmatex">\(\frac{3N}{4}\)</span> 个正面"的概率的一个上界。</p>
+<blockquote>
+<p>[!EXAMPLE]- 详细解答
+<strong>方法点拨</strong>：先把单侧事件放大成关于均值的双侧偏差事件，再套 Chebyshev。</p>
+<p><strong>解</strong>：
+设 <span class="arithmatex">\(X\)</span> 为正面次数，则 <span class="arithmatex">\(X\sim B\left(N,\frac{1}{2}\right)\)</span>，</p>
+<div class="arithmatex">\[
+E(X)=\frac{N}{2},\qquad \text{var}(X)=N\cdot\frac{1}{2}\cdot\frac{1}{2}=\frac{N}{4}
+\]</div>
+<p>事件放大（单侧偏差包含于双侧偏差）：</p>
+<div class="arithmatex">\[
+\left\{X\ge\frac{3N}{4}\right\}=\left\{X-\frac{N}{2}\ge\frac{N}{4}\right\}\subseteq\left\{\left|X-\frac{N}{2}\right|\ge\frac{N}{4}\right\}
+\]</div>
+<p>套 Chebyshev 不等式（<span class="arithmatex">\(\varepsilon=\frac{N}{4}\)</span>）：</p>
+<div class="arithmatex">\[
+P\left(X\ge\frac{3N}{4}\right)\le P\left(\left|X-\frac{N}{2}\right|\ge\frac{N}{4}\right)\le\frac{\text{var}(X)}{(N/4)^2}=\frac{N/4}{N^2/16}=\frac{4}{N}
+\]</div>
+<p><strong>对比</strong>（若只用 Markov 不等式，<span class="arithmatex">\(X\ge 0\)</span>）：</p>
+<div class="arithmatex">\[
+P\left(X\ge\frac{3N}{4}\right)\le\frac{E(X)}{3N/4}=\frac{N/2}{3N/4}=\frac{2}{3}
+\]</div>
+<p>上界不随 <span class="arithmatex">\(N\)</span> 衰减。可见利用方差信息的 Chebyshev 上界 <span class="arithmatex">\(\frac{4}{N}\)</span> 在 <span class="arithmatex">\(N\)</span> 大时远更紧。</p>
+<p><strong>答</strong>：<span class="arithmatex">\(P\left(X\ge\dfrac{3N}{4}\right)\le\dfrac{4}{N}\)</span>。</p>
+<p>[!TIP] 技巧/易错
+估界三步走：① 算 <span class="arithmatex">\(E\)</span>、<span class="arithmatex">\(\text{var}\)</span>；② 把目标事件改写成 <span class="arithmatex">\(\{|X-EX|\ge\varepsilon\}\)</span> 的子集，确定 <span class="arithmatex">\(\varepsilon\)</span>；③ 套公式。<span class="arithmatex">\(\varepsilon\)</span> 是"偏离均值的距离"（本题为 <span class="arithmatex">\(N/4\)</span>），不要误用阈值 <span class="arithmatex">\(3N/4\)</span> 本身。</p>
+</blockquote>
+<h3 id="410-hw10">题 4.10（来源：作业 HW10 思考题）<a class="headerlink" href="#410-hw10" title="Permanent link">&para;</a></h3>
+<p><strong>题目</strong>：设 <span class="arithmatex">\(E(X^2)&lt;\infty\)</span>，<span class="arithmatex">\(E(Y^2)&lt;\infty\)</span>。证明：若 <span class="arithmatex">\(E(X|Y)=E(X)\)</span>（即条件期望为常数 <span class="arithmatex">\(\mu:=E(X)\)</span>），则 <span class="arithmatex">\(X,Y\)</span> 不相关。并回答：反之，<span class="arithmatex">\(X,Y\)</span> 不相关能否推出 <span class="arithmatex">\(E(X|Y)=E(X)\)</span>？</p>
+<blockquote>
+<p>[!EXAMPLE]- 详细解答
+<strong>方法点拨</strong>：算 <span class="arithmatex">\(E(XY)\)</span> 时先对 <span class="arithmatex">\(Y\)</span> 取条件，用"提出已知因子 + 塔性质"。</p>
+<p><strong>证</strong>：
+第一步，计算 <span class="arithmatex">\(E(XY)\)</span>。由塔性质（先取条件期望再取期望）：</p>
+<div class="arithmatex">\[
+E(XY)=E\big[E(XY|Y)\big]
+\]</div>
+<p>给定 <span class="arithmatex">\(Y\)</span> 时，<span class="arithmatex">\(Y\)</span> 视为已知常数，可提出（提出已知因子性质）：</p>
+<div class="arithmatex">\[
+E(XY|Y)=Y\,E(X|Y)
+\]</div>
+<p>代入条件 <span class="arithmatex">\(E(X|Y)=\mu\)</span>：</p>
+<div class="arithmatex">\[
+E(XY)=E\big[Y\cdot\mu\big]=\mu\,E(Y)=E(X)E(Y)
+\]</div>
+<p>第二步，代入协方差计算式：</p>
+<div class="arithmatex">\[
+\text{cov}(X,Y)=E(XY)-E(X)E(Y)=0
+\]</div>
+<p>故 <span class="arithmatex">\(X,Y\)</span> 不相关。<span class="arithmatex">\(\blacksquare\)</span></p>
+<p>第三步，反方向不成立。反例：设 <span class="arithmatex">\(Y\)</span> 取 <span class="arithmatex">\(-1,0,1\)</span> 等可能，<span class="arithmatex">\(X=Y^2\)</span>。则 <span class="arithmatex">\(E(XY)=E(Y^3)=0\)</span>，<span class="arithmatex">\(E(Y)=0\)</span>，故 <span class="arithmatex">\(\text{cov}(X,Y)=E(XY)-E(X)E(Y)=0\)</span>，<span class="arithmatex">\(X,Y\)</span> 不相关；但</p>
+<div class="arithmatex">\[
+E(X|Y)=E(Y^2|Y)=Y^2
+\]</div>
+<p>不是常数。所以"不相关"弱于"条件期望为常数"。</p>
+<p><strong>答</strong>：<span class="arithmatex">\(E(X|Y)\)</span> 为常数 <span class="arithmatex">\(\Rightarrow\)</span> 不相关；反之不成立（反例见上）。</p>
+<p>[!TIP] 技巧/易错
+三个条件强弱链：独立 <span class="arithmatex">\(\Rightarrow E(X|Y)=E(X)\)</span> <span class="arithmatex">\(\Rightarrow\)</span> 不相关，且两个箭头都不可逆。补充（笔记例 1.5）：若 <span class="arithmatex">\((X,Y)\)</span> 二元正态且 <span class="arithmatex">\(E(X|Y)\)</span> 为常数，则由"正态下不相关 <span class="arithmatex">\(\iff\)</span> 独立"可进一步推出 <span class="arithmatex">\(X,Y\)</span> 独立。</p>
+</blockquote>
+<h2 id="part-d">Part D：模块小结<a class="headerlink" href="#part-d" title="Permanent link">&para;</a></h2>
+<p><strong>套路一：随机和 / 分层模型的 E 与 var</strong>。看到"个数随机的求和"或"参数本身是随机变量"（如 <span class="arithmatex">\(N\)</span> 个顾客、随机概率 <span class="arithmatex">\(P\)</span> 的硬币），统一流程：固定条件变量 <span class="arithmatex">\(\to\)</span> 写 <span class="arithmatex">\(E(X|Y)\)</span>、<span class="arithmatex">\(\text{var}(X|Y)\)</span> <span class="arithmatex">\(\to\)</span> 塔性质求 <span class="arithmatex">\(E(X)\)</span>，全方差公式求 <span class="arithmatex">\(\text{var}(X)\)</span>。记牢模板 <span class="arithmatex">\(E(T)=E(N)E(X_1)\)</span>，<span class="arithmatex">\(\text{var}(T)=E(N)\text{var}(X_1)+[E(X_1)]^2\text{var}(N)\)</span>。</p>
+<p><strong>套路二：递归型全期望</strong>。"失败回到原点"的问题（密室逃脱、任务重启、赌徒类）：按第一步结果分割，条件期望里保留未知数 <span class="arithmatex">\(E(X)\)</span>，列一元方程求解。</p>
+<p><strong>套路三：计数变量的协方差</strong>。多项分布、超几何、掷骰子计数：指示变量分解 + 双线性展开，独立对协方差为 0，同试验对用 <span class="arithmatex">\(\text{cov}(I_A,I_B)=P(A\cap B)-P(A)P(B)\)</span>（互斥时 <span class="arithmatex">\(=-P(A)P(B)&lt;0\)</span>）；总量受约束的计数之间天然负相关。</p>
+<p><strong>套路四：相关系数三步算</strong>。① <span class="arithmatex">\(\text{cov}(X,Y)=E(XY)-(EX)(EY)\)</span>（<span class="arithmatex">\(E(XY)\)</span> 可借条件期望算：<span class="arithmatex">\(E(XY)=E[Y\,E(X|Y)]\)</span>）；② 各算 <span class="arithmatex">\(\text{var}\)</span>；③ 相除。判断题层面牢记：独立 <span class="arithmatex">\(\Rightarrow E(X|Y)=EX\)</span>（常数）<span class="arithmatex">\(\Rightarrow\)</span> 不相关，均不可逆；二元正态时不相关 <span class="arithmatex">\(\iff\)</span> 独立。</p>
+<p><strong>套路五：不等式估界</strong>。只有期望 <span class="arithmatex">\(\to\)</span> Markov；有期望和方差 <span class="arithmatex">\(\to\)</span> Chebyshev（先把事件改写为 <span class="arithmatex">\(\{|X-\mu|\ge\varepsilon\}\)</span>）；交叉矩 <span class="arithmatex">\(\to\)</span> Cauchy–Schwarz。会用即可，不要求证明。</p>
+<blockquote>
+<p>[!NOTE]
+选题说明：HW9 中 Problem 2.16/2.22/3.13（方差与正态计算）属模块 3 范围，统计三大分布题、Chernoff 界（选做）超出本模块，未选入；HW9 第 7 题（教材 Ch3 3.34 缺陷硬币）核心为条件分布与贝叶斯，归入条件分布模块；HW9 赌徒破产题（<span class="arithmatex">\(EX_a=ab\)</span>）方法同套路二，因步骤较长未展开。HW10 中教材 4.22（Kelly 策略）、3.35、4.28（二元正态分解）、4.21 均标注选做，其中 4.21 的结论 <span class="arithmatex">\(|\rho|\le 1\)</span> 已在 Part A.6 与 Cauchy–Schwarz 处覆盖；电梯/细胞分裂题与题 4.5 同模板。样卷第十大题（Poisson 过程计数 + 二项拆分条件期望）的条件期望部分即 <span class="arithmatex">\(E(X|X+Y=n)\)</span> 套路，已由 A.2 表中"Poisson 拆分"覆盖，其过程背景属后续模块。</p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "navigation.indexes", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

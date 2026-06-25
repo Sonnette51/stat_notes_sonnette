@@ -1,0 +1,2924 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="清华统计课程笔记">
+      
+      
+      
+        <link rel="canonical" href="https://Sonnette51.github.io/stat_notes_sonnette/%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture01%20%E6%A6%82%E7%8E%87%E6%A8%A1%E5%9E%8B%E4%B8%8E%E6%80%A7%E8%B4%A8/">
+      
+      
+        <link rel="prev" href="../">
+      
+      
+        <link rel="next" href="../Lecture02%20%E6%A6%82%E7%8E%87%E7%A9%BA%E9%97%B4%E3%80%81%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Lecture01 概率模型与性质 - Sonnette's Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#lecture01" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="Sonnette&#39;s Notes" class="md-header__button md-logo" aria-label="Sonnette's Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Sonnette's Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Lecture01 概率模型与性质
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  数据科学编程
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  初等概率论
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Sonnette&#39;s Notes" class="md-nav__button md-logo" aria-label="Sonnette's Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Sonnette's Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据科学编程
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数据科学编程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/NumPy%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NumPy 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/Pandas%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pandas 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/Database%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/LLM%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LLM 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/MiningWebData%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mining Web Data 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/TextProcessing%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Text Processing 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/DataVisualization%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Visualization 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/Advanced%20Visualization%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Advanced Visualization 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    初等概率论
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    初等概率论
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture01 概率模型与性质
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture01 概率模型与性质
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、概率模型
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、概率模型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 概率模型的基本构成
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 样本空间
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 样本空间——选择的艺术
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4 离散例（序贯模型）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5 连续例
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、概率与概率公理
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、概率与概率公理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 事件与概率
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 概率公理
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、离散模型与连续模型
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、离散模型与连续模型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 离散模型
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 离散模型特例：古典概型
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 连续模型
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 连续模型特例：几何概型
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bertrand" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、模型与现实：Bertrand 悖论
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、概率公理 3：加强为可列可加性
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、概率的性质
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="六、概率的性质">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 直观的概率性质（维恩图验证）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 性质一览表
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-1mathbbpemptyset-0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 性质 1：\(\mathbb{P}(\emptyset) = 0\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4 性质 2：概率的有限可加性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#65-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.5 性质 3：对立事件
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#66-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.6 性质 4：差事件公式与单调性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#67-5-boole" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.7 性质 5：加法公式与 Boole 不等式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#68-6the-inclusion-exclusion-formula" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.8 性质 6：容斥恒等式（The inclusion-exclusion formula）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#69-7bonferroni-kounias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.9 性质 7：Bonferroni 不等式与 Kounias 不等式（了解即可）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#610-8sigma-subadditivity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.10 性质 8：可列次可加性（\(\sigma\)-subadditivity）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#611-9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.11 性质 9：交事件的概率下界（了解即可）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七、随机抽样与随机分配
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="七、随机抽样与随机分配">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 排列与组合
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 不同方式的随机抽样
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 随机抽样的样本空间与计数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#74" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.4 随机抽样与随机分配：按箱分配质点（选修）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        八、关于古典概型的补充说明
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="八、关于古典概型的补充说明">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 古典概型问题小技巧
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 情景证明的思考题
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        九、小结
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        本讲方法/题型清单
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture02%20%E6%A6%82%E7%8E%87%E7%A9%BA%E9%97%B4%E3%80%81%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture02 概率空间、条件概率
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture03%20%E7%8B%AC%E7%AB%8B%E6%80%A7%E3%80%81%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture03 独立性、随机变量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture04%20%E5%B8%B8%E8%A7%81%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture04 常见随机变量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture05%20%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0%E3%80%81%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E5%87%BD%E6%95%B0%E7%9A%84%E5%88%86%E5%B8%83%E3%80%81%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E7%9A%84%E5%88%86%E5%B8%83%28I%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture05 概率分布函数、随机变量函数的分布、随机向量的分布(I)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture06%20%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E7%9A%84%E5%88%86%E5%B8%83%28II%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture06 随机向量的分布(II)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture07%20%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E5%87%BD%E6%95%B0%E7%9A%84%E5%88%86%E5%B8%83%E3%80%81%E6%AC%A1%E5%BA%8F%E7%BB%9F%E8%AE%A1%E9%87%8F%E3%80%81p%E5%88%86%E4%BD%8D%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture07 随机向量函数的分布、次序统计量、p分位数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture08%20%E6%9C%9F%E6%9C%9B%E3%80%81%E6%96%B9%E5%B7%AE%E3%80%81%E7%9B%B8%E5%85%B3%E4%B8%8D%E7%AD%89%E5%BC%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture08 期望、方差、相关不等式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture09%20%E6%9D%A1%E4%BB%B6%E6%9C%9F%E6%9C%9B%E3%80%81%E6%9D%A1%E4%BB%B6%E6%96%B9%E5%B7%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture09 条件期望、条件方差
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture10%20%E5%8D%8F%E6%96%B9%E5%B7%AE%E3%80%81%E7%9B%B8%E5%85%B3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture10 协方差、相关
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture11%20%E6%A6%82%E7%8E%87%E6%AF%8D%E5%87%BD%E6%95%B0%E3%80%81%E7%9F%A9%E6%AF%8D%E5%87%BD%E6%95%B0%E3%80%81%E7%89%B9%E5%BE%81%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture11 概率母函数、矩母函数、特征函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture12%20%E5%A4%A7%E6%95%B0%E5%AE%9A%E5%BE%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture12 大数定律
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture13%20%E4%B8%AD%E5%BF%83%E6%9E%81%E9%99%90%E5%AE%9A%E7%90%86%E3%80%81%E6%94%B6%E6%95%9B%E6%80%A7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture13 中心极限定理、收敛性
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture14%20%E5%A4%9A%E5%85%83%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture14 多元正态分布
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%9C%9F%E6%9C%AB%E8%AE%B0%E5%BF%86%E8%A6%81%E7%82%B9%E6%B1%87%E6%80%BB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 期末记忆要点汇总
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A8%A1%E5%9D%971%20%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E7%9A%84%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块1 随机向量的函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A8%A1%E5%9D%972%20%E6%AC%A1%E5%BA%8F%E7%BB%9F%E8%AE%A1%E9%87%8F%E4%B8%8Ep-%E5%88%86%E4%BD%8D%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块2 次序统计量与p-分位数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A8%A1%E5%9D%973%20%E6%9C%9F%E6%9C%9B%E4%B8%8E%E6%96%B9%E5%B7%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块3 期望与方差
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A8%A1%E5%9D%974%20%E6%9D%A1%E4%BB%B6%E6%9C%9F%E6%9C%9B%E3%80%81%E5%8D%8F%E6%96%B9%E5%B7%AE%E4%B8%8E%E4%B8%8D%E7%AD%89%E5%BC%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块4 条件期望、协方差与不等式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A8%A1%E5%9D%975%20%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0%E4%B8%8E%E7%89%B9%E5%BE%81%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块5 生成函数与特征函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A8%A1%E5%9D%976%20%E6%94%B6%E6%95%9B%E6%80%A7%E3%80%81%E5%A4%A7%E6%95%B0%E5%BE%8B%E4%B8%8E%E4%B8%AD%E5%BF%83%E6%9E%81%E9%99%90%E5%AE%9A%E7%90%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块6 收敛性、大数律与中心极限定理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A8%A1%E5%9D%977%20%E5%A4%9A%E5%85%83%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块7 多元正态分布
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、概率模型
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、概率模型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 概率模型的基本构成
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 样本空间
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 样本空间——选择的艺术
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4 离散例（序贯模型）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5 连续例
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、概率与概率公理
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、概率与概率公理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 事件与概率
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 概率公理
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、离散模型与连续模型
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、离散模型与连续模型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 离散模型
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 离散模型特例：古典概型
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 连续模型
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 连续模型特例：几何概型
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bertrand" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、模型与现实：Bertrand 悖论
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、概率公理 3：加强为可列可加性
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、概率的性质
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="六、概率的性质">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 直观的概率性质（维恩图验证）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 性质一览表
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-1mathbbpemptyset-0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 性质 1：\(\mathbb{P}(\emptyset) = 0\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4 性质 2：概率的有限可加性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#65-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.5 性质 3：对立事件
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#66-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.6 性质 4：差事件公式与单调性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#67-5-boole" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.7 性质 5：加法公式与 Boole 不等式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#68-6the-inclusion-exclusion-formula" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.8 性质 6：容斥恒等式（The inclusion-exclusion formula）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#69-7bonferroni-kounias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.9 性质 7：Bonferroni 不等式与 Kounias 不等式（了解即可）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#610-8sigma-subadditivity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.10 性质 8：可列次可加性（\(\sigma\)-subadditivity）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#611-9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.11 性质 9：交事件的概率下界（了解即可）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七、随机抽样与随机分配
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="七、随机抽样与随机分配">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 排列与组合
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 不同方式的随机抽样
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 随机抽样的样本空间与计数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#74" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.4 随机抽样与随机分配：按箱分配质点（选修）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        八、关于古典概型的补充说明
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="八、关于古典概型的补充说明">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 古典概型问题小技巧
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 情景证明的思考题
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        九、小结
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        本讲方法/题型清单
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="lecture01">Lecture01 概率模型与性质<a class="headerlink" href="#lecture01" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>[!ABSTRACT] 本讲概要
+概率论的出发点是给"随机试验"建一个数学模型：先把所有可能结果收进一个集合（样本空间），再给结果的集合（事件）分配一个表示"信念程度"的数（概率）。本讲（Bertsekas &amp; Tsitsiklis Ch1 1.2, 1.6）围绕概率模型的两大构件、概率公理及其推论性质、随机抽样的四种基本模式展开。</p>
+</blockquote>
+<h2 id="_1">一、概率模型<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h3 id="11">1.1 概率模型的基本构成<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
+<p>引入例：我们关心一门课的成绩（A, B, C, …），这就是一个随机试验。</p>
+<blockquote>
+<p>[!IMPORTANT] 概率模型的基本构成</p>
+<p>一个概率模型由两部分组成：</p>
+<ol>
+<li><strong>样本空间 <span class="arithmatex">\(\Omega\)</span></strong>：一个试验的所有可能结果的集合；</li>
+<li><strong>概率</strong>：为试验结果的集合 <span class="arithmatex">\(A\)</span>（称之为事件）确定一个非负数 <span class="arithmatex">\(\mathbb{P}(A)\)</span>（称为事件 <span class="arithmatex">\(A\)</span> 的概率）。此非负数刻画了我们对事件 <span class="arithmatex">\(A\)</span> 的认识或所产生的信念程度。</li>
+</ol>
+</blockquote>
+<p><strong>直觉</strong>：样本空间回答"会发生什么"，概率回答"各种情况发生的可能性多大"。两者合起来才是一个完整的模型。</p>
+<hr />
+<h3 id="12">1.2 样本空间<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>[!INFO] 定义（样本空间）</p>
+<p>样本空间是一个<strong>集合</strong>：每一个概率模型都关联着一个试验，这个试验将产生一个试验结果，该试验的<strong>所有可能结果</strong>形成样本空间，记作 <span class="arithmatex">\(\Omega\)</span>。</p>
+</blockquote>
+<p><strong>直觉</strong>：样本空间就是把"所有可能发生的事"一个不漏、互不重复地列成清单。</p>
+<p>样本空间必须满足的要求：
+- 试验结果必须<strong>互斥</strong>（不同结果不能同时发生），并且<strong>完整</strong>（穷尽所有可能）。
+- 试验结果<strong>可能是有限</strong>的，也<strong>可能是无限</strong>多个试验结果组成。</p>
+<blockquote>
+<p>[!NOTE] 备注</p>
+<p>一个试验由什么构成，并没有什么限制。然而我们讨论的概率模型的问题中，只涉及一个试验。所以"连续抛三次硬币"的试验，只能作为<strong>一次</strong>试验，不能认为是三次试验。</p>
+</blockquote>
+<h3 id="13">1.3 样本空间——选择的艺术<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
+<p>选择样本空间的原则：
+- 即便对同一个试验，根据我们的兴趣也可以确定<strong>不同的模型</strong>。
+- 在确定 <span class="arithmatex">\(\Omega\)</span> 时，既要有足够多的细节，又要避免不必要的繁琐。</p>
+<blockquote>
+<p>[!EXAMPLE]- 例子 1：两个抛硬币游戏（样本空间的不同选法）</p>
+<p>考虑两个不同的游戏，它们都涉及连续抛掷 10 次硬币：</p>
+<ul>
+<li><strong>游戏一</strong>：每次抛掷硬币只要出现正面向上，甲就赢 1 元钱。（只与 10 次抛掷中正面向上的次数有关）</li>
+<li><strong>游戏二</strong>：每次抛掷硬币甲都赢 1 元钱，直到出现第一次正面向上（包括这一次）；继续抛掷，甲每次赢 2 元钱，直到第二次正面向上；每次抛掷得到正面向上的时候，以后每次抛掷硬币所赢的钱数比以前每次抛掷硬币所赢的钱数加倍。（不仅跟正面出现的次数有关，还跟出现的顺序有关）</li>
+</ul>
+<p><strong>解</strong>（注：此处补全了课件未明写的结论）：</p>
+<ul>
+<li>游戏一的收益只依赖正面次数，取样本空间 <span class="arithmatex">\(\Omega_1 = \lbrace 0, 1, 2, \ldots, 10 \rbrace\)</span>（正面向上的次数）就足够了，共 11 个结果。</li>
+<li>游戏二的收益依赖正面出现的具体位置（顺序），必须取完整的序列样本空间 <span class="arithmatex">\(\Omega_2 = \lbrace \text{正}, \text{反} \rbrace^{10}\)</span>，共 <span class="arithmatex">\(2^{10} = 1024\)</span> 个结果。</li>
+</ul>
+<p>同一个物理试验，因关心的问题不同，合理的样本空间可以完全不同——这就是"选择的艺术"。</p>
+</blockquote>
+<h3 id="14">1.4 离散例（序贯模型）<a class="headerlink" href="#14" title="Permanent link">&para;</a></h3>
+<p>很多试验本身具有<strong>有序性</strong>的特征，比如连续抛掷一枚四面体的骰子，一共抛两次；或者连续观测一只股票，共观测五天。常用<strong>序贯树形图</strong>来刻画样本空间中的试验结果：从根 (Root) 出发，每一层对应一次观测，叶子 (Leaves) 对应一个完整的试验结果。例如四面体骰子掷两次，样本空间可以画成 <span class="arithmatex">\(4 \times 4\)</span> 的格点图，也可以画成两层的树形图，共 16 个叶子。</p>
+<h3 id="15">1.5 连续例<a class="headerlink" href="#15" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>[!EXAMPLE]- 例子 2：约会延迟的样本空间</p>
+<p>甲和乙约定在某时刻见面，而每个人到达约会地点的时间都会有延迟，延迟时间在 0~1 小时。</p>
+<p><strong>解</strong>：考虑直角坐标系的单位正方形</p>
+<div class="arithmatex">\[\Omega = [0,1] \times [0,1] = \lbrace (x,y) \mid 0 \leq x, y \leq 1 \rbrace\]</div>
+<p>正方形中的每一个点的两个坐标分别表示他们各自可能的延迟时间。这是一个典型的<strong>连续（不可数）样本空间</strong>。</p>
+</blockquote>
+<hr />
+<h2 id="_2">二、概率与概率公理<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="21">2.1 事件与概率<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>[!INFO] 定义（事件）</p>
+<p><strong>事件</strong>：样本空间的子集，即某些试验结果的集合。事件"发生"，或者事件"不发生"。</p>
+</blockquote>
+<p><strong>直觉</strong>：事件就是"我们关心的一类结果"打包成的集合；试验结果落在这个集合里，就说事件发生了。</p>
+<blockquote>
+<p>[!INFO] 定义（概率的含义）</p>
+<p><strong>概率</strong>：分配到事件上的数。它是一种"信念"，例如"百分百确定"、"不可能"。</p>
+</blockquote>
+<h3 id="22">2.2 概率公理<a class="headerlink" href="#22" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>[!IMPORTANT] 概率公理</p>
+<ol>
+<li><strong>（非负性）</strong> 对一切事件 <span class="arithmatex">\(A\)</span>，满足 <span class="arithmatex">\(\mathbb{P}(A) \geq 0\)</span>。</li>
+<li><strong>（归一化）</strong> <span class="arithmatex">\(\mathbb{P}(\Omega) = 1\)</span>。</li>
+<li><strong>（可加性）</strong> 若 <span class="arithmatex">\(A \cap B = \emptyset\)</span>，那么 <span class="arithmatex">\(\mathbb{P}(A \cup B) = \mathbb{P}(A) + \mathbb{P}(B)\)</span>。</li>
+</ol>
+</blockquote>
+<p><strong>直觉</strong>：概率像"质量"——总质量为 1，分到互不重叠的块上可以直接相加，且每块质量非负。</p>
+<p><strong>课件中的讨论（四个问题）</strong>：
+- 需要增加一条公理 <span class="arithmatex">\(\mathbb{P}(A) \leq 1\)</span> 么？（注：不需要，后面性质 4 的推论 2 表明它可以由三条公理推出。）
+- 有限可加性：例如 <span class="arithmatex">\(\mathbb{P}(\lbrace s_1, s_2, \ldots, s_k \rbrace) = \mathbb{P}(\lbrace s_1 \rbrace) + \cdots + \mathbb{P}(\lbrace s_k \rbrace) = \mathbb{P}(s_1) + \cdots + \mathbb{P}(s_k)\)</span>，即有限个互斥事件可以逐个相加。
+- 公理 3 需要加强。（→ 见第五部分：加强为可列可加性）
+- 任意样本空间的子集都可以分配概率么？（注：一般不行，这涉及可测性问题，本课不深入。）</p>
+<hr />
+<h2 id="_3">三、离散模型与连续模型<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h3 id="31">3.1 离散模型<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
+<p>离散样本空间上，给每个样本点赋概率，事件的概率即其中样本点概率之和。</p>
+<blockquote>
+<p>[!EXAMPLE]- 例题 1：均匀四面体骰子掷两次</p>
+<p>假设骰子是均匀的，每一面出现的机会是相同的。连续抛掷一枚四面体骰子两次，记第一次、第二次的点数为 <span class="arithmatex">\(X, Y\)</span>。求：</p>
+<ol>
+<li><span class="arithmatex">\(\mathbb{P}\big((X,Y) \text{ 是 } (1,1) \text{ 或 } (1,2)\big)\)</span>；</li>
+<li><span class="arithmatex">\(\mathbb{P}(X = 1)\)</span>；</li>
+<li><span class="arithmatex">\(\mathbb{P}(X + Y \text{ 是奇数})\)</span>；</li>
+<li><span class="arithmatex">\(\mathbb{P}\big(\min(X,Y) = 2\big)\)</span>。</li>
+</ol>
+<p><strong>解</strong>（注：课件将答案留作"?"，此处补全全部计算）：</p>
+<p>样本空间 <span class="arithmatex">\(\Omega = \lbrace (i,j) \mid i, j = 1,2,3,4 \rbrace\)</span>，共 16 个等可能结果，每个概率 <span class="arithmatex">\(\frac{1}{16}\)</span>。</p>
+<ol>
+<li>事件含 2 个样本点 <span class="arithmatex">\((1,1), (1,2)\)</span>，故概率为 <span class="arithmatex">\(\frac{2}{16} = \frac{1}{8}\)</span>。</li>
+<li><span class="arithmatex">\(X = 1\)</span> 对应 <span class="arithmatex">\((1,1), (1,2), (1,3), (1,4)\)</span> 共 4 个点，概率 <span class="arithmatex">\(\frac{4}{16} = \frac{1}{4}\)</span>。</li>
+<li><span class="arithmatex">\(X+Y\)</span> 为奇数当且仅当一个为奇数、一个为偶数。<span class="arithmatex">\(\lbrace 1,2,3,4 \rbrace\)</span> 中奇数 2 个、偶数 2 个，故样本点数为 <span class="arithmatex">\(2 \times 2 + 2 \times 2 = 8\)</span>，概率 <span class="arithmatex">\(\frac{8}{16} = \frac{1}{2}\)</span>。</li>
+<li><span class="arithmatex">\(\min(X,Y) = 2\)</span> 即两数均 <span class="arithmatex">\(\geq 2\)</span> 且至少一个等于 2。均 <span class="arithmatex">\(\geq 2\)</span> 的点有 <span class="arithmatex">\(3 \times 3 = 9\)</span> 个，均 <span class="arithmatex">\(\geq 3\)</span> 的点有 <span class="arithmatex">\(2 \times 2 = 4\)</span> 个，故恰好 <span class="arithmatex">\(\min = 2\)</span> 的点有 <span class="arithmatex">\(9 - 4 = 5\)</span> 个，概率 <span class="arithmatex">\(\frac{5}{16}\)</span>。</li>
+</ol>
+</blockquote>
+<h3 id="32">3.2 离散模型特例：古典概型<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>[!IMPORTANT] 古典概型（离散均匀概率）</p>
+<p>设样本空间 <span class="arithmatex">\(\Omega\)</span> 由 <span class="arithmatex">\(n\)</span> 个<strong>等可能性</strong>的试验结果组成，因此每个试验结果组成的事件（称为基本事件）的概率是相等的。由此得到</p>
+<div class="arithmatex">\[\mathbb{P}(A) = \frac{\text{含于事件 } A \text{ 的试验结果数}}{n}\]</div>
+</blockquote>
+<p><strong>直觉</strong>：当每个结果"一视同仁"时，算概率就退化为数数——数 <span class="arithmatex">\(A\)</span> 里有几个结果，再除以总数。</p>
+<h3 id="33">3.3 连续模型<a class="headerlink" href="#33" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>[!EXAMPLE]- 例子 4：约会相遇问题</p>
+<p>甲和乙约定在某时刻见面，而每个人到达约会地点的时间都会有延迟，延迟时间在 0~1 小时。第一个到达约会地点的人会在那儿等待 15 分钟，等了 15 分钟后若对方还没有出现，先到者会离开约会地点。问他们能够相会的概率有多大？</p>
+<p><strong>解</strong>：</p>
+<p>将 <span class="arithmatex">\(\Omega\)</span> 的子集出现的概率定义为这个子集的<strong>面积</strong>。此定义符合概率的三条公理（非负、<span class="arithmatex">\(\Omega\)</span> 面积为 1、不相交集合面积可加）。</p>
+<p>两人相会当且仅当延迟时间之差不超过 15 分钟（<span class="arithmatex">\(\frac{1}{4}\)</span> 小时），即事件</p>
+<div class="arithmatex">\[M = \left\lbrace (x,y) \ \middle| \ |x - y| \leq \frac{1}{4},\ 0 \leq x \leq 1,\ 0 \leq y \leq 1 \right\rbrace\]</div>
+<p>所求的概率即为 <span class="arithmatex">\(M\)</span> 的面积。（注：此步补全了面积的具体计算）<span class="arithmatex">\(M\)</span> 是单位正方形去掉两个直角边长为 <span class="arithmatex">\(\frac{3}{4}\)</span> 的等腰直角三角形后剩下的斜带形区域，故</p>
+<div class="arithmatex">\[\mathbb{P}(M) = 1 - 2 \times \frac{1}{2} \times \left(\frac{3}{4}\right)^2 = 1 - \frac{9}{16} = \frac{7}{16}\]</div>
+</blockquote>
+<h3 id="34">3.4 连续模型特例：几何概型<a class="headerlink" href="#34" title="Permanent link">&para;</a></h3>
+<p>用 <span class="arithmatex">\(\mathbb{R}^r\)</span> 表示 <span class="arithmatex">\(r\)</span> 维向量空间，<span class="arithmatex">\(\mathbb{R}^r = \lbrace (x_1, x_2, \ldots, x_r) \mid x_i \in (-\infty, \infty), 1 \leq i \leq r \rbrace\)</span>。对于 <span class="arithmatex">\(\mathbb{R}^r\)</span> 的子集 <span class="arithmatex">\(A\)</span>，用</p>
+<div class="arithmatex">\[m(A) = \int_A dx_1 dx_2 \cdots dx_r\]</div>
+<p>表示集合 <span class="arithmatex">\(A\)</span> 的体积。</p>
+<blockquote>
+<p>[!IMPORTANT] 几何概率模型（连续均匀概率）</p>
+<p>设样本空间 <span class="arithmatex">\(\Omega \subset \mathbb{R}^r\)</span> 的体积 <span class="arithmatex">\(m(\Omega)\)</span> 是正数，且 <span class="arithmatex">\(\Omega\)</span> 中的每个试验结果发生的<strong>可能性相同</strong>，则对于事件 <span class="arithmatex">\(A \subset \Omega\)</span>，其发生的概率为</p>
+<div class="arithmatex">\[\mathbb{P}(A) = \frac{m(A)}{m(\Omega)}\]</div>
+</blockquote>
+<p><strong>直觉</strong>：几何概型是古典概型的连续版本——"数个数"换成"量体积（长度、面积）"。</p>
+<blockquote>
+<p>[!WARNING] 辨析</p>
+<p>古典概型要求<strong>有限个等可能结果</strong>、用"个数之比"；几何概型要求<strong>连续区域上均匀</strong>、用"体积之比"。两者都依赖"等可能"假设，但等可能的含义（计数测度 vs 体积测度）完全不同，不可混用。</p>
+</blockquote>
+<hr />
+<h2 id="bertrand">四、模型与现实：Bertrand 悖论<a class="headerlink" href="#bertrand" title="Permanent link">&para;</a></h2>
+<p>不同的"等可能"假设可以导致不同的概率模型，进而得到不同的答案——建模时必须明确随机机制。</p>
+<blockquote>
+<p>[!EXAMPLE]- 例子 5（Bertrand 悖论）：随机弦的长度</p>
+<p>在半径为 1 的圆内任取一条弦，求弦长大于等于 <span class="arithmatex">\(\sqrt{3}\)</span> 的概率。</p>
+<p>（注：圆的内接等边三角形的边长为 <span class="arithmatex">\(\sqrt{3}\)</span>。）用 <span class="arithmatex">\(\Omega\)</span> 表示试验的样本空间，用 <span class="arithmatex">\(A\)</span> 表示得到的弦长大于等于 <span class="arithmatex">\(\sqrt{3}\)</span>。</p>
+<p><strong>解法 (1)</strong>：如果认为弦的端点等可能的落在圆周上，则点 <span class="arithmatex">\(x_0\)</span> 确定后另一点 <span class="arithmatex">\(y\)</span> 也等可能的落在圆周上。因为 <span class="arithmatex">\(\Omega = \lbrace y \mid y \in [0, 2\pi) \rbrace\)</span>，<span class="arithmatex">\(A = \left\lbrace y \ \middle| \ \dfrac{2\pi}{3} \leq y \leq \dfrac{4\pi}{3} \right\rbrace\)</span>。于是</p>
+<div class="arithmatex">\[\mathbb{P}(A) = \frac{1}{3}\]</div>
+<p>（注：此步补全直觉——固定一个端点后，弦长 <span class="arithmatex">\(\geq \sqrt{3}\)</span> 当且仅当另一端点落在对侧三分之一圆弧上，弧长 <span class="arithmatex">\(\frac{2\pi}{3}\)</span> 占全圆 <span class="arithmatex">\(2\pi\)</span> 的 <span class="arithmatex">\(\frac{1}{3}\)</span>。）</p>
+<p><strong>解法 (2)</strong>：如果认为弦的中点等可能的落在与之垂直的直径上：当且仅当其中点与圆心的距离小于 <span class="arithmatex">\(\frac{1}{2}\)</span> 时，它的弦长才大于 <span class="arithmatex">\(\sqrt{3}\)</span>。因此</p>
+<div class="arithmatex">\[\mathbb{P}(A) = \frac{1}{2}\]</div>
+<p>（注：此步补全直觉——直径长为 2，中点离圆心距离 <span class="arithmatex">\(&lt; \frac{1}{2}\)</span> 的部分总长为 1，占比 <span class="arithmatex">\(\frac{1}{2}\)</span>。）</p>
+<p><strong>解法 (3)</strong>：如果认为弦的中点等可能的落在圆内，则 <span class="arithmatex">\(\Omega\)</span> 是大圆盘，<span class="arithmatex">\(A\)</span> 是半径 <span class="arithmatex">\(\frac{1}{2}\)</span> 的小圆盘。因此</p>
+<div class="arithmatex">\[\mathbb{P}(A) = \frac{\pi (1/2)^2}{\pi \cdot 1^2} = \frac{1}{4}\]</div>
+<p>[!WARNING] 易错</p>
+<p>从 Bertrand 悖论可以看出：<strong>不同的等可能假设可以导致不同的计算结果</strong>。"随机取一条弦"这句话本身没有唯一确定概率模型；做几何概型题目时，必须先明确"什么东西在什么集合上均匀分布"。</p>
+</blockquote>
+<hr />
+<h2 id="3">五、概率公理 3：加强为可列可加性<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>[!EXAMPLE]- 例 6：为什么有限可加性不够用</p>
+<p>抛硬币直到第一次出现正面，记所需次数为试验结果。</p>
+<ul>
+<li>样本空间：<span class="arithmatex">\(\lbrace 1, 2, \ldots \rbrace\)</span>；</li>
+<li><span class="arithmatex">\(\mathbb{P}(n) = 2^{-n}\)</span>，<span class="arithmatex">\(n = 1, 2, \ldots\)</span>；</li>
+<li>求 <span class="arithmatex">\(\mathbb{P}(\text{outcome is even})\)</span>。</li>
+</ul>
+<p><strong>解</strong>：</p>
+<div class="arithmatex">\[\mathbb{P}(\lbrace 2, 4, 6, \ldots \rbrace) = \mathbb{P}(2) + \mathbb{P}(4) + \cdots = \frac{1}{2^2} + \frac{1}{2^4} + \cdots = \frac{1/4}{1 - 1/4} = \frac{1}{3}\]</div>
+<p>（注：此步补全了等比级数求和，公比为 <span class="arithmatex">\(\frac{1}{4}\)</span>。）这里把<strong>可列无穷多个</strong>互斥事件的概率相加，仅有"两个事件可加"的公理 3 推不出这一步，必须加强公理。</p>
+<p>[!IMPORTANT] 可列可加性（公理 3 的加强）</p>
+<p>若 <span class="arithmatex">\(A_1, A_2, \ldots\)</span> 是互不相交的事件，那么</p>
+<div class="arithmatex">\[\mathbb{P}(A_1 \cup A_2 \cup \cdots) = \mathbb{P}(A_1) + \mathbb{P}(A_2) + \cdots\]</div>
+</blockquote>
+<p>从此概率公理的最终版本为：
+1. <strong>（非负性）</strong> 对一切事件 <span class="arithmatex">\(A\)</span>，满足 <span class="arithmatex">\(\mathbb{P}(A) \geq 0\)</span>；
+2. <strong>（归一化）</strong> <span class="arithmatex">\(\mathbb{P}(\Omega) = 1\)</span>；
+3. <strong>（可列可加性）</strong> 若 <span class="arithmatex">\(A_1, A_2, \ldots\)</span> 是互不相交的事件，那么 <span class="arithmatex">\(\mathbb{P}(A_1 \cup A_2 \cup \cdots) = \mathbb{P}(A_1) + \mathbb{P}(A_2) + \cdots\)</span>。</p>
+<hr />
+<h2 id="_4">六、概率的性质<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<h3 id="61">6.1 直观的概率性质（维恩图验证）<a class="headerlink" href="#61" title="Permanent link">&para;</a></h3>
+<p>利用维恩图可以直观验证概率的若干性质：
+- 若 <span class="arithmatex">\(A \subset B\)</span>，则 <span class="arithmatex">\(\mathbb{P}(A) \leq \mathbb{P}(B)\)</span>。
+- <span class="arithmatex">\(\mathbb{P}(A \cup B) = \mathbb{P}(A) + \mathbb{P}(B) - \mathbb{P}(A \cap B)\)</span>。
+- <span class="arithmatex">\(\mathbb{P}(A \cup B) \leq \mathbb{P}(A) + \mathbb{P}(B)\)</span>。
+- <span class="arithmatex">\(\mathbb{P}(A \cup B \cup C) = \mathbb{P}(A) + \mathbb{P}(A^c \cap B) + \mathbb{P}(A^c \cap B^c \cap C)\)</span>（把并集切成互不相交的三块）。</p>
+<p>下面从三条公理出发<strong>严格证明</strong>九条性质。</p>
+<h3 id="62">6.2 性质一览表<a class="headerlink" href="#62" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>编号</th>
+<th>性质</th>
+<th>公式</th>
+<th>重要程度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>空集概率为零</td>
+<td><span class="arithmatex">\(\mathbb{P}(\emptyset) = 0\)</span></td>
+<td>常用</td>
+</tr>
+<tr>
+<td>2</td>
+<td>有限可加性</td>
+<td><span class="arithmatex">\(A_i\)</span> 两两不交 <span class="arithmatex">\(\Rightarrow \mathbb{P}\left(\bigcup_{i=1}^{n} A_i\right) = \sum_{i=1}^{n} \mathbb{P}(A_i)\)</span></td>
+<td>常用</td>
+</tr>
+<tr>
+<td>3</td>
+<td>对立事件</td>
+<td><span class="arithmatex">\(\mathbb{P}(A^c) = 1 - \mathbb{P}(A)\)</span></td>
+<td>常用</td>
+</tr>
+<tr>
+<td>4</td>
+<td>差事件</td>
+<td><span class="arithmatex">\(A \subset B \Rightarrow \mathbb{P}(B \setminus A) = \mathbb{P}(B) - \mathbb{P}(A)\)</span></td>
+<td>常用</td>
+</tr>
+<tr>
+<td>5</td>
+<td>加法公式</td>
+<td><span class="arithmatex">\(\mathbb{P}(A \cup B) = \mathbb{P}(A) + \mathbb{P}(B) - \mathbb{P}(A \cap B)\)</span></td>
+<td>常用</td>
+</tr>
+<tr>
+<td>6</td>
+<td>容斥恒等式</td>
+<td>见 6.8</td>
+<td>常用</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Bonferroni / Kounias 不等式</td>
+<td>见 6.9</td>
+<td>了解即可</td>
+</tr>
+<tr>
+<td>8</td>
+<td>可列次可加性</td>
+<td><span class="arithmatex">\(\mathbb{P}\left(\bigcup_{i=1}^{\infty} A_i\right) \leq \sum_{i=1}^{\infty} \mathbb{P}(A_i)\)</span></td>
+<td>常用</td>
+</tr>
+<tr>
+<td>9</td>
+<td>交事件下界</td>
+<td><span class="arithmatex">\(\mathbb{P}\left(\bigcap_{i=1}^{\infty} A_i\right) \geq 1 - \sum_{i=1}^{\infty} \mathbb{P}(A_i^c)\)</span></td>
+<td>了解即可</td>
+</tr>
+</tbody>
+</table>
+<h3 id="63-1mathbbpemptyset-0">6.3 性质 1：<span class="arithmatex">\(\mathbb{P}(\emptyset) = 0\)</span><a class="headerlink" href="#63-1mathbbpemptyset-0" title="Permanent link">&para;</a></h3>
+<p><strong>证明</strong>：因为 <span class="arithmatex">\(\Omega = \Omega \cup \emptyset \cup \emptyset \cup \cdots\)</span>，由概率公理 (3) 得</p>
+<div class="arithmatex">\[\mathbb{P}(\Omega) = \mathbb{P}(\Omega \cup \emptyset \cup \emptyset \cup \cdots) = \mathbb{P}(\Omega) + \mathbb{P}(\emptyset) + \mathbb{P}(\emptyset) + \cdots\]</div>
+<p>由概率公理 (2)，得</p>
+<div class="arithmatex">\[1 = 1 + \mathbb{P}(\emptyset) + \mathbb{P}(\emptyset) + \cdots\]</div>
+<p>即 <span class="arithmatex">\(0 = \mathbb{P}(\emptyset) + \mathbb{P}(\emptyset) + \cdots\)</span>，再由概率公理 (1)（每项非负），得 <span class="arithmatex">\(\mathbb{P}(\emptyset) = 0\)</span>。</p>
+<h3 id="64-2">6.4 性质 2：概率的有限可加性<a class="headerlink" href="#64-2" title="Permanent link">&para;</a></h3>
+<p>设有事件 <span class="arithmatex">\(A_i\)</span>，<span class="arithmatex">\(i = 1, \ldots, n\)</span>，且 <span class="arithmatex">\(A_i \cap A_j = \emptyset\)</span>，<span class="arithmatex">\(i \neq j\)</span>，则</p>
+<div class="arithmatex">\[\mathbb{P}\left(\bigcup_{i=1}^{n} A_i\right) = \sum_{i=1}^{n} \mathbb{P}(A_i)\]</div>
+<p><strong>证明</strong>：令 <span class="arithmatex">\(A_{n+1} = A_{n+2} = \cdots = \emptyset\)</span>，则 <span class="arithmatex">\(\bigcup_{i=1}^{n} A_i = \bigcup_{i=1}^{\infty} A_i\)</span>，且当 <span class="arithmatex">\(i \neq j\)</span> 时 <span class="arithmatex">\(A_i \cap A_j = \emptyset\)</span>。由概率公理 (3) 和性质 1，可得</p>
+<div class="arithmatex">\[\mathbb{P}\left(\bigcup_{i=1}^{n} A_i\right) = \mathbb{P}\left(\bigcup_{i=1}^{\infty} A_i\right) = \sum_{i=1}^{\infty} \mathbb{P}(A_i) = \sum_{i=1}^{n} \mathbb{P}(A_i)\]</div>
+<p><strong>直觉</strong>：把"无穷可加"里多余的位置塞满空集即可退回有限情形。</p>
+<h3 id="65-3">6.5 性质 3：对立事件<a class="headerlink" href="#65-3" title="Permanent link">&para;</a></h3>
+<p>如果有事件 <span class="arithmatex">\(A\)</span>，则 <span class="arithmatex">\(\mathbb{P}(A^c) = 1 - \mathbb{P}(A)\)</span>。</p>
+<p><strong>证明</strong>：因为 <span class="arithmatex">\(A \cap A^c = \emptyset\)</span>，<span class="arithmatex">\(A \cup A^c = \Omega\)</span>，由性质 2 和概率公理 (2) 得</p>
+<div class="arithmatex">\[1 = \mathbb{P}(\Omega) = \mathbb{P}(A \cup A^c) = \mathbb{P}(A) + \mathbb{P}(A^c)\]</div>
+<p>故 <span class="arithmatex">\(\mathbb{P}(A^c) = 1 - \mathbb{P}(A)\)</span>。</p>
+<p><strong>直觉</strong>："正难则反"的依据——事件不发生的概率等于 1 减去发生的概率。</p>
+<h3 id="66-4">6.6 性质 4：差事件公式与单调性<a class="headerlink" href="#66-4" title="Permanent link">&para;</a></h3>
+<p>如果有事件 <span class="arithmatex">\(A, B\)</span>，且 <span class="arithmatex">\(A \subset B\)</span>，则 <span class="arithmatex">\(\mathbb{P}(B \setminus A) = \mathbb{P}(B) - \mathbb{P}(A)\)</span>。</p>
+<p><strong>证明</strong>：因为 <span class="arithmatex">\(B = A \cup (B \setminus A)\)</span> 且 <span class="arithmatex">\(A \cap (B \setminus A) = \emptyset\)</span>，由性质 2 得</p>
+<div class="arithmatex">\[\mathbb{P}(B) = \mathbb{P}(A) + \mathbb{P}(B \setminus A)\]</div>
+<p>即 <span class="arithmatex">\(\mathbb{P}(B \setminus A) = \mathbb{P}(B) - \mathbb{P}(A)\)</span>。</p>
+<p><strong>推论</strong>：
+1. <strong>（概率的单调性）</strong> 如果有事件 <span class="arithmatex">\(A, B\)</span>，且 <span class="arithmatex">\(A \subset B\)</span>，则 <span class="arithmatex">\(\mathbb{P}(A) \leq \mathbb{P}(B)\)</span>；
+2. 对任意的事件 <span class="arithmatex">\(A\)</span>，有 <span class="arithmatex">\(0 \leq \mathbb{P}(A) \leq 1\)</span>。（这回答了 2.2 节的问题：<span class="arithmatex">\(\mathbb{P}(A) \leq 1\)</span> 无需作为公理。）</p>
+<blockquote>
+<p>[!WARNING] 易错</p>
+<p><span class="arithmatex">\(\mathbb{P}(B \setminus A) = \mathbb{P}(B) - \mathbb{P}(A)\)</span> 只在 <span class="arithmatex">\(A \subset B\)</span> 时成立！一般情形应为 <span class="arithmatex">\(\mathbb{P}(B \setminus A) = \mathbb{P}(B) - \mathbb{P}(A \cap B)\)</span>。</p>
+</blockquote>
+<h3 id="67-5-boole">6.7 性质 5：加法公式与 Boole 不等式<a class="headerlink" href="#67-5-boole" title="Permanent link">&para;</a></h3>
+<p>如果有事件 <span class="arithmatex">\(A, B\)</span>，则 <span class="arithmatex">\(\mathbb{P}(A \cup B) = \mathbb{P}(A) + \mathbb{P}(B) - \mathbb{P}(A \cap B)\)</span>。</p>
+<p><strong>证明</strong>：因为 <span class="arithmatex">\(A \cup B = A \cup (B \setminus A)\)</span>，且 <span class="arithmatex">\(A \cap (B \setminus A) = \emptyset\)</span>，由性质 2 和性质 4 得</p>
+<div class="arithmatex">\[\begin{align}
+\mathbb{P}(A \cup B) &amp;= \mathbb{P}(A) + \mathbb{P}(B \setminus A) \\
+&amp;= \mathbb{P}(A) + \mathbb{P}(B \setminus (A \cap B)) \\
+&amp;= \mathbb{P}(A) + \mathbb{P}(B) - \mathbb{P}(A \cap B)
+\end{align}\]</div>
+<p>（注：此步补全了 <span class="arithmatex">\(B \setminus A = B \setminus (A \cap B)\)</span> 且 <span class="arithmatex">\(A \cap B \subset B\)</span>，故可用性质 4。）</p>
+<p><strong>推论（有限次可加性，finite subadditivity，或 Boole's inequality）</strong>：如果有事件 <span class="arithmatex">\(A_i\)</span>，<span class="arithmatex">\(i = 1, \ldots, n\)</span>，则</p>
+<div class="arithmatex">\[\mathbb{P}\left(\bigcup_{i=1}^{n} A_i\right) \leq \sum_{i=1}^{n} \mathbb{P}(A_i)\]</div>
+<p><strong>直觉</strong>：并集的概率不超过各自概率之和，因为重叠部分被重复计算了。</p>
+<h3 id="68-6the-inclusion-exclusion-formula">6.8 性质 6：容斥恒等式（The inclusion-exclusion formula）<a class="headerlink" href="#68-6the-inclusion-exclusion-formula" title="Permanent link">&para;</a></h3>
+<p>如果有事件 <span class="arithmatex">\(A_i\)</span>，<span class="arithmatex">\(i = 1, \ldots, n\)</span>，则</p>
+<div class="arithmatex">\[\begin{align}
+\mathbb{P}\left(\bigcup_{i=1}^{n} A_i\right) &amp;= \sum_{1 \leq i \leq n} \mathbb{P}(A_i) - \sum_{1 \leq i &lt; j \leq n} \mathbb{P}(A_i \cap A_j) \\
+&amp;\quad + \sum_{1 \leq i &lt; j &lt; k \leq n} \mathbb{P}(A_i \cap A_j \cap A_k) - \cdots + (-1)^{n-1} \mathbb{P}(A_1 \cap A_2 \cap \cdots \cap A_n)
+\end{align}\]</div>
+<p><strong>直觉与证明思路</strong>：先加单个、再减两两相交、再加三三相交……"多退少补"，恰好让每个样本点被数一次。形式证明可对 <span class="arithmatex">\(n\)</span> 用数学归纳法，从性质 5 出发归纳推广。</p>
+<h3 id="69-7bonferroni-kounias">6.9 性质 7：Bonferroni 不等式与 Kounias 不等式（了解即可）<a class="headerlink" href="#69-7bonferroni-kounias" title="Permanent link">&para;</a></h3>
+<p><strong>（Bonferroni's inequality）</strong> 如果有事件 <span class="arithmatex">\(A_i\)</span>，<span class="arithmatex">\(i = 1, \ldots, n\)</span>，则</p>
+<div class="arithmatex">\[\mathbb{P}\left(\bigcup_{i=1}^{n} A_i\right) \geq \sum_{1 \leq i \leq n} \mathbb{P}(A_i) - \sum_{1 \leq i &lt; j \leq n} \mathbb{P}(A_i \cap A_j)\]</div>
+<p><strong>（Kounias's inequality）</strong></p>
+<div class="arithmatex">\[\mathbb{P}\left(\bigcup_{i=1}^{n} A_i\right) \leq \min_{k} \left\lbrace \sum_{1 \leq i \leq n} \mathbb{P}(A_i) - \sum_{i: i \neq k} \mathbb{P}(A_i \cap A_k) \right\rbrace\]</div>
+<p><strong>直觉</strong>：容斥恒等式截断到第二项给出下界（Bonferroni）；而 Kounias 只扣掉与某个固定事件 <span class="arithmatex">\(A_k\)</span> 的重叠，再对 <span class="arithmatex">\(k\)</span> 取最优，给出比 Boole 不等式更紧的上界。</p>
+<h3 id="610-8sigma-subadditivity">6.10 性质 8：可列次可加性（<span class="arithmatex">\(\sigma\)</span>-subadditivity）<a class="headerlink" href="#610-8sigma-subadditivity" title="Permanent link">&para;</a></h3>
+<p>如果有事件 <span class="arithmatex">\(A_i\)</span>，<span class="arithmatex">\(i = 1, 2, \ldots\)</span>，则</p>
+<div class="arithmatex">\[\mathbb{P}\left(\bigcup_{i=1}^{\infty} A_i\right) \leq \sum_{i=1}^{\infty} \mathbb{P}(A_i)\]</div>
+<p><strong>证明</strong>：令 <span class="arithmatex">\(B_1 = A_1\)</span>，<span class="arithmatex">\(B_n = A_n \setminus \bigcup_{i=1}^{n-1} A_i\)</span>，则 <span class="arithmatex">\(\bigcup_{i=1}^{\infty} A_i = \bigcup_{i=1}^{\infty} B_i\)</span> 且 <span class="arithmatex">\(B_i \cap B_j = \emptyset\)</span>（<span class="arithmatex">\(i \neq j\)</span>），<span class="arithmatex">\(B_n \subset A_n\)</span>。由概率公理 (3) 和概率的单调性，得</p>
+<div class="arithmatex">\[\mathbb{P}\left(\bigcup_{i=1}^{\infty} A_i\right) = \mathbb{P}\left(\bigcup_{i=1}^{\infty} B_i\right) = \sum_{i=1}^{\infty} \mathbb{P}(B_i) \leq \sum_{i=1}^{\infty} \mathbb{P}(A_i)\]</div>
+<p><strong>直觉</strong>："不相交化"技巧——把并集改写成两两不交的"新增部分"<span class="arithmatex">\(B_n\)</span> 之并，是概率论中反复出现的标准手法。</p>
+<h3 id="611-9">6.11 性质 9：交事件的概率下界（了解即可）<a class="headerlink" href="#611-9" title="Permanent link">&para;</a></h3>
+<p>如果有事件 <span class="arithmatex">\(A_i\)</span>，<span class="arithmatex">\(i = 1, 2, \ldots\)</span>，则</p>
+<div class="arithmatex">\[\mathbb{P}\left(\bigcap_{i=1}^{\infty} A_i\right) \geq 1 - \sum_{i=1}^{\infty} \mathbb{P}(A_i^c)\]</div>
+<p>特别地，</p>
+<div class="arithmatex">\[\mathbb{P}(A_1 \cap A_2) \geq 1 - \mathbb{P}(A_1^c) - \mathbb{P}(A_2^c)\]</div>
+<p><strong>证明</strong>：由性质 3 和性质 8 得</p>
+<div class="arithmatex">\[\mathbb{P}\left(\bigcap_{i=1}^{\infty} A_i\right) = 1 - \mathbb{P}\left(\left(\bigcap_{i=1}^{\infty} A_i\right)^c\right) = 1 - \mathbb{P}\left(\bigcup_{i=1}^{\infty} A_i^c\right) \geq 1 - \sum_{i=1}^{\infty} \mathbb{P}(A_i^c)\]</div>
+<p>特别地，令 <span class="arithmatex">\(A_3 = A_4 = \cdots = \Omega\)</span>，由性质 1（<span class="arithmatex">\(\mathbb{P}(\Omega^c) = \mathbb{P}(\emptyset) = 0\)</span>），可得第二个结论。</p>
+<p><strong>直觉</strong>："每个事件都几乎必然发生，则它们同时发生也几乎必然"——损失最多是各事件不发生概率的累加。</p>
+<hr />
+<h2 id="_5">七、随机抽样与随机分配<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<h3 id="71">7.1 排列与组合<a class="headerlink" href="#71" title="Permanent link">&para;</a></h3>
+<p>排列与组合的基本计数公式：
+1. <span class="arithmatex">\(n\)</span> 个对象的排列数：<span class="arithmatex">\(n!\)</span>；
+2. <span class="arithmatex">\(n\)</span> 个对象中取 <span class="arithmatex">\(k\)</span> 个对象的排列数：<span class="arithmatex">\(P_n^k = \dfrac{n!}{(n-k)!}\)</span>；
+3. <span class="arithmatex">\(n\)</span> 个对象中取 <span class="arithmatex">\(k\)</span> 个对象的组合数：<span class="arithmatex">\(\dbinom{n}{k} = \dfrac{n!}{k!(n-k)!}\)</span>。</p>
+<p><strong>讨论</strong>：在含有 <span class="arithmatex">\(M\)</span> 个不同球的箱子中抽取 <span class="arithmatex">\(n\)</span> 个球的不同方法，课件给出三个生活化场景帮助区分排列与组合：
+- 雨课堂点名（抽取并区分先后/身份 → 排列）；
+- 选班长、副班长（选出的人职位不同 → 排列）；
+- 一二九大合唱（只要选出一组人，不分次序 → 组合）。</p>
+<h3 id="72">7.2 不同方式的随机抽样<a class="headerlink" href="#72" title="Permanent link">&para;</a></h3>
+<p><strong>有放回抽样与无放回抽样</strong>：
+- 如果每次将抽到的球在下一次抽球前放回箱子中，则试验称做<strong>放回抽样</strong>。这时，由 <span class="arithmatex">\(n\)</span> 个球形成的每一个样本可以表示为向量 <span class="arithmatex">\((a_1, \ldots, a_n)\)</span>，其中 <span class="arithmatex">\(a_i\)</span>（<span class="arithmatex">\(i = 1, \ldots, n\)</span>）是第 <span class="arithmatex">\(i\)</span> 次抽到的球的编号。易见，对于放回抽样，每个 <span class="arithmatex">\(a_i\)</span> 可以是 <span class="arithmatex">\(\lbrace 1, 2, \ldots, M \rbrace\)</span> 中的任何一个数。
+- 假设 <span class="arithmatex">\(n \leq M\)</span>，且凡是抽到的球都不再放回，则试验称做<strong>无放回抽样</strong>。</p>
+<p><strong>有序抽样和无序抽样</strong>：样本空间的描述，本质上与如下情形有关：诸如 <span class="arithmatex">\((4,1,2,1)\)</span> 和 <span class="arithmatex">\((1,4,2,1)\)</span>，是认为是"不同的基本事件"，还是"同一基本事件"。因此，习惯上区分两种情形：
+- 对<strong>有序抽样</strong>，由相同元素组成的两个样本，只要其中元素的前后顺序有所不同，就视为"不同"的样本。
+- 对<strong>无序抽样</strong>，不管元素的顺序，只要由相同元素组成的样本，都视为"同一"样本。
+- 为强调具体的样本属于哪一种，对有序样本，使用记号 <span class="arithmatex">\((a_1, \ldots, a_n)\)</span>，而无序样本则记作 <span class="arithmatex">\([a_1, \ldots, a_n]\)</span>。</p>
+<blockquote>
+<p>[!EXAMPLE]- 例题 2：<span class="arithmatex">\(M = 3\)</span>，<span class="arithmatex">\(n = 2\)</span> 时四种抽样的基本事件列表</p>
+<p>自含有 <span class="arithmatex">\(M\)</span> 个球的箱子中作 <span class="arithmatex">\(n\)</span> 次抽样（<span class="arithmatex">\(M = 3\)</span>，<span class="arithmatex">\(n = 2\)</span>），相应基本事件的结构列表如下：</p>
+<table>
+<thead>
+<tr>
+<th>抽样方式</th>
+<th>有序/无序</th>
+<th>基本事件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>放回</td>
+<td>有序</td>
+<td><span class="arithmatex">\((i,j)\)</span>，<span class="arithmatex">\(i,j = 1,2,3\)</span>（共 <span class="arithmatex">\(9\)</span> 个）</td>
+</tr>
+<tr>
+<td>放回</td>
+<td>无序</td>
+<td><span class="arithmatex">\([1,1],[2,2],[3,3],[1,2],[1,3],[2,3]\)</span>（共 <span class="arithmatex">\(6\)</span> 个）</td>
+</tr>
+<tr>
+<td>不放回</td>
+<td>有序</td>
+<td><span class="arithmatex">\((1,2),(2,1),(1,3),(3,1),(2,3),(3,2)\)</span>（共 <span class="arithmatex">\(6\)</span> 个）</td>
+</tr>
+<tr>
+<td>不放回</td>
+<td>无序</td>
+<td><span class="arithmatex">\([1,2],[1,3],[2,3]\)</span>（共 <span class="arithmatex">\(3\)</span> 个）</td>
+</tr>
+</tbody>
+</table>
+<p>（注：个数为补全的核对，分别对应 <span class="arithmatex">\(M^n = 9\)</span>、<span class="arithmatex">\(\binom{M+n-1}{n} = \binom{4}{2} = 6\)</span>、<span class="arithmatex">\(P_M^n = 6\)</span>、<span class="arithmatex">\(\binom{M}{n} = 3\)</span>。）</p>
+</blockquote>
+<h3 id="73">7.3 随机抽样的样本空间与计数<a class="headerlink" href="#73" title="Permanent link">&para;</a></h3>
+<p><strong>1. 有放回抽样</strong></p>
+<p><strong>1.1 放回有序抽样</strong>：样本空间 <span class="arithmatex">\(\Omega\)</span> 具有如下构造：</p>
+<div class="arithmatex">\[\Omega = \lbrace \omega : \omega = (a_1, \ldots, a_n),\quad a_i \in \lbrace 1, 2, \ldots, M \rbrace \rbrace\]</div>
+<p>且 <span class="arithmatex">\(\#(\Omega) = M^n\)</span>。</p>
+<p><strong>1.2 放回无序抽样</strong>：样本空间 <span class="arithmatex">\(\Omega\)</span> 具有如下构造：</p>
+<div class="arithmatex">\[\Omega = \lbrace \omega : \omega = [a_1, \ldots, a_n],\quad a_i \in \lbrace 1, 2, \ldots, M \rbrace \rbrace\]</div>
+<p>且 <span class="arithmatex">\(\#(\Omega) = \dbinom{M+n-1}{n}\)</span>。</p>
+<p><strong>2. 无放回抽样</strong></p>
+<p><strong>2.1 不放回有序抽样</strong>：样本空间 <span class="arithmatex">\(\Omega\)</span> 具有如下构造：</p>
+<div class="arithmatex">\[\Omega = \lbrace \omega : \omega = (a_1, \ldots, a_n),\quad a_k \neq a_l,\ k \neq l,\ a_i \in \lbrace 1, 2, \ldots, M \rbrace \rbrace\]</div>
+<p>且 <span class="arithmatex">\(\#(\Omega) = M(M-1) \cdots (M-n+1) = P_M^n\)</span>。</p>
+<p><strong>2.2 不放回无序抽样</strong>：样本空间 <span class="arithmatex">\(\Omega\)</span> 具有如下构造：</p>
+<div class="arithmatex">\[\Omega = \lbrace \omega : \omega = [a_1, \ldots, a_n],\quad a_k \neq a_l,\ k \neq l,\ a_i \in \lbrace 1, 2, \ldots, M \rbrace \rbrace\]</div>
+<p>且 <span class="arithmatex">\(\#(\Omega) = \dbinom{M}{n}\)</span>。</p>
+<p><strong>汇总表</strong>（自含有 <span class="arithmatex">\(M\)</span> 个球的箱子中作 <span class="arithmatex">\(n\)</span> 次抽样，不同抽样的总数）：</p>
+<table>
+<thead>
+<tr>
+<th>抽样方式</th>
+<th>有序</th>
+<th>无序</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>放回</td>
+<td><span class="arithmatex">\(M^n\)</span></td>
+<td><span class="arithmatex">\(\dbinom{M+n-1}{n}\)</span></td>
+</tr>
+<tr>
+<td>不放回</td>
+<td><span class="arithmatex">\(P_M^n\)</span></td>
+<td><span class="arithmatex">\(\dbinom{M}{n}\)</span></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>[!WARNING] 辨析</p>
+<p>放回有序、不放回有序、不放回无序三种样本空间中基本事件都是等可能的，可以直接套古典概型；但<strong>放回无序抽样的 <span class="arithmatex">\(\binom{M+n-1}{n}\)</span> 个基本事件不是等可能的</strong>（例如 <span class="arithmatex">\([1,1]\)</span> 只对应一条有序路径，而 <span class="arithmatex">\([1,2]\)</span> 对应两条），用它做古典概型分母会出错。（注：此辨析为根据例题 2 补充的提醒。）</p>
+</blockquote>
+<h3 id="74">7.4 随机抽样与随机分配：按箱分配质点（选修）<a class="headerlink" href="#74" title="Permanent link">&para;</a></h3>
+<p>（不要求，略。）课件大意：将 <span class="arithmatex">\(n\)</span> 个质点（小球）分配到 <span class="arithmatex">\(M\)</span> 个箱子中，与随机抽样一一对应——（有序抽样）<span class="arithmatex">\(\Leftrightarrow\)</span>（质点可以辨）、（无序抽样）<span class="arithmatex">\(\Leftrightarrow\)</span>（质点不可辨）、（放回抽样）<span class="arithmatex">\(\Leftrightarrow\)</span>（箱中可容纳任意多质点，"无抑制"）、（不放回抽样）<span class="arithmatex">\(\Leftrightarrow\)</span>（箱中最多可容纳一个质点，"有抑制"）。此问题产生于统计物理，比如研究 <span class="arithmatex">\(n\)</span> 个粒子（光子、电子等）按 <span class="arithmatex">\(M\)</span> 种状态的分布；课件以 2 个小球分配到 3 个箱子为例列出了全部基本事件。</p>
+<hr />
+<h2 id="_6">八、关于古典概型的补充说明<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<h3 id="81">8.1 古典概型问题小技巧<a class="headerlink" href="#81" title="Permanent link">&para;</a></h3>
+<ul>
+<li>不要失去常识、也不要过分依赖（常识）；</li>
+<li>用最简单情形验证（公式或答案）；</li>
+<li>将物体编号（即使外观相同，也先视作可辨再计数）；</li>
+<li>情景证明（story proof）：用计数的双重解释证明组合恒等式。</li>
+</ul>
+<h3 id="82">8.2 情景证明的思考题<a class="headerlink" href="#82" title="Permanent link">&para;</a></h3>
+<p>课件给出以下思考题（注：以下证明思路为补全内容，课件仅列出命题）：</p>
+<ul>
+<li><span class="arithmatex">\(\dbinom{m}{n} = \dbinom{m-1}{n-1} + \dbinom{m-1}{n}\)</span>。
+  <strong>思路</strong>：从 <span class="arithmatex">\(m\)</span> 个物体中选 <span class="arithmatex">\(n\)</span> 个，按"是否选第 <span class="arithmatex">\(m\)</span> 个物体"分类：选它则余下从 <span class="arithmatex">\(m-1\)</span> 个中选 <span class="arithmatex">\(n-1\)</span> 个；不选它则从 <span class="arithmatex">\(m-1\)</span> 个中选 <span class="arithmatex">\(n\)</span> 个。</li>
+<li><span class="arithmatex">\(\dbinom{m}{n} = \displaystyle\sum_{k=n-1}^{m-1} \dbinom{k}{n-1}\)</span>。
+  <strong>思路</strong>：按所选 <span class="arithmatex">\(n\)</span> 个物体中<strong>编号最大者</strong>分类：最大编号为 <span class="arithmatex">\(k+1\)</span>（<span class="arithmatex">\(k\)</span> 从 <span class="arithmatex">\(n-1\)</span> 到 <span class="arithmatex">\(m-1\)</span>）时，其余 <span class="arithmatex">\(n-1\)</span> 个须从前 <span class="arithmatex">\(k\)</span> 个中选取，共 <span class="arithmatex">\(\binom{k}{n-1}\)</span> 种。</li>
+<li>证明有放回无序抽样的结论 <span class="arithmatex">\(\dbinom{M+n-1}{n}\)</span>。
+  <strong>思路（隔板法）</strong>：一个无序放回样本由"每个编号被抽中的次数"<span class="arithmatex">\((x_1, \ldots, x_M)\)</span> 唯一决定，<span class="arithmatex">\(x_1 + \cdots + x_M = n\)</span>，<span class="arithmatex">\(x_i \geq 0\)</span> 为整数。把 <span class="arithmatex">\(n\)</span> 个相同的星与 <span class="arithmatex">\(M-1\)</span> 块隔板排成一行，方案数为 <span class="arithmatex">\(\binom{M+n-1}{n}\)</span>。</li>
+<li><strong>（多项式系数）</strong> 有 <span class="arithmatex">\(m\)</span> 个球，其中共 <span class="arithmatex">\(r\)</span> 种不同颜色，同色球不可辨识。这 <span class="arithmatex">\(m\)</span> 个球的排列共有多少种？（等价地，把 <span class="arithmatex">\(m\)</span> 个球放入 <span class="arithmatex">\(r\)</span> 个盒子中，使得 <span class="arithmatex">\(m_j\)</span> 个球进入第 <span class="arithmatex">\(j\)</span> 个盒子？）
+  <strong>思路</strong>：先把 <span class="arithmatex">\(m\)</span> 个球视为可辨共 <span class="arithmatex">\(m!\)</span> 种排列，同色（第 <span class="arithmatex">\(j\)</span> 色共 <span class="arithmatex">\(m_j\)</span> 个）内部的 <span class="arithmatex">\(m_j!\)</span> 种交换不产生新排列，故共</li>
+</ul>
+<div class="arithmatex">\[\frac{m!}{m_1! \, m_2! \cdots m_r!} = \binom{m}{m_1, m_2, \ldots, m_r}\]</div>
+<hr />
+<h2 id="_7">九、小结<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<p><strong>知识点</strong>：
+- 概念：试验、事件、样本空间、概率（含概率的公理化定义）；
+- 经典概率模型：古典概型、几何概型；
+- 概率的性质（利用公理推演得到）及证明：有限、可列；等式、不等式；
+- 随机抽样方式：有放回与无放回、有序与无序。</p>
+<p><strong>技巧</strong>：
+- 注意定义的明确性（e.g. 样本空间、等可能——Bertrand 悖论的教训）；
+- 一些小的技巧，直观化、简单化（e.g. 情景证明、应用 <span class="arithmatex">\(e^x\)</span> 的 Taylor 展开公式进行近似）；
+- 根据概率公理 (3) 的条件需求，拆成互斥集合；归纳法；求补。（本节课主要工具）</p>
+<hr />
+<h2 id="_8">本讲方法/题型清单<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>判断样本空间怎么取</strong> → 看清关心的量是什么 → 既要包含足够细节（如收益依赖顺序时要记录整个序列），又避免冗余（只依赖次数时记次数即可）。</li>
+<li><strong>有限等可能结果求概率</strong> → 古典概型 → 确定 <span class="arithmatex">\(\Omega\)</span> 并核对等可能；数出 <span class="arithmatex">\(A\)</span> 中结果数；<span class="arithmatex">\(\mathbb{P}(A) = \#A / \#\Omega\)</span>。</li>
+<li><strong>连续区域上均匀的概率</strong> → 几何概型 → 写出 <span class="arithmatex">\(\Omega \subset \mathbb{R}^r\)</span>；把事件翻译为子区域（常画图）；<span class="arithmatex">\(\mathbb{P}(A) = m(A)/m(\Omega)\)</span>，算长度/面积/体积之比。</li>
+<li><strong>题目说"随机取……"但机制含糊</strong> → 警惕 Bertrand 悖论 → 先明确什么量在什么集合上均匀，不同假设答案不同。</li>
+<li><strong>求并集概率</strong> → 两个事件用加法公式 <span class="arithmatex">\(\mathbb{P}(A \cup B) = \mathbb{P}(A) + \mathbb{P}(B) - \mathbb{P}(A \cap B)\)</span>；多个事件用容斥恒等式；只要上界用 Boole 不等式或 Kounias 不等式；只要下界用 Bonferroni 不等式。</li>
+<li><strong>求"至少/都不/同时"型概率</strong> → 求补技巧（性质 3）→ <span class="arithmatex">\(\mathbb{P}(A) = 1 - \mathbb{P}(A^c)\)</span>；交事件下界用性质 9。</li>
+<li><strong>证明概率等式/不等式</strong> → 从公理出发 → 拆成互斥集合（<span class="arithmatex">\(B_n = A_n \setminus \bigcup_{i&lt;n} A_i\)</span> 不相交化）、塞空集退化到有限、求补转化、再用可列可加与单调性。</li>
+<li><strong>计数抽样问题</strong> → 先判定"放回/不放回 × 有序/无序" → 对应 <span class="arithmatex">\(M^n\)</span>、<span class="arithmatex">\(P_M^n\)</span>、<span class="arithmatex">\(\binom{M}{n}\)</span>、<span class="arithmatex">\(\binom{M+n-1}{n}\)</span>；注意放回无序的基本事件不等可能，不能直接当古典概型分母。</li>
+<li><strong>证明组合恒等式</strong> → 情景证明（story proof）→ 给等式两边找同一个计数问题的两种数法（按某元素是否入选、按最大编号分类、隔板法等）。</li>
+</ul>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "navigation.indexes", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

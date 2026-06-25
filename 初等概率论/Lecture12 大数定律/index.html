@@ -1,0 +1,2675 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="清华统计课程笔记">
+      
+      
+      
+        <link rel="canonical" href="https://Sonnette51.github.io/stat_notes_sonnette/%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture12%20%E5%A4%A7%E6%95%B0%E5%AE%9A%E5%BE%8B/">
+      
+      
+        <link rel="prev" href="../Lecture11%20%E6%A6%82%E7%8E%87%E6%AF%8D%E5%87%BD%E6%95%B0%E3%80%81%E7%9F%A9%E6%AF%8D%E5%87%BD%E6%95%B0%E3%80%81%E7%89%B9%E5%BE%81%E5%87%BD%E6%95%B0/">
+      
+      
+        <link rel="next" href="../Lecture13%20%E4%B8%AD%E5%BF%83%E6%9E%81%E9%99%90%E5%AE%9A%E7%90%86%E3%80%81%E6%94%B6%E6%95%9B%E6%80%A7/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Lecture12 大数定律 - Sonnette's Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#lecture12" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="Sonnette&#39;s Notes" class="md-header__button md-logo" aria-label="Sonnette's Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Sonnette's Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Lecture12 大数定律
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  数据科学编程
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  初等概率论
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Sonnette&#39;s Notes" class="md-nav__button md-logo" aria-label="Sonnette's Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Sonnette's Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据科学编程
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数据科学编程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/NumPy%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NumPy 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/Pandas%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pandas 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/Database%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/LLM%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LLM 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/MiningWebData%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mining Web Data 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/TextProcessing%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Text Processing 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/DataVisualization%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Visualization 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/Advanced%20Visualization%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Advanced Visualization 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    初等概率论
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    初等概率论
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture01%20%E6%A6%82%E7%8E%87%E6%A8%A1%E5%9E%8B%E4%B8%8E%E6%80%A7%E8%B4%A8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture01 概率模型与性质
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture02%20%E6%A6%82%E7%8E%87%E7%A9%BA%E9%97%B4%E3%80%81%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture02 概率空间、条件概率
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture03%20%E7%8B%AC%E7%AB%8B%E6%80%A7%E3%80%81%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture03 独立性、随机变量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture04%20%E5%B8%B8%E8%A7%81%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture04 常见随机变量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture05%20%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0%E3%80%81%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E5%87%BD%E6%95%B0%E7%9A%84%E5%88%86%E5%B8%83%E3%80%81%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E7%9A%84%E5%88%86%E5%B8%83%28I%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture05 概率分布函数、随机变量函数的分布、随机向量的分布(I)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture06%20%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E7%9A%84%E5%88%86%E5%B8%83%28II%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture06 随机向量的分布(II)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture07%20%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E5%87%BD%E6%95%B0%E7%9A%84%E5%88%86%E5%B8%83%E3%80%81%E6%AC%A1%E5%BA%8F%E7%BB%9F%E8%AE%A1%E9%87%8F%E3%80%81p%E5%88%86%E4%BD%8D%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture07 随机向量函数的分布、次序统计量、p分位数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture08%20%E6%9C%9F%E6%9C%9B%E3%80%81%E6%96%B9%E5%B7%AE%E3%80%81%E7%9B%B8%E5%85%B3%E4%B8%8D%E7%AD%89%E5%BC%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture08 期望、方差、相关不等式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture09%20%E6%9D%A1%E4%BB%B6%E6%9C%9F%E6%9C%9B%E3%80%81%E6%9D%A1%E4%BB%B6%E6%96%B9%E5%B7%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture09 条件期望、条件方差
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture10%20%E5%8D%8F%E6%96%B9%E5%B7%AE%E3%80%81%E7%9B%B8%E5%85%B3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture10 协方差、相关
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture11%20%E6%A6%82%E7%8E%87%E6%AF%8D%E5%87%BD%E6%95%B0%E3%80%81%E7%9F%A9%E6%AF%8D%E5%87%BD%E6%95%B0%E3%80%81%E7%89%B9%E5%BE%81%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture11 概率母函数、矩母函数、特征函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture12 大数定律
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture12 大数定律
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        写在前面：这讲在讲什么？
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、引入：疫苗有效性问题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、引入：疫苗有效性问题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 现实背景
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 概率建模
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 模拟观察
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wlln" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、基本定理：弱大数定律（WLLN）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、基本定理：弱大数定律（WLLN）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 定理内容
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 定理证明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 结合切比雪夫不等式：样本量计算
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、理论深化
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、理论深化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 条件"独立同分布"可放宽
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 条件"方差有限"可放宽
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#slln" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、强大数定律（SLLN）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="四、强大数定律（SLLN）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 "依概率收敛"是什么意思？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 "几乎处处收敛"是什么意思？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 两种收敛的关系
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 强大数定律的内容
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5 强弱大数定律的直观区别
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#46" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.6 理论例：体现强弱大数定律的区别
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aside" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、收敛模式补充（Aside，针对一般随机变量序列）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="五、收敛模式补充（Aside，针对一般随机变量序列）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 两种收敛的等价刻画
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 蕴含关系
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 经典习题：收敛的运算封闭性
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、经典应用
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="六、经典应用">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 频率与概率
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 经验分布
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 蒙特卡洛方法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4 理论拓展与前沿应用
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七、课堂小结
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="七、课堂小结">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 课程重点
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 课程启示
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 考纲要求（掌握）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#74" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.4 常见疑问
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture13%20%E4%B8%AD%E5%BF%83%E6%9E%81%E9%99%90%E5%AE%9A%E7%90%86%E3%80%81%E6%94%B6%E6%95%9B%E6%80%A7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture13 中心极限定理、收敛性
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture14%20%E5%A4%9A%E5%85%83%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture14 多元正态分布
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%9C%9F%E6%9C%AB%E8%AE%B0%E5%BF%86%E8%A6%81%E7%82%B9%E6%B1%87%E6%80%BB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 期末记忆要点汇总
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A8%A1%E5%9D%971%20%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E7%9A%84%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块1 随机向量的函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A8%A1%E5%9D%972%20%E6%AC%A1%E5%BA%8F%E7%BB%9F%E8%AE%A1%E9%87%8F%E4%B8%8Ep-%E5%88%86%E4%BD%8D%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块2 次序统计量与p-分位数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A8%A1%E5%9D%973%20%E6%9C%9F%E6%9C%9B%E4%B8%8E%E6%96%B9%E5%B7%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块3 期望与方差
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A8%A1%E5%9D%974%20%E6%9D%A1%E4%BB%B6%E6%9C%9F%E6%9C%9B%E3%80%81%E5%8D%8F%E6%96%B9%E5%B7%AE%E4%B8%8E%E4%B8%8D%E7%AD%89%E5%BC%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块4 条件期望、协方差与不等式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A8%A1%E5%9D%975%20%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0%E4%B8%8E%E7%89%B9%E5%BE%81%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块5 生成函数与特征函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A8%A1%E5%9D%976%20%E6%94%B6%E6%95%9B%E6%80%A7%E3%80%81%E5%A4%A7%E6%95%B0%E5%BE%8B%E4%B8%8E%E4%B8%AD%E5%BF%83%E6%9E%81%E9%99%90%E5%AE%9A%E7%90%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块6 收敛性、大数律与中心极限定理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A8%A1%E5%9D%977%20%E5%A4%9A%E5%85%83%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块7 多元正态分布
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        写在前面：这讲在讲什么？
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、引入：疫苗有效性问题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、引入：疫苗有效性问题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 现实背景
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 概率建模
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 模拟观察
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wlln" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、基本定理：弱大数定律（WLLN）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、基本定理：弱大数定律（WLLN）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 定理内容
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 定理证明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 结合切比雪夫不等式：样本量计算
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、理论深化
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、理论深化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 条件"独立同分布"可放宽
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 条件"方差有限"可放宽
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#slln" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、强大数定律（SLLN）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="四、强大数定律（SLLN）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 "依概率收敛"是什么意思？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 "几乎处处收敛"是什么意思？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 两种收敛的关系
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 强大数定律的内容
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5 强弱大数定律的直观区别
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#46" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.6 理论例：体现强弱大数定律的区别
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aside" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、收敛模式补充（Aside，针对一般随机变量序列）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="五、收敛模式补充（Aside，针对一般随机变量序列）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 两种收敛的等价刻画
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 蕴含关系
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 经典习题：收敛的运算封闭性
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、经典应用
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="六、经典应用">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 频率与概率
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 经验分布
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 蒙特卡洛方法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4 理论拓展与前沿应用
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七、课堂小结
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="七、课堂小结">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 课程重点
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 课程启示
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 考纲要求（掌握）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#74" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.4 常见疑问
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="lecture12">Lecture12 大数定律<a class="headerlink" href="#lecture12" title="Permanent link">&para;</a></h1>
+<h2 id="_1">写在前面：这讲在讲什么？<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>在之前的课里，我们学过随机变量 <span class="arithmatex">\(X\)</span> 的<strong>期望</strong> <span class="arithmatex">\(EX\)</span>——它代表总体的"平均水平"。但 <span class="arithmatex">\(EX\)</span> 是一个理论上的数，在现实中我们无法直接观测到全体人群，只能随机抽一些人来测量，得到<strong>样本均值</strong>。</p>
+<p>这讲的核心问题只有一个：</p>
+<blockquote>
+<p><strong>用样本均值来估计总体均值，可靠吗？</strong></p>
+</blockquote>
+<p>大数定律（Law of Large Numbers，LLN）给出了肯定的回答，并精确刻画了"样本量 <span class="arithmatex">\(n\)</span> 越大，样本均值越接近总体均值"这一现象。</p>
+<p><strong>课程地位</strong>：大数定律是统计推断（用样本认识总体）的理论基础，也是蒙特卡洛方法、经验分布等重要工具的依据。</p>
+<hr />
+<h2 id="_2">一、引入：疫苗有效性问题<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="11">1.1 现实背景<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
+<p>疫苗研发需要做临床试验，评估安全性和有效性。我们不可能对全体人群都接种，只能随机招募 <span class="arithmatex">\(n\)</span> 位受试者。问题是：</p>
+<p><strong>能否通过 <span class="arithmatex">\(n\)</span> 位受试者（样本）来了解整个人群（总体）的有效性？</strong></p>
+<h3 id="12">1.2 概率建模<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
+<p>随机招入 <span class="arithmatex">\(n\)</span> 位受试者，定义随机变量：</p>
+<div class="arithmatex">\[X_i = \begin{cases} 1, &amp; \text{疫苗对第 } i \text{ 人有效（概率为 } p \text{）} \\ 0, &amp; \text{疫苗对第 } i \text{ 人无效（概率为 } 1-p \text{）} \end{cases}\]</div>
+<p>由于受试者是<strong>随机</strong>招入的，<span class="arithmatex">\(X_1, X_2, \ldots, X_n\)</span> 是<strong>独立同分布（i.i.d.）</strong>的随机变量。</p>
+<ul>
+<li><strong>总体均值</strong>（我们想知道但未知的）：<span class="arithmatex">\(p = EX_1\)</span></li>
+<li><strong>样本均值</strong>（我们能计算的）：<span class="arithmatex">\(M_n = \dfrac{1}{n}\displaystyle\sum_{i=1}^{n} X_i\)</span></li>
+</ul>
+<p><strong>知识点关联</strong>：这个问题体现了概率论的核心演进路径：</p>
+<div class="arithmatex">\[(\Omega, \mathcal{F}, P) \longrightarrow X / \vec{X} \longrightarrow EX \longrightarrow X_n \to ?\]</div>
+<p>从概率空间，到随机变量，到数字特征（期望），到<strong>随机变量序列的极限</strong>——大数定律就是研究这最后一步的。</p>
+<h3 id="13">1.3 模拟观察<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
+<p>用 <span class="arithmatex">\(p = 0.5\)</span> 的硬币做模拟实验，可以看到：当 <span class="arithmatex">\(n\)</span> 很小时，样本均值 <span class="arithmatex">\(M_n\)</span> 波动很大；随着 <span class="arithmatex">\(n\)</span> 增大，<span class="arithmatex">\(M_n\)</span> 越来越稳定地靠近 <span class="arithmatex">\(0.5 = EX_1\)</span>。大数定律就是这个现象的数学化。</p>
+<hr />
+<h2 id="wlln">二、基本定理：弱大数定律（WLLN）<a class="headerlink" href="#wlln" title="Permanent link">&para;</a></h2>
+<h3 id="21">2.1 定理内容<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>[!NOTE] 定理 1.1（弱大数定律，Weak Law of Large Numbers，WLLN）</p>
+<p>设 <span class="arithmatex">\({X_n}\)</span> 是<strong>独立同分布</strong>的随机变量序列，且 <span class="arithmatex">\(\mathrm{Var}(X_1) &lt; \infty\)</span>（方差有限），则对任意给定的 <span class="arithmatex">\(\varepsilon &gt; 0\)</span>，</p>
+<div class="arithmatex">\[\lim_{n \to \infty} \mathbb{P}\left(\left|\frac{1}{n}\sum_{i=1}^{n} X_i - EX_1\right| \geq \varepsilon\right) = 0\]</div>
+<p>也称 <span class="arithmatex">\(\dfrac{1}{n}\displaystyle\sum_{k=1}^{n} X_k\)</span> <strong>依概率收敛</strong>到 <span class="arithmatex">\(EX_1\)</span>，记作</p>
+<div class="arithmatex">\[\frac{1}{n}\sum_{k=1}^{n} X_k \xrightarrow{p} EX_1\]</div>
+</blockquote>
+<p><strong>白话解读</strong>：当 <span class="arithmatex">\(n\)</span> 很大时，我们有很大的把握（但非 100%）断言样本均值 <span class="arithmatex">\(\dfrac{1}{n}\sum X_i\)</span> 与总体均值 <span class="arithmatex">\(EX_1\)</span> 之差的绝对值小于任意小的 <span class="arithmatex">\(\varepsilon\)</span>。换言之，样本均值偏离总体均值很多的概率趋于零。</p>
+<p><strong>大数定律的哲学意义</strong>：它是"连接偶然性与必然性的桥梁"——单次实验结果（<span class="arithmatex">\(X_i\)</span>）是偶然的，但大量重复之后，平均结果（<span class="arithmatex">\(M_n\)</span>）趋向必然（<span class="arithmatex">\(EX_1\)</span>）。</p>
+<h3 id="22">2.2 定理证明<a class="headerlink" href="#22" title="Permanent link">&para;</a></h3>
+<p><strong>前提条件</strong>：<span class="arithmatex">\({X_n}\)</span> 独立同分布，<span class="arithmatex">\(\mathrm{Var}(X_1) &lt; \infty\)</span>。</p>
+<p><strong>目标</strong>：证明对 <span class="arithmatex">\(\forall \varepsilon &gt; 0\)</span>，<span class="arithmatex">\(\lim_{n\to\infty} \mathbb{P}\left(\left|\frac{1}{n}\sum_{i=1}^n X_i - EX_1\right| \geq \varepsilon\right) = 0\)</span>。</p>
+<p><strong>关键工具——切比雪夫不等式</strong>（复习）：</p>
+<blockquote>
+<p>对随机变量 <span class="arithmatex">\(X\)</span> 和 <span class="arithmatex">\(\varepsilon &gt; 0\)</span>： $<span class="arithmatex">\(\mathbb{P}(|X - EX| \geq \varepsilon) \leq \frac{\mathrm{Var}(X)}{\varepsilon^2}\)</span>$</p>
+</blockquote>
+<p><strong>证明步骤</strong>：</p>
+<p><strong>第一步</strong>：注意到（因为 <span class="arithmatex">\({X_n}\)</span> 同分布，各 <span class="arithmatex">\(X_i\)</span> 期望相同均为 <span class="arithmatex">\(EX_1\)</span>）： $<span class="arithmatex">\(E\left(\frac{1}{n}\sum_{i=1}^n X_i\right) = \frac{1}{n} \cdot n \cdot EX_1 = EX_1\)</span>$</p>
+<p>所以： $<span class="arithmatex">\(\mathbb{P}\left(\left|\frac{1}{n}\sum_{i=1}^n X_i - EX_1\right| \geq \varepsilon\right) = \mathbb{P}\left(\left|\frac{1}{n}\sum_{i=1}^n X_i - E\left(\frac{1}{n}\sum_{i=1}^n X_i\right)\right| \geq \varepsilon\right)\)</span>$</p>
+<p><strong>第二步</strong>：对随机变量 <span class="arithmatex">\(\dfrac{1}{n}\sum_{i=1}^n X_i\)</span> 应用切比雪夫不等式： $<span class="arithmatex">\(\leq \frac{\mathrm{Var}\left(\frac{1}{n}\sum_{i=1}^n X_i\right)}{\varepsilon^2}\)</span>$</p>
+<p><strong>第三步</strong>：计算方差。由于 <span class="arithmatex">\({X_n}\)</span> <strong>独立同分布</strong>： $<span class="arithmatex">\(\mathrm{Var}\left(\frac{1}{n}\sum_{i=1}^n X_i\right) = \frac{1}{n^2}\sum_{i=1}^n \mathrm{Var}(X_i) = \frac{1}{n^2} \cdot n \cdot \mathrm{Var}(X_1) = \frac{\mathrm{Var}(X_1)}{n}\)</span>$</p>
+<p>（这里用到了独立变量方差可加，以及同分布方差相同。）</p>
+<p><strong>第四步</strong>：合并，得到： $<span class="arithmatex">\(\mathbb{P}\left(\left|\frac{1}{n}\sum_{i=1}^n X_i - EX_1\right| \geq \varepsilon\right) \leq \frac{\mathrm{Var}(X_1)}{n\varepsilon^2} \xrightarrow{n \to +\infty} 0\)</span>$</p>
+<p>因为 <span class="arithmatex">\(\mathrm{Var}(X_1) &lt; \infty\)</span>，分母趋于无穷，故极限为 0。证毕。✓</p>
+<p><strong>常见疑问</strong>：为什么第一步要把 <span class="arithmatex">\(EX_1\)</span> 换成 <span class="arithmatex">\(E\left(\frac{1}{n}\sum X_i\right)\)</span>？因为切比雪夫不等式的形式是 <span class="arithmatex">\(\mathbb{P}(|X - EX| \geq \varepsilon)\)</span>，要让等式左边的形式凑成这个样子，就需要将 <span class="arithmatex">\(EX_1\)</span> 换写成样本均值自身的期望。由同分布条件二者相等，故这步替换是合法的。</p>
+<h3 id="23">2.3 结合切比雪夫不等式：样本量计算<a class="headerlink" href="#23" title="Permanent link">&para;</a></h3>
+<p><strong>例 1.1（接上述疫苗问题）</strong></p>
+<p>需要多少样本量，才能保证"误差大于 3% 的概率不超过 5%"？</p>
+<p><strong>目标</strong>：<span class="arithmatex">\(\mathbb{P}(|M_n - p| \geq 0.03) \leq 0.05\)</span>。</p>
+<p>由证明过程知： $<span class="arithmatex">\(\mathbb{P}(|M_n - p| \geq 0.03) \leq \frac{\mathrm{Var}(X_1)}{n \cdot (0.03)^2}\)</span>$</p>
+<p>对 <span class="arithmatex">\(X_i \sim B(1, p)\)</span>，有 <span class="arithmatex">\(\mathrm{Var}(X_1) = p(1-p)\)</span>。</p>
+<p>利用 <span class="arithmatex">\(p(1-p) \leq \dfrac{1}{4}\)</span>（对任意 <span class="arithmatex">\(p \in [0,1]\)</span> 成立，在 <span class="arithmatex">\(p=0.5\)</span> 时取等），可以在不知道 <span class="arithmatex">\(p\)</span> 真实值的情况下给出保守上界：</p>
+<div class="arithmatex">\[\frac{\mathrm{Var}(X_1)}{n \cdot (0.03)^2} \leq \frac{1}{4n(0.03)^2} \leq 0.05\]</div>
+<p>解不等式： $<span class="arithmatex">\(n \geq \frac{1}{4 \times (0.03)^2 \times 0.05} = \frac{1}{0.00018} \approx 5556\)</span>$</p>
+<p><strong>结论</strong>：取 <span class="arithmatex">\(n = 5556\)</span> 人即可保证目标成立。</p>
+<hr />
+<h2 id="_3">三、理论深化<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h3 id="31">3.1 条件"独立同分布"可放宽<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
+<p>定理 1.1 要求 <span class="arithmatex">\({X_n}\)</span> 独立同分布，这个条件可以放宽。从最一般到最严格，条件的层次如下：</p>
+<table>
+<thead>
+<tr>
+<th>条件层次</th>
+<th>对应结论</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>无任何约束</td>
+<td>大数定律不一定成立</td>
+</tr>
+<tr>
+<td><strong>马尔可夫条件</strong>：<span class="arithmatex">\(\mathrm{Var}\left(\frac{1}{n}\sum_{k=1}^n X_k\right) \to 0\)</span></td>
+<td><span class="arithmatex">\(\Rightarrow\)</span> 大数定律（<strong>马尔可夫大数定律</strong>）</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\({X_n}\)</span> 独立同分布（i.i.d.）（定理 1.1 的条件）</td>
+<td><span class="arithmatex">\(\Rightarrow\)</span> 上面的马尔可夫条件 <span class="arithmatex">\(\Rightarrow\)</span> 大数定律</td>
+</tr>
+</tbody>
+</table>
+<p><strong>关键点</strong>：我们证明 WLLN 的核心一步就是：<span class="arithmatex">\(\mathrm{Var}\left(\frac{1}{n}\sum X_k\right) = \frac{\mathrm{Var}(X_1)}{n} \to 0\)</span>。独立同分布是一个<strong>充分条件</strong>，但不是必要条件；只要方差之和被 <span class="arithmatex">\(n\)</span> 压制（即马尔可夫条件），大数定律就成立。</p>
+<h3 id="32">3.2 条件"方差有限"可放宽<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
+<p>定理 1.1 还要求 <span class="arithmatex">\(\mathrm{Var}(X_1) &lt; \infty\)</span>，这个条件也可以放宽：</p>
+<div class="arithmatex">\[\mathrm{Var}(X_1) &lt; \infty \implies E|X_1| &lt; \infty \implies n\mathbb{P}(|X_1| \geq n) \to 0\]</div>
+<p>（注意这是<strong>蕴含</strong>关系，箭头方向是从强到弱。）</p>
+<p>因此，在 i.i.d. 条件下：</p>
+<blockquote>
+<p>[!NOTE] 定理 1.1 扩展版 a（辛钦大数定律，Khinchin LLN）</p>
+<p>设 <span class="arithmatex">\({X_n}\)</span> 是 i.i.d.，且 <span class="arithmatex">\(E|X_1| &lt; \infty\)</span>（期望存在有限），则 $<span class="arithmatex">\(\frac{1}{n}\sum_{k=1}^n X_k \xrightarrow{p} EX_1\)</span>$</p>
+</blockquote>
+<p>辛钦（Khinchin，1894–1959，苏联数学家）将条件从"方差有限"减弱到"期望有限"。</p>
+<blockquote>
+<p>[!NOTE] 定理 1.1 扩展版 b（最一般的 WLLN）　（不要求掌握）</p>
+<p>设 <span class="arithmatex">\({X_n}\)</span> 是 i.i.d.，则存在实数列 <span class="arithmatex">\({a_n}\)</span> 使得 <span class="arithmatex">\(\dfrac{1}{n}\sum X_k - a_n \xrightarrow{p} 0\)</span> 的<strong>充要条件</strong>是 <span class="arithmatex">\(n\mathbb{P}(|X_1| \geq n) \to 0\)</span>。此时可取 <span class="arithmatex">\(a_n = E(X_1 I_{{|X_1| &lt; n}})\)</span>。</p>
+</blockquote>
+<hr />
+<h2 id="slln">四、强大数定律（SLLN）<a class="headerlink" href="#slln" title="Permanent link">&para;</a></h2>
+<h3 id="41">4.1 "依概率收敛"是什么意思？<a class="headerlink" href="#41" title="Permanent link">&para;</a></h3>
+<p>在讨论强弱大数定律的区别之前，先理解两种收敛模式。</p>
+<p><strong>定义 1.1（依概率收敛）</strong>：如果对 <span class="arithmatex">\(\forall \varepsilon &gt; 0\)</span>，有 $<span class="arithmatex">\(\lim_{n\to\infty} \mathbb{P}(|Y_n - Y| \geq \varepsilon) = 0\)</span>$ 则称 <span class="arithmatex">\(Y_n\)</span> <strong>依概率收敛</strong>到 <span class="arithmatex">\(Y\)</span>，记作 <span class="arithmatex">\(Y_n \xrightarrow{p} Y\)</span>。</p>
+<p>等价条件：令 <span class="arithmatex">\(A_n = {|Y_n - Y| &lt; \varepsilon}\)</span>，则依概率收敛 <span class="arithmatex">\(\Leftrightarrow\)</span> <span class="arithmatex">\(\lim_{n\to\infty} \mathbb{P}(A_n) = 1\)</span>。</p>
+<p><strong>直觉</strong>：固定任意误差范围 <span class="arithmatex">\(\varepsilon\)</span>，当 <span class="arithmatex">\(n\)</span> 足够大时，<span class="arithmatex">\(Y_n\)</span> 落在 <span class="arithmatex">\(Y\)</span> 的 <span class="arithmatex">\(\varepsilon\)</span> 邻域内的概率接近 1。但注意，这是对<strong>每个固定的 <span class="arithmatex">\(n\)</span></strong> 而言的概率，不同的 <span class="arithmatex">\(n\)</span> 对应不同的概率值。</p>
+<h3 id="42">4.2 "几乎处处收敛"是什么意思？<a class="headerlink" href="#42" title="Permanent link">&para;</a></h3>
+<p><strong>定义 1.2（几乎处处收敛 / 以概率 1 收敛）</strong>：如果 $<span class="arithmatex">\(\mathbb{P}\left(\lim_{n\to\infty} Y_n = Y\right) = 1\)</span>$ 则称 <span class="arithmatex">\(Y_n\)</span> <strong>几乎处处收敛</strong>到 <span class="arithmatex">\(Y\)</span>，记作 <span class="arithmatex">\(Y_n \xrightarrow{a.s.} Y\)</span>，或 <span class="arithmatex">\(Y_n \to Y\)</span> a.s.（almost surely）。</p>
+<p>等价条件：<span class="arithmatex">\(\mathbb{P}(\liminf_{n\to\infty} A_n) = 1\)</span>，其中 <span class="arithmatex">\(A_n = {|Y_n - Y| &lt; \varepsilon}\)</span>，即</p>
+<div class="arithmatex">\[\mathbb{P}\left(\bigcup_{n=1}^{\infty}\bigcap_{k=n}^{\infty}{|Y_k - Y| &lt; \varepsilon}\right) = 1\]</div>
+<p><strong>直觉</strong>："几乎处处"意味着对<strong>几乎所有</strong>样本路径 <span class="arithmatex">\(\omega\)</span>（即除了一个概率为 0 的例外集合外），序列 <span class="arithmatex">\(Y_n(\omega)\)</span> 都收敛到 <span class="arithmatex">\(Y(\omega)\)</span>。这是针对<strong>整条轨迹</strong>的要求，比依概率收敛更强。</p>
+<h3 id="43">4.3 两种收敛的关系<a class="headerlink" href="#43" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[Y_n \xrightarrow{a.s.} Y \implies Y_n \xrightarrow{p} Y\]</div>
+<p>即<strong>几乎处处收敛蕴含依概率收敛</strong>，反之不成立（见后面的理论例）。</p>
+<p><strong>证明</strong>（即证明<span class="arithmatex">\(\mathbb{P}(\liminf A_n) = 1\)</span> 能推出 <span class="arithmatex">\(\lim \mathbb{P}(A_n) = 1\)</span>）：</p>
+<div class="arithmatex">\[\mathbb{P}(\liminf_{n\to\infty} A_n) = \mathbb{P}\left(\lim_{n\to\infty}\bigcap_{k=n}^{\infty} A_k\right) = \lim_{n\to\infty}\mathbb{P}\left(\bigcap_{k=n}^{\infty} A_k\right) \leq \lim_{n\to\infty} \mathbb{P}(A_n)\]</div>
+<p>若左边等于 1，则 <span class="arithmatex">\(\lim_{n\to\infty} \mathbb{P}(A_n) \geq 1\)</span>，从而 <span class="arithmatex">\(\lim_{n\to\infty} \mathbb{P}(A_n) = 1\)</span>，即依概率收敛成立。</p>
+<h3 id="44">4.4 强大数定律的内容<a class="headerlink" href="#44" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>[!NOTE] 定理 1.2（强大数定律，Strong Law of Large Numbers，SLLN）</p>
+<p>设 <span class="arithmatex">\({X_n}\)</span> 是<strong>独立同分布</strong>的随机变量序列：</p>
+<p><strong>(1)</strong> 若 <span class="arithmatex">\(E|X_1| &lt; \infty\)</span>，则 $<span class="arithmatex">\(\frac{1}{n}\sum_{k=1}^n X_k \xrightarrow{a.s.} EX_1 \quad \text{（几乎处处收敛）}\)</span>$</p>
+<p><strong>(2)</strong> 反之，若 <span class="arithmatex">\(\dfrac{1}{n}\sum_{k=1}^n X_k \xrightarrow{a.s.} C\)</span> 几乎处处收敛，则 <span class="arithmatex">\(E|X_1| &lt; \infty\)</span> 且 <span class="arithmatex">\(C = EX_1\)</span>。</p>
+<p>即：<strong><span class="arithmatex">\(E|X_1| &lt; \infty\)</span> 是 <span class="arithmatex">\({X_n}\)</span> i.i.d. 下大数定律（a.s. 收敛）成立的充要条件。</strong></p>
+</blockquote>
+<p>几乎处处收敛的直观含义： $<span class="arithmatex">\(\mathbb{P}\left(\lim_{n\to\infty} \frac{1}{n}\sum_{k=1}^n X_k = EX_1\right) = 1\)</span>$</p>
+<p>即样本均值序列（作为一条轨迹）以概率 1 收敛到总体均值。</p>
+<h3 id="45">4.5 强弱大数定律的直观区别<a class="headerlink" href="#45" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>弱大数定律（WLLN）</th>
+<th>强大数定律（SLLN）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>收敛方式</strong></td>
+<td>依概率收敛</td>
+<td>几乎处处收敛</td>
+</tr>
+<tr>
+<td><strong>条件（i.i.d. 下，充要）</strong></td>
+<td>见下方①，比②更弱</td>
+<td>见下方②</td>
+</tr>
+<tr>
+<td><strong>直觉</strong></td>
+<td>采样次数越多，样本均值<strong>接近总体均值的可能性越来越大</strong></td>
+<td>采样次数越多，样本均值<strong>几乎一定渐近接近总体均值</strong></td>
+</tr>
+<tr>
+<td><strong>强弱关系</strong></td>
+<td>弱（SLLN 推出 WLLN，反之不然）</td>
+<td>强</td>
+</tr>
+<tr>
+<td>① WLLN 充要条件：$n\mathbb{P}(</td>
+<td>X_1</td>
+<td>\geq n) \to 0$</td>
+</tr>
+<tr>
+<td>② SLLN 充要条件：$E</td>
+<td>X_1</td>
+<td>&lt; \infty$</td>
+</tr>
+</tbody>
+</table>
+<p>三个条件的蕴含链：<span class="arithmatex">\(\mathrm{Var}(X_1)&lt;\infty \Rightarrow E|X_1|&lt;\infty \Rightarrow n\mathbb{P}(|X_1|\geq n)\to 0\)</span>，越往右越弱。4.6 节的理论例正是满足①但不满足②的情形，即 WLLN 成立、SLLN 不成立。</p>
+<h3 id="46">4.6 理论例：体现强弱大数定律的区别<a class="headerlink" href="#46" title="Permanent link">&para;</a></h3>
+<p><strong>例 1.1</strong>：设 <span class="arithmatex">\({X_n}\)</span> i.i.d.，共同分布为：</p>
+<div class="arithmatex">\[\mathbb{P}(X = m) = \mathbb{P}(X = -m) = \frac{C}{2m^2 \ln m}, \quad m \geq 3\]</div>
+<p>（其中 <span class="arithmatex">\(C\)</span> 为某归一化常数。）则 <span class="arithmatex">\(\bar{X}_n = \frac{1}{n}\sum_{k=1}^n X_k\)</span> <strong>服从弱大数定律，但不服从强大数定律</strong>。</p>
+<p><strong>解</strong>：</p>
+<p><strong>(1) 验证满足弱大数定律</strong>：弱大数定律的充要条件为 <span class="arithmatex">\(\lim_{n\to\infty} n\mathbb{P}(|X| \geq n) = 0\)</span>。</p>
+<div class="arithmatex">\[n\mathbb{P}(|X| \geq n) = n\sum_{m=n}^{\infty} \mathbb{P}(|X| = m) = C \cdot n\sum_{m=n}^{\infty} \frac{1}{m^2\ln m}\]</div>
+<p>用放缩估计（利用 <span class="arithmatex">\(m \ln m \geq \ln n\)</span> 以及对 <span class="arithmatex">\(1/[m(m-1)]\)</span> 的裂项）：</p>
+<div class="arithmatex">\[C \cdot n\sum_{m=n}^{\infty} \frac{1}{m^2\ln m} \leq \frac{C}{\ln n} \cdot n\sum_{m=n}^{\infty}\frac{1}{m^2} \leq \frac{C}{\ln n} \cdot n \cdot \frac{1}{n-1} \to 0\]</div>
+<p>故 <span class="arithmatex">\(\bar{X}_n\)</span> 满足弱大数定律。✓</p>
+<p><strong>(2) 验证不满足强大数定律</strong>：强大数定律的充要条件为 <span class="arithmatex">\(E|X| &lt; \infty\)</span>。但：</p>
+<div class="arithmatex">\[E|X|^+ = E|X|^- = C\sum_{m=3}^{\infty} m \cdot \frac{1}{m^2\ln m} = C\sum_{m=3}^{\infty} \frac{1}{m\ln m} = \infty\]</div>
+<p>（因为 <span class="arithmatex">\(\sum \frac{1}{m\ln m}\)</span> 是发散的调和级数变体。）故 <span class="arithmatex">\(EX\)</span> 不存在，<span class="arithmatex">\(\bar{X}_n\)</span> 不满足强大数定律。✓</p>
+<p><strong>这个例子的意义</strong>：强弱大数定律确实是两个不同的事，存在只满足弱不满足强的情形。</p>
+<hr />
+<h2 id="aside">五、收敛模式补充（Aside，针对一般随机变量序列）<a class="headerlink" href="#aside" title="Permanent link">&para;</a></h2>
+<p>（这部分是对依概率收敛和几乎处处收敛的更系统论述，不局限于大数定律的情形。）</p>
+<h3 id="51">5.1 两种收敛的等价刻画<a class="headerlink" href="#51" title="Permanent link">&para;</a></h3>
+<p>令 <span class="arithmatex">\(A_n = {|Y_n - Y| &lt; \varepsilon}\)</span>，则：</p>
+<div class="arithmatex">\[Y_n \xrightarrow{p} Y \iff \lim_{n\to\infty} \mathbb{P}(A_n) = 1\]</div>
+<div class="arithmatex">\[Y_n \xrightarrow{a.s.} Y \iff \mathbb{P}(\liminf_{n\to\infty} A_n) = 1\]</div>
+<p>其中 <span class="arithmatex">\(\liminf_{n\to\infty} A_n = \bigcup_{n=1}^{\infty}\bigcap_{k=n}^{\infty} A_k\)</span> 的含义是"从某个 <span class="arithmatex">\(n\)</span> 开始，之后所有的 <span class="arithmatex">\(A_k\)</span> 都发生"。</p>
+<p><strong>关键区别</strong>：</p>
+<ul>
+<li>依概率收敛：<span class="arithmatex">\(\lim_{n\to\infty} \mathbb{P}(A_n) = 1\)</span>，是对<strong>每个单独的 <span class="arithmatex">\(n\)</span></strong> 要求概率趋于 1。</li>
+<li>几乎处处收敛：<span class="arithmatex">\(\mathbb{P}(\liminf A_n) = 1\)</span>，是对<strong>整条轨迹</strong>要求以概率 1 最终始终在 <span class="arithmatex">\(\varepsilon\)</span>-邻域内。</li>
+</ul>
+<h3 id="52">5.2 蕴含关系<a class="headerlink" href="#52" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[Y_n \xrightarrow{a.s.} Y \implies Y_n \xrightarrow{p} Y\]</div>
+<p>反之不成立，存在依概率收敛但不几乎处处收敛的例子。（课件提示"反例"存在，未展开。）</p>
+<h3 id="53">5.3 经典习题：收敛的运算封闭性<a class="headerlink" href="#53" title="Permanent link">&para;</a></h3>
+<p><strong>Problem 5.6（依概率收敛的运算性质）</strong></p>
+<p>设 <span class="arithmatex">\(X_n \xrightarrow{p} x\)</span>，<span class="arithmatex">\(Y_n \xrightarrow{p} y\)</span>，<span class="arithmatex">\(c\)</span> 为常数，则以下序列均依概率收敛到对应的极限：</p>
+<table>
+<thead>
+<tr>
+<th>序列</th>
+<th>极限</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(cX_n\)</span></td>
+<td><span class="arithmatex">\(cx\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(X_n + Y_n\)</span></td>
+<td><span class="arithmatex">\(x + y\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\max\{0,\, X_n\}\)</span></td>
+<td><span class="arithmatex">\(\max\{0,\, x\}\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\lvert X_n \rvert\)</span></td>
+<td><span class="arithmatex">\(\lvert x \rvert\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(X_n Y_n\)</span></td>
+<td><span class="arithmatex">\(xy\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>结论</strong>：依概率收敛对加法、数乘、乘法及连续函数运算封闭；连续映射保持依概率收敛。</p>
+<hr />
+<p><strong>Problem 5.13（几乎处处收敛的运算性质）</strong></p>
+<p>设 <span class="arithmatex">\(X_n \xrightarrow{a.s.} a\)</span>，<span class="arithmatex">\(Y_n \xrightarrow{a.s.} b\)</span>，则：
+- <span class="arithmatex">\(X_n + Y_n \xrightarrow{a.s.} a + b\)</span>
+- 若 <span class="arithmatex">\(Y_n\)</span> 不能等于零，则 <span class="arithmatex">\(X_n / Y_n \xrightarrow{a.s.} a/b\)</span></p>
+<p><strong>结论</strong>：几乎处处收敛同样对加法和除法运算封闭（分母非零时），连续映射也保持几乎处处收敛。</p>
+<hr />
+<p><strong>Problem 5.14（比值序列的几乎处处收敛）</strong></p>
+<p>设 <span class="arithmatex">\(X_1, X_2, \ldots\)</span> 与 <span class="arithmatex">\(Y_1, Y_2, \ldots\)</span> 均为独立同分布随机变量序列，各自有有限期望，且 <span class="arithmatex">\(Y_1 + \cdots + Y_n \neq 0\)</span>。令</p>
+<div class="arithmatex">\[Z_n = \frac{X_1 + \cdots + X_n}{Y_1 + \cdots + Y_n}\]</div>
+<p><strong>结论</strong>：<span class="arithmatex">\(Z_n\)</span> 以概率 1 收敛，极限为 <span class="arithmatex">\(\dfrac{EX_1}{EY_1}\)</span>。</p>
+<p><strong>原理</strong>：由强大数定律，分子 <span class="arithmatex">\(\frac{1}{n}\sum X_i \xrightarrow{a.s.} EX_1\)</span>，分母 <span class="arithmatex">\(\frac{1}{n}\sum Y_i \xrightarrow{a.s.} EY_1 \neq 0\)</span>，再由 Problem 5.13 的除法性质即得。这是强大数定律与连续映射定理的典型联合应用。</p>
+<hr />
+<h2 id="_4">六、经典应用<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<h3 id="61">6.1 频率与概率<a class="headerlink" href="#61" title="Permanent link">&para;</a></h3>
+<p><strong>伯努利大数定律</strong>是大数定律的特例：当 <span class="arithmatex">\(X_n \sim B(1, p)\)</span> 时，</p>
+<div class="arithmatex">\[\frac{1}{n}\sum_{k=1}^n X_k \xrightarrow{p} p\]</div>
+<p>这表明：<strong>频率（样本均值）稳定于概率（总体均值）！</strong></p>
+<p>这是用频率来确定概率的理论依据，是统计中"<strong>频率学派</strong>"的哲学基础。</p>
+<p><strong>思考（课件提出，本课程不展开）</strong>：所有的概率都可用频率解释吗？</p>
+<h3 id="62">6.2 经验分布<a class="headerlink" href="#62" title="Permanent link">&para;</a></h3>
+<p><strong>例 1.3</strong>：设 <span class="arithmatex">\({X_j}\)</span> i.i.d.，<span class="arithmatex">\(x_j = X_j(\omega)\)</span> 是观测值。则以概率 1，观测数列 <span class="arithmatex">\({x_j}\)</span> 可以决定 <span class="arithmatex">\(X_j\)</span> 的分布函数 <span class="arithmatex">\(F(x)\)</span>。</p>
+<p><strong>证明</strong>：对任意固定的 <span class="arithmatex">\(x \in \mathbb{R}\)</span>，定义示性函数：</p>
+<div class="arithmatex">\[g(X_j) = \begin{cases} 1, &amp; X_j \leq x \\ 0, &amp; X_j &gt; x \end{cases}\]</div>
+<p>则 <span class="arithmatex">\({g(X_j)}\)</span> i.i.d.，且 <span class="arithmatex">\(Eg(X_1) = \mathbb{P}(X_1 \leq x) = F(x)\)</span>。</p>
+<p>由 SLLN：<span class="arithmatex">\(\dfrac{1}{n}\displaystyle\sum_{j=1}^n g(X_j) \xrightarrow{a.s.} F(x)\)</span>，即以概率 1， $<span class="arithmatex">\(\lim_{n\to\infty} \frac{1}{n}\sum_{j=1}^n g(x_j) = F(x)\)</span>$</p>
+<p>这就是<strong>经验分布函数</strong>：</p>
+<div class="arithmatex">\[G_n(x) = \frac{1}{n}\sum_{i=1}^n I(x_i \leq x)\]</div>
+<p>它以概率 1 收敛到真实的分布函数 <span class="arithmatex">\(F(x)\)</span>，是统计推断中用数据估计总体分布的理论依据。</p>
+<h3 id="63">6.3 蒙特卡洛方法<a class="headerlink" href="#63" title="Permanent link">&para;</a></h3>
+<p><strong>蒙特卡洛方法</strong>由美国数学家冯·诺伊曼在 20 世纪 40 年代为研制核武器提出，是《统计计算》的核心基础，特别适用于解析法难以甚至不能求解的问题。</p>
+<p><strong>例：用蒙特卡洛计算 <span class="arithmatex">\(\pi\)</span></strong></p>
+<p>在单位正方形 <span class="arithmatex">\([-1,1]^2\)</span> 中均匀撒点，令 <span class="arithmatex">\(I_j = 1\)</span> 表示第 <span class="arithmatex">\(j\)</span> 个点落在单位圆内，则</p>
+<div class="arithmatex">\[EI_j = \mathbb{P}(I_j = 1) = \frac{\text{单位圆面积}}{\text{正方形面积}} = \frac{\pi}{4}\]</div>
+<p>由大数定律：<span class="arithmatex">\(\dfrac{1}{n}\displaystyle\sum_{j=1}^n I_j \xrightarrow{a.s.} \dfrac{\pi}{4}\)</span>，故 <span class="arithmatex">\(\hat{\pi} = 4\bar{I}\)</span>。</p>
+<p><strong>例 1.4（一般情形）</strong>：估计复杂函数 <span class="arithmatex">\(f(x)\)</span> 在 <span class="arithmatex">\([a,b]\)</span> 上的积分 <span class="arithmatex">\(\int_a^b f(x)dx\)</span>。</p>
+<p>取矩形区域 <span class="arithmatex">\(A = [a,b] \times [0,c]\)</span>，子区域 <span class="arithmatex">\(B = {(x,y): 0 \leq y \leq f(x)}\)</span>。从 <span class="arithmatex">\(A\)</span> 均匀撒 <span class="arithmatex">\(n\)</span> 个点，用 <span class="arithmatex">\(I_j\)</span> 表示第 <span class="arithmatex">\(j\)</span> 个点落在 <span class="arithmatex">\(B\)</span> 中，则：</p>
+<div class="arithmatex">\[EI_j = \mathbb{P}(I_j = 1) = \frac{\int_a^b f(x)dx}{c(b-a)}\]</div>
+<p>由大数定律，以概率 1：</p>
+<div class="arithmatex">\[\int_a^b f(x)dx \approx c(b-a) \cdot \frac{1}{n}\sum_{j=1}^n I_j\]</div>
+<h3 id="64">6.4 理论拓展与前沿应用<a class="headerlink" href="#64" title="Permanent link">&para;</a></h3>
+<p><strong>机器学习中的随机森林</strong>：大数定律保证了泛化误差会收敛到一个常数，而非无限制地大。因此，不会因为树的增加而产生过拟合。</p>
+<p><strong>随机过程</strong>：概率的研究对象从古典概型 <span class="arithmatex">\(\to\)</span> 二项分布 <span class="arithmatex">\(\to\)</span> 独立同分布 <span class="arithmatex">\(\to\)</span> <strong>随机过程</strong>。随机过程中有<strong>遍历定理</strong>，其本质是"时间平均 = 空间平均/相平均"，这正是大数定律在随机过程中的推广。</p>
+<hr />
+<h2 id="_5">七、课堂小结<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<h3 id="71">7.1 课程重点<a class="headerlink" href="#71" title="Permanent link">&para;</a></h3>
+<p>大数定律的核心公式：</p>
+<div class="arithmatex">\[\frac{1}{n}\sum_{k=1}^n X_k \xrightarrow{P \text{ 或 } a.s.} EX_1\]</div>
+<p>统计（从已知到未知）：样本均值 <span class="arithmatex">\(\xrightarrow{\text{认识}}\)</span> 总体均值</p>
+<p>概率（现象与规律）：偶然现象 <span class="arithmatex">\(\xleftarrow{\text{主导}}\)</span> 必然规律</p>
+<h3 id="72">7.2 课程启示<a class="headerlink" href="#72" title="Permanent link">&para;</a></h3>
+<p>大数定律体现了<strong>偶然性与必然性的辩证统一</strong>：每次实验的结果（<span class="arithmatex">\(X_i\)</span>）是偶然的，但大量重复中的规律（<span class="arithmatex">\(EX_1\)</span>）是必然的。</p>
+<h3 id="73">7.3 考纲要求（掌握）<a class="headerlink" href="#73" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>基本概念和区别</strong>：<ul>
+<li>样本均值 vs 总体均值</li>
+<li>依概率收敛（<span class="arithmatex">\(\xrightarrow{p}\)</span>）vs 几乎处处收敛（<span class="arithmatex">\(\xrightarrow{a.s.}\)</span>）的定义与关系</li>
+</ul>
+</li>
+<li><strong>经典大数定律内容</strong>（定理 1.1, 1.2；条件、结论），理解两定理差异</li>
+<li><strong>最简单版 WLLN 的证明</strong>（定理 1.1，利用切比雪夫不等式）</li>
+<li><strong>理解</strong>：LLN 的意义；对比强弱 LLN，其中强弱的含义</li>
+<li><strong>应用</strong>：<ul>
+<li>LLN — 样本均值帮助认识总体均值（经验分布、随机模拟）</li>
+<li>样本量的计算：LLN + Chebyshev 不等式</li>
+</ul>
+</li>
+</ul>
+<h3 id="74">7.4 常见疑问<a class="headerlink" href="#74" title="Permanent link">&para;</a></h3>
+<p><strong>Q：弱大数定律说的是概率趋于 0，那意味着"以概率 1 成立"吗？</strong></p>
+<p>A：不是。弱大数定律只说当 <span class="arithmatex">\(n \to \infty\)</span> 时，<span class="arithmatex">\(\mathbb{P}(|M_n - p| \geq \varepsilon) \to 0\)</span>，即对任意固定 <span class="arithmatex">\(\varepsilon\)</span>，误差大的概率越来越小趋于 0，但永远不等于 0。不能理解为"保证收敛"。这正是"弱"的含义——它不能保证每条样本路径都收敛。</p>
+<p><strong>Q：强大数定律和弱大数定律的条件一样吗？</strong></p>
+<p>A：在 i.i.d. 条件下，强大数定律要求 <span class="arithmatex">\(E|X_1| &lt; \infty\)</span>，弱大数定律（辛钦版本）也要求 <span class="arithmatex">\(E|X_1| &lt; \infty\)</span>，条件相同但结论更强（几乎处处收敛比依概率收敛强）。最一般的弱大数定律只需 <span class="arithmatex">\(n\mathbb{P}(|X_1|\geq n) \to 0\)</span>，是比 <span class="arithmatex">\(E|X_1| &lt; \infty\)</span> 更弱的条件。</p>
+<p><strong>Q：切比雪夫不等式给出的是上界，为什么能精确描述极限？</strong></p>
+<p>A：大数定律的结论是"极限为 0"，切比雪夫不等式给出 <span class="arithmatex">\(\leq \dfrac{\mathrm{Var}(X_1)}{n\varepsilon^2}\)</span>，右边当 <span class="arithmatex">\(n\to\infty\)</span> 时趋于 0。再加上概率非负（下界为 0），由夹逼定理，极限正好等于 0。</p>
+<p><strong>Q：方差有限 (<span class="arithmatex">\(\mathrm{Var}(X_1) &lt; \infty\)</span>) 和期望有限 (<span class="arithmatex">\(E|X_1| &lt; \infty\)</span>) 有什么关系？</strong></p>
+<p>A：方差有限 <span class="arithmatex">\(\Rightarrow\)</span> 期望有限（因为 <span class="arithmatex">\(\mathrm{Var}(X) = E(X-EX)^2 &lt; \infty\)</span> 意味着 <span class="arithmatex">\(E|X|^2 &lt; \infty\)</span>，而由 Cauchy-Schwarz 不等式 <span class="arithmatex">\(E|X| \leq \sqrt{E|X|^2} &lt; \infty\)</span>），反之不成立。所以辛钦大数定律的条件（<span class="arithmatex">\(E|X_1| &lt; \infty\)</span>）比定理 1.1 的条件（<span class="arithmatex">\(\mathrm{Var}(X_1) &lt; \infty\)</span>）更弱，适用范围更广。</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "navigation.indexes", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,4120 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="清华统计课程笔记">
+      
+      
+      
+        <link rel="canonical" href="https://Sonnette51.github.io/stat_notes_sonnette/%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture07%20%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E5%87%BD%E6%95%B0%E7%9A%84%E5%88%86%E5%B8%83%E3%80%81%E6%AC%A1%E5%BA%8F%E7%BB%9F%E8%AE%A1%E9%87%8F%E3%80%81p%E5%88%86%E4%BD%8D%E6%95%B0/">
+      
+      
+        <link rel="prev" href="../Lecture06%20%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E7%9A%84%E5%88%86%E5%B8%83%28II%29/">
+      
+      
+        <link rel="next" href="../Lecture08%20%E6%9C%9F%E6%9C%9B%E3%80%81%E6%96%B9%E5%B7%AE%E3%80%81%E7%9B%B8%E5%85%B3%E4%B8%8D%E7%AD%89%E5%BC%8F/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Lecture07 随机向量函数的分布、次序统计量、p分位数 - Sonnette's Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#lecture07-p" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="Sonnette&#39;s Notes" class="md-header__button md-logo" aria-label="Sonnette's Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Sonnette's Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Lecture07 随机向量函数的分布、次序统计量、p分位数
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  数据科学编程
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  初等概率论
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Sonnette&#39;s Notes" class="md-nav__button md-logo" aria-label="Sonnette's Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Sonnette's Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据科学编程
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数据科学编程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/NumPy%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NumPy 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/Pandas%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pandas 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/Database%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/LLM%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LLM 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/MiningWebData%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mining Web Data 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/TextProcessing%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Text Processing 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/DataVisualization%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Visualization 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/Advanced%20Visualization%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Advanced Visualization 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    初等概率论
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    初等概率论
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture01%20%E6%A6%82%E7%8E%87%E6%A8%A1%E5%9E%8B%E4%B8%8E%E6%80%A7%E8%B4%A8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture01 概率模型与性质
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture02%20%E6%A6%82%E7%8E%87%E7%A9%BA%E9%97%B4%E3%80%81%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture02 概率空间、条件概率
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture03%20%E7%8B%AC%E7%AB%8B%E6%80%A7%E3%80%81%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture03 独立性、随机变量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture04%20%E5%B8%B8%E8%A7%81%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture04 常见随机变量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture05%20%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0%E3%80%81%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E5%87%BD%E6%95%B0%E7%9A%84%E5%88%86%E5%B8%83%E3%80%81%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E7%9A%84%E5%88%86%E5%B8%83%28I%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture05 概率分布函数、随机变量函数的分布、随机向量的分布(I)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture06%20%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E7%9A%84%E5%88%86%E5%B8%83%28II%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture06 随机向量的分布(II)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture07 随机向量函数的分布、次序统计量、p分位数
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture07 随机向量函数的分布、次序统计量、p分位数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、预备知识：与正态相关的三大统计分布
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、预备知识：与正态相关的三大统计分布">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-chi2_vchi-squared-distribution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 卡方分布 \(\chi^2_v\)（Chi-squared distribution）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-students-t_v" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Student's \(t_v\) 分布
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-f-fmnfishersnedecor-distribution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 F 分布 \(F(m,n)\)（Fisher–Snedecor distribution）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4 常见分布关系图（课件手绘图）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、随机向量函数的分布
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、随机向量函数的分布">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-review-gboldsymbolx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Review：刻画 \(g(\boldsymbol{X})\) 分布的两条路
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-cdf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 一般情形：CDF 曲线法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-i-zxy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 特殊情形 (i)：和 \(Z=X+Y\)（卷积）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-ii-vx-y-i" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 特殊情形 (ii)：差 \(V=X-Y\)（类似 (i)）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-jacobian" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 多个函数的联合密度（Jacobian 变换法）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.5 多个函数的联合密度（Jacobian 变换法）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#aside-vector-and-matrix-calculusjacobian" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aside: Vector and matrix calculus（Jacobian 的记号约定）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、次序统计量
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、次序统计量">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 次序统计量的分布密度
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-beta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Beta 分布
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、随机变量的 p 分位数
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="四、随机变量的 p 分位数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 常见应用简介
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-p" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 p 分位数的性质
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 随机变量的生成
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、小结
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="五、小结">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 小结：随机向量函数的分布
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 小结：重点知识点与技巧
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、附录：次序统计量性质、p 分位数性质的证明
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="六、附录：次序统计量性质、p 分位数性质的证明">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 性质 2.5 及证明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-p-16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 p 分位数性质 1–6 的证明
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        本讲方法/题型清单
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、p 分位数的定义
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、p 分位数的定义">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 直观定义（非正式）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 正式定义（唯一版）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4 两种定义之间的关系
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、以标准正态分布为例
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、以标准正态分布为例">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-mathcaln01" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 标准正态分布 \(\mathcal{N}(0,1)\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 常用分位数表
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、p 分位数的常见应用
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、p 分位数的常见应用">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 统计推断（不要求唯一性）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 统计计算（要求唯一性）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、p 分位数的性质
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="四、p 分位数的性质">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 六条基本性质
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 如何记住这些性质？
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#simulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、随机变量的生成（Simulation）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="五、随机变量的生成（Simulation）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 核心定理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 为什么这个定理很重要？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-bernoulli08" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 直观理解：以 Bernoulli(0.8) 为例
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4 具体例子：如何生成常见分布的随机数
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.4 具体例子：如何生成常见分布的随机数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-mathcalelambda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        情形 (1)：指数分布 \(\mathcal{E}(\lambda)\)（需要掌握）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2cauchy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        情形 (2)：Cauchy 分布（了解即可，不做硬性要求）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-mathcaln01" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        情形 (3)：标准正态分布 \(\mathcal{N}(0,1)\)（了解即可，不做硬性要求）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#55" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.5 总结：生成随机数的通用流程
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、p 分位数的等价定义
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七、知识总结与考试要求
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="七、知识总结与考试要求">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 必须掌握的内容
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 了解即可（不做硬性要求）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 离散分布的情况
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        八、常见疑问解答
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture08%20%E6%9C%9F%E6%9C%9B%E3%80%81%E6%96%B9%E5%B7%AE%E3%80%81%E7%9B%B8%E5%85%B3%E4%B8%8D%E7%AD%89%E5%BC%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture08 期望、方差、相关不等式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture09%20%E6%9D%A1%E4%BB%B6%E6%9C%9F%E6%9C%9B%E3%80%81%E6%9D%A1%E4%BB%B6%E6%96%B9%E5%B7%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture09 条件期望、条件方差
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture10%20%E5%8D%8F%E6%96%B9%E5%B7%AE%E3%80%81%E7%9B%B8%E5%85%B3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture10 协方差、相关
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture11%20%E6%A6%82%E7%8E%87%E6%AF%8D%E5%87%BD%E6%95%B0%E3%80%81%E7%9F%A9%E6%AF%8D%E5%87%BD%E6%95%B0%E3%80%81%E7%89%B9%E5%BE%81%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture11 概率母函数、矩母函数、特征函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture12%20%E5%A4%A7%E6%95%B0%E5%AE%9A%E5%BE%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture12 大数定律
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture13%20%E4%B8%AD%E5%BF%83%E6%9E%81%E9%99%90%E5%AE%9A%E7%90%86%E3%80%81%E6%94%B6%E6%95%9B%E6%80%A7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture13 中心极限定理、收敛性
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture14%20%E5%A4%9A%E5%85%83%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture14 多元正态分布
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%9C%9F%E6%9C%AB%E8%AE%B0%E5%BF%86%E8%A6%81%E7%82%B9%E6%B1%87%E6%80%BB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 期末记忆要点汇总
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A8%A1%E5%9D%971%20%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E7%9A%84%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块1 随机向量的函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A8%A1%E5%9D%972%20%E6%AC%A1%E5%BA%8F%E7%BB%9F%E8%AE%A1%E9%87%8F%E4%B8%8Ep-%E5%88%86%E4%BD%8D%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块2 次序统计量与p-分位数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A8%A1%E5%9D%973%20%E6%9C%9F%E6%9C%9B%E4%B8%8E%E6%96%B9%E5%B7%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块3 期望与方差
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A8%A1%E5%9D%974%20%E6%9D%A1%E4%BB%B6%E6%9C%9F%E6%9C%9B%E3%80%81%E5%8D%8F%E6%96%B9%E5%B7%AE%E4%B8%8E%E4%B8%8D%E7%AD%89%E5%BC%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块4 条件期望、协方差与不等式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A8%A1%E5%9D%975%20%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0%E4%B8%8E%E7%89%B9%E5%BE%81%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块5 生成函数与特征函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A8%A1%E5%9D%976%20%E6%94%B6%E6%95%9B%E6%80%A7%E3%80%81%E5%A4%A7%E6%95%B0%E5%BE%8B%E4%B8%8E%E4%B8%AD%E5%BF%83%E6%9E%81%E9%99%90%E5%AE%9A%E7%90%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块6 收敛性、大数律与中心极限定理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A8%A1%E5%9D%977%20%E5%A4%9A%E5%85%83%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块7 多元正态分布
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、预备知识：与正态相关的三大统计分布
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、预备知识：与正态相关的三大统计分布">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-chi2_vchi-squared-distribution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 卡方分布 \(\chi^2_v\)（Chi-squared distribution）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-students-t_v" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Student's \(t_v\) 分布
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-f-fmnfishersnedecor-distribution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 F 分布 \(F(m,n)\)（Fisher–Snedecor distribution）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4 常见分布关系图（课件手绘图）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、随机向量函数的分布
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、随机向量函数的分布">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-review-gboldsymbolx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Review：刻画 \(g(\boldsymbol{X})\) 分布的两条路
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-cdf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 一般情形：CDF 曲线法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-i-zxy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 特殊情形 (i)：和 \(Z=X+Y\)（卷积）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-ii-vx-y-i" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 特殊情形 (ii)：差 \(V=X-Y\)（类似 (i)）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-jacobian" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 多个函数的联合密度（Jacobian 变换法）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.5 多个函数的联合密度（Jacobian 变换法）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#aside-vector-and-matrix-calculusjacobian" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aside: Vector and matrix calculus（Jacobian 的记号约定）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、次序统计量
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、次序统计量">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 次序统计量的分布密度
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-beta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Beta 分布
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、随机变量的 p 分位数
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="四、随机变量的 p 分位数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 常见应用简介
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-p" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 p 分位数的性质
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 随机变量的生成
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、小结
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="五、小结">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 小结：随机向量函数的分布
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 小结：重点知识点与技巧
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、附录：次序统计量性质、p 分位数性质的证明
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="六、附录：次序统计量性质、p 分位数性质的证明">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 性质 2.5 及证明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-p-16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 p 分位数性质 1–6 的证明
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        本讲方法/题型清单
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、p 分位数的定义
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、p 分位数的定义">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 直观定义（非正式）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 正式定义（唯一版）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4 两种定义之间的关系
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、以标准正态分布为例
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、以标准正态分布为例">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-mathcaln01" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 标准正态分布 \(\mathcal{N}(0,1)\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 常用分位数表
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、p 分位数的常见应用
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、p 分位数的常见应用">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 统计推断（不要求唯一性）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 统计计算（要求唯一性）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、p 分位数的性质
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="四、p 分位数的性质">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 六条基本性质
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 如何记住这些性质？
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#simulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、随机变量的生成（Simulation）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="五、随机变量的生成（Simulation）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 核心定理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 为什么这个定理很重要？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-bernoulli08" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 直观理解：以 Bernoulli(0.8) 为例
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4 具体例子：如何生成常见分布的随机数
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.4 具体例子：如何生成常见分布的随机数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-mathcalelambda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        情形 (1)：指数分布 \(\mathcal{E}(\lambda)\)（需要掌握）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2cauchy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        情形 (2)：Cauchy 分布（了解即可，不做硬性要求）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-mathcaln01" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        情形 (3)：标准正态分布 \(\mathcal{N}(0,1)\)（了解即可，不做硬性要求）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#55" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.5 总结：生成随机数的通用流程
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、p 分位数的等价定义
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七、知识总结与考试要求
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="七、知识总结与考试要求">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 必须掌握的内容
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 了解即可（不做硬性要求）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 离散分布的情况
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        八、常见疑问解答
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="lecture07-p">Lecture07 随机向量函数的分布、次序统计量、p分位数<a class="headerlink" href="#lecture07-p" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>[!ABSTRACT] 本讲概要
+上一讲我们会求单个随机变量函数 <span class="arithmatex">\(g(X)\)</span> 的分布，这一讲把问题升级为<strong>随机向量的函数</strong> <span class="arithmatex">\(g(\boldsymbol{X})\)</span>：和、差、商、多对多变换（Jacobian 方法）。在此基础上引出两类极重要的"函数"：<strong>次序统计量</strong>（把样本从小到大排）与<strong>分位数函数 <span class="arithmatex">\(F^{-1}(p)\)</span></strong>（CDF 的"广义反函数"，是生成随机数的理论基础）。</p>
+<hr />
+</blockquote>
+<h2 id="_1">一、预备知识：与正态相关的三大统计分布<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>本讲开头补完常见连续分布家族中与 <span class="arithmatex">\(\mathcal{N}(0,1)\)</span> 紧密相关的三个分布（统计推断的三大核心分布），它们本质上都是<strong>正态随机向量的函数的分布</strong>，正好呼应本讲主题。</p>
+<h3 id="11-chi2_vchi-squared-distribution">1.1 卡方分布 <span class="arithmatex">\(\chi^2_v\)</span>（Chi-squared distribution）<a class="headerlink" href="#11-chi2_vchi-squared-distribution" title="Permanent link">&para;</a></h3>
+<p>设 <span class="arithmatex">\(v&gt;0\)</span>，如果 <span class="arithmatex">\(X\)</span> 的密度是</p>
+<div class="arithmatex">\[
+f(x)=\frac{1}{2^{v/2}\Gamma(v/2)}x^{\frac{v}{2}-1}e^{-\frac{x}{2}},\quad x\ge 0,
+\]</div>
+<p>称 <span class="arithmatex">\(X\)</span> 服从参数为 <span class="arithmatex">\(v\)</span> 的 <span class="arithmatex">\(\chi^2_v\)</span> 分布，记作 <span class="arithmatex">\(X\sim\chi^2_v\)</span>。</p>
+<p><strong>直觉</strong>：<span class="arithmatex">\(\chi^2_n\)</span> 就是 <span class="arithmatex">\(n\)</span> 个独立标准正态的"平方和能量"的分布。</p>
+<ul>
+<li>设有独立同分布 (i.i.d.) 的 <span class="arithmatex">\(Z_j\sim\mathcal{N}(0,1)\)</span>，<span class="arithmatex">\(j=1,\ldots,n\)</span>，令 <span class="arithmatex">\(X=Z_1^2+\cdots+Z_n^2\)</span>，则 <span class="arithmatex">\(X\sim\chi^2_n\)</span>。</li>
+<li>可以验证 <span class="arithmatex">\(\chi^2_1=\Gamma\left(\frac{1}{2},\frac{1}{2}\right)\)</span>。于是由 Gamma 分布的性质（以后会证明）有 <span class="arithmatex">\(\chi^2_n=\Gamma\left(\frac{n}{2},\frac{1}{2}\right)\)</span>。</li>
+</ul>
+<blockquote>
+<p>[!NOTE] 备注
+<span class="arithmatex">\(\chi^2\)</span> 分布由 Karl Pearson 于 1900 年提出 <span class="arithmatex">\(\chi^2\)</span> 检验时引入。</p>
+</blockquote>
+<h3 id="12-students-t_v">1.2 Student's <span class="arithmatex">\(t_v\)</span> 分布<a class="headerlink" href="#12-students-t_v" title="Permanent link">&para;</a></h3>
+<p>设 <span class="arithmatex">\(v&gt;0\)</span>，如果 <span class="arithmatex">\(X\)</span> 的密度是</p>
+<div class="arithmatex">\[
+f(x)=\frac{\Gamma\left(\frac{v+1}{2}\right)}{\sqrt{v\pi}\,\Gamma\left(\frac{v}{2}\right)}\left(1+\frac{x^2}{v}\right)^{-\frac{v+1}{2}},\quad x\in\mathbb{R},
+\]</div>
+<p>称 <span class="arithmatex">\(X\)</span> 服从参数为 <span class="arithmatex">\(v\)</span> 的 Student's t 分布，简称 t 分布，记作 <span class="arithmatex">\(X\sim t_v\)</span>。</p>
+<p><strong>直觉</strong>：t 分布是"用样本估计的标准差去标准化正态"产生的分布，形状像正态但尾巴更厚。</p>
+<p>性质（逐条）：</p>
+<table>
+<thead>
+<tr>
+<th>性质</th>
+<th>内容</th>
+<th>标注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>构造</td>
+<td>设 <span class="arithmatex">\(Z\sim\mathcal{N}(0,1)\)</span>，<span class="arithmatex">\(X\sim\chi^2_n\)</span>，且 <span class="arithmatex">\(X\)</span> 与 <span class="arithmatex">\(Z\)</span> 独立，令 <span class="arithmatex">\(T=\dfrac{Z}{\sqrt{X/n}}\)</span>，则 <span class="arithmatex">\(T\sim t_n\)</span></td>
+<td>常用</td>
+</tr>
+<tr>
+<td>对称性</td>
+<td>若 <span class="arithmatex">\(T\sim t_v\)</span>，则 <span class="arithmatex">\(-T\sim t_v\)</span></td>
+<td>常用</td>
+</tr>
+<tr>
+<td>重尾</td>
+<td>比正态分布重尾</td>
+<td>了解即可</td>
+</tr>
+<tr>
+<td>大自由度极限</td>
+<td>当 <span class="arithmatex">\(v\)</span> 很大时，<span class="arithmatex">\(t_v\)</span> 分布和标准正态分布很像（以后用大数定律证明）</td>
+<td>了解即可</td>
+</tr>
+<tr>
+<td>特例</td>
+<td><span class="arithmatex">\(v=1\)</span> 时性质特殊，亦称为 <strong>Cauchy 分布</strong></td>
+<td>常用</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>[!NOTE] 备注
+t 分布由 William Sealy Gosset 于 1908 年以笔名 "Student" 发表。</p>
+</blockquote>
+<h3 id="13-f-fmnfishersnedecor-distribution">1.3 F 分布 <span class="arithmatex">\(F(m,n)\)</span>（Fisher–Snedecor distribution）<a class="headerlink" href="#13-f-fmnfishersnedecor-distribution" title="Permanent link">&para;</a></h3>
+<p>设 <span class="arithmatex">\(m,n\)</span> 是正整数，如果 <span class="arithmatex">\(X\)</span> 的密度是</p>
+<div class="arithmatex">\[
+f(x)=\frac{\Gamma\left(\frac{m+n}{2}\right)}{\Gamma\left(\frac{m}{2}\right)\Gamma\left(\frac{n}{2}\right)}\cdot\frac{m^{m/2}\,n^{n/2}\,x^{\frac{m}{2}-1}}{(mx+n)^{\frac{m+n}{2}}},\quad x\ge 0,
+\]</div>
+<p>称 <span class="arithmatex">\(X\)</span> 服从参数为 <span class="arithmatex">\((m,n)\)</span> 的 <span class="arithmatex">\(F\)</span> 分布，记作 <span class="arithmatex">\(X\sim F(m,n)\)</span>。</p>
+<p><strong>直觉</strong>：F 分布是"两组独立正态平方和的（平均）比值"的分布，用来比较两个方差的大小。</p>
+<ul>
+<li>设有 i.i.d. 的 <span class="arithmatex">\(X_j\sim\mathcal{N}(0,1)\)</span>，<span class="arithmatex">\(j=1,\ldots,m\)</span> 和 <span class="arithmatex">\(Y_j\sim\mathcal{N}(0,1)\)</span>，<span class="arithmatex">\(j=1,\ldots,n\)</span>，令</li>
+</ul>
+<div class="arithmatex">\[
+F=\frac{\sum_{i=1}^{m}X_i^2/m}{\sum_{i=1}^{n}Y_i^2/n},
+\]</div>
+<p>则 <span class="arithmatex">\(F\sim F(m,n)\)</span>。</p>
+<blockquote>
+<p>[!NOTE] 备注
+1924 年英国统计学家 R.A. Fisher 提出，因此命名 F 分布。在方差分析、线性回归中有重要应用。</p>
+</blockquote>
+<h3 id="14">1.4 常见分布关系图（课件手绘图）<a class="headerlink" href="#14" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>[!NOTE] 备注：常见分布之间的关系网
+- <span class="arithmatex">\(B(n,p)\xrightarrow{np\to\lambda,\ n\to+\infty}\mathcal{P}(\lambda)\)</span>（二项收敛到 Poisson）；
+- <span class="arithmatex">\(HG(n,M,N)\xrightarrow{M/N\to p,\ N\to+\infty}B(n,p)\)</span>（无放回 → 有放回）；<span class="arithmatex">\(NHG(r,M,N)\xrightarrow{N\to\infty}NB(r,p)\)</span>；
+- <span class="arithmatex">\(B(p)\)</span>（两点分布）独立和 → <span class="arithmatex">\(B(n,p)\)</span>；<span class="arithmatex">\(G(p)\)</span> 独立和 → <span class="arithmatex">\(NB(r,p)\)</span>（Pascal 分布）；
+- <span class="arithmatex">\(\mathcal{E}(\lambda)\)</span> 与 <span class="arithmatex">\(G(p)\)</span> 同为<strong>无记忆 (memoryless)</strong> 分布（连续/离散对应）；<span class="arithmatex">\(\mathcal{E}(\lambda)\)</span> 独立和 → <span class="arithmatex">\(\Gamma(n,\lambda)\)</span>；
+- <span class="arithmatex">\(\mathcal{N}(\mu,\sigma^2)\)</span> 派生出 <span class="arithmatex">\(\chi^2_n\)</span>、<span class="arithmatex">\(t_n\)</span>、<span class="arithmatex">\(F(m,n)\)</span>；<span class="arithmatex">\(\mathcal{U}(a,b)\)</span> 自成一类。</p>
+</blockquote>
+<hr />
+<h2 id="_2">二、随机向量函数的分布<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="21-review-gboldsymbolx">2.1 Review：刻画 <span class="arithmatex">\(g(\boldsymbol{X})\)</span> 分布的两条路<a class="headerlink" href="#21-review-gboldsymbolx" title="Permanent link">&para;</a></h3>
+<p>随机变量（向量）的三件套：CDF、PMF/PDF。CDF 与 PMF 互相可以确定；CDF 与 PDF 之间，PDF 可确定 CDF，CDF 不能唯一确定 PDF（只能"几乎处处"确定）。</p>
+<p>由此我们得到两条路去刻画 <span class="arithmatex">\(g(\vec{X})\)</span> 的分布：
+1. <strong>general 通用方法</strong>：从 <span class="arithmatex">\(\vec{X}\)</span> 的 CDF/PDF 出发，直接求 <span class="arithmatex">\(g(\vec{X})\)</span> 的 <strong>CDF</strong>，再根据需要求导得 PDF（或读出 PMF）；
+2. <strong>特殊情形</strong>：当 <span class="arithmatex">\(g\)</span> 具有良好结构（如一维单调函数、和差、可逆多对多变换）时，可以<strong>从 PDF 直接得到 PDF</strong>（公式法）。</p>
+<h3 id="22-cdf">2.2 一般情形：CDF 曲线法<a class="headerlink" href="#22-cdf" title="Permanent link">&para;</a></h3>
+<p><strong>方法</strong>：直接求分布函数 <span class="arithmatex">\(F_Z(z)=\mathbb{P}(g(\vec{X})\le z)\)</span>（一个区域上的积分/求和），再根据需要求 PDF 或 PMF。（常用）</p>
+<blockquote>
+<p>[!EXAMPLE]- 例题 1.1：单位正方形上均匀分布，求商 <span class="arithmatex">\(Z=Y/X\)</span> 的密度
+设 <span class="arithmatex">\((X,Y)\)</span> 为单位正方形上的均匀分布，有联合密度 <span class="arithmatex">\(f(x,y)\)</span>。可验证 <span class="arithmatex">\(X,Y\)</span> 独立。求 <span class="arithmatex">\(Z=g(X,Y)=Y/X\)</span> 的概率密度函数。</p>
+<p><strong>解</strong>：<span class="arithmatex">\(f(x,y)=1\)</span>（<span class="arithmatex">\(0&lt;x&lt;1,0&lt;y&lt;1\)</span>）。对固定 <span class="arithmatex">\(z\)</span>，事件 <span class="arithmatex">\(\{Y/X\le z\}=\{Y\le zX\}\)</span> 是单位正方形与直线 <span class="arithmatex">\(y=zx\)</span> 下方区域的交集。</p>
+<ul>
+<li>当 <span class="arithmatex">\(0\le z\le 1\)</span> 时，直线 <span class="arithmatex">\(y=zx\)</span> 在正方形内从 <span class="arithmatex">\((0,0)\)</span> 到 <span class="arithmatex">\((1,z)\)</span>，下方是一个直角三角形，面积为 <span class="arithmatex">\(\frac{1}{2}\cdot 1\cdot z\)</span>，故</li>
+</ul>
+<div class="arithmatex">\[
+F_Z(z)=\mathbb{P}\left(\frac{Y}{X}\le z\right)=\frac{z}{2},\quad 0\le z\le 1.
+\]</div>
+<ul>
+<li>当 <span class="arithmatex">\(z&gt;1\)</span> 时，看补集 <span class="arithmatex">\(\{Y&gt;zX\}\)</span>：它是直线上方的三角形，顶点 <span class="arithmatex">\((0,0),(0,1),(1/z,1)\)</span>，面积 <span class="arithmatex">\(\frac{1}{2}\cdot\frac{1}{z}\cdot 1=\frac{1}{2z}\)</span>（注：此步补全了"为何是 <span class="arithmatex">\(1-\frac{1}{2z}\)</span>"的几何理由），故</li>
+</ul>
+<div class="arithmatex">\[
+F_Z(z)=\mathbb{P}\left(\frac{Y}{X}\le z\right)=1-\frac{1}{2z},\quad z&gt;1.
+\]</div>
+<ul>
+<li><span class="arithmatex">\(F_Z(z)=0\)</span>，<span class="arithmatex">\(z&lt;0\)</span>。</li>
+</ul>
+<p>求导即得密度（注：此步补全了课件略去的求导）：</p>
+<div class="arithmatex">\[
+f_Z(z)=\begin{cases}\dfrac{1}{2}, &amp; 0&lt;z&lt;1,\\[4pt] \dfrac{1}{2z^2}, &amp; z&gt;1,\\[4pt] 0, &amp; \text{其它}.\end{cases}
+\]</div>
+<p>[!EXAMPLE]- 例题 1.2：两个独立标准正态的模长——Rayleigh 分布
+设 <span class="arithmatex">\(X,Y\)</span> 独立且都服从 <span class="arithmatex">\(\mathcal{N}(0,1)\)</span>，求 <span class="arithmatex">\(Z=\sqrt{X^2+Y^2}\)</span> 的分布。</p>
+<p><strong>解</strong>：<span class="arithmatex">\((X,Y)\)</span> 有联合密度</p>
+<div class="arithmatex">\[
+f(x,y)=\frac{1}{2\pi}\exp\left(-\frac{x^2+y^2}{2}\right).
+\]</div>
+<p>对 <span class="arithmatex">\(z\ge 0\)</span>，有</p>
+<div class="arithmatex">\[
+F_Z(z)=\mathbb{P}\left(\sqrt{X^2+Y^2}\le z\right)=\int_{\{\sqrt{x^2+y^2}\le z\}}\frac{1}{2\pi}\exp\left(-\frac{x^2+y^2}{2}\right)dxdy.
+\]</div>
+<p>作极坐标换元 <span class="arithmatex">\(x=r\cos\theta\)</span>，<span class="arithmatex">\(y=r\sin\theta\)</span>（依据：积分区域是圆盘，被积函数只依赖 <span class="arithmatex">\(x^2+y^2=r^2\)</span>；面积元 <span class="arithmatex">\(dxdy=r\,drd\theta\)</span>，即换元的 Jacobian 为 <span class="arithmatex">\(r\)</span>）：</p>
+<div class="arithmatex">\[
+F_Z(z)=\frac{1}{2\pi}\int_0^{2\pi}d\theta\int_0^z re^{-r^2/2}\,dr=\int_0^z re^{-r^2/2}\,dr.
+\]</div>
+<p>求导可得 <span class="arithmatex">\(Z\)</span> 的密度函数</p>
+<div class="arithmatex">\[
+f_Z(z)=ze^{-z^2/2},\quad z\ge 0.
+\]</div>
+<p>此分布称为 <strong>Rayleigh 分布</strong>。</p>
+<p><strong>背景</strong>：向坐标 <span class="arithmatex">\((0,0)\)</span> 射击时，弹落点 <span class="arithmatex">\((X,Y)\)</span> 服从二元正态分布，<span class="arithmatex">\(R=Z=\sqrt{X^2+Y^2}\)</span> 为弹落点到目标的距离，被称为<strong>脱靶量</strong>。</p>
+</blockquote>
+<h3 id="23-i-zxy">2.3 特殊情形 (i)：和 <span class="arithmatex">\(Z=X+Y\)</span>（卷积）<a class="headerlink" href="#23-i-zxy" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>[!EXAMPLE]- 例题 1.3：离散情形——分布列的卷积
+设 <span class="arithmatex">\((X,Y)\)</span> 有联合分布列，求 <span class="arithmatex">\(Z=X+Y\)</span> 的分布列。</p>
+<p><strong>解</strong>：把事件 <span class="arithmatex">\(\{X+Y=z\}\)</span> 按 <span class="arithmatex">\(X\)</span> 的取值分拆（全概率分解，互斥并）：</p>
+<div class="arithmatex">\[
+P_Z(z)=\mathbb{P}(X+Y=z)=\sum_x\mathbb{P}(X=x,Y=z-x).
+\]</div>
+<p>特别地，当 <span class="arithmatex">\(X,Y\)</span> 独立时，<span class="arithmatex">\(Z=X+Y\)</span> 有分布列</p>
+<div class="arithmatex">\[
+P_Z(z)=\sum_x\mathbb{P}(X=x)\mathbb{P}(Y=z-x)=\sum_x P_X(x)P_Y(z-x),
+\]</div>
+<p>此时 <span class="arithmatex">\(Z\)</span> 的分布列为 <span class="arithmatex">\(X\)</span> 和 <span class="arithmatex">\(Y\)</span> 的分布列的<strong>卷积 (convolution)</strong>。</p>
+<p><strong>Review</strong>：<span class="arithmatex">\(X\sim B(n,p)\)</span>，<span class="arithmatex">\(Y\sim B(m,p)\)</span>，独立 <span class="arithmatex">\(\Rightarrow X+Y\sim B(m+n,p)\)</span>（直观：<span class="arithmatex">\(n\)</span> 次试验加 <span class="arithmatex">\(m\)</span> 次试验就是 <span class="arithmatex">\(m+n\)</span> 次试验）。</p>
+<p>[!NOTE] 备注
+课件冷笑话：此卷 (convolution) 非彼卷 (involution)。</p>
+<p>[!IMPORTANT] 例 1.4（卷积公式，连续情形）（常用）
+设 <span class="arithmatex">\((X,Y)\)</span> 有联合密度 <span class="arithmatex">\(f(x,y)\)</span>，则 <span class="arithmatex">\(Z=X+Y\)</span> 有密度函数</p>
+<div class="arithmatex">\[
+f_Z(z)=\int_{-\infty}^{\infty}f(x,z-x)\,dx.
+\]</div>
+<p>特别地，当 <span class="arithmatex">\(X,Y\)</span> 独立时，<span class="arithmatex">\(Z=X+Y\)</span> 有密度函数</p>
+<div class="arithmatex">\[
+f_Z(z)=\int_{-\infty}^{\infty}f_X(x)f_Y(z-x)\,dx.
+\]</div>
+</blockquote>
+<p><strong>证明</strong>：对任意 <span class="arithmatex">\(a&lt;b\)</span>，有</p>
+<div class="arithmatex">\[
+\mathbb{P}(a&lt;Z\le b)=\mathbb{P}(a&lt;X+Y\le b)=\int_{\mathbb{R}^2}I_{\{a&lt;x+y\le b\}}f(x,y)\,dxdy=\int_{\mathbb{R}}\left(\int_{a-x}^{b-x}f(x,y)\,dy\right)dx.
+\]</div>
+<p>对内层积分作换元 <span class="arithmatex">\(y=z-x\)</span>（固定 <span class="arithmatex">\(x\)</span>，<span class="arithmatex">\(dy=dz\)</span>；当 <span class="arithmatex">\(y\)</span> 从 <span class="arithmatex">\(a-x\)</span> 到 <span class="arithmatex">\(b-x\)</span> 时 <span class="arithmatex">\(z\)</span> 从 <span class="arithmatex">\(a\)</span> 到 <span class="arithmatex">\(b\)</span>），再用 Fubini 定理交换积分次序：</p>
+<div class="arithmatex">\[
+=\int_{\mathbb{R}}\left(\int_a^b f(x,z-x)\,dz\right)dx=\int_a^b\left(\int_{\mathbb{R}}f(x,z-x)\,dx\right)dz.
+\]</div>
+<p>由 <span class="arithmatex">\(a,b\)</span> 任意，<span class="arithmatex">\(Z=X+Y\)</span> 的密度函数为 <span class="arithmatex">\(f_Z(z)=\int_{-\infty}^{\infty}f(x,z-x)\,dx\)</span>。易见，<span class="arithmatex">\(Z\)</span> 的密度函数也可以写为（对称地按 <span class="arithmatex">\(y\)</span> 分拆）</p>
+<div class="arithmatex">\[
+f_Z(z)=\int_{-\infty}^{\infty}f(z-y,y)\,dy.
+\]</div>
+<blockquote>
+<p>[!EXAMPLE]- 例题 1.5：两个独立 <span class="arithmatex">\(\mathcal{U}(0,1)\)</span> 之和——三角分布
+设 <span class="arithmatex">\(X,Y\)</span> 独立，且服从 <span class="arithmatex">\(\mathcal{U}(0,1)\)</span>。求 <span class="arithmatex">\(Z=X+Y\)</span> 的概率密度。</p>
+<p><strong>解</strong>：显然 <span class="arithmatex">\(Z\in(0,2)\)</span>，且</p>
+<div class="arithmatex">\[
+f_X(x)=f_Y(y)=I_{\{0&lt;x&lt;1\}}.
+\]</div>
+<p>于是由卷积公式</p>
+<div class="arithmatex">\[
+f_Z(z)=\int_{-\infty}^{\infty}f_X(x)f_Y(z-x)\,dx=\int_0^1 I_{\{0&lt;z-x&lt;1\}}\,dx.
+\]</div>
+<p>作换元 <span class="arithmatex">\(t=z-x\)</span>（依据：<span class="arithmatex">\(dt=-dx\)</span>，<span class="arithmatex">\(x\)</span> 从 <span class="arithmatex">\(0\)</span> 到 <span class="arithmatex">\(1\)</span> 时 <span class="arithmatex">\(t\)</span> 从 <span class="arithmatex">\(z\)</span> 降到 <span class="arithmatex">\(z-1\)</span>，交换上下限消去负号）：</p>
+<div class="arithmatex">\[
+f_Z(z)=\int_{z-1}^{z}I_{\{0&lt;t&lt;1\}}\,dt=\text{区间}(z-1,z)\cap(0,1)\text{的长度}.
+\]</div>
+<p>分段讨论（注：此步补全了区间交集长度的计算）：当 <span class="arithmatex">\(z\in[0,1)\)</span> 时交集为 <span class="arithmatex">\((0,z)\)</span>，长度 <span class="arithmatex">\(z\)</span>；当 <span class="arithmatex">\(z\in[1,2]\)</span> 时交集为 <span class="arithmatex">\((z-1,1)\)</span>，长度 <span class="arithmatex">\(2-z\)</span>；其余为 0。故</p>
+<div class="arithmatex">\[
+f_Z(z)=\begin{cases}z, &amp; \text{if } z\in[0,1),\\ 2-z, &amp; \text{if } z\in[1,2],\\ 0, &amp; \text{others}.\end{cases}
+\]</div>
+<p>密度图像是 <span class="arithmatex">\([0,2]\)</span> 上以 <span class="arithmatex">\(z=1\)</span> 为顶点的三角形（课件"例2.5 结论图"）。</p>
+<p>[!EXAMPLE]- 例题 1.6：<span class="arithmatex">\(n\)</span> 个独立 <span class="arithmatex">\(\mathcal{U}(-1,1)\)</span> 之和
+设 <span class="arithmatex">\(X_1,X_2,\ldots,X_n\)</span> 独立同分布，且服从 <span class="arithmatex">\(\mathcal{U}(-1,1)\)</span>。则</p>
+<p>1) <span class="arithmatex">\(X_1+X_2\)</span> 的密度函数为</p>
+<div class="arithmatex">\[
+f_{X_1+X_2}(x)=\begin{cases}\dfrac{2-|x|}{4}, &amp; \text{if } |x|\le 2,\\[4pt] 0, &amp; \text{if } |x|&gt;2.\end{cases}
+\]</div>
+<p>（注：此步补全推导——<span class="arithmatex">\(f_{X_i}(x)=\frac{1}{2}I_{\{|x|&lt;1\}}\)</span>，卷积 <span class="arithmatex">\(f_{X_1+X_2}(x)=\int\frac{1}{4}I_{\{|t|&lt;1\}}I_{\{|x-t|&lt;1\}}dt=\frac{1}{4}\times\)</span>区间 <span class="arithmatex">\((-1,1)\cap(x-1,x+1)\)</span> 的长度 <span class="arithmatex">\(=\frac{2-|x|}{4}\)</span>。）</p>
+<p>2) <span class="arithmatex">\(X_1+X_2+X_3\)</span> 的密度函数为（对 1) 的结果再卷一次 <span class="arithmatex">\(\mathcal{U}(-1,1)\)</span>，分段积分可得）</p>
+<div class="arithmatex">\[
+f_{X_1+X_2+X_3}(x)=\begin{cases}\dfrac{(3-|x|)^2}{16}, &amp; \text{if } 1\le|x|\le 3,\\[4pt] \dfrac{3-x^2}{8}, &amp; \text{if } 0\le|x|\le 1,\\[4pt] 0, &amp; \text{if } |x|&gt;3.\end{cases}
+\]</div>
+<p>3) <span class="arithmatex">\(S_n=X_1+X_2+\cdots+X_n\)</span> 的密度函数为（归纳卷积的一般公式，了解即可）</p>
+<div class="arithmatex">\[
+f_{S_n}(x)=\begin{cases}\dfrac{1}{2^n(n-1)!}\displaystyle\sum_{k=0}^{[\frac{n+x}{2}]}(-1)^k\binom{n}{k}(n+x-2k)^{n-1}, &amp; \text{if } |x|\le n,\\[4pt] 0, &amp; \text{if } |x|&gt;n,\end{cases}
+\]</div>
+<p>此处 <span class="arithmatex">\([a]\)</span> 表示 <span class="arithmatex">\(a\)</span> 的整数部分。</p>
+<p><strong>观察</strong>（课件"例2.6 结论图"）：把 <span class="arithmatex">\(f_{S_n}\)</span> 与对应的正态密度（approximation）画在一起，<span class="arithmatex">\(n=2\)</span> 时已接近，<span class="arithmatex">\(n\ge 5\)</span> 后几乎重合——<strong>多个独立变量叠加趋近正态</strong>，这是中心极限定理的直观预览。</p>
+</blockquote>
+<h3 id="24-ii-vx-y-i">2.4 特殊情形 (ii)：差 <span class="arithmatex">\(V=X-Y\)</span>（类似 (i)）<a class="headerlink" href="#24-ii-vx-y-i" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>[!EXAMPLE]- 例题 1.7：差的密度公式
+设 <span class="arithmatex">\((X,Y)\)</span> 有联合密度 <span class="arithmatex">\(f(x,y)\)</span>，则 <span class="arithmatex">\(V=X-Y\)</span> 有密度函数</p>
+<div class="arithmatex">\[
+f_V(v)=\int_{-\infty}^{\infty}f(x,x-v)\,dx.
+\]</div>
+<p>特别地，当 <span class="arithmatex">\(X,Y\)</span> 独立时，<span class="arithmatex">\(V=X-Y\)</span> 有密度函数</p>
+<div class="arithmatex">\[
+f_V(v)=\int_{-\infty}^{\infty}f_X(x)f_Y(x-v)\,dx.
+\]</div>
+<p><strong>解（思路）</strong>：与例 1.4 同法。<span class="arithmatex">\(\mathbb{P}(a&lt;V\le b)=\int_{\mathbb{R}^2}I_{\{a&lt;x-y\le b\}}f(x,y)dxdy\)</span>，固定 <span class="arithmatex">\(x\)</span> 对 <span class="arithmatex">\(y\)</span> 作换元 <span class="arithmatex">\(v=x-y\)</span>（即 <span class="arithmatex">\(y=x-v\)</span>，<span class="arithmatex">\(|dy|=|dv|\)</span>），再用 Fubini 交换次序即得（注：此步补全了换元依据；也可把减法转化为加法 <span class="arithmatex">\(V=X+(-Y)\)</span> 套用卷积公式）。</p>
+<p>[!WARNING] 易错
+差的公式里第二个密度的宗量是 <span class="arithmatex">\(f_Y(x-v)\)</span>（即 <span class="arithmatex">\(y=x-v\)</span>），<strong>不是</strong> <span class="arithmatex">\(f_Y(v-x)\)</span>。和的卷积是 <span class="arithmatex">\(f_Y(z-x)\)</span>。两者来源都是"解出另一变量"：<span class="arithmatex">\(X+Y=z\Rightarrow y=z-x\)</span>；<span class="arithmatex">\(X-Y=v\Rightarrow y=x-v\)</span>。死记容易混，建议每次现场解方程。</p>
+</blockquote>
+<h3 id="25-jacobian">2.5 多个函数的联合密度（Jacobian 变换法）<a class="headerlink" href="#25-jacobian" title="Permanent link">&para;</a></h3>
+<p>设 <span class="arithmatex">\(\vec{X}=(X_1,X_2,\ldots,X_n)\)</span> 有联合密度 <span class="arithmatex">\(f(\vec{x})\)</span>，<span class="arithmatex">\(Y_1=g_1(\vec{X}),\ldots,Y_n=g_n(\vec{X})\)</span> 是 <span class="arithmatex">\(n\)</span> 个 <span class="arithmatex">\(\vec{X}\)</span> 的函数。<span class="arithmatex">\(\vec{Y}=(Y_1,Y_2,\ldots,Y_n)\)</span> 的联合密度是什么？</p>
+<blockquote>
+<p>[!NOTE] 回忆（Lecture05/06 定理 2.1：一维随机变量函数的密度）
+设 <span class="arithmatex">\(X\)</span> 有概率密度 <span class="arithmatex">\(f(x)\)</span>，<span class="arithmatex">\(D\subset\mathbb{R}\)</span>，<span class="arithmatex">\(Y=g(X)\)</span>，<span class="arithmatex">\(\mathbb{P}(Y\in D)=1\)</span>。如果
+1. 对 <span class="arithmatex">\(y\in D\)</span>，<span class="arithmatex">\(\{Y=y\}=\bigcup_{i=1}^{n}\{X=h_i(y)\}\)</span>；
+2. 每个 <span class="arithmatex">\(h_i(y)\)</span> 在 <span class="arithmatex">\(D\)</span> 上有连续导数，且诸 <span class="arithmatex">\(h_i(D)\)</span> 互不相交（各反函数分支的值域内有连续的导数）；</p>
+<p>则 <span class="arithmatex">\(Y\)</span> 有密度</p>
+<div class="arithmatex">\[
+g_Y(y)=\begin{cases}\displaystyle\sum_{i=1}^{n}f(h_i(y))\,|h_i'(y)|, &amp; y\in D,\\ 0, &amp; y\in D^c.\end{cases}
+\]</div>
+<p>本节的定理就是它的多维版本：<span class="arithmatex">\(|h_i'(y)|\)</span> 升级为 Jacobian 行列式的绝对值。</p>
+<p>[!IMPORTANT] 定理 1.1（2 维变量变换，2-dim）（常用）
+设 <span class="arithmatex">\((X,Y)\)</span> 有联合密度 <span class="arithmatex">\(f(x,y)\)</span>，<span class="arithmatex">\(U=u(X,Y)\)</span>，<span class="arithmatex">\(V=v(X,Y)\)</span> 是 <span class="arithmatex">\((X,Y)\)</span> 的函数，<span class="arithmatex">\(D\)</span> 是平面上的区域使得 <span class="arithmatex">\(\mathbb{P}((U,V)\in D)=1\)</span>。如果存在 <span class="arithmatex">\(D\)</span> 上的函数 <span class="arithmatex">\(x_i=x_i(u,v)\)</span>，<span class="arithmatex">\(y_i=y_i(u,v)\)</span>，<span class="arithmatex">\(i=1,2,\ldots,n\)</span>，使得
+1. 对 <span class="arithmatex">\((u,v)\in D\)</span>，有 <span class="arithmatex">\(\{U=u,V=v\}=\bigcup_{i=1}^{n}\{X=x_i,Y=y_i\}\)</span>（反解出全部分支）；
+2. <span class="arithmatex">\(\Delta_i:x_i=x_i(u,v),\ y_i=y_i(u,v)\)</span> 是 <span class="arithmatex">\(D\)</span> 到其值域 <span class="arithmatex">\(D_i\)</span> 的可逆映射，有连续的偏导数，并且雅克比 (Jacobian) 行列式的绝对值 <span class="arithmatex">\(\left|\frac{\partial(x_i,y_i)}{\partial(u,v)}\right|\neq 0\)</span>，<span class="arithmatex">\((u,v)\in D\)</span>，<span class="arithmatex">\(i=1,\ldots,n\)</span>；
+3. <span class="arithmatex">\(D_1,\ldots,D_n\)</span> 互不相交；</p>
+<p>则 <span class="arithmatex">\((U,V)\)</span> 有联合密度</p>
+<div class="arithmatex">\[
+g(u,v)=\begin{cases}\displaystyle\sum_{i=1}^{n}f\big(x_i(u,v),y_i(u,v)\big)\left|\frac{\partial(x_i,y_i)}{\partial(u,v)}\right|, &amp; (u,v)\in D,\\ 0, &amp; (u,v)\in D^c.\end{cases}
+\]</div>
+</blockquote>
+<p><strong>直觉</strong>：新密度 = 旧密度在原像点的值 × 面积缩放因子（Jacobian 绝对值），多个反解分支则把各分支的贡献加起来。<strong>定理 1.1 可以直接从 2 维推广到 n 维</strong>。</p>
+<h4 id="aside-vector-and-matrix-calculusjacobian">Aside: Vector and matrix calculus（Jacobian 的记号约定）<a class="headerlink" href="#aside-vector-and-matrix-calculusjacobian" title="Permanent link">&para;</a></h4>
+<p>向量对向量求导有两种排版约定：</p>
+<ul>
+<li><strong>Numerator-layout（分子布局）</strong>：<span class="arithmatex">\(\frac{\partial y}{\partial x}\)</span> 按 <span class="arithmatex">\(y\)</span> 和 <span class="arithmatex">\(x'\)</span> 排，如</li>
+</ul>
+<div class="arithmatex">\[
+\frac{\partial(x,y)}{\partial(u,v)}=\begin{pmatrix}\dfrac{\partial x}{\partial u} &amp; \dfrac{\partial x}{\partial v}\\[4pt] \dfrac{\partial y}{\partial u} &amp; \dfrac{\partial y}{\partial v}\end{pmatrix};
+\]</div>
+<ul>
+<li><strong>Denominator-layout（分母布局）</strong>：按 <span class="arithmatex">\(y'\)</span> 和 <span class="arithmatex">\(x\)</span> 排，即上述矩阵的转置</li>
+</ul>
+<div class="arithmatex">\[
+\frac{\partial(x,y)}{\partial(u,v)}=\begin{pmatrix}\dfrac{\partial x}{\partial u} &amp; \dfrac{\partial y}{\partial u}\\[4pt] \dfrac{\partial x}{\partial v} &amp; \dfrac{\partial y}{\partial v}\end{pmatrix};
+\]</div>
+<p>相应地，<span class="arithmatex">\(\frac{\partial(x,y)}{\partial u}=\left(\frac{\partial x}{\partial u},\frac{\partial y}{\partial u}\right)'\)</span>（一列），<span class="arithmatex">\(\frac{\partial x}{\partial(u,v)}=\left(\frac{\partial x}{\partial u},\frac{\partial x}{\partial v}\right)'\)</span>。</p>
+<blockquote>
+<p>[!NOTE] 备注
+由于矩阵转置不改变行列式，<span class="arithmatex">\(\left|\frac{\partial(x,y)}{\partial(u,v)}\right|\)</span> 在两种布局下相同——所以定理 1.1 中的 Jacobian 绝对值不依赖布局约定，放心算。</p>
+<p>[!EXAMPLE]- 例题 1.8：极坐标变换——<span class="arithmatex">\((R,\Theta)\)</span> 的联合密度
+设 <span class="arithmatex">\(X,Y\)</span> 独立，<span class="arithmatex">\(X,Y\sim\mathcal{N}(0,1)\)</span>，<span class="arithmatex">\((R,\Theta)\)</span> 由极坐标变换</p>
+<div class="arithmatex">\[
+\begin{cases}X=R\cos\Theta\\ Y=R\sin\Theta\end{cases}
+\]</div>
+<p>决定，求 <span class="arithmatex">\((R,\Theta)\)</span> 的联合密度。</p>
+<p><strong>解</strong>：<span class="arithmatex">\((X,Y)\)</span> 有联合密度</p>
+<div class="arithmatex">\[
+f(x,y)=\frac{1}{2\pi}\exp\left(-\frac{x^2+y^2}{2}\right).
+\]</div>
+<p>定义 <span class="arithmatex">\(D=\{(r,\theta)\mid r&gt;0,\ \theta\in[0,2\pi)\}\)</span>，则 <span class="arithmatex">\(\mathbb{P}((R,\Theta)\in D)=1\)</span>。变换</p>
+<div class="arithmatex">\[
+\Delta:\begin{cases}x=r\cos\theta\\ y=r\sin\theta\end{cases}
+\]</div>
+<p>建立了 <span class="arithmatex">\(D\)</span> 到 <span class="arithmatex">\(D_1=\{(x,y)\mid(x,y)\neq 0\}\)</span> 的可逆变换（单分支，<span class="arithmatex">\(n=1\)</span>）。对 <span class="arithmatex">\((r,\theta)\in D\)</span>，利用</p>
+<div class="arithmatex">\[
+\{R=r,\Theta=\theta\}=\{X=x,Y=y\},\qquad \frac{\partial(x,y)}{\partial(r,\theta)}=\det\begin{pmatrix}\cos\theta &amp; -r\sin\theta\\ \sin\theta &amp; r\cos\theta\end{pmatrix}=r&gt;0,
+\]</div>
+<p>（注：此步补全了 Jacobian 行列式的展开：<span class="arithmatex">\(r\cos^2\theta+r\sin^2\theta=r\)</span>。）由定理 1.1 得 <span class="arithmatex">\((R,\Theta)\)</span> 的联合密度</p>
+<div class="arithmatex">\[
+g(r,\theta)=f(r\cos\theta,r\sin\theta)\cdot r=\frac{1}{2\pi}\cdot r\cdot\exp\left(-\frac{r^2}{2}\right),\quad(r,\theta)\in D.
+\]</div>
+<p>从中可以看出 <span class="arithmatex">\(R\)</span> 和 <span class="arithmatex">\(\Theta\)</span> <strong>独立</strong>（联合密度可分离变量为 <span class="arithmatex">\(r\)</span> 的函数乘 <span class="arithmatex">\(\theta\)</span> 的函数，且定义域是乘积形），分别有概率密度</p>
+<div class="arithmatex">\[
+g_R(r)=r\exp\left(-\frac{r^2}{2}\right),\ r\ge 0;\qquad g_\Theta(\theta)=\frac{1}{2\pi}I_{[0,2\pi)}(\theta).
+\]</div>
+<p>即 <span class="arithmatex">\(R\)</span> 是 Rayleigh 分布（脱靶量，呼应例 1.2），<span class="arithmatex">\(\Theta\sim\mathcal{U}[0,2\pi)\)</span>。</p>
+<p>[!TIP] 方法：蕴含独立性的联合密度快速拆解（归一化）
+若联合密度 <span class="arithmatex">\(g(u,v)=h_1(u)h_2(v)\)</span> 在矩形（乘积型）区域上成立，则 <span class="arithmatex">\(U,V\)</span> 独立，且各自密度正比于 <span class="arithmatex">\(h_1,h_2\)</span>——把每个因子各自归一化（乘常数使积分为 1）即得边缘密度，无需再积分求边缘。例 1.8、例 1.10 都用了这一招。</p>
+<p>[!IMPORTANT] 定理 1.2（同分布经函数映射仍同分布）
+设 <span class="arithmatex">\(n\)</span> 维随机向量 <span class="arithmatex">\(\boldsymbol{X}\)</span> 和 <span class="arithmatex">\(\boldsymbol{Y}\)</span> 有相同的分布，<span class="arithmatex">\(g:\mathbb{R}^n\to\mathbb{R}^m\)</span> 是可测的，则 <span class="arithmatex">\(g(\boldsymbol{X})\)</span> 与 <span class="arithmatex">\(g(\boldsymbol{Y})\)</span> 有相同的分布。</p>
+<p><strong>直觉</strong>：分布只由"取值的概率规律"决定，对同分布的输入做同一个加工，输出的概率规律当然也一样。</p>
+<p>[!EXAMPLE]- 例题 1.9：Box–Muller 正态随机数（不要求掌握，仅用于展示定理 1.2 的功能）
+设 <span class="arithmatex">\(U,V\)</span> 独立，<span class="arithmatex">\(U,V\sim\mathcal{U}(0,1)\)</span>，定义</p>
+<div class="arithmatex">\[
+\begin{cases}X=\sqrt{-2\ln U}\cos(2\pi V)\\ Y=\sqrt{-2\ln U}\sin(2\pi V)\end{cases}
+\]</div>
+<p>则 <span class="arithmatex">\(X,Y\)</span> 独立，且服从 <span class="arithmatex">\(\mathcal{N}(0,1)\)</span>。【用来产生正态随机变量】</p>
+<p><strong>证明</strong>：<span class="arithmatex">\(R=\sqrt{-2\ln U}\sim\)</span> Rayleigh 分布（注：补全验证——<span class="arithmatex">\(\mathbb{P}(R\le r)=\mathbb{P}(U\ge e^{-r^2/2})=1-e^{-r^2/2}\)</span>，求导得密度 <span class="arithmatex">\(re^{-r^2/2}\)</span>，正是 Rayleigh），<span class="arithmatex">\(\Theta=2\pi V\sim\mathcal{U}[0,2\pi)\)</span>，且 <span class="arithmatex">\(R\)</span> 与 <span class="arithmatex">\(\Theta\)</span> 独立。由例 1.8，"Rayleigh × 独立均匀角度"经过 <span class="arithmatex">\((r,\theta)\mapsto(r\cos\theta,r\sin\theta)\)</span> 映射后得到两个独立 <span class="arithmatex">\(\mathcal{N}(0,1)\)</span>；由定理 1.2（同分布输入 → 同分布输出）易得结论成立。</p>
+<p>[!EXAMPLE]- 例题 1.10：<span class="arithmatex">\(U=X/Y\)</span> 与 <span class="arithmatex">\(V=X^2+Y^2\)</span> 的联合密度
+设 <span class="arithmatex">\(X,Y\)</span> 独立，<span class="arithmatex">\(X,Y\sim\mathcal{N}(0,1)\)</span>，求 <span class="arithmatex">\(U=X/Y\)</span> 和 <span class="arithmatex">\(V=X^2+Y^2\)</span> 的联合密度。</p>
+<p><strong>解</strong>（课件只给了结果，以下推导为补全）：取 <span class="arithmatex">\(D=\{(u,v)\mid u\in\mathbb{R},v&gt;0\}\)</span>。由 <span class="arithmatex">\(x=uy\)</span> 及 <span class="arithmatex">\(x^2+y^2=v\)</span> 得 <span class="arithmatex">\(y^2(1+u^2)=v\)</span>，于是反解有<strong>两个分支</strong>（<span class="arithmatex">\(y\)</span> 取正负）：</p>
+<div class="arithmatex">\[
+\Delta_{\pm}:\quad y_{\pm}=\pm\sqrt{\frac{v}{1+u^2}},\qquad x_{\pm}=u\,y_{\pm}.
+\]</div>
+<p>计算分支 <span class="arithmatex">\(\Delta_+\)</span> 的 Jacobian（依据：对 <span class="arithmatex">\(u,v\)</span> 分别求偏导）：</p>
+<div class="arithmatex">\[
+\frac{\partial y}{\partial u}=-\frac{u\sqrt{v}}{(1+u^2)^{3/2}},\quad \frac{\partial y}{\partial v}=\frac{1}{2\sqrt{v}\sqrt{1+u^2}},\quad \frac{\partial x}{\partial u}=y+u\frac{\partial y}{\partial u},\quad \frac{\partial x}{\partial v}=u\frac{\partial y}{\partial v},
+\]</div>
+<div class="arithmatex">\[
+\frac{\partial(x,y)}{\partial(u,v)}=\frac{\partial x}{\partial u}\frac{\partial y}{\partial v}-\frac{\partial x}{\partial v}\frac{\partial y}{\partial u}=y\frac{\partial y}{\partial v}=\sqrt{\frac{v}{1+u^2}}\cdot\frac{1}{2\sqrt{v}\sqrt{1+u^2}}=\frac{1}{2(1+u^2)}.
+\]</div>
+<p>分支 <span class="arithmatex">\(\Delta_-\)</span> 同理，Jacobian 绝对值也是 <span class="arithmatex">\(\frac{1}{2(1+u^2)}\)</span>。而两个分支上 <span class="arithmatex">\(x^2+y^2=v\)</span> 都成立，故 <span class="arithmatex">\(f(x_{\pm},y_{\pm})=\frac{1}{2\pi}e^{-v/2}\)</span>。由定理 1.1 把两支贡献相加：</p>
+<div class="arithmatex">\[
+g(u,v)=2\cdot\frac{1}{2\pi}e^{-\frac{v}{2}}\cdot\frac{1}{2(1+u^2)}=\frac{1}{\pi(1+u^2)}\cdot\frac{1}{2}e^{-\frac{v}{2}},\quad v\ge 0,\ u\in\mathbb{R}.
+\]</div>
+<p>即 <span class="arithmatex">\(U,V\)</span> <strong>独立</strong>（密度可分离），且 <span class="arithmatex">\(U\)</span> 服从 <strong>Cauchy 分布</strong>（密度 <span class="arithmatex">\(\frac{1}{\pi(1+u^2)}\)</span>），<span class="arithmatex">\(V\)</span> 服从<strong>指数分布</strong> <span class="arithmatex">\(\mathcal{E}(\frac{1}{2})\)</span>（也就是 <span class="arithmatex">\(\chi^2_2\)</span>）。</p>
+<p><strong>附带收获</strong>：两个独立标准正态之商是 Cauchy 分布——这就是"曲线救国"求出 Cauchy 密度的经典办法。</p>
+<p>[!NOTE] 思考题（课件小结页）
+乘法 <span class="arithmatex">\(Z=XY\)</span>、除法 <span class="arithmatex">\(Z=X/Y\)</span> 的特殊情形公式该如何做？（提示：增补变量法——补一个变量如 <span class="arithmatex">\(W=X\)</span> 凑成二维可逆变换，用定理 1.1 求联合密度后再积分掉 <span class="arithmatex">\(W\)</span>；或仿照例 1.4 用 CDF+换元直接推。）</p>
+</blockquote>
+<hr />
+<h2 id="_3">三、次序统计量<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h3 id="31">3.1 定义<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>[!IMPORTANT] 定义 2.1（次序统计量）
+设 <span class="arithmatex">\(X_1,X_2,\ldots,X_n\)</span> 是概率空间 <span class="arithmatex">\((\Omega,\mathcal{F},\mathbb{P})\)</span> 上的随机变量，对 <span class="arithmatex">\(\omega\in\Omega\)</span>，将 <span class="arithmatex">\(X_1(\omega),X_2(\omega),\ldots,X_n(\omega)\)</span> 从小到大排列得到</p>
+<div class="arithmatex">\[
+X_{(1)}(\omega)\le X_{(2)}(\omega)\le\cdots\le X_{(n)}(\omega),
+\]</div>
+<p>称 <span class="arithmatex">\(X_{(1)},X_{(2)},\ldots,X_{(n)}\)</span> 为 <span class="arithmatex">\(X_1,X_2,\ldots,X_n\)</span> 的<strong>次序统计量 (order statistics)</strong>。</p>
+</blockquote>
+<p><strong>直觉</strong>：对每个样本点 <span class="arithmatex">\(\omega\)</span> 都把这组数"现场排序"，<span class="arithmatex">\(X_{(k)}\)</span> 就是"第 <span class="arithmatex">\(k\)</span> 小"这个名次上的值；名次是固定的，占据名次的人随 <span class="arithmatex">\(\omega\)</span> 变化。特别地 <span class="arithmatex">\(X_{(1)}=\min\)</span>，<span class="arithmatex">\(X_{(n)}=\max\)</span>。</p>
+<blockquote>
+<p>[!EXAMPLE]- 例题 2.1：三位百米运动员
+设某省有 3 位百米运动员，用 <span class="arithmatex">\(X_i\)</span> 表示第 <span class="arithmatex">\(i\)</span> 个运动员的成绩。设 <span class="arithmatex">\(X_i\)</span> 都是样本空间 <span class="arithmatex">\(\Omega=\{\omega_1,\omega_2,\omega_3\}\)</span> 上的随机变量，其中 <span class="arithmatex">\(\omega_i=\)</span> 第 <span class="arithmatex">\(i\)</span> 次训练的成绩（单位：秒）。记 <span class="arithmatex">\(X_{(i)}\)</span> 为第 <span class="arithmatex">\(i\)</span> 名次运动员的成绩。</p>
+<p><strong>解</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>第几次训练</th>
+<th><span class="arithmatex">\(X_1\)</span></th>
+<th><span class="arithmatex">\(X_2\)</span></th>
+<th><span class="arithmatex">\(X_3\)</span></th>
+<th><span class="arithmatex">\(X_{(1)}\)</span></th>
+<th><span class="arithmatex">\(X_{(2)}\)</span></th>
+<th><span class="arithmatex">\(X_{(3)}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\omega_1\)</span></td>
+<td>11.3</td>
+<td>11.6</td>
+<td>11.0</td>
+<td>11.0</td>
+<td>11.3</td>
+<td>11.6</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\omega_2\)</span></td>
+<td>11.0</td>
+<td>11.5</td>
+<td>11.8</td>
+<td>11.0</td>
+<td>11.5</td>
+<td>11.8</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\omega_3\)</span></td>
+<td>12.0</td>
+<td>11.9</td>
+<td>12.2</td>
+<td>11.9</td>
+<td>12.0</td>
+<td>12.2</td>
+</tr>
+</tbody>
+</table>
+<p><span class="arithmatex">\(X_{(1)},X_{(2)},X_{(3)}\)</span> 即为 <span class="arithmatex">\(X_1,X_2,X_3\)</span> 的次序统计量。注意每行排序后"第 1 名"可能来自不同的 <span class="arithmatex">\(X_i\)</span>。</p>
+</blockquote>
+<h3 id="32">3.2 次序统计量的分布密度<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
+<p>以下设随机变量 <span class="arithmatex">\(X_1,X_2,\ldots,X_n\)</span> <strong>独立同分布</strong>，有公共的分布函数 <span class="arithmatex">\(F(x)\)</span> 和密度函数 <span class="arithmatex">\(f(x)\)</span>。性质汇总：</p>
+<table>
+<thead>
+<tr>
+<th>性质</th>
+<th>内容</th>
+<th>公式</th>
+<th>标注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>性质 2.1</td>
+<td>全体次序统计量的联合密度</td>
+<td><span class="arithmatex">\(g(x_1,\ldots,x_n)=n!\prod_{i=1}^{n}f(x_i)\)</span>，<span class="arithmatex">\(x_1&lt;\cdots&lt;x_n\)</span></td>
+<td>常用</td>
+</tr>
+<tr>
+<td>性质 2.2</td>
+<td>单个 <span class="arithmatex">\(X_{(k)}\)</span> 的密度</td>
+<td><span class="arithmatex">\(g_k(x_k)=n\binom{n-1}{k-1}[F(x_k)]^{k-1}[1-F(x_k)]^{n-k}f(x_k)\)</span></td>
+<td>常用</td>
+</tr>
+<tr>
+<td>性质 2.3</td>
+<td>有序区域积分引理</td>
+<td><span class="arithmatex">\(\int_{a&lt;x_1&lt;\cdots&lt;x_k&lt;b}f(x_1)\cdots f(x_k)dx_1\cdots dx_k=\frac{(F(b)-F(a))^k}{k!}\)</span></td>
+<td>工具</td>
+</tr>
+<tr>
+<td>性质 2.4</td>
+<td>两个次序统计量的联合密度</td>
+<td>见下</td>
+<td>了解即可</td>
+</tr>
+<tr>
+<td>性质 2.5</td>
+<td><span class="arithmatex">\((X_{(1)},\ldots,X_{(n)})\)</span> 的联合分布函数连续</td>
+<td>见附录</td>
+<td>了解即可</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>[!IMPORTANT] 性质 2.1（联合密度）
+<span class="arithmatex">\((X_{(1)},X_{(2)},\ldots,X_{(n)})\)</span> 有联合密度</p>
+<div class="arithmatex">\[
+g(x_1,\ldots,x_n)=\begin{cases}n!\displaystyle\prod_{i=1}^{n}f(x_i), &amp; \text{if } x_1&lt;\cdots&lt;x_n,\\ 0, &amp; \text{others}.\end{cases}
+\]</div>
+</blockquote>
+<p><strong>证明思路（微元法）</strong>：对 <span class="arithmatex">\(x_1&lt;\cdots&lt;x_n\)</span>，事件"诸 <span class="arithmatex">\(X_{(i)}\)</span> 分别落在 <span class="arithmatex">\(x_i\)</span> 附近的小区间"等价于"<span class="arithmatex">\(n\)</span> 个原始变量以<strong>某种排列</strong>一一落入这些小区间"。排列共 <span class="arithmatex">\(n!\)</span> 种且互斥，每种的概率约为 <span class="arithmatex">\(\prod_i f(x_i)dx_i\)</span>，故密度为 <span class="arithmatex">\(n!\prod_i f(x_i)\)</span>。这就是为何比独立情形多了因子 <span class="arithmatex">\(n!\)</span>。</p>
+<blockquote>
+<p>[!IMPORTANT] 性质 2.3（有序区域积分引理）
+对于 <span class="arithmatex">\(-\infty\le a&lt;x_1&lt;x_2&lt;\cdots&lt;x_k&lt;b\le\infty\)</span>，有</p>
+<div class="arithmatex">\[
+\int_{a&lt;x_1&lt;\cdots&lt;x_k&lt;b}f(x_1)\cdots f(x_k)\,dx_1\cdots dx_k=\frac{(F(b)-F(a))^k}{k!}.
+\]</div>
+</blockquote>
+<p><strong>证明（归纳法）</strong>：<span class="arithmatex">\(k=1\)</span> 时即 <span class="arithmatex">\(\int_a^b f=F(b)-F(a)\)</span>，结论成立。假设结论对 <span class="arithmatex">\(k-1\)</span> 成立，对于 <span class="arithmatex">\(k\)</span>，用 Fubini 定理先固定最外层的 <span class="arithmatex">\(x_k\)</span>：</p>
+<div class="arithmatex">\[
+\int_{a&lt;x_1&lt;\cdots&lt;x_k&lt;b}f(x_1)\cdots f(x_k)\,dx_1\cdots dx_k=\int_a^b\left(\int_{a&lt;x_1&lt;\cdots&lt;x_{k-1}&lt;x_k}f(x_1)\cdots f(x_{k-1})\,dx_1\cdots dx_{k-1}\right)f(x_k)\,dx_k
+\]</div>
+<div class="arithmatex">\[
+=\int_a^b\frac{(F(x_k)-F(a))^{k-1}}{(k-1)!}f(x_k)\,dx_k=\frac{(F(b)-F(a))^k}{k!}.
+\]</div>
+<p>（注：最后一步补全依据——令 <span class="arithmatex">\(G(x)=F(x)-F(a)\)</span>，则 <span class="arithmatex">\(G'=f\)</span>，被积函数是 <span class="arithmatex">\(\frac{G^{k-1}G'}{(k-1)!}\)</span>，原函数为 <span class="arithmatex">\(\frac{G^k}{k!}\)</span>。）</p>
+<blockquote>
+<p>[!IMPORTANT] 性质 2.2（<span class="arithmatex">\(X_{(k)}\)</span> 的边缘密度）
+<span class="arithmatex">\(X_{(k)}\)</span> 有密度</p>
+<div class="arithmatex">\[
+g_k(x_k)=n\binom{n-1}{k-1}[F(x_k)]^{k-1}[1-F(x_k)]^{n-k}f(x_k).
+\]</div>
+</blockquote>
+<p><strong>证明（课件 Thinking 页）</strong>：从性质 2.1 的联合密度出发，把除 <span class="arithmatex">\(x_k\)</span> 外的变量都积分掉。记 <span class="arithmatex">\(c=x_k\)</span>：</p>
+<div class="arithmatex">\[
+g_k(c)=\int_{\{x_1&lt;\cdots&lt;x_{k-1}&lt;c&lt;x_{k+1}&lt;\cdots&lt;x_n\}}g(x_1,\ldots,x_n)\,dx_1\ldots dx_{k-1}dx_{k+1}\ldots dx_n
+\]</div>
+<div class="arithmatex">\[
+=n!\,f(c)\left[\int_{x_1&lt;\cdots&lt;x_{k-1}&lt;c}f(x_1)\cdots f(x_{k-1})\,dx_1\cdots dx_{k-1}\right]\cdot\left[\int_{c&lt;x_{k+1}&lt;\cdots&lt;x_n}f(x_{k+1})\cdots f(x_n)\,dx_{k+1}\cdots dx_n\right].
+\]</div>
+<p>由性质 2.3（前一块取 <span class="arithmatex">\(a=-\infty,b=c\)</span>，后一块取 <span class="arithmatex">\(a=c,b=+\infty\)</span>）：</p>
+<div class="arithmatex">\[
+g_k(c)=n!\,f(c)\cdot\frac{F(c)^{k-1}}{(k-1)!}\cdot\frac{(1-F(c))^{n-k}}{(n-k)!}=n\binom{n-1}{k-1}F(c)^{k-1}(1-F(c))^{n-k}f(c).
+\]</div>
+<p>（注：此步补全了组合数化简：<span class="arithmatex">\(\frac{n!}{(k-1)!(n-k)!}=n\cdot\frac{(n-1)!}{(k-1)!(n-k)!}=n\binom{n-1}{k-1}\)</span>。）</p>
+<p><strong>直觉记忆</strong>：要让"第 <span class="arithmatex">\(k\)</span> 小"落在 <span class="arithmatex">\(c\)</span> 处，需要 <span class="arithmatex">\(k-1\)</span> 个比它小（每个概率 <span class="arithmatex">\(F(c)\)</span>）、<span class="arithmatex">\(n-k\)</span> 个比它大（每个概率 <span class="arithmatex">\(1-F(c)\)</span>）、1 个恰好在 <span class="arithmatex">\(c\)</span> 处（密度 <span class="arithmatex">\(f(c)\)</span>）；再乘上"选谁当这三拨人"的多项式系数 <span class="arithmatex">\(\frac{n!}{(k-1)!\,1!\,(n-k)!}\)</span>。</p>
+<p><strong>特例（常用）</strong>：
+- 最小值 <span class="arithmatex">\(X_{(1)}\)</span>：<span class="arithmatex">\(g_1(x)=n[1-F(x)]^{n-1}f(x)\)</span>，等价地 <span class="arithmatex">\(\mathbb{P}(X_{(1)}&gt;x)=[1-F(x)]^n\)</span>；
+- 最大值 <span class="arithmatex">\(X_{(n)}\)</span>：<span class="arithmatex">\(g_n(x)=n[F(x)]^{n-1}f(x)\)</span>，等价地 <span class="arithmatex">\(\mathbb{P}(X_{(n)}\le x)=[F(x)]^n\)</span>。</p>
+<blockquote>
+<p>[!IMPORTANT] 性质 2.4（两个次序统计量的联合密度）（了解即可）
+对 <span class="arithmatex">\(k_1&lt;k_2\)</span>，<span class="arithmatex">\((X_{(k_1)},X_{(k_2)})\)</span> 有联合密度</p>
+<div class="arithmatex">\[
+\begin{align}
+g(x_{k_1},x_{k_2})&amp;=\frac{n!}{(k_1-1)!\,(k_2-k_1-1)!\,(n-k_2)!}\\
+&amp;\quad\times[F(x_{k_1})]^{k_1-1}\,[F(x_{k_2})-F(x_{k_1})]^{k_2-k_1-1}\\
+&amp;\quad\times[1-F(x_{k_2})]^{n-k_2}\,f(x_{k_1})f(x_{k_2}),\qquad x_{k_1}&lt;x_{k_2}.
+\end{align}
+\]</div>
+</blockquote>
+<p><strong>证明思路</strong>：与性质 2.2 同法——从联合密度积分掉其余变量，按"小于 <span class="arithmatex">\(x_{k_1}\)</span> / 介于两者之间 / 大于 <span class="arithmatex">\(x_{k_2}\)</span>"三块分别用性质 2.3，三块人数分别为 <span class="arithmatex">\(k_1-1\)</span>、<span class="arithmatex">\(k_2-k_1-1\)</span>、<span class="arithmatex">\(n-k_2\)</span>，多项式系数即前面的阶乘比。</p>
+<blockquote>
+<p>[!WARNING] 辨析：<span class="arithmatex">\(X_{(k)}\)</span> 与 <span class="arithmatex">\(X_k\)</span>
+- <span class="arithmatex">\(X_1,\ldots,X_n\)</span> i.i.d.，但 <span class="arithmatex">\(X_{(1)},\ldots,X_{(n)}\)</span> <strong>既不独立也不同分布</strong>（联合密度只在 <span class="arithmatex">\(x_1&lt;\cdots&lt;x_n\)</span> 上非零，天然耦合）；
+- <span class="arithmatex">\(X_{(k)}\)</span> 的密度不是 <span class="arithmatex">\(f\)</span>，而是被 <span class="arithmatex">\(F^{k-1}(1-F)^{n-k}\)</span> 加权扭曲后的 <span class="arithmatex">\(f\)</span>；
+- 不要把 <span class="arithmatex">\(\mathbb{P}(X_{(n)}\le x)=[F(x)]^n\)</span>（最大值，全部 <span class="arithmatex">\(\le x\)</span>）与 <span class="arithmatex">\(\mathbb{P}(X_{(1)}&gt;x)=[1-F(x)]^n\)</span>（最小值，全部 <span class="arithmatex">\(&gt;x\)</span>）混淆。</p>
+<p>[!EXAMPLE]- 例题 2.2：教室灯泡——最小值的分布
+某教学楼原来每个教室有 4 只灯泡用于室内照明，新装修后每个教室有 24 只灯泡用于室内照明。装修后教室管理员总认为灯泡更容易坏了，试解释其中的原因。</p>
+<p><strong>解</strong>：设所有灯泡的使用寿命相互独立，且服从 <span class="arithmatex">\(\mathcal{E}(\lambda)\)</span>。用 <span class="arithmatex">\(X_i\)</span> 表示第 <span class="arithmatex">\(i\)</span> 只灯泡的使用寿命，则装修前等待第一只灯泡烧坏的时间长度 <span class="arithmatex">\(X\)</span> 为</p>
+<div class="arithmatex">\[
+X=\min\{X_1,X_2,X_3,X_4\},
+\]</div>
+<p>装修后等待第一只灯泡烧坏的时间长度 <span class="arithmatex">\(Y\)</span> 为</p>
+<div class="arithmatex">\[
+Y=\min\{X_1,X_2,\ldots,X_{24}\}.
+\]</div>
+<p>利用性质 2.2（取 <span class="arithmatex">\(k=1\)</span>）的结论分别得到 <span class="arithmatex">\(X\)</span> 和 <span class="arithmatex">\(Y\)</span> 的密度函数（注：此步补全代入过程——指数分布 <span class="arithmatex">\(F(t)=1-e^{-\lambda t}\)</span>，<span class="arithmatex">\(f(t)=\lambda e^{-\lambda t}\)</span>，故 <span class="arithmatex">\(g_1(t)=n[1-F(t)]^{n-1}f(t)=n\lambda e^{-n\lambda t}\)</span>）：</p>
+<div class="arithmatex">\[
+f_X(t)=4\lambda e^{-4\lambda t},\qquad f_Y(t)=24\lambda e^{-24\lambda t},\qquad t&gt;0,
+\]</div>
+<p>即 <span class="arithmatex">\(X\sim\mathcal{E}(4\lambda)\)</span>，<span class="arithmatex">\(Y\sim\mathcal{E}(24\lambda)\)</span>。于是有 <span class="arithmatex">\(\mathbb{P}(X&gt;t)=e^{-4\lambda t}\)</span> 和 <span class="arithmatex">\(\mathbb{P}(Y&gt;t)=e^{-24\lambda t}\)</span>。</p>
+<p>当 <span class="arithmatex">\(\lambda=1/6000\)</span>（小时）时（比如 Philips 牌 5W LED 球泡），</p>
+<div class="arithmatex">\[
+\mathbb{P}(X&gt;400)=0.7659,\quad\mathbb{P}(X&gt;200)=0.8752;\qquad\mathbb{P}(Y&gt;400)=0.2019,\quad\mathbb{P}(Y&gt;200)=0.4493.
+\]</div>
+<p>从中可以看到 <span class="arithmatex">\(Y\)</span> 要比 <span class="arithmatex">\(X\)</span> <strong>随机地小很多</strong>——灯泡本身没变，只是"24 个里最早坏的那个"自然比"4 个里最早坏的那个"来得早。</p>
+<p>[!NOTE] 备注
+顺带得到一个常用结论：<span class="arithmatex">\(n\)</span> 个独立 <span class="arithmatex">\(\mathcal{E}(\lambda)\)</span> 的最小值服从 <span class="arithmatex">\(\mathcal{E}(n\lambda)\)</span>。</p>
+</blockquote>
+<h3 id="33-beta">3.3 Beta 分布<a class="headerlink" href="#33-beta" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>[!IMPORTANT] 定义（Beta 分布 <span class="arithmatex">\(\text{Beta}(\alpha,\beta)\)</span>）
+设 <span class="arithmatex">\(\alpha,\beta\)</span> 是正常数，如果 <span class="arithmatex">\(X\)</span> 的密度是</p>
+<div class="arithmatex">\[
+f(x)=\frac{1}{B(\alpha,\beta)}x^{\alpha-1}(1-x)^{\beta-1},\quad 0&lt;x&lt;1,
+\]</div>
+<p>其中 <span class="arithmatex">\(B(\alpha,\beta)=\dfrac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha+\beta)}\)</span>，则称 <span class="arithmatex">\(X\)</span> 服从参数为 <span class="arithmatex">\((\alpha,\beta)\)</span> 的 Beta 分布，记作 <span class="arithmatex">\(X\sim\text{Beta}(\alpha,\beta)\)</span>。</p>
+</blockquote>
+<p><strong>直觉</strong>：Beta 分布是"取值限制在 <span class="arithmatex">\((0,1)\)</span> 上的万能形状分布"，常用来描述一个<strong>概率/比例</strong>本身的不确定性。</p>
+<p>密度形状（随参数变化）：
+- 当 <span class="arithmatex">\(\alpha=\beta=1\)</span> 时，为均匀分布 <span class="arithmatex">\(\mathcal{U}(0,1)\)</span>；
+- 当 <span class="arithmatex">\(\alpha=2\)</span>，<span class="arithmatex">\(\beta=1\)</span> 时，密度函数呈直线型；
+- 当 <span class="arithmatex">\(\alpha=\beta=1/2\)</span> 时，密度函数呈上 U 型（两端高中间低）；
+- 当 <span class="arithmatex">\(\alpha=\beta=2\)</span> 时，密度函数呈下 U 型（中间高两端低）。</p>
+<blockquote>
+<p>[!NOTE] 备注：Beta 分布的两个身份
+1. <strong>贝叶斯统计中的先验分布</strong>：它是二项分布的<strong>共轭分布</strong>。若 <span class="arithmatex">\(X\mid p\sim\text{Binomial}(n,p)\)</span>，参数 <span class="arithmatex">\(p\)</span> 的先验取 <span class="arithmatex">\(\text{Beta}(\alpha,\beta)\)</span>，观测 <span class="arithmatex">\(X\)</span> 后得到后验 <span class="arithmatex">\(p\mid X\sim\text{Beta}(\alpha+X,\beta+n-X)\)</span>（直观解释：<span class="arithmatex">\(\alpha,\beta\)</span> 像"虚拟的成功/失败次数"；学习条件分布后将可以证明）。
+2. <strong>均匀分布的次序统计量</strong>：Beta 分布可看作是均匀分布 <span class="arithmatex">\(\mathcal{U}(0,1)\)</span> 的次序统计量。（注：此步补全对应关系——设 <span class="arithmatex">\(U_1,\ldots,U_n\)</span> i.i.d. <span class="arithmatex">\(\sim\mathcal{U}(0,1)\)</span>，则 <span class="arithmatex">\(F(x)=x\)</span>，<span class="arithmatex">\(f(x)=1\)</span>，由性质 2.2，<span class="arithmatex">\(U_{(k)}\)</span> 的密度为 <span class="arithmatex">\(n\binom{n-1}{k-1}x^{k-1}(1-x)^{n-k}\)</span>，恰为 <span class="arithmatex">\(\text{Beta}(k,\ n-k+1)\)</span>。）</p>
+</blockquote>
+<hr />
+<h2 id="p">四、随机变量的 p 分位数<a class="headerlink" href="#p" title="Permanent link">&para;</a></h2>
+<p>设 <span class="arithmatex">\(X\)</span> 是 <span class="arithmatex">\((\Omega,\mathcal{F},\mathbb{P})\)</span> 上的 r.v.，<span class="arithmatex">\(F(x)\)</span> 是其分布函数。</p>
+<h3 id="41">4.1 定义<a class="headerlink" href="#41" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>[!IMPORTANT] 直观定义（随机变量的 p 分位数, p-quantile）
+对 <span class="arithmatex">\(p\in(0,1)\)</span>，如果</p>
+<div class="arithmatex">\[
+\mathbb{P}(X\le x)\ge p,\qquad\mathbb{P}(X\ge x)\ge 1-p,
+\]</div>
+<p>称 <span class="arithmatex">\(x\)</span> 为 <span class="arithmatex">\(X\)</span> 的 <strong>p-分位数</strong>。</p>
+</blockquote>
+<p><strong>直觉</strong>：<span class="arithmatex">\(x\)</span> 把分布"按概率 <span class="arithmatex">\(p:(1-p)\)</span> 切开"——左边至少占 <span class="arithmatex">\(p\)</span>，右边至少占 <span class="arithmatex">\(1-p\)</span>。<strong>上述定义方式所确定的 p-分位数不一定唯一</strong>（如 CDF 有平台段时，一整段都满足）。</p>
+<blockquote>
+<p>[!IMPORTANT] 正式定义（满足唯一性）
+对 <span class="arithmatex">\(p\in(0,1)\)</span>，定义</p>
+<div class="arithmatex">\[
+F^{-1}(p)=\inf\{x\mid F(x)\ge p\}.
+\]</div>
+<p>称 <span class="arithmatex">\(F^{-1}(p)\)</span> 为 <span class="arithmatex">\(F\)</span> 的或者 <span class="arithmatex">\(X\)</span> 的 p 分位数，通常用 <span class="arithmatex">\(\xi_p\)</span> 表示。特别地，称 <span class="arithmatex">\(\xi_{\frac{1}{2}}\)</span> 为 <span class="arithmatex">\(F\)</span> 或 <span class="arithmatex">\(X\)</span> 的<strong>中位数</strong>。</p>
+</blockquote>
+<p><strong>直觉</strong>：在所有"CDF 已经爬到 <span class="arithmatex">\(p\)</span> 以上"的位置里取最左边那个，强行选出唯一代表。<span class="arithmatex">\(F^{-1}\)</span> 称为<strong>广义反函数/分位数函数</strong>——即使 <span class="arithmatex">\(F\)</span> 不严格单调、不连续，它也总有定义。</p>
+<blockquote>
+<p>[!NOTE] 备注：其它等价定义
+对 <span class="arithmatex">\(p\in(0,1)\)</span>，</p>
+<div class="arithmatex">\[
+F^{-1}(p)=\sup\{x\mid F(x)&lt;p\}.
+\]</div>
+<p>（从右逼近平台/跳跃点，与 <span class="arithmatex">\(\inf\)</span> 定义给出同一个值。）</p>
+<p>[!EXAMPLE]- 例题：<span class="arithmatex">\(\mathcal{N}(0,1)\)</span> 的分位数（查表 <span class="arithmatex">\(p\mapsto x=F^{-1}(p)\)</span>）
+<strong>解</strong>：标准正态 CDF 连续且严格递增，<span class="arithmatex">\(F^{-1}\)</span> 就是普通反函数。常用值：</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(p\)</span>（area from <span class="arithmatex">\(-\infty\)</span> to <span class="arithmatex">\(x\)</span>）</th>
+<th><span class="arithmatex">\(x=F^{-1}(p)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.999</td>
+<td>3.090232</td>
+</tr>
+<tr>
+<td>0.998</td>
+<td>2.878162</td>
+</tr>
+<tr>
+<td>0.995</td>
+<td>2.575829</td>
+</tr>
+<tr>
+<td>0.99</td>
+<td>2.326348</td>
+</tr>
+<tr>
+<td>0.98</td>
+<td>2.053749</td>
+</tr>
+<tr>
+<td>0.95</td>
+<td>1.644854</td>
+</tr>
+<tr>
+<td>0.90</td>
+<td>1.281552</td>
+</tr>
+<tr>
+<td>0.80</td>
+<td>0.841621</td>
+</tr>
+<tr>
+<td>0.50</td>
+<td>0.000000</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h3 id="42">4.2 常见应用简介<a class="headerlink" href="#42" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>统计推断</strong>（通常不要求唯一性）。例：抛 100 次均匀的硬币，得到 100 次正面很罕见，我们就会怀疑它不均匀；但 99 次罕见么？98 次？通常，我们会基于概率定义一个范围——95% 的概率落在多少次内？（即用分位数确定取值范围）</li>
+<li><strong>统计计算</strong>（要求唯一性）。例：Simulation（随机模拟/生成随机数），见 4.4 节。</li>
+</ul>
+<h3 id="43-p">4.3 p 分位数的性质<a class="headerlink" href="#43-p" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>[!IMPORTANT] p 分位数的性质（设 <span class="arithmatex">\(F^{-1}(p)=\inf\{x\mid F(x)\ge p\}\)</span>）</p>
+<table>
+<thead>
+<tr>
+<th>编号</th>
+<th>性质</th>
+<th>标注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><span class="arithmatex">\(F^{-1}(p)\)</span> 单调非降</td>
+<td>常用</td>
+</tr>
+<tr>
+<td>2</td>
+<td><span class="arithmatex">\(F^{-1}(F(x))\le x\)</span>，<span class="arithmatex">\(\forall x\in\mathbb{R}\)</span></td>
+<td>常用</td>
+</tr>
+<tr>
+<td>3</td>
+<td><span class="arithmatex">\(F\big(F^{-1}(p)\big)\ge p\)</span>，<span class="arithmatex">\(\forall p\in(0,1)\)</span></td>
+<td>常用</td>
+</tr>
+<tr>
+<td>4</td>
+<td><span class="arithmatex">\(F^{-1}(p)\le t\Leftrightarrow p\le F(t)\)</span></td>
+<td>常用（生成随机数的关键）</td>
+</tr>
+<tr>
+<td>5</td>
+<td><span class="arithmatex">\(F^{-1}(p)\)</span> 是左连续的</td>
+<td>了解即可</td>
+</tr>
+<tr>
+<td>6</td>
+<td>如果 <span class="arithmatex">\(F\)</span> 是连续的，则 <span class="arithmatex">\(F\big(F^{-1}(p)\big)=p\)</span>，<span class="arithmatex">\(\forall p\in(0,1)\)</span></td>
+<td>常用</td>
+</tr>
+</tbody>
+</table>
+<p>性质的证明依赖于 CDF 的性质（单调非降、右连续），详见附录（第六部分）。</p>
+<p>[!WARNING] 辨析：<span class="arithmatex">\(F^{-1}\)</span> 不是普通的反函数
+- 一般只有不等式：<span class="arithmatex">\(F^{-1}(F(x))\le x\)</span>（<span class="arithmatex">\(F\)</span> 在平台段上"压缩信息"，反推回去只能到平台左端）与 <span class="arithmatex">\(F(F^{-1}(p))\ge p\)</span>（<span class="arithmatex">\(F\)</span> 有跳跃时会"跳过" <span class="arithmatex">\(p\)</span>）；
+- 仅当 <span class="arithmatex">\(F\)</span> 连续时才有 <span class="arithmatex">\(F(F^{-1}(p))=p\)</span>（性质 6）；仅当 <span class="arithmatex">\(F\)</span> 严格递增时才有 <span class="arithmatex">\(F^{-1}(F(x))=x\)</span>；
+- 最常用的桥梁是性质 4 的等价关系 <span class="arithmatex">\(F^{-1}(p)\le t\Leftrightarrow p\le F(t)\)</span>，它无条件成立，很多证明（如定理 3.1）靠它"搬运"不等号。</p>
+</blockquote>
+<h3 id="44">4.4 随机变量的生成<a class="headerlink" href="#44" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>[!IMPORTANT] 定理 3.1（产生服从分布函数 <span class="arithmatex">\(F(x)\)</span> 的随机变量）
+设 <span class="arithmatex">\(X\sim\mathcal{U}(0,1)\)</span>，<span class="arithmatex">\(F(x)\)</span> 是连续分布函数，则 <span class="arithmatex">\(Y=F^{-1}(X)\sim F\)</span>。</p>
+</blockquote>
+<p><strong>证明</strong>：显然（利用性质 4：<span class="arithmatex">\(F^{-1}(X)\le y\Leftrightarrow X\le F(y)\)</span>，以及 <span class="arithmatex">\(X\sim\mathcal{U}(0,1)\)</span> 时 <span class="arithmatex">\(\mathbb{P}(X\le u)=u\)</span>）</p>
+<div class="arithmatex">\[
+F_Y(y)=\mathbb{P}(Y\le y)=\mathbb{P}\big(F^{-1}(X)\le y\big)=\mathbb{P}\big(X\le F(y)\big)=F(y),
+\]</div>
+<p>因此 <span class="arithmatex">\(Y\sim F\)</span>。</p>
+<p><strong>直觉</strong>：均匀随机数 <span class="arithmatex">\(U\)</span> 落在 <span class="arithmatex">\([0,p]\)</span> 的概率恰好是 <span class="arithmatex">\(p\)</span>，把它通过 <span class="arithmatex">\(F^{-1}\)</span> "搬"到 <span class="arithmatex">\(x\)</span> 轴上，落在 <span class="arithmatex">\((-\infty,x]\)</span> 的概率就恰好是 <span class="arithmatex">\(F(x)\)</span>——这就是<strong>逆变换采样法 (inverse transform sampling)</strong>。</p>
+<blockquote>
+<p>[!EXAMPLE]- 例题：直观理解随机变量的生成——两点分布 <span class="arithmatex">\(B(0.8)\)</span>
+<strong>解</strong>：目标：生成 <span class="arithmatex">\(\mathbb{P}(X=1)=0.8\)</span>，<span class="arithmatex">\(\mathbb{P}(X=0)=0.2\)</span> 的随机数。流程：</p>
+<div class="arithmatex">\[
+B(0.8)\ \to\ F(x)\ \to\ F^{-1}(x)\ \to\ F^{-1}(U)\ \to\ F^{-1}(u_1),F^{-1}(u_2),\ldots
+\]</div>
+<p>这里 <span class="arithmatex">\(F(x)\)</span> 在 <span class="arithmatex">\(0\)</span> 处跳到 <span class="arithmatex">\(0.2\)</span>、在 <span class="arithmatex">\(1\)</span> 处跳到 <span class="arithmatex">\(1\)</span>，故（注：此步补全分位数函数的显式形式）</p>
+<div class="arithmatex">\[
+F^{-1}(u)=\begin{cases}0, &amp; 0&lt;u\le 0.2,\\ 1, &amp; 0.2&lt;u&lt;1.\end{cases}
+\]</div>
+<p>e.g. <span class="arithmatex">\(F^{-1}(0.12)=0\)</span>，<span class="arithmatex">\(F^{-1}(0.91)=1\)</span>，……多次 i.i.d. 实现后，0 与 1 的频数比例约为 <span class="arithmatex">\(0.2:0.8\)</span>（课件直方图所示）。可见<strong>离散分布也能用 <span class="arithmatex">\(F^{-1}(U)\)</span> 生成</strong>（定理 3.1 的"连续"假设是为了证明 <span class="arithmatex">\(Y\)</span> 的 CDF 恰为 <span class="arithmatex">\(F\)</span>；对离散情形按上式分段定义同样可行）。</p>
+<p>[!EXAMPLE]- 例题 3.1：用均匀随机数生成 <span class="arithmatex">\(\mathcal{E}(\lambda)\)</span>、Cauchy、<span class="arithmatex">\(\mathcal{N}(0,1)\)</span>
+设易生成服从均匀分布的随机变量，如何生成服从下列分布函数的随机变量：(1) <span class="arithmatex">\(\mathcal{E}(\lambda)\)</span>，(2) Cauchy 分布，(3) <span class="arithmatex">\(\mathcal{N}(0,1)\)</span>。</p>
+<p><strong>解</strong>：设 <span class="arithmatex">\(U,V\sim\mathcal{U}(0,1)\)</span>。</p>
+<p>(1) <span class="arithmatex">\(X=-\lambda^{-1}\log(1-U)\)</span>。</p>
+<p>（注：此步补全推导——<span class="arithmatex">\(\mathcal{E}(\lambda)\)</span> 的 CDF 为 <span class="arithmatex">\(F(x)=1-e^{-\lambda x}\)</span>，<span class="arithmatex">\(x&gt;0\)</span>。解 <span class="arithmatex">\(F(x)=u\)</span>：<span class="arithmatex">\(e^{-\lambda x}=1-u\Rightarrow x=-\lambda^{-1}\log(1-u)\)</span>，即 <span class="arithmatex">\(F^{-1}(u)=-\lambda^{-1}\log(1-u)\)</span>，套用定理 3.1。课件演示了 R 代码 <code>u = runif(1); x = -log(1-u)/lambda</code> 及生成 Exp(3.5) 直方图。）</p>
+<p>(2) <span class="arithmatex">\(Z=X/Y\)</span>，其中 <span class="arithmatex">\(X,Y\)</span> 是独立的且服从 <span class="arithmatex">\(\mathcal{N}(0,1)\)</span>。</p>
+<p>（由例 1.10，两独立标准正态之商服从 Cauchy 分布；而 <span class="arithmatex">\(X,Y\)</span> 可由 (3) 生成。这是"殊途同归/曲线救国"：不用 Cauchy 的 <span class="arithmatex">\(F^{-1}(u)=\tan(\pi(u-\frac{1}{2}))\)</span> 也能生成。）</p>
+<p>(3) 令 <span class="arithmatex">\(\theta=2\pi U\)</span>，<span class="arithmatex">\(R=\sqrt{-2\log V}\)</span>，则 <span class="arithmatex">\(X=R\cos\theta\)</span> 和 <span class="arithmatex">\(Y=R\sin\theta\)</span> 独立，都服从 <span class="arithmatex">\(\mathcal{N}(0,1)\)</span>。</p>
+<p>【这里巧妙使用了坐标变换（Box–Muller，见例 1.8、例 1.9），具体推导<strong>不要求掌握</strong>。背景：<span class="arithmatex">\(\mathcal{N}(0,1)\)</span> 的 CDF 没有初等闭式反函数，直接用定理 3.1 不便，于是借助极坐标"曲线救国"。】</p>
+<p>[!NOTE] 总结：随机变量的 p 分位数（课件要求）
+- <strong>掌握</strong>定义（直观定义；满足唯一性的正式定义）。
+- <strong>能够应用</strong>：
+  - 统计推断——确定取值范围：给定分布和 <span class="arithmatex">\(p\)</span> 值下，能计算对应的 p-分位数；
+  - 统计计算——生成随机数：掌握理论，例如 <span class="arithmatex">\(F^{-1}(U)\sim F(x)\)</span>；了解如何模拟生成随机数。
+- <strong>建议</strong>：连续型随机变量一定掌握（本质就是 CDF 的反函数）；例题中正态分布、Cauchy 分布的生成属于较复杂情形，不做硬性要求；离散型随机变量根据自己情况酌情掌握。</p>
+</blockquote>
+<hr />
+<h2 id="_4">五、小结<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<h3 id="51">5.1 小结：随机向量函数的分布<a class="headerlink" href="#51" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>问题</strong>：一般情形；特殊情形（和、差；多对多）。</li>
+<li><strong>方法</strong>：</li>
+<li>CDF 曲线法（先求分布函数再求导）；</li>
+<li>PDF 直接法：微元法、增补变量法、转换成已有结果法（e.g. 减法转为加法、乘法转为除法）。</li>
+<li><strong>经典结论</strong>：</li>
+<li>3 大统计核心分布（<span class="arithmatex">\(\chi^2\)</span>、<span class="arithmatex">\(t\)</span>、<span class="arithmatex">\(F\)</span>）与正态分布的关系；</li>
+<li>Cauchy 分布的密度函数求解（正态之商）；</li>
+<li>多个叠加趋近正态——直观感受（CLT 预览）。</li>
+</ul>
+<h3 id="52">5.2 小结：重点知识点与技巧<a class="headerlink" href="#52" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>重点知识点</strong>：</li>
+<li>计算随机向量函数的分布 (CDF, PDF, PMF) / 相应概率；</li>
+<li>次序统计量的定义、（连续型随机变量下）PDF/CDF 的计算；</li>
+<li>基于分布函数得到的 p-分位数。</li>
+<li><strong>技巧</strong>：</li>
+<li>蕴含独立性的联合概率密度的快速拆解（归一化）；</li>
+<li>殊途同归的选择：同一问题的不同解法，可能曲线救国计算更简便（e.g. Cauchy 分布 PDF 的计算、Normal r.v. 的生成）；</li>
+<li>微元法求解/理解 PDF。</li>
+</ul>
+<hr />
+<h2 id="p_1">六、附录：次序统计量性质、p 分位数性质的证明<a class="headerlink" href="#p_1" title="Permanent link">&para;</a></h2>
+<h3 id="61-25">6.1 性质 2.5 及证明<a class="headerlink" href="#61-25" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>[!IMPORTANT] 性质 2.5
+<span class="arithmatex">\((X_{(1)},X_{(2)},\ldots,X_{(n)})\)</span> 的联合分布 <span class="arithmatex">\(F_n(x_1,x_2,\ldots,x_n)\)</span> 是连续函数。</p>
+</blockquote>
+<p><strong>证明</strong>：只须证明每个 <span class="arithmatex">\(X_{(k)}\)</span> 的分布函数连续，即单点概率为零。利用 <span class="arithmatex">\(\mathbb{P}(X_1=x)=0\)</span>（<span class="arithmatex">\(X_1\)</span> 连续型），得</p>
+<div class="arithmatex">\[
+\begin{align}
+\mathbb{P}(X_{(k)}=x)&amp;=\mathbb{P}(\{X_j\}\text{中有}k-1\text{个}&lt;x,\ \text{有一个}=x,\ \text{有}n-k\text{个}&gt;x)\\
+&amp;=\frac{n!}{(k-1)!\,1!\,(n-k)!}\,[\mathbb{P}(X_1&lt;x)]^{k-1}\,\mathbb{P}(X_1=x)\,[1-F_1(x)]^{n-k}\\
+&amp;=0.
+\end{align}
+\]</div>
+<h3 id="62-p-16">6.2 p 分位数性质 1–6 的证明<a class="headerlink" href="#62-p-16" title="Permanent link">&para;</a></h3>
+<p><strong>性质 1：<span class="arithmatex">\(F^{-1}(p)\)</span> 单调非降。</strong></p>
+<p>证明：对任意的 <span class="arithmatex">\(p_1&lt;p_2\)</span>：如果 <span class="arithmatex">\(F(t)\ge p_2\)</span>，则 <span class="arithmatex">\(F(t)\ge p_2&gt;p_1\)</span>，所以 <span class="arithmatex">\(\{t:F(t)\ge p_1\}\supset\{t:F(t)\ge p_2\}\)</span>，于是</p>
+<div class="arithmatex">\[
+F^{-1}(p_1)=\inf\{t:F(t)\ge p_1\}\le\inf\{t:F(t)\ge p_2\}=F^{-1}(p_2).
+\]</div>
+<p>（集合越大，下确界越小或不变。）</p>
+<p><strong>性质 2：<span class="arithmatex">\(F^{-1}(F(x))\le x\)</span>，<span class="arithmatex">\(\forall x\in\mathbb{R}\)</span>。</strong></p>
+<p>证明：<span class="arithmatex">\(F^{-1}(F(x))=\inf\{t:F(t)\ge F(x)\}\le x\)</span>，因为 <span class="arithmatex">\(x\in\{t:F(t)\ge F(x)\}\)</span>（<span class="arithmatex">\(x\)</span> 本身就满足条件，下确界不超过它）。</p>
+<p><strong>性质 3：<span class="arithmatex">\(F(F^{-1}(p))\ge p\)</span>，<span class="arithmatex">\(\forall p\in(0,1)\)</span>。</strong></p>
+<p>证明：首先，集合 <span class="arithmatex">\(\{t:F(t)\ge p\}\)</span> 一定具有如下形式：</p>
+<div class="arithmatex">\[
+\{t:F(t)\ge p\}=(a,\infty)\ \text{或}\ [a,\infty).\tag{1}
+\]</div>
+<p>（事实上一定不是 <span class="arithmatex">\((a,\infty)\)</span> 这种开形式，见下。）为此，假定 <span class="arithmatex">\(r\in\{t:F(t)\ge p\}\)</span>（蕴含了 <span class="arithmatex">\(F(r)\ge p\)</span>），则对任意的 <span class="arithmatex">\(r'&gt;r\)</span> 有 <span class="arithmatex">\(F(r')\ge F(r)\ge p\)</span>（<span class="arithmatex">\(F\)</span> 单调非降），即 <span class="arithmatex">\(r'\in\{t:F(t)\ge p\}\)</span>——所以该集合是向右无界的区间。</p>
+<p>由 (1)，得 <span class="arithmatex">\(F^{-1}(p)=\inf\{t:F(t)\ge p\}=a\)</span>。由于 <span class="arithmatex">\(a+n^{-1}\in\{t:F(t)\ge p\}\)</span>，有 <span class="arithmatex">\(F(a+n^{-1})\ge p\)</span>。令 <span class="arithmatex">\(n\to\infty\)</span>，并利用 <span class="arithmatex">\(F\)</span> 的<strong>右连续性</strong>，得</p>
+<div class="arithmatex">\[
+F\big(F^{-1}(p)\big)=F(a)=\lim_{n\to\infty}F(a+n^{-1})\ge p.
+\]</div>
+<blockquote>
+<p>[!NOTE] 注
+上述证明中，<span class="arithmatex">\(a=F^{-1}(p)\in\{t:F(t)\ge p\}\)</span>，因此有</p>
+<div class="arithmatex">\[
+\{t:F(t)\ge p\}=[a,\infty)=[F^{-1}(p),\infty),
+\]</div>
+<p>故 <span class="arithmatex">\(F^{-1}(p)=\inf\{t:F(t)\ge p\}=\min\{t:F(t)\ge p\}\)</span>（下确界可以取到）。</p>
+</blockquote>
+<p><strong>性质 4：<span class="arithmatex">\(F^{-1}(p)\le t\Leftrightarrow p\le F(t)\)</span>。</strong></p>
+<p>证明：(<span class="arithmatex">\(\Leftarrow\)</span>) 如果 <span class="arithmatex">\(F(t)\ge p\)</span>，则 <span class="arithmatex">\(t\in\{t:F(t)\ge p\}\)</span>，于是 <span class="arithmatex">\(t\ge\inf\{t:F(t)\ge p\}=F^{-1}(p)\)</span>。</p>
+<p>(<span class="arithmatex">\(\Rightarrow\)</span>) 如果 <span class="arithmatex">\(F^{-1}(p)\le t\)</span>，由于 <span class="arithmatex">\(F\)</span> 是单调非降的，利用性质 3 有 <span class="arithmatex">\(F(t)\ge F\big(F^{-1}(p)\big)\ge p\)</span>。</p>
+<p><strong>性质 5：<span class="arithmatex">\(F^{-1}(p)\)</span> 是左连续的。</strong></p>
+<p>证明：令 <span class="arithmatex">\(p_n\uparrow p\)</span>。</p>
+<ul>
+<li>由性质 1，<span class="arithmatex">\(F^{-1}(p_n)\le F^{-1}(p)\)</span> 且单调，不妨设 <span class="arithmatex">\(F^{-1}(p_n)\uparrow b\)</span>；</li>
+<li>则 <span class="arithmatex">\(F^{-1}(p_n)\le b\le F^{-1}(p)\)</span>，<span class="arithmatex">\(\forall n\)</span>；由 <span class="arithmatex">\(F^{-1}(p_n)\le b\)</span> 与性质 4 得 <span class="arithmatex">\(p_n\le F(b)\)</span>；</li>
+<li>令 <span class="arithmatex">\(n\to\infty\)</span>：<span class="arithmatex">\(F(b)\ge\lim_{n\to\infty}p_n=p\)</span>；</li>
+<li>于是 <span class="arithmatex">\(b\ge F^{-1}\big(F(b)\big)\ge F^{-1}(p)\)</span>（第一个不等号利用性质 2，第二个由 <span class="arithmatex">\(F(b)\ge p\)</span> 与性质 1 的单调性得到）；</li>
+<li>结合 <span class="arithmatex">\(b\le F^{-1}(p)\)</span>，得 <span class="arithmatex">\(\lim_{n\to\infty}F^{-1}(p_n)=b=F^{-1}(p)\)</span>。</li>
+</ul>
+<p><strong>性质 6：如果 <span class="arithmatex">\(F\)</span> 是连续的，则 <span class="arithmatex">\(F(F^{-1}(p))=p\)</span>，<span class="arithmatex">\(\forall p\in(0,1)\)</span>。</strong></p>
+<p>证明：由性质 3，<span class="arithmatex">\(F(F^{-1}(p))\ge p\)</span>。现在证明等号成立。</p>
+<p>（反证法）假设不成立，令 <span class="arithmatex">\(a=F^{-1}(p)\)</span>，有 <span class="arithmatex">\(F(a)&gt;p\)</span>。利用 <span class="arithmatex">\(F\)</span> 的连续性和单调性，则存在 <span class="arithmatex">\(\delta&gt;0\)</span> 使得 <span class="arithmatex">\(F(a-\delta)\ge p\)</span>，因此</p>
+<div class="arithmatex">\[
+a-\delta\ge F^{-1}\big(F(a-\delta)\big)\ge F^{-1}(p)=a
+\]</div>
+<p>（第一个不等号利用性质 2，第二个利用性质 1）。此蕴含了 <span class="arithmatex">\(\delta\le 0\)</span>，矛盾！</p>
+<hr />
+<h2 id="_5">本讲方法/题型清单<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>求 <span class="arithmatex">\(g(\vec{X})\)</span> 的分布（一般情形）</strong> → CDF 曲线法 → 写出 <span class="arithmatex">\(F_Z(z)=\mathbb{P}(g(\vec{X})\le z)\)</span>，化为联合密度在区域 <span class="arithmatex">\(\{g(\vec{x})\le z\}\)</span> 上的积分（几何面积/极坐标常帮大忙），最后对 <span class="arithmatex">\(z\)</span> 求导得密度（例 1.1、1.2）。</li>
+<li><strong>求和 <span class="arithmatex">\(Z=X+Y\)</span> 的分布</strong> → 卷积公式 → 离散：<span class="arithmatex">\(P_Z(z)=\sum_x P_X(x)P_Y(z-x)\)</span>；连续：<span class="arithmatex">\(f_Z(z)=\int f_X(x)f_Y(z-x)dx\)</span>；关键步骤：定支撑集 → 解示性函数约束得积分限 → 分段讨论（例 1.3–1.6）。</li>
+<li><strong>求差 <span class="arithmatex">\(V=X-Y\)</span></strong> → 套差公式 <span class="arithmatex">\(f_V(v)=\int f_X(x)f_Y(x-v)dx\)</span>，或转化为 <span class="arithmatex">\(X+(-Y)\)</span> 用加法卷积（例 1.7）。</li>
+<li><strong>求多对多变换 <span class="arithmatex">\((U,V)=T(X,Y)\)</span> 的联合密度</strong> → 定理 1.1 Jacobian 法 → 关键步骤：① 确定 <span class="arithmatex">\(D\)</span> 使 <span class="arithmatex">\(\mathbb{P}((U,V)\in D)=1\)</span>；② 反解出全部分支 <span class="arithmatex">\(x_i(u,v),y_i(u,v)\)</span>；③ 算 <span class="arithmatex">\(\left|\frac{\partial(x,y)}{\partial(u,v)}\right|\)</span>（注意是<strong>旧变量对新变量</strong>求导）；④ 代入 <span class="arithmatex">\(\sum_i f(x_i,y_i)|J_i|\)</span>（例 1.8、1.10）。</li>
+<li><strong>求乘积/商的分布</strong> → 增补变量法 → 补 <span class="arithmatex">\(W=X\)</span>（或 <span class="arithmatex">\(W=Y\)</span>）凑成二维可逆变换，求联合密度后积分掉辅助变量；或如例 1.1 直接 CDF 法。</li>
+<li><strong>判断变换后变量是否独立</strong> → 看联合密度能否在乘积型区域上分离变量 → 能分离则独立，各因子归一化即边缘密度（例 1.8、1.10 的"快速拆解"）。</li>
+<li><strong>求 <span class="arithmatex">\(X_{(k)}\)</span>（最小/最大/第 <span class="arithmatex">\(k\)</span> 小）的分布</strong> → 性质 2.2 → 套 <span class="arithmatex">\(g_k=n\binom{n-1}{k-1}F^{k-1}(1-F)^{n-k}f\)</span>；最小/最大值也可直接用 <span class="arithmatex">\(\mathbb{P}(X_{(1)}&gt;x)=[1-F]^n\)</span>、<span class="arithmatex">\(\mathbb{P}(X_{(n)}\le x)=[F]^n\)</span>（例 2.2）。</li>
+<li><strong>求若干次序统计量的联合分布</strong> → 性质 2.1（全体）或性质 2.4（两个）→ 记忆口诀：按"各段人数"写多项式系数 × 各段概率幂 × 在场点的密度。</li>
+<li><strong>遇到有序区域上的多重积分</strong> → 性质 2.3 → <span class="arithmatex">\(\int_{a&lt;x_1&lt;\cdots&lt;x_k&lt;b}\prod f=\frac{(F(b)-F(a))^k}{k!}\)</span>，配合 Fubini 归纳。</li>
+<li><strong>求给定分布的 p-分位数</strong> → 正式定义 <span class="arithmatex">\(F^{-1}(p)=\inf\{x:F(x)\ge p\}\)</span> → 连续严格增时解方程 <span class="arithmatex">\(F(x)=p\)</span>；有平台/跳跃时取"最左满足点"（注意不唯一性只出现在直观定义下）。</li>
+<li><strong>用均匀随机数生成指定分布</strong> → 逆变换法（定理 3.1）→ 求 <span class="arithmatex">\(F^{-1}\)</span> 闭式（如 <span class="arithmatex">\(\mathcal{E}(\lambda)\)</span>：<span class="arithmatex">\(-\lambda^{-1}\log(1-u)\)</span>）；<span class="arithmatex">\(F^{-1}\)</span> 无闭式时曲线救国：Cauchy 用正态之商，正态用 Box–Muller 坐标变换（例 3.1）。</li>
+<li><strong>证明涉及 <span class="arithmatex">\(F^{-1}\)</span> 的命题</strong> → 性质 4 桥梁 → 用 <span class="arithmatex">\(F^{-1}(p)\le t\Leftrightarrow p\le F(t)\)</span> 把分位数语句翻译成 CDF 语句（定理 3.1 的证明）。</li>
+</ul>
+<hr />
+<blockquote>
+<p>[!ABSTRACT] 补充笔记：p 分位数（p-quantile）</p>
+</blockquote>
+<hr />
+<h2 id="p_2">一、p 分位数的定义<a class="headerlink" href="#p_2" title="Permanent link">&para;</a></h2>
+<h3 id="11">1.1 直观定义（非正式）<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>[!INFO] 定义（直观版）</p>
+<p>设 X 是概率空间 <span class="arithmatex">\((\Omega, \mathcal{F}, \mathbb{P})\)</span> 上的随机变量，<span class="arithmatex">\(F(x)\)</span> 是其分布函数。</p>
+<p>对 <span class="arithmatex">\(p \in (0, 1)\)</span>，如果实数 x 满足： $<span class="arithmatex">\(\mathbb{P}(X \leq x) \geq p \quad \text{且} \quad \mathbb{P}(X \geq x) \geq 1-p\)</span>$ 则称 x 为 X 的 <strong>p 分位数（p-quantile）</strong>。</p>
+</blockquote>
+<p><strong>解读这个定义</strong>：</p>
+<ul>
+<li>第一个条件 <span class="arithmatex">\(\mathbb{P}(X \leq x) \geq p\)</span>：x 左边（含 x）累积了至少 p 的概率。</li>
+<li>第二个条件 <span class="arithmatex">\(\mathbb{P}(X \geq x) \geq 1-p\)</span>：x 右边（含 x）累积了至少 <span class="arithmatex">\(1-p\)</span> 的概率。</li>
+</ul>
+<p><strong>为什么两个条件都要？</strong></p>
+<p>如果只要第一个条件，那么比 x 大的任何值都会满足（因为 CDF 单调非降）。加上第二个条件，就是要求 x 不能太靠右——它右边也要有足够的概率。两个条件合起来，才把 x 夹在了"合理"的位置。</p>
+<p><strong>⚠️ 注意：直观定义下，p 分位数不一定唯一！</strong></p>
+<p>以最简单的例子说明：设 X 服从均匀分布 <span class="arithmatex">\(\mathcal{U}(0,1)\)</span>，求 0.5 分位数（中位数）。</p>
+<p>按直观定义，任何 <span class="arithmatex">\(x = 0.5\)</span> 都满足：<span class="arithmatex">\(\mathbb{P}(X \leq 0.5) = 0.5 \geq 0.5\)</span>，<span class="arithmatex">\(\mathbb{P}(X \geq 0.5) = 0.5 \geq 0.5\)</span>。<br />
+事实上对连续分布，中位数是唯一的，但对<strong>离散分布</strong>，可能存在一个区间上的点都满足直观定义。</p>
+<blockquote>
+<p><strong>例</strong>：抛一枚均匀硬币，<span class="arithmatex">\(X \in {0, 1}\)</span>，<span class="arithmatex">\(\mathbb{P}(X=0)=\mathbb{P}(X=1)=0.5\)</span>。</p>
+<p>寻找 0.5 分位数：</p>
+<ul>
+<li>对 <span class="arithmatex">\(x = 0\)</span>：<span class="arithmatex">\(\mathbb{P}(X \leq 0) = 0.5 \geq 0.5\)</span>，<span class="arithmatex">\(\mathbb{P}(X \geq 0) = 1 \geq 0.5\)</span> ✓</li>
+<li>对 <span class="arithmatex">\(x = 0.3\)</span>：<span class="arithmatex">\(\mathbb{P}(X \leq 0.3) = 0.5 \geq 0.5\)</span>，<span class="arithmatex">\(\mathbb{P}(X \geq 0.3) = 0.5 \geq 0.5\)</span> ✓</li>
+<li>对 <span class="arithmatex">\(x = 1\)</span>：<span class="arithmatex">\(\mathbb{P}(X \leq 1) = 1 \geq 0.5\)</span>，<span class="arithmatex">\(\mathbb{P}(X \geq 1) = 0.5 \geq 0.5\)</span> ✓</li>
+</ul>
+<p>所以 <span class="arithmatex">\([0,1]\)</span> 上的所有点都是 0.5 分位数！不唯一。</p>
+</blockquote>
+<hr />
+<h3 id="13">1.3 正式定义（唯一版）<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
+<p>由于不唯一性在某些应用场合（特别是统计计算，如模拟）很麻烦，我们需要一个能给出唯一答案的定义。</p>
+<blockquote>
+<p>[!INFO] 定义（正式版）</p>
+<p>对 <span class="arithmatex">\(p \in (0, 1)\)</span>，定义： $<span class="arithmatex">\(F^{-1}(p) = \inf{x \mid F(x) \geq p}\)</span>$ 称 <span class="arithmatex">\(F^{-1}(p)\)</span> 为 F 或 X 的 <strong>p 分位数</strong>，通常用 <span class="arithmatex">\(\xi_p\)</span> 表示。</p>
+<p>特别地，称 <span class="arithmatex">\(\xi_{1/2}\)</span>（即 <span class="arithmatex">\(p = 0.5\)</span> 时的分位数）为 F 或 X 的<strong>中位数（median）</strong>。</p>
+</blockquote>
+<p><strong>解读这个定义</strong>：</p>
+<p><span class="arithmatex">\(\inf\)</span> 是"下确界"，即"最小的上界"，在实数中通常理解为：所有满足 <span class="arithmatex">\(F(x) \geq p\)</span> 的 x 中，<strong>最小的那个</strong>。</p>
+<p>用人话说：从左往右扫描数轴，找到 <strong>CDF 第一次不低于 p</strong> 的那个 x 值，这就是 <span class="arithmatex">\(F^{-1}(p)\)</span>。</p>
+<p><strong>为什么这个定义是唯一的？</strong></p>
+<p>因为下确界（inf）操作对一个集合总是给出唯一的值（集合的最小元素，或最大下界）。</p>
+<p><strong>等价表述</strong>（另一种写法，两者完全等价）：</p>
+<div class="arithmatex">\[F^{-1}(p) = \sup{x \mid F(x) &lt; p}\]</div>
+<p>即：所有使 CDF <strong>严格小于</strong> p 的 x 中，取最大的那个。（可以验证两种写法给出同一个值。）</p>
+<hr />
+<h3 id="14_1">1.4 两种定义之间的关系<a class="headerlink" href="#14_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>直观定义</strong>：不唯一，适用于统计推断（不需要精确唯一值的场合）。</li>
+<li><strong>正式定义</strong>：唯一，适用于统计计算（需要精确唯一值，如随机数生成）。</li>
+</ul>
+<p>正式定义给出的 <span class="arithmatex">\(F^{-1}(p)\)</span> <strong>一定是</strong>直观定义意义下的某个 p 分位数。（即正式定义是直观定义的一个特例。）</p>
+<hr />
+<h2 id="_6">二、以标准正态分布为例<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<h3 id="21-mathcaln01">2.1 标准正态分布 <span class="arithmatex">\(\mathcal{N}(0,1)\)</span><a class="headerlink" href="#21-mathcaln01" title="Permanent link">&para;</a></h3>
+<p>标准正态分布的密度函数是那个著名的钟形曲线： $<span class="arithmatex">\(f(x) = \frac{1}{\sqrt{2\pi}} e^{-x^2/2}\)</span>$</p>
+<p>其 CDF 记为 <span class="arithmatex">\(\Phi(x) = \mathbb{P}(X \leq x)\)</span>，没有解析表达式，通常查表。</p>
+<p><strong>p 分位数的几何含义</strong>：<br />
+在钟形曲线上，从 <span class="arithmatex">\(-\infty\)</span> 积分到 x，得到的面积（概率）恰好等于 p。所以 <span class="arithmatex">\(F^{-1}(p) = x\)</span> 就是这个面积为 p 时对应的 x 值。</p>
+<h3 id="22">2.2 常用分位数表<a class="headerlink" href="#22" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">左尾面积 p</th>
+<th style="text-align: center;">p 分位数 x = F⁻¹(p)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">0.999</td>
+<td style="text-align: center;">3.090232</td>
+</tr>
+<tr>
+<td style="text-align: center;">0.998</td>
+<td style="text-align: center;">2.878162</td>
+</tr>
+<tr>
+<td style="text-align: center;">0.995</td>
+<td style="text-align: center;">2.575829</td>
+</tr>
+<tr>
+<td style="text-align: center;">0.99</td>
+<td style="text-align: center;">2.326348</td>
+</tr>
+<tr>
+<td style="text-align: center;">0.98</td>
+<td style="text-align: center;">2.053749</td>
+</tr>
+<tr>
+<td style="text-align: center;">0.95</td>
+<td style="text-align: center;">1.644854</td>
+</tr>
+<tr>
+<td style="text-align: center;">0.90</td>
+<td style="text-align: center;">1.281552</td>
+</tr>
+<tr>
+<td style="text-align: center;">0.80</td>
+<td style="text-align: center;">0.841621</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>0.50</strong></td>
+<td style="text-align: center;"><strong>0.000000</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>解读</strong>：</p>
+<ul>
+<li>p = 0.95 对应 x ≈ 1.645：标准正态分布中，95% 的概率落在 1.645 以下。</li>
+<li>p = 0.50 对应 x = 0：中位数是 0（由对称性，恰好一半落在左边，一半在右边）。</li>
+<li>注意：表里只列了 p &gt; 0.5 的情况。由对称性，若要 p = 0.05 的分位数，就是 <span class="arithmatex">\(-1.645\)</span>（即 <span class="arithmatex">\(\xi_{0.05} = -\xi_{0.95}\)</span>）。</li>
+</ul>
+<hr />
+<h2 id="p_3">三、p 分位数的常见应用<a class="headerlink" href="#p_3" title="Permanent link">&para;</a></h2>
+<h3 id="31_1">3.1 统计推断（不要求唯一性）<a class="headerlink" href="#31_1" title="Permanent link">&para;</a></h3>
+<p><strong>场景</strong>：判断一个硬币是否均匀。</p>
+<p>抛 100 次均匀硬币，得到正面次数 X 服从 <span class="arithmatex">\(\text{Binomial}(100, 0.5)\)</span>。</p>
+<ul>
+<li>得到 100 次正面：几乎不可能（概率 <span class="arithmatex">\(\approx 10^{-30}\)</span>），肯定有问题。</li>
+<li>得到 99 次正面：也极罕见。</li>
+<li>得到 80 次正面：还罕见吗？</li>
+</ul>
+<p>我们的做法：<strong>利用分位数定出一个合理范围</strong>。例如，"在均匀硬币假设下，95% 的概率，正面次数会落在哪个区间？"</p>
+<p>如果实际观测值落在这个区间之外，我们就有理由怀疑硬币不均匀。</p>
+<p>这里用到的就是 p 分位数——取 <span class="arithmatex">\(\xi_{0.025}\)</span> 和 <span class="arithmatex">\(\xi_{0.975}\)</span>，构成一个 95% 置信区间。</p>
+<p><strong>注意</strong>：这里不要求 p 分位数唯一，因为我们只需要一个合理的范围。</p>
+<h3 id="32_1">3.2 统计计算（要求唯一性）<a class="headerlink" href="#32_1" title="Permanent link">&para;</a></h3>
+<p><strong>场景</strong>：用计算机模拟生成服从特定分布的随机数（Simulation / 随机数生成）。</p>
+<p>这里需要唯一的分位数，因为要对每个均匀分布的随机数 U 精确计算 <span class="arithmatex">\(F^{-1}(U)\)</span>。</p>
+<p>具体方法见第四节（随机变量的生成）。</p>
+<hr />
+<h2 id="p_4">四、p 分位数的性质<a class="headerlink" href="#p_4" title="Permanent link">&para;</a></h2>
+<h3 id="41_1">4.1 六条基本性质<a class="headerlink" href="#41_1" title="Permanent link">&para;</a></h3>
+<p>设 F 是某个连续型或离散型随机变量的 CDF，<span class="arithmatex">\(F^{-1}\)</span> 是按正式定义给出的分位数函数。</p>
+<p><strong>性质 1</strong>：<span class="arithmatex">\(F^{-1}(p)\)</span> 关于 p 单调非降。</p>
+<blockquote>
+<p><strong>理解</strong>：p 越大（要求累积更多概率），对应的分位数 x 只能更大或不变。</p>
+</blockquote>
+<p><strong>性质 2</strong>：<span class="arithmatex">\(F^{-1}(F(x)) \leq x\)</span>，对所有 <span class="arithmatex">\(x \in \mathbb{R}\)</span> 成立。</p>
+<blockquote>
+<p><strong>理解</strong>：先把 x 用 F 映射到概率空间，再用 <span class="arithmatex">\(F^{-1}\)</span> 映射回来，结果不超过原来的 x。</p>
+<p><strong>为什么是 ≤ 而不是 =？</strong> 对于连续分布，等号成立；但对于离散分布，CDF 是阶梯函数，从一个"台阶"上的 x 映射到概率 F(x)，再反映射回来，会回到台阶的左端点（可能比原来的 x 小）。</p>
+</blockquote>
+<p><strong>性质 3</strong>：<span class="arithmatex">\(F(F^{-1}(p)) \geq p\)</span>，对所有 <span class="arithmatex">\(p \in (0,1)\)</span> 成立。</p>
+<blockquote>
+<p><strong>理解</strong>：先用 <span class="arithmatex">\(F^{-1}\)</span> 把概率 p 映射到实数轴，再用 F 映射回来，结果不低于原来的 p。</p>
+<p><strong>为什么是 ≥？</strong> 因为 <span class="arithmatex">\(F^{-1}(p)\)</span> 被定义为"使 F(x) ≥ p 的最小 x"，所以 <span class="arithmatex">\(F(F^{-1}(p)) \geq p\)</span> 是定义的直接推论。</p>
+</blockquote>
+<p><strong>性质 4</strong>：<span class="arithmatex">\(F^{-1}(p) \leq t \iff p \leq F(t)\)</span>，对所有 <span class="arithmatex">\(t \in \mathbb{R}\)</span>，<span class="arithmatex">\(p \in (0,1)\)</span>。</p>
+<p><strong>性质 5</strong>：<span class="arithmatex">\(F^{-1}(p)\)</span> 是左连续的。</p>
+<blockquote>
+<p><strong>理解</strong>：当 p 从左边趋向某个值时，<span class="arithmatex">\(F^{-1}\)</span> 的极限等于该点的值。</p>
+<p>注意：CDF 本身是右连续的；而它的"广义逆"（分位数函数）是<strong>左连续</strong>的。两者的连续性方向相反，这是个重要但容易搞混的细节。</p>
+</blockquote>
+<p><strong>性质 6</strong>：如果 F 是连续的（即 X 是连续型随机变量），则 <span class="arithmatex">\(F(F^{-1}(p)) = p\)</span>，对所有 <span class="arithmatex">\(p \in (0,1)\)</span> 成立。</p>
+<blockquote>
+<p><strong>理解</strong>：性质 3 说的是 ≥，但当 F 连续时，等号成立。即先走 <span class="arithmatex">\(F^{-1}\)</span> 再走 F，完美"还原"了原来的 p。</p>
+<p>这对应着我们熟悉的"连续型随机变量的 CDF 是严格单调的，因此 <span class="arithmatex">\(F^{-1}\)</span> 是真正的反函数"。</p>
+</blockquote>
+<h3 id="42_1">4.2 如何记住这些性质？<a class="headerlink" href="#42_1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>性质</th>
+<th>记忆口诀</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. 单调非降</td>
+<td>分位数随 p 增大只增不减</td>
+</tr>
+<tr>
+<td>2. <span class="arithmatex">\(F^{-1}(F(x)) \leq x\)</span></td>
+<td>反-正 组合，结果不超过原来</td>
+</tr>
+<tr>
+<td>3. <span class="arithmatex">\(F(F^{-1}(p)) \geq p\)</span></td>
+<td>正-反 组合，结果不低于原来</td>
+</tr>
+<tr>
+<td>4. 互逆关系</td>
+<td><span class="arithmatex">\(F^{-1}(p) \leq t\)</span> 等价于 <span class="arithmatex">\(p \leq F(t)\)</span></td>
+</tr>
+<tr>
+<td>5. 左连续</td>
+<td>F 右连续，<span class="arithmatex">\(F^{-1}\)</span> 左连续（方向相反）</td>
+</tr>
+<tr>
+<td>6. 连续时等号成立</td>
+<td>F 连续 → <span class="arithmatex">\(F(F^{-1}(p)) = p\)</span>（真正的反函数）</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>证明提示</strong>（不要求掌握细节）：所有这些性质的证明都依赖于 CDF 的基本性质，详见教材附录。</p>
+</blockquote>
+<hr />
+<h2 id="simulation">五、随机变量的生成（Simulation）<a class="headerlink" href="#simulation" title="Permanent link">&para;</a></h2>
+<p>这一节解释了 p 分位数最重要的实际应用之一：<strong>用均匀分布随机数生成任意分布的随机数</strong>。</p>
+<h3 id="51_1">5.1 核心定理<a class="headerlink" href="#51_1" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>[!NOTE] 定理 3.1（概率积分变换的逆）</p>
+<p>设 <span class="arithmatex">\(X \sim \mathcal{U}(0,1)\)</span>（X 服从 [0,1] 上的均匀分布），F(x) 是某个<strong>连续</strong>分布函数，则：</p>
+<div class="arithmatex">\[Y = F^{-1}(X) \sim F\]</div>
+<p>即 Y 服从分布函数为 F 的分布。</p>
+</blockquote>
+<p><strong>证明</strong>（很简洁，建议理解）：</p>
+<p>计算 Y 的 CDF：</p>
+<div class="arithmatex">\[F_Y(y) = \mathbb{P}(Y \leq y) = \mathbb{P}(F^{-1}(X) \leq y)\]</div>
+<p>利用性质 4（<span class="arithmatex">\(F^{-1}(p) \leq t \iff p \leq F(t)\)</span>，令 <span class="arithmatex">\(p = X\)</span>，<span class="arithmatex">\(t = y\)</span>）：</p>
+<div class="arithmatex">\[= \mathbb{P}(X \leq F(y))\]</div>
+<p>由于 <span class="arithmatex">\(X \sim \mathcal{U}(0,1)\)</span>，<span class="arithmatex">\(\mathbb{P}(X \leq c) = c\)</span>（对 <span class="arithmatex">\(0 \leq c \leq 1\)</span>）：</p>
+<div class="arithmatex">\[= F(y)\]</div>
+<p>所以 <span class="arithmatex">\(Y \sim F\)</span>。证毕。✓</p>
+<h3 id="52_1">5.2 为什么这个定理很重要？<a class="headerlink" href="#52_1" title="Permanent link">&para;</a></h3>
+<p>计算机只能直接生成均匀分布 <span class="arithmatex">\(\mathcal{U}(0,1)\)</span> 的随机数（通过伪随机数算法）。但实际应用中，我们需要指数分布、正态分布等各种分布的随机数。</p>
+<p>这个定理告诉我们：<strong>只需要两步</strong>：</p>
+<ol>
+<li>生成 <span class="arithmatex">\(U \sim \mathcal{U}(0,1)\)</span>（计算机容易做到）</li>
+<li>计算 <span class="arithmatex">\(Y = F^{-1}(U)\)</span>（即求 p 分位数）</li>
+</ol>
+<p>就可以得到服从分布 F 的随机数 Y。</p>
+<h3 id="53-bernoulli08">5.3 直观理解：以 Bernoulli(0.8) 为例<a class="headerlink" href="#53-bernoulli08" title="Permanent link">&para;</a></h3>
+<p><strong>Bernoulli(0.8)</strong>：X 取值 0 或 1，<span class="arithmatex">\(\mathbb{P}(X=0) = 0.2\)</span>，<span class="arithmatex">\(\mathbb{P}(X=1) = 0.8\)</span>。</p>
+<p><strong>第一步</strong>：写出 CDF：$<span class="arithmatex">\(F(x) = \begin{cases} 0, &amp; x &lt; 0 \\ 0.2, &amp; 0 \leq x &lt; 1 \\ 1, &amp; x \geq 1 \end{cases}\)</span>$</p>
+<p><strong>第二步</strong>：求 <span class="arithmatex">\(F^{-1}\)</span>（分位数函数）：$<span class="arithmatex">\(F^{-1}(p) = \begin{cases} 0, &amp; 0 &lt; p \leq 0.2 \\ 1, &amp; 0.2 &lt; p \leq 1 \end{cases}\)</span>$
+<strong>第三步</strong>：生成随机数的过程：</p>
+<ul>
+<li>计算机生成 <span class="arithmatex">\(u_1 = 0.12\)</span>：<span class="arithmatex">\(F^{-1}(0.12) = 0\)</span>（因为 <span class="arithmatex">\(0.12 \leq 0.2\)</span>）→ 输出 0</li>
+<li>计算机生成 <span class="arithmatex">\(u_2 = 0.91\)</span>：<span class="arithmatex">\(F^{-1}(0.91) = 1\)</span>（因为 <span class="arithmatex">\(0.91 &gt; 0.2\)</span>）→ 输出 1</li>
+</ul>
+<p><strong>直觉验证</strong>：均匀分布中，0.12 在 0.2 的左边，落入"输出 0"的区域（概率 20%）；0.91 在 0.2 的右边，落入"输出 1"的区域（概率 80%）。这正好对应 Bernoulli(0.8)！</p>
+<p>多次重复这个过程，生成的 0 和 1 序列，就会以大约 20%:80% 的比例分布。</p>
+<h3 id="54">5.4 具体例子：如何生成常见分布的随机数<a class="headerlink" href="#54" title="Permanent link">&para;</a></h3>
+<p><strong>例 3.1</strong>：假设已经能生成 <span class="arithmatex">\(\mathcal{U}(0,1)\)</span> 随机数，如何生成以下分布的随机数？</p>
+<hr />
+<h4 id="1-mathcalelambda">情形 (1)：指数分布 <span class="arithmatex">\(\mathcal{E}(\lambda)\)</span>（需要掌握）<a class="headerlink" href="#1-mathcalelambda" title="Permanent link">&para;</a></h4>
+<p><strong>指数分布的 CDF</strong>： $<span class="arithmatex">\(F(x) = 1 - e^{-\lambda x}, \quad x \geq 0\)</span>$</p>
+<p><strong>求 <span class="arithmatex">\(F^{-1}(p)\)</span></strong>：令 <span class="arithmatex">\(F(x) = p\)</span>，即 <span class="arithmatex">\(1 - e^{-\lambda x} = p\)</span>，解出 x： $<span class="arithmatex">\(e^{-\lambda x} = 1-p \Rightarrow -\lambda x = \log(1-p) \Rightarrow x = -\frac{1}{\lambda}\log(1-p)\)</span>$</p>
+<p><strong>生成方法</strong>：设 <span class="arithmatex">\(U \sim \mathcal{U}(0,1)\)</span>，令 $<span class="arithmatex">\(X = -\frac{1}{\lambda}\log(1-U)\)</span>$ 则 <span class="arithmatex">\(X \sim \mathcal{E}(\lambda)\)</span>。</p>
+<p><strong>R 语言验证</strong>（课件中给出的示例）：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="o">&gt;</span><span class="w"> </span><span class="n">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">runif</span><span class="p">(</span><span class="m">1</span><span class="p">)</span><span class="w">   </span><span class="c1"># 生成一个 [0,1] 均匀随机数</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="o">&gt;</span><span class="w"> </span><span class="n">u</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="m">0.335191</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="o">&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="nf">log</span><span class="p">(</span><span class="m">1</span><span class="o">-</span><span class="n">u</span><span class="p">)</span><span class="o">/</span><span class="n">lambda</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="o">&gt;</span><span class="w"> </span><span class="n">x</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="m">0.1166444</span>
+</code></pre></div>
+<p><strong>小技巧</strong>：由于 <span class="arithmatex">\(1-U\)</span> 也服从 <span class="arithmatex">\(\mathcal{U}(0,1)\)</span>（均匀分布关于 0.5 对称），实际中常写成： $<span class="arithmatex">\(X = -\frac{1}{\lambda}\log U\)</span>$ （用 <span class="arithmatex">\(U\)</span> 代替 <span class="arithmatex">\(1-U\)</span>，因为二者同分布，结果一样。）</p>
+<hr />
+<h4 id="2cauchy">情形 (2)：Cauchy 分布（了解即可，不做硬性要求）<a class="headerlink" href="#2cauchy" title="Permanent link">&para;</a></h4>
+<p><strong>生成方法</strong>：令 X, Y 独立且都服从 <span class="arithmatex">\(\mathcal{N}(0,1)\)</span>，则 <span class="arithmatex">\(Z = X/Y\)</span> 服从 Cauchy 分布。</p>
+<p>（这里用到了两个独立正态随机变量的比值服从 Cauchy 分布的结论。）</p>
+<hr />
+<h4 id="3-mathcaln01">情形 (3)：标准正态分布 <span class="arithmatex">\(\mathcal{N}(0,1)\)</span>（了解即可，不做硬性要求）<a class="headerlink" href="#3-mathcaln01" title="Permanent link">&para;</a></h4>
+<p>标准正态的 CDF <span class="arithmatex">\(\Phi(x)\)</span> 没有解析表达式，因此直接用 <span class="arithmatex">\(F^{-1}(U)\)</span> 的方法不方便（无法写出 <span class="arithmatex">\(\Phi^{-1}\)</span> 的解析式）。</p>
+<p><strong>Box-Muller 变换</strong>：设 <span class="arithmatex">\(U, V \sim \mathcal{U}(0,1)\)</span> 独立，令 $<span class="arithmatex">\(X = \sqrt{-2\log U} \cos(2\pi V), \quad Y = \sqrt{-2\log U} \sin(2\pi V)\)</span>$ 则 X, Y 相互独立，都服从 <span class="arithmatex">\(\mathcal{N}(0,1)\)</span>。</p>
+<blockquote>
+<p>这里用了极坐标变换的技巧（详见附录），课件标注"不要求掌握"，了解结论即可。</p>
+</blockquote>
+<hr />
+<h3 id="55">5.5 总结：生成随机数的通用流程<a class="headerlink" href="#55" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>目标分布 F
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  ↓  求 CDF 的反函数（分位数函数）
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>F⁻¹(x)
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>  ↓  代入均匀随机数 U
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>F⁻¹(U)  ←  这就是服从分布 F 的随机数！
+</code></pre></div>
+<hr />
+<h2 id="p_5">六、p 分位数的等价定义<a class="headerlink" href="#p_5" title="Permanent link">&para;</a></h2>
+<p>课件最后补充了一个等价定义：</p>
+<blockquote>
+<p><strong>等价定义</strong>： $<span class="arithmatex">\(F^{-1}(p) = \sup{x \mid F(x) &lt; p}\)</span>$</p>
+</blockquote>
+<p>和正式定义 <span class="arithmatex">\(F^{-1}(p) = \inf{x \mid F(x) \geq p}\)</span> 是完全等价的。</p>
+<p><strong>两者的区别</strong>（集合不同，但结论相同）：</p>
+<ul>
+<li>正式定义：在"CDF 已经≥p"的 x 中取最小值。</li>
+<li>等价定义：在"CDF 还&lt;p"的 x 中取最大值。</li>
+</ul>
+<p>这两个边界从两侧夹住了同一个点，所以结果相同。</p>
+<hr />
+<h2 id="_7">七、知识总结与考试要求<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<h3 id="71">7.1 必须掌握的内容<a class="headerlink" href="#71" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>知识点</th>
+<th>具体要求</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>直观定义</strong></td>
+<td>能写出 <span class="arithmatex">\(\mathbb{P}(X \leq x) \geq p\)</span> 且 <span class="arithmatex">\(\mathbb{P}(X \geq x) \geq 1-p\)</span>，理解其含义</td>
+</tr>
+<tr>
+<td><strong>正式定义（唯一性）</strong></td>
+<td>能写出 <span class="arithmatex">\(F^{-1}(p) = \inf{x \mid F(x) \geq p}\)</span>，知道为什么用 inf</td>
+</tr>
+<tr>
+<td><strong>两者关系</strong></td>
+<td>直观定义不唯一，正式定义唯一；正式定义用于统计计算</td>
+</tr>
+<tr>
+<td><strong>性质 1-6</strong></td>
+<td>理解每条性质的含义，知道连续情况下性质 6 等号成立</td>
+</tr>
+<tr>
+<td><strong>定理 3.1</strong></td>
+<td>能陈述并证明：若 <span class="arithmatex">\(U \sim \mathcal{U}(0,1)\)</span>，F 连续，则 <span class="arithmatex">\(F^{-1}(U) \sim F\)</span></td>
+</tr>
+<tr>
+<td><strong>连续分布的随机数生成</strong></td>
+<td>能对给定连续分布求出 <span class="arithmatex">\(F^{-1}\)</span> 并写出生成公式（如指数分布）</td>
+</tr>
+<tr>
+<td><strong>应用场景</strong></td>
+<td>知道统计推断和统计计算对唯一性的不同需求</td>
+</tr>
+</tbody>
+</table>
+<h3 id="72">7.2 了解即可（不做硬性要求）<a class="headerlink" href="#72" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Cauchy 分布和正态分布的具体生成方法</li>
+<li>Box-Muller 变换的证明</li>
+<li>极坐标变换的技术细节（附录内容）</li>
+</ul>
+<h3 id="73">7.3 离散分布的情况<a class="headerlink" href="#73" title="Permanent link">&para;</a></h3>
+<p>课件建议"根据自己情况酌情掌握"。对于离散分布，<span class="arithmatex">\(F\)</span> 是阶梯函数，<span class="arithmatex">\(F^{-1}\)</span> 仍然是按照 <span class="arithmatex">\(\inf{x \mid F(x) \geq p}\)</span> 定义的，但要注意 CDF 在跳跃点的值。如本讲义 5.3 节的 Bernoulli(0.8) 例子，是离散分布生成的好示范。</p>
+<hr />
+<h2 id="_8">八、常见疑问解答<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<p><strong>Q1：p 分位数中的 p 必须在 (0,1) 内吗？</strong></p>
+<p>A：是的，定义要求 <span class="arithmatex">\(p \in (0,1)\)</span>。<span class="arithmatex">\(p=0\)</span> 和 <span class="arithmatex">\(p=1\)</span> 对应 <span class="arithmatex">\(-\infty\)</span> 和 <span class="arithmatex">\(+\infty\)</span>，没有实际意义。</p>
+<p><strong>Q2：中位数就是均值吗？</strong></p>
+<p>A：不一定！中位数是 <span class="arithmatex">\(\xi_{1/2}\)</span>（0.5 分位数），均值是期望 <span class="arithmatex">\(\mathbb{E}[X]\)</span>。对称分布（如正态分布）中二者相等，但偏斜分布中通常不同。</p>
+<p><strong>Q3：如果 CDF 在某点跳跃，分位数怎么取？</strong></p>
+<p>A：按定义，<span class="arithmatex">\(F^{-1}(p) = \inf{x \mid F(x) \geq p}\)</span>，即找到 CDF <strong>第一次</strong>达到 p 的 x 值。如果 CDF 在 <span class="arithmatex">\(x_0\)</span> 处跳跃，从 <span class="arithmatex">\(F(x_0^-)\)</span> 跳到 <span class="arithmatex">\(F(x_0)\)</span>，那么所有 <span class="arithmatex">\(p \in (F(x_0^-), F(x_0)]\)</span> 的分位数都是 <span class="arithmatex">\(x_0\)</span>。</p>
+<p><strong>Q4：为什么 <span class="arithmatex">\(F^{-1}\)</span> 是左连续而 F 是右连续？</strong></p>
+<p>A：这是数学上的对偶性。CDF 的右连续性来自于概率测度的基本性质；而 <span class="arithmatex">\(F^{-1}\)</span> 的左连续性可以从其定义 <span class="arithmatex">\(\inf{x \mid F(x) \geq p}\)</span> 中通过极限论证得到（详见附录）。记住这个"方向相反"的结论即可。</p>
+<p><strong>Q5：定理 3.1 要求 F 连续，如果不连续（离散分布）怎么办？</strong></p>
+<p>A：对于离散分布，<span class="arithmatex">\(F^{-1}(U)\)</span> 仍然有意义，只是证明不能直接用性质 4（此时需要处理 CDF 的跳跃）。结论仍然成立：<span class="arithmatex">\(F^{-1}(U) \sim F\)</span>，但证明略复杂，不做要求。</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "navigation.indexes", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

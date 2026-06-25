@@ -1,0 +1,2666 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="清华统计课程笔记">
+      
+      
+      
+        <link rel="canonical" href="https://Sonnette51.github.io/stat_notes_sonnette/%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%A8%A1%E5%9D%971%20%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E7%9A%84%E5%87%BD%E6%95%B0/">
+      
+      
+        <link rel="prev" href="../%E6%9C%9F%E6%9C%AB%E8%AE%B0%E5%BF%86%E8%A6%81%E7%82%B9%E6%B1%87%E6%80%BB/">
+      
+      
+        <link rel="next" href="../%E6%A8%A1%E5%9D%972%20%E6%AC%A1%E5%BA%8F%E7%BB%9F%E8%AE%A1%E9%87%8F%E4%B8%8Ep-%E5%88%86%E4%BD%8D%E6%95%B0/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>复习 模块1 随机向量的函数 - Sonnette's Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="Sonnette&#39;s Notes" class="md-header__button md-logo" aria-label="Sonnette's Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Sonnette's Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              复习 模块1 随机向量的函数
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  数据科学编程
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  初等概率论
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Sonnette&#39;s Notes" class="md-nav__button md-logo" aria-label="Sonnette's Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Sonnette's Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据科学编程
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数据科学编程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/NumPy%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NumPy 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/Pandas%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pandas 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/Database%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/LLM%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LLM 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/MiningWebData%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mining Web Data 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/TextProcessing%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Text Processing 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/DataVisualization%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Visualization 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/Advanced%20Visualization%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Advanced Visualization 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    初等概率论
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    初等概率论
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture01%20%E6%A6%82%E7%8E%87%E6%A8%A1%E5%9E%8B%E4%B8%8E%E6%80%A7%E8%B4%A8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture01 概率模型与性质
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture02%20%E6%A6%82%E7%8E%87%E7%A9%BA%E9%97%B4%E3%80%81%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture02 概率空间、条件概率
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture03%20%E7%8B%AC%E7%AB%8B%E6%80%A7%E3%80%81%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture03 独立性、随机变量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture04%20%E5%B8%B8%E8%A7%81%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture04 常见随机变量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture05%20%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0%E3%80%81%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E5%87%BD%E6%95%B0%E7%9A%84%E5%88%86%E5%B8%83%E3%80%81%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E7%9A%84%E5%88%86%E5%B8%83%28I%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture05 概率分布函数、随机变量函数的分布、随机向量的分布(I)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture06%20%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E7%9A%84%E5%88%86%E5%B8%83%28II%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture06 随机向量的分布(II)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture07%20%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E5%87%BD%E6%95%B0%E7%9A%84%E5%88%86%E5%B8%83%E3%80%81%E6%AC%A1%E5%BA%8F%E7%BB%9F%E8%AE%A1%E9%87%8F%E3%80%81p%E5%88%86%E4%BD%8D%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture07 随机向量函数的分布、次序统计量、p分位数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture08%20%E6%9C%9F%E6%9C%9B%E3%80%81%E6%96%B9%E5%B7%AE%E3%80%81%E7%9B%B8%E5%85%B3%E4%B8%8D%E7%AD%89%E5%BC%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture08 期望、方差、相关不等式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture09%20%E6%9D%A1%E4%BB%B6%E6%9C%9F%E6%9C%9B%E3%80%81%E6%9D%A1%E4%BB%B6%E6%96%B9%E5%B7%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture09 条件期望、条件方差
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture10%20%E5%8D%8F%E6%96%B9%E5%B7%AE%E3%80%81%E7%9B%B8%E5%85%B3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture10 协方差、相关
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture11%20%E6%A6%82%E7%8E%87%E6%AF%8D%E5%87%BD%E6%95%B0%E3%80%81%E7%9F%A9%E6%AF%8D%E5%87%BD%E6%95%B0%E3%80%81%E7%89%B9%E5%BE%81%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture11 概率母函数、矩母函数、特征函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture12%20%E5%A4%A7%E6%95%B0%E5%AE%9A%E5%BE%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture12 大数定律
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture13%20%E4%B8%AD%E5%BF%83%E6%9E%81%E9%99%90%E5%AE%9A%E7%90%86%E3%80%81%E6%94%B6%E6%95%9B%E6%80%A7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture13 中心极限定理、收敛性
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture14%20%E5%A4%9A%E5%85%83%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture14 多元正态分布
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%9C%9F%E6%9C%AB%E8%AE%B0%E5%BF%86%E8%A6%81%E7%82%B9%E6%B1%87%E6%80%BB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 期末记忆要点汇总
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块1 随机向量的函数
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块1 随机向量的函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#part-0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 0：一句话看懂这个模块
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-a" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part A：公式与方法速查
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part A：公式与方法速查">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.1 联合 → 边缘（已知联合分布求单个分量的分布；任何时候都可用）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a2-cdf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.2 CDF 法（通用方法）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a3-x_1ldotsx_n-cdf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.3 最大值 / 最小值（\(X_1,\ldots,X_n\) 独立时，CDF 法的直接推论）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.4 离散卷积（和的分布列）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.5 连续卷积（和的密度）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.6 差的分布
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a7-wx-wy-jacobian-w" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.7 积与商的分布（增补变量法的产物：补 \(W=X\) 或 \(W=Y\) 凑成二维可逆变换，用 Jacobian 定理求联合密度后积分掉 \(W\)）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a8-jacobian-11-n" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.8 Jacobian 变换定理（定理 1.1，二维，可推广到 \(n\) 维）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.9 独立性快速判别（归一化技巧）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.10 混合型处理（一离散一连续，或按概率混合）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a11-12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.11 同分布映射定理（定理 1.2）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a12-lec07" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.12 统计三大分布速查（Lec07 预备知识，样卷常用）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-b" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part B：判断题精选
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part C：典型计算/证明题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part C：典型计算/证明题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-hw7-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        题 1.1（来源：作业 HW7 第 1 题）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-hw7-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        题 1.2（来源：作业 HW7 第 2 题）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#132" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        题 1.3（来源：样卷第三大题(2)）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-hw7-3-problem-14-competing-exponentials" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        题 1.4（来源：作业 HW7 第 3 题，即教材第四章 Problem 14 "Competing exponentials"）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-hw7-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        题 1.5（来源：作业 HW7 第 4 题）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#16-hw7-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        题 1.6（来源：作业 HW7 第 5 题）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#17-hw7-6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        题 1.7（来源：作业 HW7 第 6 题）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#183" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        题 1.8（来源：补充题，仿样卷第三大题(3) 混合型风格）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-d" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part D：模块小结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A8%A1%E5%9D%972%20%E6%AC%A1%E5%BA%8F%E7%BB%9F%E8%AE%A1%E9%87%8F%E4%B8%8Ep-%E5%88%86%E4%BD%8D%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块2 次序统计量与p-分位数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A8%A1%E5%9D%973%20%E6%9C%9F%E6%9C%9B%E4%B8%8E%E6%96%B9%E5%B7%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块3 期望与方差
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A8%A1%E5%9D%974%20%E6%9D%A1%E4%BB%B6%E6%9C%9F%E6%9C%9B%E3%80%81%E5%8D%8F%E6%96%B9%E5%B7%AE%E4%B8%8E%E4%B8%8D%E7%AD%89%E5%BC%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块4 条件期望、协方差与不等式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A8%A1%E5%9D%975%20%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0%E4%B8%8E%E7%89%B9%E5%BE%81%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块5 生成函数与特征函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A8%A1%E5%9D%976%20%E6%94%B6%E6%95%9B%E6%80%A7%E3%80%81%E5%A4%A7%E6%95%B0%E5%BE%8B%E4%B8%8E%E4%B8%AD%E5%BF%83%E6%9E%81%E9%99%90%E5%AE%9A%E7%90%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块6 收敛性、大数律与中心极限定理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A8%A1%E5%9D%977%20%E5%A4%9A%E5%85%83%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块7 多元正态分布
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#part-0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 0：一句话看懂这个模块
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-a" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part A：公式与方法速查
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part A：公式与方法速查">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.1 联合 → 边缘（已知联合分布求单个分量的分布；任何时候都可用）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a2-cdf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.2 CDF 法（通用方法）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a3-x_1ldotsx_n-cdf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.3 最大值 / 最小值（\(X_1,\ldots,X_n\) 独立时，CDF 法的直接推论）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.4 离散卷积（和的分布列）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.5 连续卷积（和的密度）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.6 差的分布
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a7-wx-wy-jacobian-w" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.7 积与商的分布（增补变量法的产物：补 \(W=X\) 或 \(W=Y\) 凑成二维可逆变换，用 Jacobian 定理求联合密度后积分掉 \(W\)）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a8-jacobian-11-n" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.8 Jacobian 变换定理（定理 1.1，二维，可推广到 \(n\) 维）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.9 独立性快速判别（归一化技巧）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.10 混合型处理（一离散一连续，或按概率混合）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a11-12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.11 同分布映射定理（定理 1.2）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a12-lec07" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.12 统计三大分布速查（Lec07 预备知识，样卷常用）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-b" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part B：判断题精选
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part C：典型计算/证明题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part C：典型计算/证明题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-hw7-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        题 1.1（来源：作业 HW7 第 1 题）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-hw7-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        题 1.2（来源：作业 HW7 第 2 题）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#132" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        题 1.3（来源：样卷第三大题(2)）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-hw7-3-problem-14-competing-exponentials" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        题 1.4（来源：作业 HW7 第 3 题，即教材第四章 Problem 14 "Competing exponentials"）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-hw7-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        题 1.5（来源：作业 HW7 第 4 题）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#16-hw7-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        题 1.6（来源：作业 HW7 第 5 题）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#17-hw7-6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        题 1.7（来源：作业 HW7 第 6 题）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#183" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        题 1.8（来源：补充题，仿样卷第三大题(3) 混合型风格）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-d" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part D：模块小结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="1">模块 1：随机向量的函数<a class="headerlink" href="#1" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>对应 Lec 07：随机向量函数的分布（CDF 法、卷积、Jacobian 变换）及统计三大分布预备知识。约 10–20 分，以计算题为主，兼有判断。</p>
+</blockquote>
+<h2 id="part-0">Part 0：一句话看懂这个模块<a class="headerlink" href="#part-0" title="Permanent link">&para;</a></h2>
+<p><strong>全模块只做一件事</strong>：已知 <span class="arithmatex">\(X,Y\)</span> 的分布，求 <span class="arithmatex">\(Z=g(X,Y)\)</span> 的分布。</p>
+<p><strong>就两条路</strong>：</p>
+<ol>
+<li><strong>CDF 法</strong>（万能）：算 <span class="arithmatex">\(F_Z(z)=\mathbb{P}(g(X,Y)\le z)\)</span>，再求导。本质：在 <span class="arithmatex">\(xy\)</span> 平面上画出 <span class="arithmatex">\(\{g(x,y)\le z\}\)</span> 这块区域，求它的概率。</li>
+<li><strong>公式法</strong>（套现成的）：<span class="arithmatex">\(g\)</span> 长得规整时（和、差、积、商、可逆变换），有预先推好的公式直接套——A.2~A.10 全是这条路的"专用工具"。</li>
+</ol>
+<p><strong>按 <span class="arithmatex">\(g\)</span> 的形状对号入座</strong>：</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(g\)</span> 长什么样</th>
+<th>用哪个工具</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(X+Y\)</span>（和）</td>
+<td>离散卷积（A.4）/ 连续卷积（A.5）</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(X-Y\)</span>（差）</td>
+<td>差公式（A.6）</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(XY\)</span>、<span class="arithmatex">\(X/Y\)</span>（积、商）</td>
+<td>积商公式（A.7），或 CDF 法画区域</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\max,\min\)</span></td>
+<td>生存函数/CDF 连乘（A.3）</td>
+</tr>
+<tr>
+<td>一对变一对 <span class="arithmatex">\((U,V)=(u,v)(X,Y)\)</span></td>
+<td>Jacobian 五步法（A.8）</td>
+</tr>
+<tr>
+<td>一离散一连续相加</td>
+<td>全概率公式分拆（A.10）</td>
+</tr>
+<tr>
+<td>奇形怪状</td>
+<td>CDF 法兜底</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Jacobian 一句话</strong>：是一维换元 <span class="arithmatex">\(f_Y(y)=f_X(x)|dx/dy|\)</span> 的二维版——<strong>新密度 = 旧密度 × |面积缩放|</strong>。那个行列式就是"面积缩放因子"。</p>
+<p><strong>五步模板</strong>：写联合密度 → 反解 <span class="arithmatex">\(x,y\)</span>（数清分支）→ 算 Jacobian → 定新变量区域 → 套公式。</p>
+<p><strong>最容易混的两组概念</strong>：</p>
+<ul>
+<li>卷积（独立求和）= "两个总体各抽一次相加"，密度做 <span class="arithmatex">\(\int f_X(x)f_Y(z-x)dx\)</span>；</li>
+<li>概率混合 = "随机选一个总体抽一次"，密度做 <span class="arithmatex">\(\sum p_i f_i(z)\)</span>。</li>
+<li><span class="arithmatex">\(\max\)</span> 用 <span class="arithmatex">\(\mathbb{P}(\max\le z)=\prod F_i(z)\)</span>；<span class="arithmatex">\(\min\)</span> 用 <span class="arithmatex">\(\mathbb{P}(\min&gt;z)=\prod(1-F_i(z))\)</span>，方向别反。</li>
+</ul>
+<p>看到这里如果思路通了，下面 Part A 就是查表用的，不用从头啃。</p>
+<h2 id="part-a">Part A：公式与方法速查<a class="headerlink" href="#part-a" title="Permanent link">&para;</a></h2>
+<p><strong>总路线</strong>：求 <span class="arithmatex">\(Z=g(\vec{X})\)</span> 的分布只有两条路——(1) 通用 CDF 法：先求 <span class="arithmatex">\(F_Z(z)=\mathbb{P}(g(\vec{X})\le z)\)</span> 再求导；(2) 公式法：当 <span class="arithmatex">\(g\)</span> 结构良好（和、差、可逆变换）时从 PDF 直接得 PDF。</p>
+<h3 id="a1">A.1 联合 → 边缘（已知联合分布求单个分量的分布；任何时候都可用）<a class="headerlink" href="#a1" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+f_X(x)=\int_{-\infty}^{\infty}f(x,y)\,dy,\qquad \mathbb{P}(X=x)=\sum_{y}\mathbb{P}(X=x,Y=y).
+\]</div>
+<h3 id="a2-cdf">A.2 CDF 法（通用方法）<a class="headerlink" href="#a2-cdf" title="Permanent link">&para;</a></h3>
+<p>把事件 <span class="arithmatex">\(\{g(X,Y)\le z\}\)</span> 化为平面区域，对联合密度积分（连续）或对分布列求和（离散），再求导得 PDF。适用于商、模长、<span class="arithmatex">\(\max\)</span>、<span class="arithmatex">\(\min\)</span> 等一切没有现成公式的函数。</p>
+<div class="arithmatex">\[
+F_Z(z)=\mathbb{P}\big(g(X,Y)\le z\big)=\iint_{\{g(x,y)\le z\}}f(x,y)\,dx\,dy,\qquad f_Z(z)=F_Z'(z).
+\]</div>
+<h3 id="a3-x_1ldotsx_n-cdf">A.3 最大值 / 最小值（<span class="arithmatex">\(X_1,\ldots,X_n\)</span> 独立时，CDF 法的直接推论）<a class="headerlink" href="#a3-x_1ldotsx_n-cdf" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+\mathbb{P}\Big(\max_{i}X_i\le z\Big)=\prod_{i=1}^{n}F_i(z),\qquad \mathbb{P}\Big(\min_{i}X_i&gt;z\Big)=\prod_{i=1}^{n}\big(1-F_i(z)\big).
+\]</div>
+<p>特例：<span class="arithmatex">\(n\)</span> 个独立 <span class="arithmatex">\(\mathcal{E}(\lambda)\)</span> 的最小值服从 <span class="arithmatex">\(\mathcal{E}(n\lambda)\)</span>。</p>
+<h3 id="a4">A.4 离散卷积（和的分布列）<a class="headerlink" href="#a4" title="Permanent link">&para;</a></h3>
+<p>按 <span class="arithmatex">\(X\)</span> 的取值全概率分拆。</p>
+<div class="arithmatex">\[
+\mathbb{P}(Z=z)=\sum_{x}\mathbb{P}(X=x,Y=z-x)\overset{X\perp Y}{=}\sum_{x}P_X(x)P_Y(z-x).
+\]</div>
+<p>常用再生性速查（均要求相互独立）：</p>
+<table>
+<thead>
+<tr>
+<th>分布</th>
+<th>再生性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>二项</td>
+<td><span class="arithmatex">\(B(n,p)+B(m,p)\sim B(n+m,p)\)</span></td>
+</tr>
+<tr>
+<td>泊松</td>
+<td><span class="arithmatex">\(\mathcal{P}(\lambda_1)+\mathcal{P}(\lambda_2)\sim\mathcal{P}(\lambda_1+\lambda_2)\)</span></td>
+</tr>
+<tr>
+<td>正态</td>
+<td><span class="arithmatex">\(\mathcal{N}(\mu_1,\sigma_1^2)+\mathcal{N}(\mu_2,\sigma_2^2)\sim\mathcal{N}(\mu_1+\mu_2,\sigma_1^2+\sigma_2^2)\)</span></td>
+</tr>
+<tr>
+<td>Gamma</td>
+<td><span class="arithmatex">\(\Gamma(\alpha,\lambda)+\Gamma(\beta,\lambda)\sim\Gamma(\alpha+\beta,\lambda)\)</span>（要求第二参数相同）</td>
+</tr>
+<tr>
+<td>指数</td>
+<td><span class="arithmatex">\(n\)</span> 个 <span class="arithmatex">\(\mathcal{E}(\lambda)\)</span> 之和 <span class="arithmatex">\(\sim\Gamma(n,\lambda)\)</span></td>
+</tr>
+<tr>
+<td>卡方</td>
+<td><span class="arithmatex">\(\chi^2_{m}+\chi^2_{n}\sim\chi^2_{m+n}\)</span></td>
+</tr>
+<tr>
+<td>几何</td>
+<td><span class="arithmatex">\(r\)</span> 个 <span class="arithmatex">\(G(p)\)</span> 之和 <span class="arithmatex">\(\sim NB(r,p)\)</span></td>
+</tr>
+</tbody>
+</table>
+<h3 id="a5">A.5 连续卷积（和的密度）<a class="headerlink" href="#a5" title="Permanent link">&para;</a></h3>
+<p><span class="arithmatex">\(Z=X+Y\)</span>，<span class="arithmatex">\((X,Y)\)</span> 有联合密度 <span class="arithmatex">\(f(x,y)\)</span>，则</p>
+<div class="arithmatex">\[
+f_Z(z)=\int_{-\infty}^{\infty}f(x,z-x)\,dx\overset{X\perp Y}{=}\int_{-\infty}^{\infty}f_X(x)f_Y(z-x)\,dx.
+\]</div>
+<p>操作要点：先定 <span class="arithmatex">\(Z\)</span> 的支撑集，再由示性函数（密度的非零范围）解出积分上下限，最后按 <span class="arithmatex">\(z\)</span> 分段讨论。</p>
+<h3 id="a6">A.6 差的分布<a class="headerlink" href="#a6" title="Permanent link">&para;</a></h3>
+<p><span class="arithmatex">\(V=X-Y\)</span>，则</p>
+<div class="arithmatex">\[
+f_V(v)=\int_{-\infty}^{\infty}f(x,x-v)\,dx\overset{X\perp Y}{=}\int_{-\infty}^{\infty}f_X(x)f_Y(x-v)\,dx.
+\]</div>
+<blockquote>
+<p>[!WARNING] 易错
+差的公式中第二个宗量是 <span class="arithmatex">\(f_Y(x-v)\)</span>（由 <span class="arithmatex">\(x-y=v\)</span> 解出 <span class="arithmatex">\(y=x-v\)</span>），<strong>不是</strong> <span class="arithmatex">\(f_Y(v-x)\)</span>；和的卷积才是 <span class="arithmatex">\(f_Y(z-x)\)</span>（由 <span class="arithmatex">\(x+y=z\)</span> 解出 <span class="arithmatex">\(y=z-x\)</span>）。死记容易混，建议每次现场解方程"解出另一变量"。</p>
+</blockquote>
+<h3 id="a7-wx-wy-jacobian-w">A.7 积与商的分布（增补变量法的产物：补 <span class="arithmatex">\(W=X\)</span> 或 <span class="arithmatex">\(W=Y\)</span> 凑成二维可逆变换，用 Jacobian 定理求联合密度后积分掉 <span class="arithmatex">\(W\)</span>）<a class="headerlink" href="#a7-wx-wy-jacobian-w" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+f_{XY}(z)=\int_{-\infty}^{\infty}\frac{1}{|x|}f\Big(x,\frac{z}{x}\Big)\,dx,\qquad f_{X/Y}(z)=\int_{-\infty}^{\infty}|y|\,f(zy,y)\,dy.
+\]</div>
+<p>商也常用 CDF 法直接做（画区域算面积），尤其在均匀分布场合更直观。</p>
+<h3 id="a8-jacobian-11-n">A.8 Jacobian 变换定理（定理 1.1，二维，可推广到 <span class="arithmatex">\(n\)</span> 维）<a class="headerlink" href="#a8-jacobian-11-n" title="Permanent link">&para;</a></h3>
+<p>设 <span class="arithmatex">\((X,Y)\)</span> 有联合密度 <span class="arithmatex">\(f(x,y)\)</span>，<span class="arithmatex">\(U=u(X,Y)\)</span>，<span class="arithmatex">\(V=v(X,Y)\)</span>，<span class="arithmatex">\(D\)</span> 满足 <span class="arithmatex">\(\mathbb{P}((U,V)\in D)=1\)</span>。若存在 <span class="arithmatex">\(D\)</span> 上的反解分支 <span class="arithmatex">\(x_i=x_i(u,v)\)</span>，<span class="arithmatex">\(y_i=y_i(u,v)\)</span>，<span class="arithmatex">\(i=1,\ldots,n\)</span>，满足：</p>
+<ol>
+<li>对 <span class="arithmatex">\((u,v)\in D\)</span>，<span class="arithmatex">\(\{U=u,V=v\}=\bigcup_{i=1}^{n}\{X=x_i,Y=y_i\}\)</span>（反解出全部分支）；</li>
+<li>每个 <span class="arithmatex">\(\Delta_i\)</span> 是 <span class="arithmatex">\(D\)</span> 到值域 <span class="arithmatex">\(D_i\)</span> 的可逆映射，偏导连续且 <span class="arithmatex">\(\left|\frac{\partial(x_i,y_i)}{\partial(u,v)}\right|\neq 0\)</span>；</li>
+<li><span class="arithmatex">\(D_1,\ldots,D_n\)</span> 互不相交；</li>
+</ol>
+<p>则 <span class="arithmatex">\((U,V)\)</span> 有联合密度</p>
+<div class="arithmatex">\[
+g(u,v)=\begin{cases}\displaystyle\sum_{i=1}^{n}f\big(x_i(u,v),y_i(u,v)\big)\left|\frac{\partial(x_i,y_i)}{\partial(u,v)}\right|, &amp; (u,v)\in D,\\ 0, &amp; (u,v)\in D^{c}.\end{cases}
+\]</div>
+<p>其中 Jacobian 行列式为</p>
+<div class="arithmatex">\[
+\frac{\partial(x,y)}{\partial(u,v)}=\det\begin{pmatrix}\dfrac{\partial x}{\partial u} &amp; \dfrac{\partial x}{\partial v}\\[4pt] \dfrac{\partial y}{\partial u} &amp; \dfrac{\partial y}{\partial v}\end{pmatrix}.
+\]</div>
+<p>直觉：新密度 = 旧密度在原像点的值 × 面积缩放因子；多分支则各支贡献相加。适用场景：多对多变换求联合密度（如极坐标、<span class="arithmatex">\((X/Y,X^2+Y^2)\)</span>、<span class="arithmatex">\((X_1^2,X_1+X_2)\)</span> 等），以及"求一个函数的分布"时的增补变量法。</p>
+<blockquote>
+<p>[!WARNING] 易错
+- Jacobian 是<strong>旧变量对新变量</strong>的导数 <span class="arithmatex">\(\frac{\partial(x,y)}{\partial(u,v)}\)</span>，且要取<strong>绝对值</strong>；若先算 <span class="arithmatex">\(\frac{\partial(u,v)}{\partial(x,y)}\)</span>，须取倒数（行列式互为倒数，转置不改变行列式，故布局约定不影响结果）。
+- 反解不止一支时（如 <span class="arithmatex">\(y=\pm\sqrt{\cdot}\)</span>）必须<strong>逐支求 Jacobian 后求和</strong>，漏支会丢一半概率。
+- 写结果时必须同时写清 <span class="arithmatex">\((u,v)\)</span> 的取值区域 <span class="arithmatex">\(D\)</span>（由原变量的支撑集映射而来），区域错则全错。</p>
+</blockquote>
+<h3 id="a9">A.9 独立性快速判别（归一化技巧）<a class="headerlink" href="#a9" title="Permanent link">&para;</a></h3>
+<p>若联合密度在<strong>乘积型区域</strong>上可分离变量</p>
+<div class="arithmatex">\[
+g(u,v)=h_1(u)\,h_2(v),\qquad(u,v)\in A\times B,
+\]</div>
+<p>则 <span class="arithmatex">\(U,V\)</span> 独立，且各自密度正比于 <span class="arithmatex">\(h_1,h_2\)</span>，把每个因子归一化即得边缘密度，无需再积分。</p>
+<h3 id="a10">A.10 混合型处理（一离散一连续，或按概率混合）<a class="headerlink" href="#a10" title="Permanent link">&para;</a></h3>
+<ul>
+<li><span class="arithmatex">\(X\)</span> 离散（分布列 <span class="arithmatex">\(p_k=\mathbb{P}(X=x_k)\)</span>）、<span class="arithmatex">\(Y\)</span> 连续且与 <span class="arithmatex">\(X\)</span> 独立，则 <span class="arithmatex">\(Z=X+Y\)</span> 仍是<strong>连续型</strong>，由全概率公式</li>
+</ul>
+<div class="arithmatex">\[
+F_Z(z)=\sum_{k}p_k\,F_Y(z-x_k),\qquad f_Z(z)=\sum_{k}p_k\,f_Y(z-x_k).
+\]</div>
+<ul>
+<li>按概率混合（以概率 <span class="arithmatex">\(p_i\)</span> 取自密度 <span class="arithmatex">\(f_i\)</span> 的总体，<span class="arithmatex">\(\sum_i p_i=1\)</span>）：</li>
+</ul>
+<div class="arithmatex">\[
+f_Z(z)=\sum_{i}p_i\,f_i(z),\qquad \mathbb{E}[Z^m]=\sum_{i}p_i\int_{-\infty}^{\infty}z^m f_i(z)\,dz.
+\]</div>
+<ul>
+<li>更一般地，含连续变量 <span class="arithmatex">\(Y\)</span> 时可对 <span class="arithmatex">\(Y\)</span> "条件化"：<span class="arithmatex">\(F_Z(z)=\int_{-\infty}^{\infty}f_Y(y)\,\mathbb{P}\big(g(X,y)\le z\big)\,dy\)</span>（独立时成立），先固定一个变量算条件概率，再积分平均。</li>
+</ul>
+<blockquote>
+<p>[!WARNING] 易错
+"按概率混合"是密度的<strong>加权和</strong> <span class="arithmatex">\(\sum p_i f_i\)</span>，对应"随机选一个总体抽一次"；"独立求和"是密度的<strong>卷积</strong>，对应"两个总体各抽一次相加"。二者完全不同，判断题最爱考。</p>
+</blockquote>
+<h3 id="a11-12">A.11 同分布映射定理（定理 1.2）<a class="headerlink" href="#a11-12" title="Permanent link">&para;</a></h3>
+<p>若 <span class="arithmatex">\(\boldsymbol{X}\)</span> 与 <span class="arithmatex">\(\boldsymbol{Y}\)</span> 同分布，<span class="arithmatex">\(g\)</span> 可测，则 <span class="arithmatex">\(g(\boldsymbol{X})\)</span> 与 <span class="arithmatex">\(g(\boldsymbol{Y})\)</span> 同分布。用于"曲线救国"：把难算的分布替换成同分布的好算版本（如 Box–Muller）。</p>
+<h3 id="a12-lec07">A.12 统计三大分布速查（Lec07 预备知识，样卷常用）<a class="headerlink" href="#a12-lec07" title="Permanent link">&para;</a></h3>
+<p>以下设各变量相互独立。</p>
+<table>
+<thead>
+<tr>
+<th>分布</th>
+<th>构造</th>
+<th>关键性质</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\chi^2_n\)</span>（卡方）</td>
+<td><span class="arithmatex">\(Z_1^2+\cdots+Z_n^2\)</span>，<span class="arithmatex">\(Z_i\overset{\text{i.i.d.}}{\sim}\mathcal{N}(0,1)\)</span></td>
+<td><span class="arithmatex">\(\chi^2_n=\Gamma\!\left(\tfrac{n}{2},\tfrac{1}{2}\right)\)</span>；<span class="arithmatex">\(E=n\)</span>，<span class="arithmatex">\(\mathrm{Var}=2n\)</span>；可加：<span class="arithmatex">\(\chi^2_m+\chi^2_n\sim\chi^2_{m+n}\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(t_n\)</span>（Student <span class="arithmatex">\(t\)</span>）</td>
+<td><span class="arithmatex">\(\dfrac{Z}{\sqrt{X/n}}\)</span>，<span class="arithmatex">\(Z\sim\mathcal{N}(0,1)\)</span>，<span class="arithmatex">\(X\sim\chi^2_n\)</span></td>
+<td>对称，重尾；<span class="arithmatex">\(t_1=\)</span> Cauchy 分布；<span class="arithmatex">\(n\to\infty\)</span> 时趋近 <span class="arithmatex">\(\mathcal{N}(0,1)\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(F(m,n)\)</span>（Fisher <span class="arithmatex">\(F\)</span>）</td>
+<td><span class="arithmatex">\(\dfrac{U/m}{V/n}\)</span>，<span class="arithmatex">\(U\sim\chi^2_m\)</span>，<span class="arithmatex">\(V\sim\chi^2_n\)</span></td>
+<td><span class="arithmatex">\(\dfrac{1}{F(m,n)}\sim F(n,m)\)</span>（分子分母互换）；<span class="arithmatex">\(t_n^2\sim F(1,n)\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>使用场景</strong>：Jacobian 变换后认出形状（题 1.7）；给定若干独立标准正态，写出 <span class="arithmatex">\(\chi^2\)</span>、<span class="arithmatex">\(t\)</span>、<span class="arithmatex">\(F\)</span> 的分布参数；结合 Gamma 密度（卷中给出）证明再生性。</p>
+<blockquote>
+<p>[!WARNING] 易错
+<span class="arithmatex">\(t_n\)</span> 的构造中，<span class="arithmatex">\(Z\)</span> 与 <span class="arithmatex">\(X\)</span> 必须<strong>独立</strong>；分母是 <span class="arithmatex">\(\sqrt{X/n}\)</span>（除以 <span class="arithmatex">\(n\)</span> 再开根），不是 <span class="arithmatex">\(\sqrt{X}\)</span>。<span class="arithmatex">\(F\)</span> 分布的两个 <span class="arithmatex">\(\chi^2\)</span> 分别除以各自的自由度再相除，写参数时先写分子自由度 <span class="arithmatex">\(m\)</span>、再写分母自由度 <span class="arithmatex">\(n\)</span>。</p>
+</blockquote>
+<h2 id="part-b">Part B：判断题精选<a class="headerlink" href="#part-b" title="Permanent link">&para;</a></h2>
+<p><strong>B1</strong> 设 <span class="arithmatex">\(X,Y\)</span> 相互独立且都服从 <span class="arithmatex">\(\mathcal{U}(0,1)\)</span>，则 <span class="arithmatex">\(X+Y\sim\mathcal{U}(0,2)\)</span>。</p>
+<blockquote>
+<p>[!TIP]- 答案
+<strong>错</strong>。由卷积公式，<span class="arithmatex">\(X+Y\)</span> 服从 <span class="arithmatex">\([0,2]\)</span> 上以 <span class="arithmatex">\(z=1\)</span> 为顶点的三角分布：<span class="arithmatex">\(f_Z(z)=z\)</span>（<span class="arithmatex">\(0\le z&lt;1\)</span>），<span class="arithmatex">\(f_Z(z)=2-z\)</span>（<span class="arithmatex">\(1\le z\le 2\)</span>）。均匀分布无再生性。</p>
+</blockquote>
+<p><strong>B2</strong> 对任意有联合密度 <span class="arithmatex">\(f(x,y)\)</span> 的 <span class="arithmatex">\((X,Y)\)</span>，都有 <span class="arithmatex">\(f_{X+Y}(z)=\int_{-\infty}^{\infty}f_X(x)f_Y(z-x)\,dx\)</span>。</p>
+<blockquote>
+<p>[!TIP]- 答案
+<strong>错</strong>。该式只在 <span class="arithmatex">\(X,Y\)</span> <strong>独立</strong>时成立；一般情形应为 <span class="arithmatex">\(f_{X+Y}(z)=\int_{-\infty}^{\infty}f(x,z-x)\,dx\)</span>，用联合密度而非边缘密度的乘积。</p>
+</blockquote>
+<p><strong>B3</strong> 用 Jacobian 变换定理时，若变换单分支可逆，则可以先算 <span class="arithmatex">\(\frac{\partial(u,v)}{\partial(x,y)}\)</span>，再取其行列式绝对值的倒数作为缩放因子。</p>
+<blockquote>
+<p>[!TIP]- 答案
+<strong>对</strong>。可逆映射的 Jacobian 矩阵互逆，行列式互为倒数：<span class="arithmatex">\(\left|\frac{\partial(x,y)}{\partial(u,v)}\right|=\left|\frac{\partial(u,v)}{\partial(x,y)}\right|^{-1}\)</span>（非零处），结果只需在原像点取值即可。</p>
+</blockquote>
+<p><strong>B4</strong> 设 <span class="arithmatex">\(X,Y\)</span> 相互独立且都服从 <span class="arithmatex">\(\mathcal{N}(0,1)\)</span>，则 <span class="arithmatex">\(X/Y\)</span> 服从 Cauchy 分布（即 <span class="arithmatex">\(t_1\)</span> 分布）。</p>
+<blockquote>
+<p>[!TIP]- 答案
+<strong>对</strong>。经典结论：对 <span class="arithmatex">\((U,V)=(X/Y,X^2+Y^2)\)</span> 作 Jacobian 变换（两支反解），联合密度可分离，得 <span class="arithmatex">\(U\)</span> 的密度 <span class="arithmatex">\(\frac{1}{\pi(1+u^2)}\)</span>，即 Cauchy 分布，且 <span class="arithmatex">\(U\)</span> 与 <span class="arithmatex">\(V\sim\mathcal{E}(\frac{1}{2})=\chi^2_2\)</span> 独立。</p>
+</blockquote>
+<p><strong>B5</strong> 设 <span class="arithmatex">\(X\)</span> 是离散型随机变量，<span class="arithmatex">\(Y\)</span> 是连续型随机变量，二者独立，则 <span class="arithmatex">\(Z=X+Y\)</span> 既不是离散型也不是连续型。</p>
+<blockquote>
+<p>[!TIP]- 答案
+<strong>错</strong>。<span class="arithmatex">\(Z\)</span> 是<strong>连续型</strong>：由全概率公式 <span class="arithmatex">\(f_Z(z)=\sum_k\mathbb{P}(X=x_k)\,f_Y(z-x_k)\)</span> 是合法的概率密度。直觉：连续的"抹平"作用占主导，平移后的连续分布加权混合仍连续。</p>
+</blockquote>
+<h2 id="part-c">Part C：典型计算/证明题<a class="headerlink" href="#part-c" title="Permanent link">&para;</a></h2>
+<h3 id="11-hw7-1">题 1.1（来源：作业 HW7 第 1 题）<a class="headerlink" href="#11-hw7-1" title="Permanent link">&para;</a></h3>
+<p><strong>题目</strong>：随机变量 <span class="arithmatex">\(X\sim\mathcal{P}(3)\)</span>，<span class="arithmatex">\(Y\sim\mathcal{P}(6)\)</span> 都是泊松分布，且 <span class="arithmatex">\(X\)</span> 与 <span class="arithmatex">\(Y\)</span> 独立。请用卷积法求 <span class="arithmatex">\(Z=X+Y\)</span> 的分布列，并写出对应分布名称与参数。</p>
+<blockquote>
+<p>[!EXAMPLE]- 详细解答
+<strong>方法点拨</strong>：离散卷积——把 <span class="arithmatex">\(\{Z=k\}\)</span> 按 <span class="arithmatex">\(X\)</span> 的取值全概率分拆，求和时凑二项式定理。</p>
+<p><strong>解</strong>：<span class="arithmatex">\(X,Y\)</span> 取非负整数值，故 <span class="arithmatex">\(Z=X+Y\)</span> 取非负整数值。对 <span class="arithmatex">\(k=0,1,2,\ldots\)</span>，按 <span class="arithmatex">\(X=i\)</span>（<span class="arithmatex">\(0\le i\le k\)</span>，互斥并）分拆，并用独立性把联合概率写成乘积：</p>
+<div class="arithmatex">\[
+\mathbb{P}(Z=k)=\sum_{i=0}^{k}\mathbb{P}(X=i)\,\mathbb{P}(Y=k-i)=\sum_{i=0}^{k}\frac{3^{i}e^{-3}}{i!}\cdot\frac{6^{k-i}e^{-6}}{(k-i)!}.
+\]</div>
+<p>提出与 <span class="arithmatex">\(i\)</span> 无关的因子 <span class="arithmatex">\(e^{-9}\)</span>，并对每项乘除 <span class="arithmatex">\(k!\)</span> 凑出组合数（依据：<span class="arithmatex">\(\frac{1}{i!(k-i)!}=\frac{1}{k!}\binom{k}{i}\)</span>）：</p>
+<div class="arithmatex">\[
+\mathbb{P}(Z=k)=\frac{e^{-9}}{k!}\sum_{i=0}^{k}\binom{k}{i}3^{i}\,6^{k-i}=\frac{e^{-9}}{k!}(3+6)^{k}=\frac{9^{k}e^{-9}}{k!},
+\]</div>
+<p>其中倒数第二步用了二项式定理 <span class="arithmatex">\(\sum_{i=0}^{k}\binom{k}{i}a^{i}b^{k-i}=(a+b)^{k}\)</span>。</p>
+<p><strong>答</strong>：<span class="arithmatex">\(\mathbb{P}(Z=k)=\dfrac{9^{k}e^{-9}}{k!}\)</span>，<span class="arithmatex">\(k=0,1,2,\ldots\)</span>，即 <span class="arithmatex">\(Z\sim\mathcal{P}(9)\)</span>（泊松分布的再生性：<span class="arithmatex">\(\mathcal{P}(\lambda_1)+\mathcal{P}(\lambda_2)\sim\mathcal{P}(\lambda_1+\lambda_2)\)</span>）。</p>
+<p>[!TIP] 技巧/易错
+离散卷积求和的两板斧：泊松凑<strong>二项式定理</strong>，二项分布凑 <strong>Vandermonde 恒等式</strong> <span class="arithmatex">\(\sum_i\binom{n}{i}\binom{m}{k-i}=\binom{n+m}{k}\)</span>。求和范围别写错：<span class="arithmatex">\(i\)</span> 只能从 <span class="arithmatex">\(0\)</span> 跑到 <span class="arithmatex">\(k\)</span>（两个变量都非负）。</p>
+</blockquote>
+<h3 id="12-hw7-2">题 1.2（来源：作业 HW7 第 2 题）<a class="headerlink" href="#12-hw7-2" title="Permanent link">&para;</a></h3>
+<p><strong>题目</strong>：随机变量 <span class="arithmatex">\(X\sim\Gamma(\alpha,\lambda)\)</span>，<span class="arithmatex">\(Y\sim\Gamma(\beta,\lambda)\)</span>，且 <span class="arithmatex">\(X\)</span> 与 <span class="arithmatex">\(Y\)</span> 独立。请证明 <span class="arithmatex">\(Z=X+Y\sim\Gamma(\alpha+\beta,\lambda)\)</span>。（提示：化简时可利用 Beta 函数；Gamma 密度 <span class="arithmatex">\(f(x)=\frac{\lambda^{\alpha}}{\Gamma(\alpha)}x^{\alpha-1}e^{-\lambda x}\)</span>，<span class="arithmatex">\(x&gt;0\)</span>，卷中会给出。）</p>
+<blockquote>
+<p>[!EXAMPLE]- 详细解答
+<strong>方法点拨</strong>：连续卷积积分——独立时 <span class="arithmatex">\(f_Z=f_X*f_Y\)</span>，积分中作比例换元 <span class="arithmatex">\(x=zt\)</span> 化出 Beta 函数。</p>
+<p><strong>解</strong>：<span class="arithmatex">\(X,Y&gt;0\)</span>，故 <span class="arithmatex">\(Z&gt;0\)</span>。由独立情形的卷积公式，注意 <span class="arithmatex">\(f_X(x)\)</span> 要求 <span class="arithmatex">\(x&gt;0\)</span>、<span class="arithmatex">\(f_Y(z-x)\)</span> 要求 <span class="arithmatex">\(z-x&gt;0\)</span>，故积分限为 <span class="arithmatex">\(0&lt;x&lt;z\)</span>：</p>
+<div class="arithmatex">\[
+f_Z(z)=\int_{0}^{z}\frac{\lambda^{\alpha}}{\Gamma(\alpha)}x^{\alpha-1}e^{-\lambda x}\cdot\frac{\lambda^{\beta}}{\Gamma(\beta)}(z-x)^{\beta-1}e^{-\lambda(z-x)}\,dx.
+\]</div>
+<p>指数部分 <span class="arithmatex">\(e^{-\lambda x}e^{-\lambda(z-x)}=e^{-\lambda z}\)</span> 与 <span class="arithmatex">\(x\)</span> 无关，提出常数：</p>
+<div class="arithmatex">\[
+f_Z(z)=\frac{\lambda^{\alpha+\beta}}{\Gamma(\alpha)\Gamma(\beta)}e^{-\lambda z}\int_{0}^{z}x^{\alpha-1}(z-x)^{\beta-1}\,dx.
+\]</div>
+<p>作换元 <span class="arithmatex">\(x=zt\)</span>（依据：<span class="arithmatex">\(dx=z\,dt\)</span>，<span class="arithmatex">\(x\)</span> 从 <span class="arithmatex">\(0\)</span> 到 <span class="arithmatex">\(z\)</span> 时 <span class="arithmatex">\(t\)</span> 从 <span class="arithmatex">\(0\)</span> 到 <span class="arithmatex">\(1\)</span>）：</p>
+<div class="arithmatex">\[
+\int_{0}^{z}x^{\alpha-1}(z-x)^{\beta-1}\,dx=z^{\alpha+\beta-1}\int_{0}^{1}t^{\alpha-1}(1-t)^{\beta-1}\,dt=z^{\alpha+\beta-1}B(\alpha,\beta),
+\]</div>
+<p>其中 <span class="arithmatex">\(B(\alpha,\beta)=\dfrac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha+\beta)}\)</span>（Beta 函数，即 Beta 分布密度的归一化常数）。代回：</p>
+<div class="arithmatex">\[
+f_Z(z)=\frac{\lambda^{\alpha+\beta}}{\Gamma(\alpha)\Gamma(\beta)}\cdot\frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha+\beta)}\,z^{\alpha+\beta-1}e^{-\lambda z}=\frac{\lambda^{\alpha+\beta}}{\Gamma(\alpha+\beta)}z^{\alpha+\beta-1}e^{-\lambda z},\qquad z&gt;0.
+\]</div>
+<p>这正是 <span class="arithmatex">\(\Gamma(\alpha+\beta,\lambda)\)</span> 的密度。</p>
+<p><strong>答</strong>：<span class="arithmatex">\(Z=X+Y\sim\Gamma(\alpha+\beta,\lambda)\)</span>，证毕。</p>
+<p>[!TIP] 技巧/易错
+- 卷积积分限不是 <span class="arithmatex">\((-\infty,\infty)\)</span> 而由<strong>两个示性函数</strong>共同决定，先写 <span class="arithmatex">\(I_{\{x&gt;0\}}I_{\{z-x&gt;0\}}\)</span> 再定限，这是最高频丢分点。
+- 另一条路：不会算积分时，验证"待证密度卷出来形状对、常数由归一化自动确定"也可得分。
+- 推论：<span class="arithmatex">\(n\)</span> 个独立 <span class="arithmatex">\(\mathcal{E}(\lambda)=\Gamma(1,\lambda)\)</span> 之和 <span class="arithmatex">\(\sim\Gamma(n,\lambda)\)</span>；<span class="arithmatex">\(\chi^2_m+\chi^2_n=\Gamma(\frac{m}{2},\frac{1}{2})+\Gamma(\frac{n}{2},\frac{1}{2})\sim\chi^2_{m+n}\)</span>。</p>
+</blockquote>
+<h3 id="132">题 1.3（来源：样卷第三大题(2)）<a class="headerlink" href="#132" title="Permanent link">&para;</a></h3>
+<p><strong>题目</strong>：设两个学生独立玩某游戏，两人得分都服从 <span class="arithmatex">\(\mathcal{U}(0,1)\)</span>，记为 <span class="arithmatex">\(Y_1,Y_2\)</span>。求 <span class="arithmatex">\(\dfrac{Y_1}{Y_2}\)</span> 的概率密度函数。</p>
+<blockquote>
+<p>[!EXAMPLE]- 详细解答
+<strong>方法点拨</strong>：CDF 法——商没有必背公式，把 <span class="arithmatex">\(\{Y_1/Y_2\le u\}\)</span> 画成单位正方形内的区域直接算面积。</p>
+<p><strong>解</strong>：<span class="arithmatex">\((Y_1,Y_2)\)</span> 的联合密度为 <span class="arithmatex">\(f(y_1,y_2)=1\)</span>（<span class="arithmatex">\(0&lt;y_1&lt;1\)</span>，<span class="arithmatex">\(0&lt;y_2&lt;1\)</span>，独立均匀的乘积）。记 <span class="arithmatex">\(U=Y_1/Y_2&gt;0\)</span>。对 <span class="arithmatex">\(u&gt;0\)</span>，</p>
+<div class="arithmatex">\[
+F_U(u)=\mathbb{P}\Big(\frac{Y_1}{Y_2}\le u\Big)=\mathbb{P}(Y_1\le uY_2)=\text{单位正方形中区域}\{y_1\le uy_2\}\text{的面积}.
+\]</div>
+<p>分两种情形看直线 <span class="arithmatex">\(y_1=uy_2\)</span> 与正方形的位置关系：</p>
+<ul>
+<li>当 <span class="arithmatex">\(0&lt;u\le 1\)</span> 时，直线从 <span class="arithmatex">\((0,0)\)</span> 到 <span class="arithmatex">\((u,1)\)</span>，区域 <span class="arithmatex">\(\{y_1\le uy_2\}\)</span> 是顶点为 <span class="arithmatex">\((0,0),(0,1),(u,1)\)</span> 的三角形（依据：固定 <span class="arithmatex">\(y_2\)</span>，<span class="arithmatex">\(y_1\)</span> 从 <span class="arithmatex">\(0\)</span> 取到 <span class="arithmatex">\(uy_2\le 1\)</span>），面积为 <span class="arithmatex">\(\frac{1}{2}\cdot u\cdot 1\)</span>，故</li>
+</ul>
+<div class="arithmatex">\[
+F_U(u)=\frac{u}{2},\qquad 0&lt;u\le 1.
+\]</div>
+<ul>
+<li>当 <span class="arithmatex">\(u&gt;1\)</span> 时，看补集 <span class="arithmatex">\(\{Y_1&gt;uY_2\}=\{Y_2&lt;Y_1/u\}\)</span>：是顶点为 <span class="arithmatex">\((0,0),(1,0),(1,\frac{1}{u})\)</span> 的三角形，面积 <span class="arithmatex">\(\frac{1}{2}\cdot 1\cdot\frac{1}{u}\)</span>，故</li>
+</ul>
+<div class="arithmatex">\[
+F_U(u)=1-\frac{1}{2u},\qquad u&gt;1.
+\]</div>
+<p>求导得密度（在 <span class="arithmatex">\(u=1\)</span> 处两侧导数一致为 <span class="arithmatex">\(\frac{1}{2}\)</span>，单点不影响密度）：</p>
+<div class="arithmatex">\[
+f_U(u)=\begin{cases}\dfrac{1}{2}, &amp; 0&lt;u\le 1,\\[4pt] \dfrac{1}{2u^{2}}, &amp; u&gt;1,\\[4pt] 0, &amp; \text{其它}.\end{cases}
+\]</div>
+<p><strong>答</strong>：<span class="arithmatex">\(f_U(u)=\frac{1}{2}I_{\{0&lt;u\le 1\}}+\frac{1}{2u^{2}}I_{\{u&gt;1\}}\)</span>。</p>
+<p>[!TIP] 技巧/易错
+自查两件事：<span class="arithmatex">\(F_U(+\infty)=1\)</span> 是否成立（这里 <span class="arithmatex">\(1-\frac{1}{2u}\to 1\)</span>，对）；密度积分是否为 <span class="arithmatex">\(1\)</span>（<span class="arithmatex">\(\frac{1}{2}+\int_1^{\infty}\frac{du}{2u^2}=\frac{1}{2}+\frac{1}{2}=1\)</span>，对）。<span class="arithmatex">\(u&gt;1\)</span> 时一定要用补集，直接积区域容易把梯形面积算错。</p>
+</blockquote>
+<h3 id="14-hw7-3-problem-14-competing-exponentials">题 1.4（来源：作业 HW7 第 3 题，即教材第四章 Problem 14 "Competing exponentials"）<a class="headerlink" href="#14-hw7-3-problem-14-competing-exponentials" title="Permanent link">&para;</a></h3>
+<p><strong>题目</strong>：两只灯泡的寿命建模为独立的指数随机变量 <span class="arithmatex">\(X\)</span> 与 <span class="arithmatex">\(Y\)</span>，参数分别为 <span class="arithmatex">\(\lambda\)</span> 和 <span class="arithmatex">\(\mu\)</span>。第一只灯泡烧坏的时刻为 <span class="arithmatex">\(Z=\min\{X,Y\}\)</span>。证明 <span class="arithmatex">\(Z\)</span> 是参数为 <span class="arithmatex">\(\lambda+\mu\)</span> 的指数随机变量。</p>
+<blockquote>
+<p>[!EXAMPLE]- 详细解答
+<strong>方法点拨</strong>：CDF 法（生存函数版）——<span class="arithmatex">\(\min\)</span> 大于 <span class="arithmatex">\(z\)</span> 当且仅当两者都大于 <span class="arithmatex">\(z\)</span>，独立性使概率相乘。</p>
+<p><strong>解</strong>：对 <span class="arithmatex">\(z\ge 0\)</span>，事件等价改写（依据：<span class="arithmatex">\(\min\{X,Y\}&gt;z\Leftrightarrow X&gt;z\)</span> 且 <span class="arithmatex">\(Y&gt;z\)</span>）：</p>
+<div class="arithmatex">\[
+\mathbb{P}(Z&gt;z)=\mathbb{P}(X&gt;z,\,Y&gt;z)=\mathbb{P}(X&gt;z)\,\mathbb{P}(Y&gt;z),
+\]</div>
+<p>第二个等号用了 <span class="arithmatex">\(X,Y\)</span> 独立。代入指数分布的生存函数 <span class="arithmatex">\(\mathbb{P}(X&gt;z)=e^{-\lambda z}\)</span>，<span class="arithmatex">\(\mathbb{P}(Y&gt;z)=e^{-\mu z}\)</span>：</p>
+<div class="arithmatex">\[
+\mathbb{P}(Z&gt;z)=e^{-\lambda z}\cdot e^{-\mu z}=e^{-(\lambda+\mu)z},\qquad z\ge 0,
+\]</div>
+<p>而 <span class="arithmatex">\(z&lt;0\)</span> 时 <span class="arithmatex">\(\mathbb{P}(Z&gt;z)=1\)</span>。故 <span class="arithmatex">\(Z\)</span> 的分布函数 <span class="arithmatex">\(F_Z(z)=1-e^{-(\lambda+\mu)z}\)</span>（<span class="arithmatex">\(z\ge 0\)</span>），求导得密度 <span class="arithmatex">\(f_Z(z)=(\lambda+\mu)e^{-(\lambda+\mu)z}\)</span>，<span class="arithmatex">\(z&gt;0\)</span>。</p>
+<p><strong>答</strong>：<span class="arithmatex">\(Z=\min\{X,Y\}\sim\mathcal{E}(\lambda+\mu)\)</span>，证毕。</p>
+<p>[!TIP] 技巧/易错
+<span class="arithmatex">\(\min\)</span> 用 <span class="arithmatex">\(\mathbb{P}(\min&gt;z)=\prod\mathbb{P}(X_i&gt;z)\)</span>，<span class="arithmatex">\(\max\)</span> 用 <span class="arithmatex">\(\mathbb{P}(\max\le z)=\prod\mathbb{P}(X_i\le z)\)</span>，方向别配反。推广：<span class="arithmatex">\(n\)</span> 个独立 <span class="arithmatex">\(\mathcal{E}(\lambda_i)\)</span> 的最小值 <span class="arithmatex">\(\sim\mathcal{E}(\lambda_1+\cdots+\lambda_n)\)</span>；同参数时 <span class="arithmatex">\(\min\sim\mathcal{E}(n\lambda)\)</span>（笔记"教室灯泡"例题）。</p>
+</blockquote>
+<h3 id="15-hw7-4">题 1.5（来源：作业 HW7 第 4 题）<a class="headerlink" href="#15-hw7-4" title="Permanent link">&para;</a></h3>
+<p><strong>题目</strong>：设随机变量 <span class="arithmatex">\(X\)</span> 服从参数为 <span class="arithmatex">\(1\)</span> 的指数分布，随机变量 <span class="arithmatex">\(Y\sim\mathcal{N}(0,1)\)</span>，且 <span class="arithmatex">\(X\)</span> 与 <span class="arithmatex">\(Y\)</span> 独立。试求随机变量 <span class="arithmatex">\(Z=\sqrt{2X}\,|Y|\)</span> 的概率密度函数。</p>
+<blockquote>
+<p>[!EXAMPLE]- 详细解答
+<strong>方法点拨</strong>：混合策略——固定 <span class="arithmatex">\(Y\)</span> 用全概率公式（先对 <span class="arithmatex">\(X\)</span> 算条件概率，再对 <span class="arithmatex">\(Y\)</span> 积分平均），CDF 算到底，避免求导后处理反常积分。</p>
+<p><strong>解</strong>：<span class="arithmatex">\(X&gt;0\)</span>，故 <span class="arithmatex">\(Z\ge 0\)</span>，只需考虑 <span class="arithmatex">\(z&gt;0\)</span>。事件等价改写（依据：两边平方，<span class="arithmatex">\(|Y|&gt;0\)</span> 几乎必然）：</p>
+<div class="arithmatex">\[
+\{Z\le z\}=\{2XY^{2}\le z^{2}\}=\Big\{X\le\frac{z^{2}}{2Y^{2}}\Big\}.
+\]</div>
+<p>由 <span class="arithmatex">\(X\perp Y\)</span>，固定 <span class="arithmatex">\(Y=y\)</span>（<span class="arithmatex">\(y\neq 0\)</span>）时用 <span class="arithmatex">\(X\sim\mathcal{E}(1)\)</span> 的分布函数 <span class="arithmatex">\(\mathbb{P}(X\le t)=1-e^{-t}\)</span>，再对 <span class="arithmatex">\(Y\)</span> 的密度积分（全概率公式的连续版）：</p>
+<div class="arithmatex">\[
+F_Z(z)=\int_{-\infty}^{\infty}\frac{1}{\sqrt{2\pi}}e^{-y^{2}/2}\Big(1-e^{-\frac{z^{2}}{2y^{2}}}\Big)dy=1-\frac{2}{\sqrt{2\pi}}\int_{0}^{\infty}e^{-\frac{y^{2}}{2}-\frac{z^{2}}{2y^{2}}}\,dy,
+\]</div>
+<p>末步用了被积函数关于 <span class="arithmatex">\(y\)</span> 为偶函数。记 <span class="arithmatex">\(I=\int_{0}^{\infty}e^{-\frac{y^{2}}{2}-\frac{z^{2}}{2y^{2}}}dy\)</span>。配方（依据：<span class="arithmatex">\(\frac{y^2}{2}+\frac{z^2}{2y^2}=\frac{1}{2}\big(y-\frac{z}{y}\big)^2+z\)</span>）：</p>
+<div class="arithmatex">\[
+I=e^{-z}\int_{0}^{\infty}e^{-\frac{1}{2}\left(y-\frac{z}{y}\right)^{2}}dy=:e^{-z}J.
+\]</div>
+<p>计算 <span class="arithmatex">\(J\)</span>：作换元 <span class="arithmatex">\(y=z/t\)</span>（依据：<span class="arithmatex">\(dy=-\frac{z}{t^{2}}dt\)</span>，积分限交换消去负号；且 <span class="arithmatex">\(y-\frac{z}{y}=\frac{z}{t}-t=-\big(t-\frac{z}{t}\big)\)</span>，平方后不变）：</p>
+<div class="arithmatex">\[
+J=\int_{0}^{\infty}e^{-\frac{1}{2}\left(t-\frac{z}{t}\right)^{2}}\frac{z}{t^{2}}\,dt.
+\]</div>
+<p>两个表达式相加（同一个 <span class="arithmatex">\(J\)</span> 写两遍取平均）：</p>
+<div class="arithmatex">\[
+2J=\int_{0}^{\infty}e^{-\frac{1}{2}\left(y-\frac{z}{y}\right)^{2}}\Big(1+\frac{z}{y^{2}}\Big)dy.
+\]</div>
+<p>作换元 <span class="arithmatex">\(s=y-\dfrac{z}{y}\)</span>（依据：<span class="arithmatex">\(ds=\big(1+\frac{z}{y^{2}}\big)dy\)</span> 恰为括号因子；<span class="arithmatex">\(y:0^{+}\to\infty\)</span> 时 <span class="arithmatex">\(s:-\infty\to\infty\)</span>，单调）：</p>
+<div class="arithmatex">\[
+2J=\int_{-\infty}^{\infty}e^{-s^{2}/2}\,ds=\sqrt{2\pi}\quad\Longrightarrow\quad J=\frac{\sqrt{2\pi}}{2}.
+\]</div>
+<p>代回：</p>
+<div class="arithmatex">\[
+F_Z(z)=1-\frac{2}{\sqrt{2\pi}}\cdot\frac{\sqrt{2\pi}}{2}e^{-z}=1-e^{-z},\qquad z&gt;0.
+\]</div>
+<p>求导得 <span class="arithmatex">\(f_Z(z)=e^{-z}\)</span>，<span class="arithmatex">\(z&gt;0\)</span>。</p>
+<p><strong>答</strong>：<span class="arithmatex">\(Z=\sqrt{2X}\,|Y|\sim\mathcal{E}(1)\)</span>，密度 <span class="arithmatex">\(f_Z(z)=e^{-z}I_{\{z&gt;0\}}\)</span>。</p>
+<p>[!TIP] 技巧/易错
+- "先条件化、后平均"是处理两个独立变量的非标准函数（积、商、复合）的万能起手式，比硬上二维积分干净。
+- 积分技巧 <span class="arithmatex">\(\int_{0}^{\infty}e^{-\frac{1}{2}(y-z/y)^{2}}dy=\frac{\sqrt{2\pi}}{2}\)</span>（自反换元 <span class="arithmatex">\(y\mapsto z/y\)</span> 取平均）值得记住，正态与指数混搭的题常用。
+- 概率背景：<span class="arithmatex">\(\sqrt{2X}\sim\)</span> Rayleigh 分布（验证：<span class="arithmatex">\(\mathbb{P}(\sqrt{2X}\le r)=\mathbb{P}(X\le r^2/2)=1-e^{-r^{2}/2}\)</span>），本题即"Rayleigh × 独立半正态"。</p>
+</blockquote>
+<h3 id="16-hw7-5">题 1.6（来源：作业 HW7 第 5 题）<a class="headerlink" href="#16-hw7-5" title="Permanent link">&para;</a></h3>
+<p><strong>题目</strong>：设有两个独立的连续型随机变量 <span class="arithmatex">\(X_1,X_2\)</span>。<span class="arithmatex">\(X_1\sim\mathcal{U}(1,2)\)</span> 是均匀分布，<span class="arithmatex">\(X_2\)</span> 的概率密度为</p>
+<div class="arithmatex">\[
+f_{X_2}(x_2)=\begin{cases}\dfrac{3}{8}x_2^{2}, &amp; x_2\in[0,2],\\[4pt] 0, &amp; \text{otherwise}.\end{cases}
+\]</div>
+<p>令 <span class="arithmatex">\(Y_1=X_1^{2}\)</span>，<span class="arithmatex">\(Y_2=X_1+X_2\)</span>。求 <span class="arithmatex">\(Y=(Y_1,Y_2)\)</span> 的联合概率密度。</p>
+<blockquote>
+<p>[!EXAMPLE]- 详细解答
+<strong>方法点拨</strong>：Jacobian 变换定理——反解出 <span class="arithmatex">\((x_1,x_2)\)</span>（注意 <span class="arithmatex">\(x_1&gt;0\)</span> 故开方只取正支），算 Jacobian，最后认真写值域。</p>
+<p><strong>解</strong>：第一步（联合密度）：由独立性，</p>
+<div class="arithmatex">\[
+f(x_1,x_2)=1\cdot\frac{3}{8}x_2^{2}=\frac{3}{8}x_2^{2},\qquad 1&lt;x_1&lt;2,\ 0\le x_2\le 2.
+\]</div>
+<p>第二步（反解，单分支）：由 <span class="arithmatex">\(y_1=x_1^{2}\)</span> 且 <span class="arithmatex">\(x_1\in(1,2)&gt;0\)</span>，开方只有正支（依据：负支 <span class="arithmatex">\(x_1=-\sqrt{y_1}\)</span> 不在支撑集内，舍去）：</p>
+<div class="arithmatex">\[
+x_1=\sqrt{y_1},\qquad x_2=y_2-\sqrt{y_1}.
+\]</div>
+<p>第三步（Jacobian）：逐项求偏导，</p>
+<div class="arithmatex">\[
+\frac{\partial(x_1,x_2)}{\partial(y_1,y_2)}=\det\begin{pmatrix}\dfrac{1}{2\sqrt{y_1}} &amp; 0\\[6pt] -\dfrac{1}{2\sqrt{y_1}} &amp; 1\end{pmatrix}=\frac{1}{2\sqrt{y_1}}&gt;0.
+\]</div>
+<p>第四步（定值域 <span class="arithmatex">\(D\)</span>）：由 <span class="arithmatex">\(1&lt;x_1&lt;2\)</span> 得 <span class="arithmatex">\(1&lt;y_1&lt;4\)</span>；由 <span class="arithmatex">\(0\le x_2\le 2\)</span> 得 <span class="arithmatex">\(\sqrt{y_1}\le y_2\le\sqrt{y_1}+2\)</span>。</p>
+<p>第五步（代入定理 1.1）：</p>
+<div class="arithmatex">\[
+g(y_1,y_2)=f\big(\sqrt{y_1},\,y_2-\sqrt{y_1}\big)\cdot\Big|\frac{1}{2\sqrt{y_1}}\Big|=\frac{3}{8}\big(y_2-\sqrt{y_1}\big)^{2}\cdot\frac{1}{2\sqrt{y_1}}.
+\]</div>
+<p><strong>答</strong>：</p>
+<div class="arithmatex">\[
+g(y_1,y_2)=\begin{cases}\dfrac{3\big(y_2-\sqrt{y_1}\big)^{2}}{16\sqrt{y_1}}, &amp; 1&lt;y_1&lt;4,\ \sqrt{y_1}\le y_2\le\sqrt{y_1}+2,\\[6pt] 0, &amp; \text{其它}.\end{cases}
+\]</div>
+<p>[!TIP] 技巧/易错
+五步模板：写联合密度 → 反解（数清分支）→ 算 Jacobian → 定新变量区域 → 代公式。本题最易丢分处是第四步：<span class="arithmatex">\(y_2\)</span> 的范围依赖 <span class="arithmatex">\(y_1\)</span>（曲边区域），写成矩形 <span class="arithmatex">\([1,4]\times[1,4]\)</span> 就错了。</p>
+</blockquote>
+<h3 id="17-hw7-6">题 1.7（来源：作业 HW7 第 6 题）<a class="headerlink" href="#17-hw7-6" title="Permanent link">&para;</a></h3>
+<p><strong>题目</strong>：设有三个独立的随机变量 <span class="arithmatex">\(X_1,X_2,X_3\)</span>，且 <span class="arithmatex">\(X_i\sim\chi^{2}_{r_i}\)</span>，<span class="arithmatex">\(i=1,2,3\)</span>。</p>
+<p>a) 设 <span class="arithmatex">\(Y_1=\dfrac{X_1}{X_2}\)</span>，<span class="arithmatex">\(Y_2=X_1+X_2\)</span>。请证明 <span class="arithmatex">\(Y_1,Y_2\)</span> 相互独立，且 <span class="arithmatex">\(Y_2\sim\chi^{2}_{r_1+r_2}\)</span>。</p>
+<p>b) 请说明 <span class="arithmatex">\(\dfrac{X_1/r_1}{X_2/r_2}\)</span> 和 <span class="arithmatex">\(\dfrac{X_3/r_3}{(X_1+X_2)/(r_1+r_2)}\)</span> 都服从 F 分布（注明具体参数），且相互独立。</p>
+<blockquote>
+<p>[!EXAMPLE]- 详细解答
+<strong>方法点拨</strong>：Jacobian 变换求 <span class="arithmatex">\((Y_1,Y_2)\)</span> 联合密度，再用"可分离 + 乘积型区域 <span class="arithmatex">\(\Rightarrow\)</span> 独立"的因子分解判别；b) 用 F 分布的构造性定义。</p>
+<p><strong>解</strong>：a) 记 <span class="arithmatex">\(a=\frac{r_1}{2}\)</span>，<span class="arithmatex">\(b=\frac{r_2}{2}\)</span>。<span class="arithmatex">\(\chi^2_{r}\)</span> 的密度为 <span class="arithmatex">\(\frac{1}{2^{r/2}\Gamma(r/2)}x^{r/2-1}e^{-x/2}\)</span>（<span class="arithmatex">\(x&gt;0\)</span>），由独立性，</p>
+<div class="arithmatex">\[
+f(x_1,x_2)=\frac{1}{2^{a+b}\Gamma(a)\Gamma(b)}\,x_1^{a-1}x_2^{b-1}e^{-(x_1+x_2)/2},\qquad x_1,x_2&gt;0.
+\]</div>
+<p>反解（单分支）：由 <span class="arithmatex">\(y_1=x_1/x_2\)</span>，<span class="arithmatex">\(y_2=x_1+x_2\)</span> 解得（依据：<span class="arithmatex">\(x_1=y_1x_2\)</span> 代入第二式）</p>
+<div class="arithmatex">\[
+x_1=\frac{y_1y_2}{1+y_1},\qquad x_2=\frac{y_2}{1+y_1},\qquad(y_1,y_2)\in D=\{y_1&gt;0,\ y_2&gt;0\}.
+\]</div>
+<p>Jacobian（逐项求偏导后展开行列式）：</p>
+<div class="arithmatex">\[
+\frac{\partial(x_1,x_2)}{\partial(y_1,y_2)}=\det\begin{pmatrix}\dfrac{y_2}{(1+y_1)^{2}} &amp; \dfrac{y_1}{1+y_1}\\[6pt] -\dfrac{y_2}{(1+y_1)^{2}} &amp; \dfrac{1}{1+y_1}\end{pmatrix}=\frac{y_2}{(1+y_1)^{3}}+\frac{y_1y_2}{(1+y_1)^{3}}=\frac{y_2}{(1+y_1)^{2}}&gt;0.
+\]</div>
+<p>代入定理 1.1，并整理 <span class="arithmatex">\(x_1^{a-1}x_2^{b-1}=\dfrac{y_1^{a-1}y_2^{a+b-2}}{(1+y_1)^{a+b-2}}\)</span>：</p>
+<div class="arithmatex">\[
+g(y_1,y_2)=\frac{1}{2^{a+b}\Gamma(a)\Gamma(b)}\cdot\frac{y_1^{a-1}}{(1+y_1)^{a+b}}\cdot y_2^{a+b-1}e^{-y_2/2},\qquad y_1,y_2&gt;0.
+\]</div>
+<p>联合密度在乘积型区域 <span class="arithmatex">\((0,\infty)\times(0,\infty)\)</span> 上分离为 <span class="arithmatex">\(y_1\)</span> 的函数乘 <span class="arithmatex">\(y_2\)</span> 的函数，故 <span class="arithmatex">\(Y_1\perp Y_2\)</span>（归一化技巧）。<span class="arithmatex">\(y_2\)</span> 因子 <span class="arithmatex">\(y_2^{(r_1+r_2)/2-1}e^{-y_2/2}\)</span> 正比于 <span class="arithmatex">\(\chi^2_{r_1+r_2}\)</span> 的密度，归一化常数唯一，故 <span class="arithmatex">\(Y_2\sim\chi^2_{r_1+r_2}\)</span>。证毕。</p>
+<p>b) F 分布的构造性定义：若 <span class="arithmatex">\(U\sim\chi^2_m\)</span>，<span class="arithmatex">\(V\sim\chi^2_n\)</span> 且 <span class="arithmatex">\(U\perp V\)</span>，则 <span class="arithmatex">\(\dfrac{U/m}{V/n}\sim F(m,n)\)</span>。</p>
+<ul>
+<li>第一个比值：<span class="arithmatex">\(X_1\perp X_2\)</span>，直接由定义得 <span class="arithmatex">\(\dfrac{X_1/r_1}{X_2/r_2}\sim F(r_1,r_2)\)</span>。</li>
+<li>第二个比值：<span class="arithmatex">\(X_3\perp(X_1,X_2)\)</span>，从而 <span class="arithmatex">\(X_3\perp(X_1+X_2)\)</span>；由 a)，<span class="arithmatex">\(X_1+X_2\sim\chi^2_{r_1+r_2}\)</span>。由定义得 <span class="arithmatex">\(\dfrac{X_3/r_3}{(X_1+X_2)/(r_1+r_2)}\sim F(r_3,\,r_1+r_2)\)</span>。</li>
+<li>相互独立：第一个比值是 <span class="arithmatex">\(Y_1=X_1/X_2\)</span> 的函数（<span class="arithmatex">\(\frac{X_1/r_1}{X_2/r_2}=\frac{r_2}{r_1}Y_1\)</span>），第二个比值是 <span class="arithmatex">\((X_3,Y_2)\)</span> 的函数。由 a) 知 <span class="arithmatex">\(Y_1\perp Y_2\)</span>，又 <span class="arithmatex">\(X_3\)</span> 与 <span class="arithmatex">\((X_1,X_2)\)</span> 独立（从而与 <span class="arithmatex">\((Y_1,Y_2)\)</span> 独立），故三元组 <span class="arithmatex">\((Y_1,Y_2,X_3)\)</span> 的联合分布完全分解，<span class="arithmatex">\(Y_1\)</span> 与 <span class="arithmatex">\((Y_2,X_3)\)</span> 独立；独立向量的函数仍独立，结论成立。</li>
+</ul>
+<p><strong>答</strong>：a) <span class="arithmatex">\(Y_1\perp Y_2\)</span> 且 <span class="arithmatex">\(Y_2\sim\chi^2_{r_1+r_2}\)</span>；b) 两个比值分别服从 <span class="arithmatex">\(F(r_1,r_2)\)</span> 与 <span class="arithmatex">\(F(r_3,r_1+r_2)\)</span>，且相互独立。</p>
+<p>[!TIP] 技巧/易错
+证"独立 + 识别分布"的题不必把归一化常数算到底：分离变量后，每个因子的常数由"密度积分为 1"自动确定，直接报分布名即可。证两个统计量独立时，常用套路是把它们都写成<strong>某组已知独立变量的函数</strong>。</p>
+</blockquote>
+<h3 id="183">题 1.8（来源：补充题，仿样卷第三大题(3) 混合型风格）<a class="headerlink" href="#183" title="Permanent link">&para;</a></h3>
+<p><strong>题目</strong>：设 <span class="arithmatex">\(X\sim B(1,p)\)</span>（两点分布，<span class="arithmatex">\(\mathbb{P}(X=1)=p\)</span>），<span class="arithmatex">\(Y\sim\mathcal{E}(\lambda)\)</span>，且 <span class="arithmatex">\(X\)</span> 与 <span class="arithmatex">\(Y\)</span> 独立。求 <span class="arithmatex">\(Z=X+Y\)</span> 的分布函数与概率密度函数，并求 <span class="arithmatex">\(\mathbb{E}[Z]\)</span>。</p>
+<blockquote>
+<p>[!EXAMPLE]- 详细解答
+<strong>方法点拨</strong>：混合型（离散 + 连续）——对离散变量 <span class="arithmatex">\(X\)</span> 用全概率公式分拆，逐种情形化为 <span class="arithmatex">\(Y\)</span> 的分布。</p>
+<p><strong>解</strong>：<span class="arithmatex">\(Y&gt;0\)</span> 而 <span class="arithmatex">\(X\in\{0,1\}\)</span>，故 <span class="arithmatex">\(Z&gt;0\)</span>。对 <span class="arithmatex">\(z&gt;0\)</span>，按 <span class="arithmatex">\(X\)</span> 取值全概率分拆，并用 <span class="arithmatex">\(X\perp Y\)</span> 把条件概率换成无条件概率：</p>
+<div class="arithmatex">\[
+F_Z(z)=\mathbb{P}(X+Y\le z)=(1-p)\,\mathbb{P}(Y\le z)+p\,\mathbb{P}(Y\le z-1).
+\]</div>
+<p>代入 <span class="arithmatex">\(\mathcal{E}(\lambda)\)</span> 的分布函数 <span class="arithmatex">\(\mathbb{P}(Y\le t)=(1-e^{-\lambda t})I_{\{t&gt;0\}}\)</span>，分段讨论：</p>
+<ul>
+<li>当 <span class="arithmatex">\(0&lt;z\le 1\)</span> 时，<span class="arithmatex">\(z-1\le 0\)</span>，第二项为 <span class="arithmatex">\(0\)</span>：</li>
+</ul>
+<div class="arithmatex">\[
+F_Z(z)=(1-p)\big(1-e^{-\lambda z}\big);
+\]</div>
+<ul>
+<li>当 <span class="arithmatex">\(z&gt;1\)</span> 时：</li>
+</ul>
+<div class="arithmatex">\[
+F_Z(z)=(1-p)\big(1-e^{-\lambda z}\big)+p\big(1-e^{-\lambda(z-1)}\big).
+\]</div>
+<p><span class="arithmatex">\(F_Z\)</span> 连续（在 <span class="arithmatex">\(z=1\)</span> 处左右极限均为 <span class="arithmatex">\((1-p)(1-e^{-\lambda})\)</span>），分段求导得密度：</p>
+<div class="arithmatex">\[
+f_Z(z)=\begin{cases}(1-p)\lambda e^{-\lambda z}, &amp; 0&lt;z\le 1,\\ (1-p)\lambda e^{-\lambda z}+p\lambda e^{-\lambda(z-1)}, &amp; z&gt;1,\\ 0, &amp; \text{其它},\end{cases}
+\]</div>
+<p>即 <span class="arithmatex">\(f_Z(z)=(1-p)f_Y(z)+p\,f_Y(z-1)\)</span>：两条平移指数密度的加权混合。</p>
+<p>期望用线性性最快（依据：期望可加，无需密度）：</p>
+<div class="arithmatex">\[
+\mathbb{E}[Z]=\mathbb{E}[X]+\mathbb{E}[Y]=p+\frac{1}{\lambda}.
+\]</div>
+<p><strong>答</strong>：<span class="arithmatex">\(f_Z(z)=(1-p)\lambda e^{-\lambda z}I_{\{z&gt;0\}}+p\lambda e^{-\lambda(z-1)}I_{\{z&gt;1\}}\)</span>，<span class="arithmatex">\(\mathbb{E}[Z]=p+\dfrac{1}{\lambda}\)</span>。</p>
+<p>[!TIP] 技巧/易错
+混合型两种考法要分清：本题是"离散 + 连续<strong>相加</strong>"，密度是 <span class="arithmatex">\(\sum_k p_k f_Y(z-x_k)\)</span>（平移后加权）；样卷三(3) 是"以概率 <span class="arithmatex">\(p_i\)</span> <strong>选总体</strong>"，密度是 <span class="arithmatex">\(\sum_i p_i f_i(z)\)</span>（不平移直接加权），矩为 <span class="arithmatex">\(\mathbb{E}[Z^m]=\sum_i p_i\mathbb{E}[Z_i^m]\)</span>。两者都源于全概率公式，但事件分拆的对象不同。</p>
+</blockquote>
+<h2 id="part-d">Part D：模块小结<a class="headerlink" href="#part-d" title="Permanent link">&para;</a></h2>
+<p>方法选择决策表：</p>
+<table>
+<thead>
+<tr>
+<th>目标</th>
+<th>首选方法</th>
+<th>速查</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>和（离散）</td>
+<td>离散卷积求和</td>
+<td>Part A 第 4 条，凑二项式定理/Vandermonde</td>
+</tr>
+<tr>
+<td>和（连续）</td>
+<td>卷积积分</td>
+<td>Part A 第 5 条，示性函数定积分限</td>
+</tr>
+<tr>
+<td>差</td>
+<td>差公式或 <span class="arithmatex">\(X+(-Y)\)</span></td>
+<td>Part A 第 6 条</td>
+</tr>
+<tr>
+<td>商、积、模长、奇形函数</td>
+<td>CDF 法（画区域）或先条件化后平均</td>
+<td>Part A 第 2、7、10 条</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\max\)</span> / <span class="arithmatex">\(\min\)</span></td>
+<td>生存函数/CDF 连乘</td>
+<td>Part A 第 3 条</td>
+</tr>
+<tr>
+<td>多对多变换求联合密度</td>
+<td>Jacobian 五步模板</td>
+<td>Part A 第 8 条</td>
+</tr>
+<tr>
+<td>证两个统计量独立</td>
+<td>变换后因子分解</td>
+<td>Part A 第 9 条</td>
+</tr>
+<tr>
+<td>离散 + 连续混搭</td>
+<td>全概率公式分拆</td>
+<td>Part A 第 10 条</td>
+</tr>
+</tbody>
+</table>
+<p>跨知识点综合提示：</p>
+<ul>
+<li>本模块与<strong>重要分布再生性</strong>绑定出题：泊松/二项/正态/Gamma/卡方的和，务必把 Part A 的再生性表背熟；非常见分布（Gamma、Beta、F 的密度）卷中会给，但要会"看到密度认出分布"。</li>
+<li><span class="arithmatex">\(\min\)</span> 的指数分布结论（题 1.4）是后续<strong>次序统计量</strong>（模块 2）<span class="arithmatex">\(X_{(1)}\)</span> 密度公式的特例，也常作为样卷"排队服务"应用题（两员工指数服务时长，问先完成时间的分布）的第一问。</li>
+<li>Jacobian + 因子分解（题 1.7）直接对接三大统计分布：<span class="arithmatex">\(\chi^2\)</span> 可加性、<span class="arithmatex">\(t=\frac{Z}{\sqrt{X/n}}\)</span>、<span class="arithmatex">\(F=\frac{U/m}{V/n}\)</span> 的构造都在样卷第五大题风格中反复出现；两个独立标准正态的商为 Cauchy、<span class="arithmatex">\((R,\Theta)\)</span> 极坐标独立性是判断题高频素材。</li>
+<li>样卷第三大题把"和差变换 + 商的 CDF 法 + 概率混合"打包成一道大题，建议把题 1.3、题 1.8 连起来限时练一遍。</li>
+</ul>
+<blockquote>
+<p>[!NOTE] 说明：作业第 3 题原文为"教材第四章 14 题"，其原题已由作业附页给出（Competing exponentials），故收录为题 1.4；作业第 7 题（次序统计量的联合密度）属于模块 2 的范围，未收录于本模块。</p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "navigation.indexes", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

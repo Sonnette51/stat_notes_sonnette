@@ -1,0 +1,2591 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="清华统计课程笔记">
+      
+      
+      
+        <link rel="canonical" href="https://Sonnette51.github.io/stat_notes_sonnette/%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%A8%A1%E5%9D%976%20%E6%94%B6%E6%95%9B%E6%80%A7%E3%80%81%E5%A4%A7%E6%95%B0%E5%BE%8B%E4%B8%8E%E4%B8%AD%E5%BF%83%E6%9E%81%E9%99%90%E5%AE%9A%E7%90%86/">
+      
+      
+        <link rel="prev" href="../%E6%A8%A1%E5%9D%975%20%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0%E4%B8%8E%E7%89%B9%E5%BE%81%E5%87%BD%E6%95%B0/">
+      
+      
+        <link rel="next" href="../%E6%A8%A1%E5%9D%977%20%E5%A4%9A%E5%85%83%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>复习 模块6 收敛性、大数律与中心极限定理 - Sonnette's Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#6" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="Sonnette&#39;s Notes" class="md-header__button md-logo" aria-label="Sonnette's Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Sonnette's Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              复习 模块6 收敛性、大数律与中心极限定理
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  数据科学编程
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  初等概率论
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Sonnette&#39;s Notes" class="md-nav__button md-logo" aria-label="Sonnette's Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Sonnette's Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据科学编程
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数据科学编程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/NumPy%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NumPy 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/Pandas%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pandas 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/Database%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/LLM%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LLM 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/MiningWebData%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mining Web Data 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/TextProcessing%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Text Processing 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/DataVisualization%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Visualization 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/Advanced%20Visualization%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Advanced Visualization 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    初等概率论
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    初等概率论
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture01%20%E6%A6%82%E7%8E%87%E6%A8%A1%E5%9E%8B%E4%B8%8E%E6%80%A7%E8%B4%A8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture01 概率模型与性质
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture02%20%E6%A6%82%E7%8E%87%E7%A9%BA%E9%97%B4%E3%80%81%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture02 概率空间、条件概率
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture03%20%E7%8B%AC%E7%AB%8B%E6%80%A7%E3%80%81%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture03 独立性、随机变量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture04%20%E5%B8%B8%E8%A7%81%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture04 常见随机变量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture05%20%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0%E3%80%81%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E5%87%BD%E6%95%B0%E7%9A%84%E5%88%86%E5%B8%83%E3%80%81%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E7%9A%84%E5%88%86%E5%B8%83%28I%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture05 概率分布函数、随机变量函数的分布、随机向量的分布(I)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture06%20%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E7%9A%84%E5%88%86%E5%B8%83%28II%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture06 随机向量的分布(II)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture07%20%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E5%87%BD%E6%95%B0%E7%9A%84%E5%88%86%E5%B8%83%E3%80%81%E6%AC%A1%E5%BA%8F%E7%BB%9F%E8%AE%A1%E9%87%8F%E3%80%81p%E5%88%86%E4%BD%8D%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture07 随机向量函数的分布、次序统计量、p分位数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture08%20%E6%9C%9F%E6%9C%9B%E3%80%81%E6%96%B9%E5%B7%AE%E3%80%81%E7%9B%B8%E5%85%B3%E4%B8%8D%E7%AD%89%E5%BC%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture08 期望、方差、相关不等式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture09%20%E6%9D%A1%E4%BB%B6%E6%9C%9F%E6%9C%9B%E3%80%81%E6%9D%A1%E4%BB%B6%E6%96%B9%E5%B7%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture09 条件期望、条件方差
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture10%20%E5%8D%8F%E6%96%B9%E5%B7%AE%E3%80%81%E7%9B%B8%E5%85%B3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture10 协方差、相关
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture11%20%E6%A6%82%E7%8E%87%E6%AF%8D%E5%87%BD%E6%95%B0%E3%80%81%E7%9F%A9%E6%AF%8D%E5%87%BD%E6%95%B0%E3%80%81%E7%89%B9%E5%BE%81%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture11 概率母函数、矩母函数、特征函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture12%20%E5%A4%A7%E6%95%B0%E5%AE%9A%E5%BE%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture12 大数定律
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture13%20%E4%B8%AD%E5%BF%83%E6%9E%81%E9%99%90%E5%AE%9A%E7%90%86%E3%80%81%E6%94%B6%E6%95%9B%E6%80%A7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture13 中心极限定理、收敛性
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture14%20%E5%A4%9A%E5%85%83%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture14 多元正态分布
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%9C%9F%E6%9C%AB%E8%AE%B0%E5%BF%86%E8%A6%81%E7%82%B9%E6%B1%87%E6%80%BB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 期末记忆要点汇总
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A8%A1%E5%9D%971%20%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E7%9A%84%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块1 随机向量的函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A8%A1%E5%9D%972%20%E6%AC%A1%E5%BA%8F%E7%BB%9F%E8%AE%A1%E9%87%8F%E4%B8%8Ep-%E5%88%86%E4%BD%8D%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块2 次序统计量与p-分位数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A8%A1%E5%9D%973%20%E6%9C%9F%E6%9C%9B%E4%B8%8E%E6%96%B9%E5%B7%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块3 期望与方差
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A8%A1%E5%9D%974%20%E6%9D%A1%E4%BB%B6%E6%9C%9F%E6%9C%9B%E3%80%81%E5%8D%8F%E6%96%B9%E5%B7%AE%E4%B8%8E%E4%B8%8D%E7%AD%89%E5%BC%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块4 条件期望、协方差与不等式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A8%A1%E5%9D%975%20%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0%E4%B8%8E%E7%89%B9%E5%BE%81%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块5 生成函数与特征函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块6 收敛性、大数律与中心极限定理
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块6 收敛性、大数律与中心极限定理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#part-a" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part A：公式与方法速查
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part A：公式与方法速查">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.1 依概率收敛
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.2 依分布收敛
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.3 两种收敛的关系（结论即可，证明不考）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.4 两个不等式（会用即可，不要求证明）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a5-wllnchebyshev" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.5 弱大数律（WLLN，Chebyshev 版）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a6-lindeberglevy-clt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.6 中心极限定理（Lindeberg–Lévy CLT）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.7 二项分布的正态近似与连续性修正
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a8-vs-poisson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.8 正态近似 vs Poisson 近似：选哪个？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a9-clt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.9 CLT 三类题型的流程
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-b" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part B：判断题精选
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part C：典型计算/证明题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part C：典型计算/证明题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        题 6.1（来源：补充题）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        题 6.2（来源：例题）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        题 6.3（来源：作业）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64-ch5-problem-9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        题 6.4（来源：作业，教材 Ch5 Problem 9）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#65-ch5-problem-10-a-440" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        题 6.5（来源：作业，教材 Ch5 Problem 10；注：中文版 (a) 翻译有误，应为"少于 440"）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#66" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        题 6.6（来源：作业）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#671-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        题 6.7（来源：样卷第七题，(1) 同作业第 4 题）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#68-hw12-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        题 6.8（来源：作业 HW12 第 5 题）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#69-hw12-6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        题 6.9（来源：作业 HW12 第 6 题）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-d" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part D：模块小结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A8%A1%E5%9D%977%20%E5%A4%9A%E5%85%83%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块7 多元正态分布
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#part-a" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part A：公式与方法速查
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part A：公式与方法速查">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.1 依概率收敛
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.2 依分布收敛
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.3 两种收敛的关系（结论即可，证明不考）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.4 两个不等式（会用即可，不要求证明）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a5-wllnchebyshev" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.5 弱大数律（WLLN，Chebyshev 版）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a6-lindeberglevy-clt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.6 中心极限定理（Lindeberg–Lévy CLT）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.7 二项分布的正态近似与连续性修正
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a8-vs-poisson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.8 正态近似 vs Poisson 近似：选哪个？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a9-clt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.9 CLT 三类题型的流程
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-b" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part B：判断题精选
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part C：典型计算/证明题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part C：典型计算/证明题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        题 6.1（来源：补充题）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        题 6.2（来源：例题）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        题 6.3（来源：作业）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64-ch5-problem-9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        题 6.4（来源：作业，教材 Ch5 Problem 9）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#65-ch5-problem-10-a-440" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        题 6.5（来源：作业，教材 Ch5 Problem 10；注：中文版 (a) 翻译有误，应为"少于 440"）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#66" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        题 6.6（来源：作业）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#671-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        题 6.7（来源：样卷第七题，(1) 同作业第 4 题）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#68-hw12-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        题 6.8（来源：作业 HW12 第 5 题）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#69-hw12-6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        题 6.9（来源：作业 HW12 第 6 题）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-d" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part D：模块小结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="6">模块 6：收敛性、大数律与中心极限定理<a class="headerlink" href="#6" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>对应 Lec 13–14：依概率收敛、依分布收敛、WLLN、CLT、二项分布的正态/Poisson 近似。本模块约 20 分，以计算题为主（CLT 估概率、定 <span class="arithmatex">\(n\)</span>、定分位点），兼有判断与证明（WLLN 的 Chebyshev 证明、Poisson 和的 CLT 极限）。</p>
+</blockquote>
+<h2 id="part-a">Part A：公式与方法速查<a class="headerlink" href="#part-a" title="Permanent link">&para;</a></h2>
+<h3 id="a1">A.1 依概率收敛<a class="headerlink" href="#a1" title="Permanent link">&para;</a></h3>
+<p><strong>定义</strong>：若对任意 <span class="arithmatex">\(\varepsilon&gt;0\)</span>，有</p>
+<div class="arithmatex">\[
+\lim_{n\to\infty}\mathbb{P}\left(|X_n-X|\geq\varepsilon\right)=0
+\]</div>
+<p>则称 <span class="arithmatex">\(X_n\)</span> <strong>依概率收敛</strong>到 <span class="arithmatex">\(X\)</span>，记 <span class="arithmatex">\(X_n\xrightarrow{p}X\)</span>。等价表述：<span class="arithmatex">\(\lim_{n\to\infty}\mathbb{P}(|X_n-X|&lt;\varepsilon)=1\)</span>。</p>
+<p><strong>验证流程</strong>：固定 <span class="arithmatex">\(\varepsilon&gt;0\)</span>，把 <span class="arithmatex">\(\mathbb{P}(|X_n-X|\geq\varepsilon)\)</span> 算成（或用 Chebyshev/Markov 控制成）一个关于 <span class="arithmatex">\(n\)</span> 的数列，证明其趋于 <span class="arithmatex">\(0\)</span>。</p>
+<p><strong>运算封闭性</strong>（会用结论）：若 <span class="arithmatex">\(X_n\xrightarrow{p}x\)</span>，<span class="arithmatex">\(Y_n\xrightarrow{p}y\)</span>，则 <span class="arithmatex">\(cX_n\xrightarrow{p}cx\)</span>，<span class="arithmatex">\(X_n+Y_n\xrightarrow{p}x+y\)</span>，<span class="arithmatex">\(X_nY_n\xrightarrow{p}xy\)</span>，<span class="arithmatex">\(|X_n|\xrightarrow{p}|x|\)</span>；连续函数 <span class="arithmatex">\(g\)</span> 保持依概率收敛：<span class="arithmatex">\(g(X_n)\xrightarrow{p}g(x)\)</span>（连续映射定理）。</p>
+<h3 id="a2">A.2 依分布收敛<a class="headerlink" href="#a2" title="Permanent link">&para;</a></h3>
+<p><strong>定义</strong>：设 <span class="arithmatex">\(X_n,X\)</span> 的分布函数为 <span class="arithmatex">\(F_n,F\)</span>。若在 <span class="arithmatex">\(F\)</span> 的<strong>所有连续点</strong> <span class="arithmatex">\(x\)</span> 处</p>
+<div class="arithmatex">\[
+\lim_{n\to\infty}F_n(x)=F(x)
+\]</div>
+<p>则称 <span class="arithmatex">\(X_n\)</span> <strong>依分布收敛</strong>到 <span class="arithmatex">\(X\)</span>，记 <span class="arithmatex">\(X_n\xrightarrow{d}X\)</span>（也称 <span class="arithmatex">\(F_n\)</span> 弱收敛到 <span class="arithmatex">\(F\)</span>）。</p>
+<p><strong>验证工具（连续性定理）</strong>：<span class="arithmatex">\(X_n\xrightarrow{d}X\iff\phi_n(t)\to\phi(t)\)</span> 对一切 <span class="arithmatex">\(t\)</span> 成立（<span class="arithmatex">\(\phi\)</span> 为特征函数；MGF/PGF 在可逆条件下同样适用）。典型应用：<span class="arithmatex">\(np_n=\lambda\)</span> 固定时 <span class="arithmatex">\(B(n,p_n)\xrightarrow{d}\mathcal{P}(\lambda)\)</span>；CLT 的证明。</p>
+<h3 id="a3">A.3 两种收敛的关系（结论即可，证明不考）<a class="headerlink" href="#a3" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>已知</th>
+<th>结论</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(X_n\xrightarrow{a.s.}X\)</span></td>
+<td><span class="arithmatex">\(X_n\xrightarrow{p}X\)</span></td>
+<td>反之不成立</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(X_n\xrightarrow{p}X\)</span></td>
+<td><span class="arithmatex">\(X_n\xrightarrow{d}X\)</span></td>
+<td>反之不成立（反例：i.i.d. 正态序列）</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(X_n\xrightarrow{d}C\)</span>（<span class="arithmatex">\(C\)</span> 为常数）</td>
+<td><span class="arithmatex">\(X_n\xrightarrow{p}C\)</span></td>
+<td><strong>极限为常数时两者等价</strong>，常考</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>[!WARNING] 易错
+依概率收敛 vs 依分布收敛：前者要求 <span class="arithmatex">\(X_n\)</span> 与 <span class="arithmatex">\(X\)</span> 在<strong>同一概率空间</strong>上彼此靠近（比较的是随机变量本身），后者只要求<strong>分布形状</strong>趋同（比较的是 CDF）。反例：<span class="arithmatex">\(\{X_n\}\)</span> i.i.d. <span class="arithmatex">\(\sim\mathcal{N}(0,1)\)</span>，显然 <span class="arithmatex">\(X_n\xrightarrow{d}X_1\)</span>（CDF 完全相同），但 <span class="arithmatex">\(X_n-X_1\sim\mathcal{N}(0,2)\)</span>，<span class="arithmatex">\(\mathbb{P}(|X_n-X_1|&gt;1)\)</span> 是不为零的常数，故 <span class="arithmatex">\(X_n\not\xrightarrow{p}X_1\)</span>。唯一的"反向通道"是极限为常数的情形。</p>
+</blockquote>
+<h3 id="a4">A.4 两个不等式（会用即可，不要求证明）<a class="headerlink" href="#a4" title="Permanent link">&para;</a></h3>
+<p><strong>Markov 不等式</strong>：<span class="arithmatex">\(X\geq 0\)</span>，<span class="arithmatex">\(a&gt;0\)</span>，则</p>
+<div class="arithmatex">\[
+\mathbb{P}(X\geq a)\leq\frac{E(X)}{a}
+\]</div>
+<p><strong>Chebyshev 不等式</strong>：<span class="arithmatex">\(\mathrm{Var}(X)&lt;\infty\)</span>，<span class="arithmatex">\(\varepsilon&gt;0\)</span>，则</p>
+<div class="arithmatex">\[
+\mathbb{P}\left(|X-EX|\geq\varepsilon\right)\leq\frac{\mathrm{Var}(X)}{\varepsilon^2}
+\]</div>
+<p>适用场景：只知道期望/方差、不知道分布时估计尾概率上界；WLLN 的证明引擎；与 CLT 结果对比（Chebyshev 给<strong>保守界</strong>，CLT 给<strong>近似值</strong>）。</p>
+<h3 id="a5-wllnchebyshev">A.5 弱大数律（WLLN，Chebyshev 版）<a class="headerlink" href="#a5-wllnchebyshev" title="Permanent link">&para;</a></h3>
+<p><strong>陈述</strong>：设 <span class="arithmatex">\(\{X_n\}\)</span> <strong>独立同分布</strong>，且 <span class="arithmatex">\(\mathrm{Var}(X_1)&lt;\infty\)</span>，记 <span class="arithmatex">\(M_n=\dfrac{1}{n}\sum_{i=1}^{n}X_i\)</span>，则对任意 <span class="arithmatex">\(\varepsilon&gt;0\)</span>，</p>
+<div class="arithmatex">\[
+\lim_{n\to\infty}\mathbb{P}\left(\left|M_n-EX_1\right|\geq\varepsilon\right)=0,\qquad\text{即}\quad M_n\xrightarrow{p}EX_1
+\]</div>
+<p><strong>Chebyshev 证明三步</strong>（常考基础，要会写）：</p>
+<ol>
+<li>由同分布，<span class="arithmatex">\(E(M_n)=EX_1\)</span>，把事件改写为 <span class="arithmatex">\(\{|M_n-E(M_n)|\geq\varepsilon\}\)</span>；</li>
+<li>由独立性，<span class="arithmatex">\(\mathrm{Var}(M_n)=\dfrac{1}{n^2}\cdot n\cdot\mathrm{Var}(X_1)=\dfrac{\mathrm{Var}(X_1)}{n}\)</span>；</li>
+<li>对 <span class="arithmatex">\(M_n\)</span> 用 Chebyshev 不等式：</li>
+</ol>
+<div class="arithmatex">\[
+\mathbb{P}\left(|M_n-EX_1|\geq\varepsilon\right)\leq\frac{\mathrm{Var}(X_1)}{n\varepsilon^2}\xrightarrow{n\to\infty}0
+\]</div>
+<p><strong>Bernoulli 大数律</strong>（特例）：<span class="arithmatex">\(X_i\sim B(1,p)\)</span> i.i.d. 时</p>
+<div class="arithmatex">\[
+\frac{1}{n}\sum_{k=1}^{n}X_k\xrightarrow{p}p
+\]</div>
+<p>即<strong>频率依概率稳定于概率</strong>，是"用频率估计概率"的理论依据。</p>
+<blockquote>
+<p>[!WARNING] 易错
+WLLN 的结论是<strong>依概率收敛</strong>，不是"以概率 1 收敛"——后者是强大数律（SLLN，几乎处处收敛）的结论。判断题常拿"WLLN 说明样本均值以概率 1 趋于总体均值"挖坑：错，混淆了强弱两种收敛模式。</p>
+</blockquote>
+<h3 id="a6-lindeberglevy-clt">A.6 中心极限定理（Lindeberg–Lévy CLT）<a class="headerlink" href="#a6-lindeberglevy-clt" title="Permanent link">&para;</a></h3>
+<p><strong>陈述</strong>：设 <span class="arithmatex">\(\{X_n\}\)</span> i.i.d.，<span class="arithmatex">\(EX_i=\mu\)</span>，<span class="arithmatex">\(\mathrm{Var}(X_i)=\sigma^2&lt;\infty\)</span>，记 <span class="arithmatex">\(S_n=X_1+\cdots+X_n\)</span>，则</p>
+<div class="arithmatex">\[
+\frac{S_n-n\mu}{\sigma\sqrt{n}}\xrightarrow{d}\mathcal{N}(0,1)\qquad\text{等价地}\qquad\frac{M_n-\mu}{\sigma/\sqrt{n}}\xrightarrow{d}\mathcal{N}(0,1)
+\]</div>
+<p><strong>实用近似形式</strong>（<span class="arithmatex">\(n\)</span> 充分大）：</p>
+<div class="arithmatex">\[
+S_n\approx\mathcal{N}(n\mu,\;n\sigma^2),\qquad M_n\approx\mathcal{N}\left(\mu,\;\frac{\sigma^2}{n}\right)
+\]</div>
+<p><strong>标准化三步</strong>（一切 CLT 计算题的骨架）：</p>
+<ol>
+<li><strong>建模</strong>：写清 <span class="arithmatex">\(X_i\)</span> 是什么、<span class="arithmatex">\(S_n\)</span> 或 <span class="arithmatex">\(M_n\)</span> 是什么，算出 <span class="arithmatex">\(\mu=EX_1\)</span>、<span class="arithmatex">\(\sigma^2=\mathrm{Var}(X_1)\)</span>，把所求事件翻译成 <span class="arithmatex">\(\mathbb{P}(S_n\leq c)\)</span> 等形式（注意不等号方向）；</li>
+<li><strong>标准化</strong>：事件两边同减 <span class="arithmatex">\(n\mu\)</span>、同除 <span class="arithmatex">\(\sigma\sqrt{n}\)</span>，化为 <span class="arithmatex">\(\mathbb{P}\left(Z\leq\dfrac{c-n\mu}{\sigma\sqrt{n}}\right)\)</span>；</li>
+<li><strong>查表</strong>：用 <span class="arithmatex">\(\Phi\)</span> 表出并查值（负值用 <span class="arithmatex">\(\Phi(-z)=1-\Phi(z)\)</span>）。</li>
+</ol>
+<blockquote>
+<p>[!WARNING] 易错
+CLT 的两个前提缺一不可：i.i.d. 与 <span class="arithmatex">\(\sigma^2&lt;\infty\)</span>（蕴含 <span class="arithmatex">\(\mu\)</span> 存在）。柯西分布 i.i.d. 序列的 <span class="arithmatex">\(M_n\)</span> 仍服从柯西分布，永远不趋于正态——判断题"任何 i.i.d. 序列都满足 CLT"是错的。另外 <span class="arithmatex">\(S_n\approx\mathcal{N}(n\mu,n\sigma^2)\)</span> 是<strong>近似</strong>，不是精确相等。</p>
+</blockquote>
+<h3 id="a7">A.7 二项分布的正态近似与连续性修正<a class="headerlink" href="#a7" title="Permanent link">&para;</a></h3>
+<p>设 <span class="arithmatex">\(S_n\sim B(n,p)\)</span>，<span class="arithmatex">\(n\)</span> 大且 <span class="arithmatex">\(np(1-p)\)</span> 较大时用正态近似 <span class="arithmatex">\(S_n\approx\mathcal{N}(np,\,np(1-p))\)</span>。用连续分布近似离散分布时，把整数 <span class="arithmatex">\(k\)</span> 的概率质量看作区间 <span class="arithmatex">\([k-0.5,\,k+0.5]\)</span> 上的面积，即<strong>连续性修正</strong>（de Moivre–Laplace 修正，对 Poisson 等其他整数值分布同样适用）。记 <span class="arithmatex">\(\sigma_n=\sqrt{np(1-p)}\)</span>：</p>
+<table>
+<thead>
+<tr>
+<th>目标概率</th>
+<th>修正写法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\mathbb{P}(S_n\leq m)\)</span></td>
+<td><span class="arithmatex">\(\Phi\left(\dfrac{m+0.5-np}{\sigma_n}\right)\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\mathbb{P}(S_n&lt;m)\)</span></td>
+<td><span class="arithmatex">\(\Phi\left(\dfrac{m-0.5-np}{\sigma_n}\right)\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\mathbb{P}(S_n\geq k)\)</span></td>
+<td><span class="arithmatex">\(1-\Phi\left(\dfrac{k-0.5-np}{\sigma_n}\right)\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\mathbb{P}(k\leq S_n\leq m)\)</span></td>
+<td><span class="arithmatex">\(\Phi\left(\dfrac{m+0.5-np}{\sigma_n}\right)-\Phi\left(\dfrac{k-0.5-np}{\sigma_n}\right)\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\mathbb{P}(S_n=k)\)</span></td>
+<td><span class="arithmatex">\(\Phi\left(\dfrac{k+0.5-np}{\sigma_n}\right)-\Phi\left(\dfrac{k-0.5-np}{\sigma_n}\right)\)</span></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>[!WARNING] 易错
+修正方向口诀："把整数柱整个包进去"——<span class="arithmatex">\(\leq m\)</span> 时上限<strong>外扩</strong>到 <span class="arithmatex">\(m+0.5\)</span>；<span class="arithmatex">\(\geq k\)</span> 时下限<strong>外扩</strong>到 <span class="arithmatex">\(k-0.5\)</span>；严格不等号 <span class="arithmatex">\(&lt;m\)</span> 等价于 <span class="arithmatex">\(\leq m-1\)</span>，故用 <span class="arithmatex">\(m-0.5\)</span>。单点概率 <span class="arithmatex">\(\mathbb{P}(S_n=k)\)</span> 不修正时近似为 <span class="arithmatex">\(0\)</span>，必须用 <span class="arithmatex">\([k-0.5,k+0.5]\)</span>。</p>
+</blockquote>
+<h3 id="a8-vs-poisson">A.8 正态近似 vs Poisson 近似：选哪个？<a class="headerlink" href="#a8-vs-poisson" title="Permanent link">&para;</a></h3>
+<p>对 <span class="arithmatex">\(B(n,p)\)</span>：</p>
+<table>
+<thead>
+<tr>
+<th>参数特征</th>
+<th>推荐近似</th>
+<th>理由</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(p\)</span> 很小（稀有事件），<span class="arithmatex">\(np\)</span> 不大</td>
+<td>Poisson 近似 <span class="arithmatex">\(\mathcal{P}(np)\)</span></td>
+<td>二项的 Poisson 极限定理</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(n\)</span> 大且 <span class="arithmatex">\(np(1-p)\)</span> 较大</td>
+<td>正态近似 <span class="arithmatex">\(\mathcal{N}(np,np(1-p))\)</span>（加修正）</td>
+<td>CLT</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(np\)</span> 固定且很大</td>
+<td>两者均可</td>
+<td>Poisson 自身也可再用正态近似</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>[!WARNING] 易错
+判断标准看 <span class="arithmatex">\(np(1-p)\)</span> 的大小，而不是只看 <span class="arithmatex">\(n\)</span>：如 <span class="arithmatex">\(B(50,0.05)\)</span>，虽然 <span class="arithmatex">\(n=50\)</span> 不算小，但 <span class="arithmatex">\(p=0.05\)</span> 很小、<span class="arithmatex">\(np=2.5\)</span> 不大，Poisson 近似比正态近似更准（见题 6.4 的数值对比）。</p>
+</blockquote>
+<h3 id="a9-clt">A.9 CLT 三类题型的流程<a class="headerlink" href="#a9-clt" title="Permanent link">&para;</a></h3>
+<p>核心关系式（<span class="arithmatex">\(\Phi\)</span> 为标准正态 CDF）：</p>
+<div class="arithmatex">\[
+\mathbb{P}\left(c_1\leq\frac{S_n-n\mu}{\sigma\sqrt{n}}\leq c_2\right)\approx\Phi(c_2)-\Phi(c_1)
+\]</div>
+<table>
+<thead>
+<tr>
+<th>题型</th>
+<th>已知</th>
+<th>求</th>
+<th>流程</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>求概率</td>
+<td><span class="arithmatex">\(n\)</span>、边界 <span class="arithmatex">\(c\)</span></td>
+<td><span class="arithmatex">\(\alpha\)</span></td>
+<td>标准化（离散加修正）后直接查表</td>
+</tr>
+<tr>
+<td>定样本量 <span class="arithmatex">\(n\)</span></td>
+<td>误差限 <span class="arithmatex">\(\varepsilon\)</span>、置信概率 <span class="arithmatex">\(1-\alpha\)</span></td>
+<td><span class="arithmatex">\(n\)</span></td>
+<td><span class="arithmatex">\(\mathbb{P}(\lvert M_n-\mu\rvert&lt;\varepsilon)\geq 1-\alpha\)</span> 标准化为 <span class="arithmatex">\(\Phi\left(\dfrac{\varepsilon\sqrt{n}}{\sigma}\right)\geq 1-\dfrac{\alpha}{2}\)</span>，查 <span class="arithmatex">\(z_{\alpha/2}\)</span> 解出 <span class="arithmatex">\(n\geq\left(\dfrac{z_{\alpha/2}\sigma}{\varepsilon}\right)^2\)</span>；<span class="arithmatex">\(\sigma\)</span> 未知时用上界（如 Bernoulli 的 <span class="arithmatex">\(\sigma\leq\dfrac{1}{2}\)</span>）</td>
+</tr>
+<tr>
+<td>定分位点/边界 <span class="arithmatex">\(c\)</span></td>
+<td><span class="arithmatex">\(n\)</span>、置信概率</td>
+<td><span class="arithmatex">\(c\)</span></td>
+<td>令 <span class="arithmatex">\(\Phi\left(\dfrac{c\pm 0.5-np}{\sigma_n}\right)=\)</span> 目标概率，查表反解 <span class="arithmatex">\(c\)</span>，按"取整方向保证不等式成立"取整</td>
+</tr>
+</tbody>
+</table>
+<p>常用查表值：<span class="arithmatex">\(\Phi(1)=0.8413\)</span>，<span class="arithmatex">\(\Phi(1.28)\approx 0.90\)</span>，<span class="arithmatex">\(\Phi(1.645)\approx 0.95\)</span>，<span class="arithmatex">\(\Phi(1.96)=0.975\)</span>，<span class="arithmatex">\(\Phi(2)=0.9772\)</span>，<span class="arithmatex">\(\Phi(2.33)\approx 0.99\)</span>。</p>
+<h2 id="part-b">Part B：判断题精选<a class="headerlink" href="#part-b" title="Permanent link">&para;</a></h2>
+<p><strong>B1</strong> 若 <span class="arithmatex">\(X_n\xrightarrow{d}X\)</span>，则必有 <span class="arithmatex">\(X_n\xrightarrow{p}X\)</span>。</p>
+<blockquote>
+<p>[!TIP]- 答案
+<strong>错</strong>。依分布收敛是最弱的收敛模式，不能反推依概率收敛。反例：<span class="arithmatex">\(\{X_n\}\)</span> i.i.d. <span class="arithmatex">\(\sim\mathcal{N}(0,1)\)</span>，则 <span class="arithmatex">\(X_n\)</span> 与 <span class="arithmatex">\(X_1\)</span> 同分布，自然 <span class="arithmatex">\(X_n\xrightarrow{d}X_1\)</span>；但 <span class="arithmatex">\(X_n-X_1\sim\mathcal{N}(0,2)\)</span>，故 <span class="arithmatex">\(\mathbb{P}(|X_n-X_1|&gt;1)\)</span> 为不趋于零的正常数，<span class="arithmatex">\(X_n\not\xrightarrow{p}X_1\)</span>。仅当极限为<strong>常数</strong> <span class="arithmatex">\(C\)</span> 时才有 <span class="arithmatex">\(X_n\xrightarrow{d}C\iff X_n\xrightarrow{p}C\)</span>。</p>
+</blockquote>
+<p><strong>B2</strong> 若 <span class="arithmatex">\(X_n\xrightarrow{d}C\)</span>，其中 <span class="arithmatex">\(C\)</span> 为常数，则 <span class="arithmatex">\(X_n\xrightarrow{p}C\)</span>。</p>
+<blockquote>
+<p>[!TIP]- 答案
+<strong>对</strong>。极限为常数时依分布收敛与依概率收敛等价：极限分布函数为 <span class="arithmatex">\(F(x)=\mathbf{1}_{\{x\geq C\}}\)</span>，<span class="arithmatex">\(F_n\)</span> 在 <span class="arithmatex">\(C\)</span> 以外的所有点收敛到 <span class="arithmatex">\(0\)</span> 或 <span class="arithmatex">\(1\)</span>，恰好说明 <span class="arithmatex">\(X_n\)</span> 的分布质量集中到 <span class="arithmatex">\(C\)</span> 附近，即 <span class="arithmatex">\(\mathbb{P}(|X_n-C|\geq\varepsilon)\to 0\)</span>。这一结论在 WLLN 与 Slutsky 定理中都直接使用。</p>
+</blockquote>
+<p><strong>B3</strong> 弱大数律表明：i.i.d. 且方差有限时，样本均值以概率 1 收敛到总体均值。</p>
+<blockquote>
+<p>[!TIP]- 答案
+<strong>错</strong>。WLLN 的结论是<strong>依概率收敛</strong>（<span class="arithmatex">\(M_n\xrightarrow{p}EX_1\)</span>）：对每个固定的大 <span class="arithmatex">\(n\)</span>，偏差超过 <span class="arithmatex">\(\varepsilon\)</span> 的概率趋于 0，但不保证每条样本路径都收敛。"以概率 1 收敛"（几乎处处收敛）是<strong>强</strong>大数律的结论，比依概率收敛更强。</p>
+</blockquote>
+<p><strong>B4</strong> 只要 <span class="arithmatex">\(\{X_n\}\)</span> 独立同分布，标准化部分和就一定依分布收敛到 <span class="arithmatex">\(\mathcal{N}(0,1)\)</span>。</p>
+<blockquote>
+<p>[!TIP]- 答案
+<strong>错</strong>。CLT 还要求 <span class="arithmatex">\(EX_1=\mu\)</span> 存在、<span class="arithmatex">\(\mathrm{Var}(X_1)=\sigma^2&lt;\infty\)</span>。反例：柯西分布 i.i.d. 序列期望不存在，且由特征函数可证 <span class="arithmatex">\(M_n=\frac{1}{n}\sum X_i\)</span> 仍服从同一柯西分布，不论 <span class="arithmatex">\(n\)</span> 多大都不趋向正态。</p>
+</blockquote>
+<p><strong>B5</strong> 设 <span class="arithmatex">\(S_n\sim B(n,p)\)</span>。用正态近似计算单点概率时，<span class="arithmatex">\(\mathbb{P}(S_n=k)\approx\Phi\left(\dfrac{k+0.5-np}{\sqrt{np(1-p)}}\right)-\Phi\left(\dfrac{k-0.5-np}{\sqrt{np(1-p)}}\right)\)</span>。</p>
+<blockquote>
+<p>[!TIP]- 答案
+<strong>对</strong>。这是连续性修正的单点形式：把整数 <span class="arithmatex">\(k\)</span> 处的概率质量近似为正态曲线在 <span class="arithmatex">\([k-0.5,k+0.5]\)</span> 上的面积。若不加修正，连续分布单点概率为 0，近似毫无意义——能算单点概率正是修正版的特有优势。</p>
+</blockquote>
+<h2 id="part-c">Part C：典型计算/证明题<a class="headerlink" href="#part-c" title="Permanent link">&para;</a></h2>
+<h3 id="61">题 6.1（来源：补充题）<a class="headerlink" href="#61" title="Permanent link">&para;</a></h3>
+<p><strong>题目</strong>：[补充题] 设 <span class="arithmatex">\(X_1,X_2,\ldots,X_n\)</span> i.i.d. <span class="arithmatex">\(\sim\mathcal{U}(0,1)\)</span>，令 <span class="arithmatex">\(Y_n=\max\{X_1,\ldots,X_n\}\)</span>。用依概率收敛的定义证明 <span class="arithmatex">\(Y_n\xrightarrow{p}1\)</span>。</p>
+<blockquote>
+<p>[!EXAMPLE]- 详细解答
+<strong>方法点拨</strong>：验证依概率收敛就是按定义固定 <span class="arithmatex">\(\varepsilon\)</span>，把尾概率 <span class="arithmatex">\(\mathbb{P}(|Y_n-1|\geq\varepsilon)\)</span> 显式算出来并证明趋于 0。</p>
+<p><strong>解</strong>：</p>
+<p><strong>第一步（化简事件）</strong>：因为 <span class="arithmatex">\(0\leq Y_n\leq 1\)</span> 恒成立，所以 <span class="arithmatex">\(|Y_n-1|=1-Y_n\)</span>。对任意 <span class="arithmatex">\(\varepsilon\in(0,1)\)</span>：</p>
+<div class="arithmatex">\[
+\mathbb{P}(|Y_n-1|\geq\varepsilon)=\mathbb{P}(Y_n\leq 1-\varepsilon)
+\]</div>
+<p>（若 <span class="arithmatex">\(\varepsilon\geq 1\)</span>，该概率为 <span class="arithmatex">\(\mathbb{P}(Y_n\leq 1-\varepsilon)\leq\mathbb{P}(Y_n\leq 0)=0\)</span>，自动成立。）</p>
+<p><strong>第二步（用独立性算最大值的 CDF）</strong>：事件 <span class="arithmatex">\(\{Y_n\leq 1-\varepsilon\}\)</span> 即所有 <span class="arithmatex">\(X_i\)</span> 都不超过 <span class="arithmatex">\(1-\varepsilon\)</span>。由独立性：</p>
+<div class="arithmatex">\[
+\mathbb{P}(Y_n\leq 1-\varepsilon)=\prod_{i=1}^{n}\mathbb{P}(X_i\leq 1-\varepsilon)=(1-\varepsilon)^n
+\]</div>
+<p>（依据：<span class="arithmatex">\(X_i\sim\mathcal{U}(0,1)\)</span> 的 CDF 在 <span class="arithmatex">\([0,1]\)</span> 上为 <span class="arithmatex">\(F(x)=x\)</span>。）</p>
+<p><strong>第三步（取极限）</strong>：因为 <span class="arithmatex">\(0&lt;1-\varepsilon&lt;1\)</span>，所以</p>
+<div class="arithmatex">\[
+\lim_{n\to\infty}\mathbb{P}(|Y_n-1|\geq\varepsilon)=\lim_{n\to\infty}(1-\varepsilon)^n=0
+\]</div>
+<p>对任意 <span class="arithmatex">\(\varepsilon&gt;0\)</span> 成立，故由定义 <span class="arithmatex">\(Y_n\xrightarrow{p}1\)</span>。</p>
+<p><strong>答</strong>：<span class="arithmatex">\(Y_n\xrightarrow{p}1\)</span>，证毕。</p>
+<p>[!TIP] 技巧/易错
+最大值/最小值型依概率收敛题的统一套路：先利用变量天然的取值范围把绝对值事件化为单边事件，再用独立性把 <span class="arithmatex">\(\max\)</span>/<span class="arithmatex">\(\min\)</span> 的概率写成乘积。极限是<strong>常数</strong>，因此本题结论也等价于 <span class="arithmatex">\(Y_n\xrightarrow{d}1\)</span>。</p>
+</blockquote>
+<h3 id="62">题 6.2（来源：例题）<a class="headerlink" href="#62" title="Permanent link">&para;</a></h3>
+<p><strong>题目</strong>：评估疫苗有效率 <span class="arithmatex">\(p\)</span>，随机抽 <span class="arithmatex">\(n\)</span> 位受试者，<span class="arithmatex">\(X_i\sim B(1,p)\)</span> i.i.d.，<span class="arithmatex">\(M_n=\frac{1}{n}\sum_{i=1}^{n}X_i\)</span>。要求 <span class="arithmatex">\(\mathbb{P}(|M_n-p|\geq 0.03)\leq 0.05\)</span>（即以 95% 概率保证误差小于 3%）。分别用 (1) Chebyshev 不等式、(2) CLT 确定所需样本量 <span class="arithmatex">\(n\)</span>，并比较两个结果。</p>
+<blockquote>
+<p>[!EXAMPLE]- 详细解答
+<strong>方法点拨</strong>：<span class="arithmatex">\(p\)</span> 未知时统一用方差上界 <span class="arithmatex">\(p(1-p)\leq\frac{1}{4}\)</span> 做保守估计；Chebyshev 给严格上界，CLT 给近似值，后者所需 <span class="arithmatex">\(n\)</span> 小得多。</p>
+<p><strong>解</strong>：</p>
+<p>两问都需要 <span class="arithmatex">\(\mathrm{Var}(X_1)=p(1-p)\leq\dfrac{1}{4}\)</span>（对任意 <span class="arithmatex">\(p\in[0,1]\)</span>，在 <span class="arithmatex">\(p=\frac{1}{2}\)</span> 取等），即 <span class="arithmatex">\(\sigma\leq\dfrac{1}{2}\)</span>。</p>
+<p><strong>(1) Chebyshev 法</strong>：对 <span class="arithmatex">\(M_n\)</span> 用 Chebyshev 不等式（<span class="arithmatex">\(E(M_n)=p\)</span>，<span class="arithmatex">\(\mathrm{Var}(M_n)=\frac{p(1-p)}{n}\)</span>）：</p>
+<div class="arithmatex">\[
+\mathbb{P}(|M_n-p|\geq 0.03)\leq\frac{p(1-p)}{n\cdot(0.03)^2}\leq\frac{1}{4n\cdot(0.03)^2}
+\]</div>
+<p>令右端 <span class="arithmatex">\(\leq 0.05\)</span>：</p>
+<div class="arithmatex">\[
+n\geq\frac{1}{4\times(0.03)^2\times 0.05}=\frac{1}{0.00018}\approx 5556
+\]</div>
+<p><strong>(2) CLT 法</strong>：由 CLT，<span class="arithmatex">\(\dfrac{M_n-p}{\sigma/\sqrt{n}}\approx Z\sim\mathcal{N}(0,1)\)</span>，故</p>
+<div class="arithmatex">\[
+\mathbb{P}(|M_n-p|&lt;0.03)\approx\mathbb{P}\left(|Z|&lt;\frac{0.03\sqrt{n}}{\sigma}\right)\geq\mathbb{P}\left(|Z|&lt;0.06\sqrt{n}\right)
+\]</div>
+<p>（依据：<span class="arithmatex">\(\sigma\leq\frac{1}{2}\)</span>，故 <span class="arithmatex">\(\frac{0.03\sqrt{n}}{\sigma}\geq 0.06\sqrt{n}\)</span>，概率随区间扩大而增大。）</p>
+<p>令 <span class="arithmatex">\(\mathbb{P}(|Z|&lt;0.06\sqrt{n})=0.95\)</span>，由对称性 <span class="arithmatex">\(\Phi(0.06\sqrt{n})=0.975\)</span>，查表 <span class="arithmatex">\(0.06\sqrt{n}=1.96\)</span>：</p>
+<div class="arithmatex">\[
+n=\left(\frac{1.96}{0.06}\right)^2\approx 1067.1\implies n=1068
+\]</div>
+<p><strong>答</strong>：Chebyshev 法需 <span class="arithmatex">\(n\geq 5556\)</span>；CLT 法只需 <span class="arithmatex">\(n\approx 1068\)</span>。Chebyshev 是对<strong>任意分布</strong>都成立的严格上界，故非常保守；CLT 利用了"和近似正态"的分布信息，给出小得多（约 1/5）的样本量，但只是近似而非严格保证。</p>
+<p>[!TIP] 技巧/易错
+定 <span class="arithmatex">\(n\)</span> 题中 <span class="arithmatex">\(\sigma\)</span> 未知是常态：Bernoulli 情形永远可用 <span class="arithmatex">\(\sigma\leq\frac{1}{2}\)</span>。注意两种方法的查表对象不同——Chebyshev 不查表，直接解代数不等式；CLT 要把双侧概率 <span class="arithmatex">\(0.95\)</span> 转成单侧 <span class="arithmatex">\(\Phi=0.975\)</span> 再查 <span class="arithmatex">\(1.96\)</span>，漏除 2 是高频错误。</p>
+</blockquote>
+<h3 id="63">题 6.3（来源：作业）<a class="headerlink" href="#63" title="Permanent link">&para;</a></h3>
+<p><strong>题目</strong>：设 <span class="arithmatex">\(X_1,X_2,\ldots\)</span>，<span class="arithmatex">\(Y_1,Y_2,\ldots\)</span> 都是独立同分布随机变量序列（全体相互独立），且每个变量都服从均匀分布 <span class="arithmatex">\(\mathcal{U}(0,1)\)</span>。</p>
+<p>(1) 令 <span class="arithmatex">\(W=\dfrac{(X_1+\cdots+X_{25})-(Y_1+\cdots+Y_{25})}{25}\)</span>，求 <span class="arithmatex">\(\mathbb{P}(|W-EW|&lt;0.001)\)</span> 的数值近似值。</p>
+<p>(2) 令 <span class="arithmatex">\(W=\dfrac{X_1+\cdots+X_{16}}{16}-\dfrac{Y_1+\cdots+Y_{25}}{25}\)</span>，求 <span class="arithmatex">\(\mathbb{P}(|W-EW|&lt;0.001)\)</span> 的数值近似值。（提示：若 <span class="arithmatex">\(\bar{X}\xrightarrow{d}\mathcal{N}(\mu_1,\sigma_1^2)\)</span>，<span class="arithmatex">\(\bar{Y}\xrightarrow{d}\mathcal{N}(\mu_2,\sigma_2^2)\)</span> 且独立，则 <span class="arithmatex">\(\bar{X}-\bar{Y}\xrightarrow{d}\mathcal{N}(\mu_1-\mu_2,\sigma_1^2+\sigma_2^2)\)</span>。）</p>
+<blockquote>
+<p>[!EXAMPLE]- 详细解答
+<strong>方法点拨</strong>：把 <span class="arithmatex">\(W\)</span> 看作大量 i.i.d. 变量的（加权）和，用 CLT 得 <span class="arithmatex">\(W\)</span> 的近似正态分布，再标准化查表；(2) 用"独立正态近似之差仍近似正态、方差相加"。</p>
+<p><strong>解</strong>：</p>
+<p>公共参数：<span class="arithmatex">\(X_i,Y_i\sim\mathcal{U}(0,1)\)</span>，<span class="arithmatex">\(EX_i=EY_i=\dfrac{1}{2}\)</span>，<span class="arithmatex">\(\mathrm{Var}(X_i)=\mathrm{Var}(Y_i)=\dfrac{1}{12}\)</span>。</p>
+<p><strong>(1)</strong> 把 <span class="arithmatex">\(W\)</span> 写成 50 个 i.i.d. 变量的线性组合。先算期望与方差：</p>
+<div class="arithmatex">\[
+EW=\frac{25\times\frac{1}{2}-25\times\frac{1}{2}}{25}=0
+\]</div>
+<div class="arithmatex">\[
+\mathrm{Var}(W)=\frac{1}{25^2}\left(25\times\frac{1}{12}+25\times\frac{1}{12}\right)=\frac{2}{25\times 12}=\frac{1}{150}
+\]</div>
+<p>（依据：全体变量独立，方差可加；<span class="arithmatex">\(Y_i\)</span> 前的负号不改变方差。）</p>
+<p>由 CLT，<span class="arithmatex">\(W\approx\mathcal{N}\left(0,\frac{1}{150}\right)\)</span>，标准差 <span class="arithmatex">\(\sigma_W=\frac{1}{\sqrt{150}}\approx 0.08165\)</span>。标准化：</p>
+<div class="arithmatex">\[
+\mathbb{P}(|W|&lt;0.001)\approx\mathbb{P}\left(|Z|&lt;\frac{0.001}{0.08165}\right)=2\Phi(0.0122)-1
+\]</div>
+<p>查表/线性近似 <span class="arithmatex">\(\Phi(0.0122)\approx 0.5049\)</span>（小 <span class="arithmatex">\(z\)</span> 时 <span class="arithmatex">\(\Phi(z)\approx 0.5+0.3989z\)</span>）：</p>
+<div class="arithmatex">\[
+\mathbb{P}(|W|&lt;0.001)\approx 2\times 0.5049-1\approx 0.0098
+\]</div>
+<p><strong>(2)</strong> 由 CLT 分别有</p>
+<div class="arithmatex">\[
+\bar{X}_{16}=\frac{X_1+\cdots+X_{16}}{16}\approx\mathcal{N}\left(\frac{1}{2},\;\frac{1}{12\times 16}\right)=\mathcal{N}\left(\frac{1}{2},\frac{1}{192}\right),\qquad\bar{Y}_{25}\approx\mathcal{N}\left(\frac{1}{2},\frac{1}{300}\right)
+\]</div>
+<p>两组样本独立，由提示中的结论（独立正态差，均值相减、方差相加）：</p>
+<div class="arithmatex">\[
+W=\bar{X}_{16}-\bar{Y}_{25}\approx\mathcal{N}\left(0,\;\frac{1}{192}+\frac{1}{300}\right)=\mathcal{N}\left(0,\;\frac{41}{4800}\right)
+\]</div>
+<p>标准差 <span class="arithmatex">\(\sigma_W=\sqrt{41/4800}\approx 0.09242\)</span>。标准化：</p>
+<div class="arithmatex">\[
+\mathbb{P}(|W|&lt;0.001)\approx 2\Phi\left(\frac{0.001}{0.09242}\right)-1=2\Phi(0.0108)-1\approx 2\times 0.5043-1\approx 0.0086
+\]</div>
+<p><strong>答</strong>：(1) <span class="arithmatex">\(\mathbb{P}(|W-EW|&lt;0.001)\approx 0.0098\)</span>；(2) <span class="arithmatex">\(\approx 0.0086\)</span>。</p>
+<p>[!TIP] 技巧/易错
+易错点一：算 <span class="arithmatex">\(\mathrm{Var}(W)\)</span> 时忘记分母平方（<span class="arithmatex">\(\mathrm{Var}(aS)=a^2\mathrm{Var}(S)\)</span>）。易错点二：差的方差是<strong>相加</strong>不是相减——独立时 <span class="arithmatex">\(\mathrm{Var}(U-V)=\mathrm{Var}(U)+\mathrm{Var}(V)\)</span>。本题答案是很小的概率，因为 <span class="arithmatex">\(0.001\)</span> 远小于 <span class="arithmatex">\(\sigma_W\)</span>，结果合理。</p>
+</blockquote>
+<h3 id="64-ch5-problem-9">题 6.4（来源：作业，教材 Ch5 Problem 9）<a class="headerlink" href="#64-ch5-problem-9" title="Permanent link">&para;</a></h3>
+<p><strong>题目</strong>：每天你的电脑操作系统至少崩溃一次的概率为 5%，各天独立。考察未来 50 天中至少 45 天无崩溃的概率。</p>
+<p>(a) 用二项分布的正态近似求该概率；</p>
+<p>(b) 改用二项分布的 Poisson 近似重做。</p>
+<blockquote>
+<p>[!EXAMPLE]- 详细解答
+<strong>方法点拨</strong>：先建模翻译——"至少 45 天无崩溃"等价于"崩溃天数至多 5 天"；<span class="arithmatex">\(p=0.05\)</span> 很小，本题正是对比两种近似优劣的标准例子。</p>
+<p><strong>解</strong>：</p>
+<p><strong>建模</strong>：令 <span class="arithmatex">\(X\)</span> 为 50 天中发生崩溃的天数，则 <span class="arithmatex">\(X\sim B(50,\,0.05)\)</span>。所求为</p>
+<div class="arithmatex">\[
+\mathbb{P}(\text{至少 45 天无崩溃})=\mathbb{P}(X\leq 5)
+\]</div>
+<p>参数：<span class="arithmatex">\(np=50\times 0.05=2.5\)</span>，<span class="arithmatex">\(np(1-p)=50\times 0.05\times 0.95=2.375\)</span>，<span class="arithmatex">\(\sigma_n=\sqrt{2.375}\approx 1.541\)</span>。</p>
+<p><strong>(a) 正态近似（含连续性修正）</strong>：<span class="arithmatex">\(X\approx\mathcal{N}(2.5,\,2.375)\)</span>。计算 <span class="arithmatex">\(\mathbb{P}(X\leq 5)\)</span>，上限外扩为 <span class="arithmatex">\(5.5\)</span>：</p>
+<div class="arithmatex">\[
+\mathbb{P}(X\leq 5)\approx\Phi\left(\frac{5+0.5-2.5}{1.541}\right)=\Phi(1.95)\approx 0.9744
+\]</div>
+<p>（依据：修正规则 <span class="arithmatex">\(\mathbb{P}(S_n\leq m)\to\Phi\left(\frac{m+0.5-np}{\sigma_n}\right)\)</span>；查表 <span class="arithmatex">\(\Phi(1.95)=0.9744\)</span>。）</p>
+<p><strong>(b) Poisson 近似</strong>：<span class="arithmatex">\(p=0.05\)</span> 小、<span class="arithmatex">\(np=2.5\)</span> 适中，用 <span class="arithmatex">\(X\approx\mathcal{P}(\lambda)\)</span>，<span class="arithmatex">\(\lambda=np=2.5\)</span>：</p>
+<div class="arithmatex">\[
+\mathbb{P}(X\leq 5)\approx\sum_{k=0}^{5}e^{-2.5}\frac{2.5^k}{k!}=e^{-2.5}\left(1+2.5+3.125+2.604+1.628+0.814\right)
+\]</div>
+<div class="arithmatex">\[
+=e^{-2.5}\times 11.671\approx 0.0821\times 11.671\approx 0.958
+\]</div>
+<p><strong>答</strong>：(a) 正态近似给出 <span class="arithmatex">\(\approx 0.974\)</span>；(b) Poisson 近似给出 <span class="arithmatex">\(\approx 0.958\)</span>。（精确值 <span class="arithmatex">\(\mathbb{P}(X\leq 5)\approx 0.962\)</span>：本题 <span class="arithmatex">\(p\)</span> 小、<span class="arithmatex">\(np(1-p)=2.375\)</span> 偏小，Poisson 近似更准，与 A.8 的选择标准一致。）</p>
+<p>[!TIP] 技巧/易错
+建模三个陷阱：① <span class="arithmatex">\(p\)</span> 的方向——这里 <span class="arithmatex">\(p=0.05\)</span> 定义为"崩溃"，则"无崩溃天数至少 45"必须翻译成"崩溃天数 <span class="arithmatex">\(\leq 5\)</span>"，不等号方向极易写反；② 正态近似别忘修正（不修正得 <span class="arithmatex">\(\Phi(1.62)\approx 0.947\)</span>，误差明显更大）；③ Poisson 近似不需要连续性修正——它本身就是离散分布。</p>
+</blockquote>
+<h3 id="65-ch5-problem-10-a-440">题 6.5（来源：作业，教材 Ch5 Problem 10；注：中文版 (a) 翻译有误，应为"少于 440"）<a class="headerlink" href="#65-ch5-problem-10-a-440" title="Permanent link">&para;</a></h3>
+<p><strong>题目</strong>：某工厂第 <span class="arithmatex">\(n\)</span> 天生产 <span class="arithmatex">\(X_n\)</span> 件产品，<span class="arithmatex">\(\{X_n\}\)</span> i.i.d.，均值 5、方差 9。</p>
+<p>(a) 求 100 天总产量<strong>少于</strong> 440 件的概率的近似值；</p>
+<p>(b) 求使 <span class="arithmatex">\(\mathbb{P}(X_1+\cdots+X_n\geq 200+5n)\leq 0.05\)</span> 成立的最大的 <span class="arithmatex">\(n\)</span>；</p>
+<p>(c) 令 <span class="arithmatex">\(N\)</span> 为总产量首次超过 1000 件的天数，求 <span class="arithmatex">\(\mathbb{P}(N\geq 220)\)</span> 的近似值。</p>
+<blockquote>
+<p>[!EXAMPLE]- 详细解答
+<strong>方法点拨</strong>：三问分别对应 CLT 三大题型：求概率、定 <span class="arithmatex">\(n\)</span>、以及"首达时间事件 <span class="arithmatex">\(\{N\geq m\}\)</span> 翻译成部分和事件 <span class="arithmatex">\(\{S_{m-1}\leq c\}\)</span>"。</p>
+<p><strong>解</strong>：</p>
+<p>记 <span class="arithmatex">\(S_n=X_1+\cdots+X_n\)</span>，则 <span class="arithmatex">\(E(S_n)=5n\)</span>，<span class="arithmatex">\(\mathrm{Var}(S_n)=9n\)</span>，<span class="arithmatex">\(\sqrt{\mathrm{Var}(S_n)}=3\sqrt{n}\)</span>。由 CLT，<span class="arithmatex">\(\dfrac{S_n-5n}{3\sqrt{n}}\approx Z\sim\mathcal{N}(0,1)\)</span>。</p>
+<p><strong>(a)</strong> <span class="arithmatex">\(n=100\)</span>：<span class="arithmatex">\(E(S_{100})=500\)</span>，<span class="arithmatex">\(\sqrt{\mathrm{Var}(S_{100})}=30\)</span>。标准化：</p>
+<div class="arithmatex">\[
+\mathbb{P}(S_{100}&lt;440)\approx\Phi\left(\frac{440-500}{30}\right)=\Phi(-2)=1-\Phi(2)=1-0.9772=0.0228
+\]</div>
+<p>（<span class="arithmatex">\(X_n\)</span> 未必是整数值离散分布，题目也未给分布列，故不作连续性修正，按教材直接标准化。）</p>
+<p><strong>(b)</strong> 把事件两边同减 <span class="arithmatex">\(5n\)</span>、同除 <span class="arithmatex">\(3\sqrt{n}\)</span>：</p>
+<div class="arithmatex">\[
+\mathbb{P}(S_n\geq 200+5n)=\mathbb{P}\left(\frac{S_n-5n}{3\sqrt{n}}\geq\frac{200}{3\sqrt{n}}\right)\approx 1-\Phi\left(\frac{200}{3\sqrt{n}}\right)
+\]</div>
+<p>要求其 <span class="arithmatex">\(\leq 0.05\)</span>，即 <span class="arithmatex">\(\Phi\left(\dfrac{200}{3\sqrt{n}}\right)\geq 0.95\)</span>，查表 <span class="arithmatex">\(\Phi(1.645)=0.95\)</span>：</p>
+<div class="arithmatex">\[
+\frac{200}{3\sqrt{n}}\geq 1.645\iff\sqrt{n}\leq\frac{200}{3\times 1.645}\approx 40.53\iff n\leq 1642.6
+\]</div>
+<p>故最大的 <span class="arithmatex">\(n=1642\)</span>。</p>
+<p><strong>(c)</strong> 关键翻译：总产量首次超过 1000 的天数 <span class="arithmatex">\(\geq 220\)</span>，等价于"前 219 天总产量未超过 1000"：</p>
+<div class="arithmatex">\[
+\{N\geq 220\}=\{S_{219}\leq 1000\}
+\]</div>
+<p><span class="arithmatex">\(E(S_{219})=5\times 219=1095\)</span>，<span class="arithmatex">\(\sqrt{\mathrm{Var}(S_{219})}=3\sqrt{219}\approx 44.40\)</span>。标准化：</p>
+<div class="arithmatex">\[
+\mathbb{P}(N\geq 220)=\mathbb{P}(S_{219}\leq 1000)\approx\Phi\left(\frac{1000-1095}{44.40}\right)=\Phi(-2.14)=1-0.9838\approx 0.0162
+\]</div>
+<p><strong>答</strong>：(a) <span class="arithmatex">\(\approx 0.0228\)</span>；(b) <span class="arithmatex">\(n_{\max}=1642\)</span>；(c) <span class="arithmatex">\(\approx 0.0162\)</span>。</p>
+<p>[!TIP] 技巧/易错
+(c) 的"首达时间 <span class="arithmatex">\(\leftrightarrow\)</span> 部分和"互译是高频考点：<span class="arithmatex">\(\{N\geq m\}\iff\{S_{m-1}\leq c\}\)</span>（前 <span class="arithmatex">\(m-1\)</span> 步还没到），注意下标是 <span class="arithmatex">\(m-1\)</span> 不是 <span class="arithmatex">\(m\)</span>。(b) 中"概率 <span class="arithmatex">\(\leq 0.05\)</span> 求最大 <span class="arithmatex">\(n\)</span>"：<span class="arithmatex">\(n\)</span> 越大 <span class="arithmatex">\(\frac{200}{3\sqrt{n}}\)</span> 越小、尾概率越大，所以解出的是上界，向下取整。</p>
+</blockquote>
+<h3 id="66">题 6.6（来源：作业）<a class="headerlink" href="#66" title="Permanent link">&para;</a></h3>
+<p><strong>题目</strong>：某 WiFi 接入点传输速率为 <span class="arithmatex">\(v\)</span> bps，若某时刻有 <span class="arithmatex">\(r\)</span> 台设备使用，则每台分得 <span class="arithmatex">\(v/r\)</span>。共有 <span class="arithmatex">\(N=10000\)</span> 台设备可连接，每个时刻每台设备独立地以概率 <span class="arithmatex">\(p=0.2\)</span> 使用 WiFi。求满足"同时使用人数多于 <span class="arithmatex">\(m\)</span> 的概率不超过 5%"的最小 <span class="arithmatex">\(m\)</span>，从而可保证以至少 95% 的概率每台在用设备获得至少 <span class="arithmatex">\(v/m\)</span> 的速率。</p>
+<blockquote>
+<p>[!EXAMPLE]- 详细解答
+<strong>方法点拨</strong>：这是"已知 <span class="arithmatex">\(n\)</span> 与置信概率、反解边界 <span class="arithmatex">\(c\)</span>"的定分位点题型：对二项变量正态近似（加连续性修正），查 <span class="arithmatex">\(\Phi^{-1}(0.95)=1.645\)</span> 反解。</p>
+<p><strong>解</strong>：</p>
+<p><strong>建模</strong>：令 <span class="arithmatex">\(X_i=1\)</span> 表示第 <span class="arithmatex">\(i\)</span> 台设备此刻在用（概率 0.2），<span class="arithmatex">\(X=\sum_{i=1}^{10000}X_i\)</span> 为同时在用设备数，则 <span class="arithmatex">\(X\sim B(10000,\,0.2)\)</span>。要求最小的 <span class="arithmatex">\(m\)</span> 使</p>
+<div class="arithmatex">\[
+\mathbb{P}(X&gt;m)\leq 0.05\iff\mathbb{P}(X\leq m)\geq 0.95
+\]</div>
+<p><strong>参数</strong>：<span class="arithmatex">\(np=10000\times 0.2=2000\)</span>，<span class="arithmatex">\(np(1-p)=10000\times 0.2\times 0.8=1600\)</span>，<span class="arithmatex">\(\sigma_n=40\)</span>。</p>
+<p><strong>正态近似（含连续性修正）</strong>：<span class="arithmatex">\(X\)</span> 为整数值，<span class="arithmatex">\(\mathbb{P}(X\leq m)\)</span> 的上限外扩为 <span class="arithmatex">\(m+0.5\)</span>：</p>
+<div class="arithmatex">\[
+\mathbb{P}(X\leq m)\approx\Phi\left(\frac{m+0.5-2000}{40}\right)\geq 0.95
+\]</div>
+<p><strong>查表反解</strong>：<span class="arithmatex">\(\Phi(1.645)=0.95\)</span>，故</p>
+<div class="arithmatex">\[
+\frac{m+0.5-2000}{40}\geq 1.645\iff m\geq 2000+1.645\times 40-0.5=2065.3
+\]</div>
+<p><span class="arithmatex">\(m\)</span> 取整数且需保证不等式成立，向上取整得 <span class="arithmatex">\(m=2066\)</span>。</p>
+<p><strong>答</strong>：<span class="arithmatex">\(m=2066\)</span>。即以至少 95% 的概率，同时在用设备不超过 2066 台，每台在用设备可获得至少 <span class="arithmatex">\(\dfrac{v}{2066}\)</span> 的速率；反过来若有速率下限 <span class="arithmatex">\(s\)</span> 的要求，应配置 <span class="arithmatex">\(v\geq 2066\,s\)</span>。
+</p>
+<p>[!TIP] 技巧/易错
+反解边界后的取整方向由"谁要被保证"决定：这里要 <span class="arithmatex">\(\mathbb{P}(X\leq m)\geq 0.95\)</span>，<span class="arithmatex">\(m\)</span> 越大概率越大，故<strong>向上</strong>取整；若是"座位数最多能设多少"一类令概率 <span class="arithmatex">\(\leq\alpha\)</span> 的问题，则向下取整。考前把 A.9 表里 <span class="arithmatex">\(\Phi(1.645)=0.95\)</span> 等关键值记牢。</p>
+</blockquote>
+<h3 id="671-4">题 6.7（来源：样卷第七题，(1) 同作业第 4 题）<a class="headerlink" href="#671-4" title="Permanent link">&para;</a></h3>
+<p><strong>题目</strong>：设 <span class="arithmatex">\(X_1,X_2,\ldots\)</span> 是独立同分布的随机变量序列，令 <span class="arithmatex">\(T_n=X_1+\cdots+X_n\)</span>。</p>
+<p>(1) 设 <span class="arithmatex">\(X_i\sim\mathcal{P}(1)\)</span>，请估计 <span class="arithmatex">\(\mathbb{P}(T_n\leq n)\)</span>（<span class="arithmatex">\(n\)</span> 很大），并由此证明</p>
+<div class="arithmatex">\[
+\lim_{n\to\infty}e^{-n}\sum_{k=0}^{n}\frac{n^k}{k!}=\frac{1}{2}
+\]</div>
+<p>(2) 设 <span class="arithmatex">\(X_i\sim\mathcal{P}(\lambda)\)</span>，记 <span class="arithmatex">\(M_n(t)\)</span> 为 <span class="arithmatex">\(\dfrac{T_n}{n}\)</span> 的矩母函数。当 <span class="arithmatex">\(n\to\infty\)</span> 时，<span class="arithmatex">\(M_n(t)\)</span> 的极限是什么？该极限说明了什么？</p>
+<blockquote>
+<p>[!EXAMPLE]- 详细解答
+<strong>方法点拨</strong>：(1) 识别出 <span class="arithmatex">\(e^{-n}\sum_{k=0}^{n}\frac{n^k}{k!}\)</span> 正是 <span class="arithmatex">\(\mathcal{P}(n)\)</span> 变量不超过 <span class="arithmatex">\(n\)</span> 的概率，再用 CLT；(2) 算 MGF 极限，识别出极限是<strong>常数的 MGF</strong>，由连续性定理与"依分布收敛到常数 <span class="arithmatex">\(\iff\)</span> 依概率收敛"对接 WLLN。</p>
+<p><strong>解</strong>：</p>
+<p><strong>(1)</strong> 由 Poisson 分布的可加性（独立 Poisson 之和仍 Poisson，参数相加），<span class="arithmatex">\(T_n=X_1+\cdots+X_n\sim\mathcal{P}(n)\)</span>，于是</p>
+<div class="arithmatex">\[
+\mathbb{P}(T_n\leq n)=\sum_{k=0}^{n}e^{-n}\frac{n^k}{k!}
+\]</div>
+<p>另一方面，<span class="arithmatex">\(EX_1=1\)</span>，<span class="arithmatex">\(\mathrm{Var}(X_1)=1\)</span>，故 <span class="arithmatex">\(E(T_n)=n\)</span>，<span class="arithmatex">\(\mathrm{Var}(T_n)=n\)</span>。对事件标准化：</p>
+<div class="arithmatex">\[
+\mathbb{P}(T_n\leq n)=\mathbb{P}\left(\frac{T_n-n}{\sqrt{n}}\leq 0\right)
+\]</div>
+<p>由 CLT，<span class="arithmatex">\(\dfrac{T_n-n}{\sqrt{n}}\xrightarrow{d}\mathcal{N}(0,1)\)</span>。<span class="arithmatex">\(0\)</span> 是标准正态 CDF 的连续点，由依分布收敛的定义：</p>
+<div class="arithmatex">\[
+\lim_{n\to\infty}\mathbb{P}\left(\frac{T_n-n}{\sqrt{n}}\leq 0\right)=\Phi(0)=\frac{1}{2}
+\]</div>
+<p>两式结合即得</p>
+<div class="arithmatex">\[
+\lim_{n\to\infty}e^{-n}\sum_{k=0}^{n}\frac{n^k}{k!}=\frac{1}{2}
+\]</div>
+<p>所以 <span class="arithmatex">\(n\)</span> 很大时 <span class="arithmatex">\(\mathbb{P}(T_n\leq n)\approx\dfrac{1}{2}\)</span>。</p>
+<p><strong>(2)</strong> 先写 <span class="arithmatex">\(T_n\)</span> 的 MGF。单个 <span class="arithmatex">\(X_i\sim\mathcal{P}(\lambda)\)</span> 的 MGF 为 <span class="arithmatex">\(M_X(t)=\exp\left(\lambda(e^{t}-1)\right)\)</span>；由独立性，<span class="arithmatex">\(T_n\)</span> 的 MGF 为其 <span class="arithmatex">\(n\)</span> 次幂：<span class="arithmatex">\(M_{T_n}(t)=\exp\left(n\lambda(e^{t}-1)\right)\)</span>。于是</p>
+<div class="arithmatex">\[
+M_n(t)=E\,e^{tT_n/n}=M_{T_n}\!\left(\frac{t}{n}\right)=\exp\left(n\lambda\left(e^{t/n}-1\right)\right)
+\]</div>
+<p>对指数做 Taylor 展开（<span class="arithmatex">\(t/n\to 0\)</span>）：<span class="arithmatex">\(e^{t/n}-1=\dfrac{t}{n}+\dfrac{t^2}{2n^2}+o\!\left(\dfrac{1}{n^2}\right)\)</span>，故</p>
+<div class="arithmatex">\[
+n\lambda\left(e^{t/n}-1\right)=\lambda t+\frac{\lambda t^2}{2n}+o\!\left(\frac{1}{n}\right)\xrightarrow{n\to\infty}\lambda t
+\]</div>
+<p>因此对每个固定的 <span class="arithmatex">\(t\)</span>：</p>
+<div class="arithmatex">\[
+\lim_{n\to\infty}M_n(t)=e^{\lambda t}
+\]</div>
+<p><span class="arithmatex">\(e^{\lambda t}\)</span> 恰是<strong>退化分布</strong>（恒等于常数 <span class="arithmatex">\(\lambda\)</span> 的随机变量）的 MGF。由连续性定理，<span class="arithmatex">\(\dfrac{T_n}{n}\xrightarrow{d}\lambda\)</span>；又因极限是常数，依分布收敛等价于依概率收敛，故 <span class="arithmatex">\(\dfrac{T_n}{n}\xrightarrow{p}\lambda=EX_1\)</span>——这正是弱大数律的结论，本题用 MGF 重新验证了它。</p>
+<p><strong>答</strong>：(1) <span class="arithmatex">\(\mathbb{P}(T_n\leq n)\to\Phi(0)=\dfrac{1}{2}\)</span>，极限式得证；(2) <span class="arithmatex">\(M_n(t)\to e^{\lambda t}\)</span>，说明 <span class="arithmatex">\(T_n/n\)</span> 依分布（从而依概率）收敛到常数 <span class="arithmatex">\(\lambda\)</span>，即 WLLN。</p>
+<p>[!TIP] 技巧/易错
+(1) 是"级数极限题伪装的 CLT 题"，识别模式：<span class="arithmatex">\(e^{-n}\sum_{k=0}^{n}\frac{n^k}{k!}=\mathbb{P}(\mathcal{P}(n)\leq n)\)</span>，而 <span class="arithmatex">\(\mathcal{P}(n)\)</span> 可拆成 <span class="arithmatex">\(n\)</span> 个 i.i.d. <span class="arithmatex">\(\mathcal{P}(1)\)</span> 之和——"把一个分布拆成 i.i.d. 和"是使用 CLT 的标准前置动作（对 <span class="arithmatex">\(B(n,p)\)</span>、<span class="arithmatex">\(\Gamma(n,\beta)\)</span> 同理）。(2) 中代入的是 <span class="arithmatex">\(t/n\)</span> 而非 <span class="arithmatex">\(t\)</span>，且结论的落点是"常数极限 <span class="arithmatex">\(\Rightarrow\)</span> 依分布与依概率等价"，这两步是采分点。</p>
+</blockquote>
+<h3 id="68-hw12-5">题 6.8（来源：作业 HW12 第 5 题）<a class="headerlink" href="#68-hw12-5" title="Permanent link">&para;</a></h3>
+<p><strong>题目</strong>：设 <span class="arithmatex">\(\{X_i,\ i=1,2,\ldots\}\)</span> 独立同分布，<span class="arithmatex">\(X_1\sim\mathcal{E}(2)\)</span>。令 <span class="arithmatex">\(Y_n=\dfrac{1}{n}\sum_{i=1}^{n}X_i^2\)</span>，问 <span class="arithmatex">\(Y_n\)</span> 依概率收敛到什么？即 <span class="arithmatex">\(Y_n\xrightarrow{p}?\)</span></p>
+<blockquote>
+<p>[!EXAMPLE]- 详细解答
+<strong>方法点拨</strong>：<span class="arithmatex">\(Y_n\)</span> 是"新随机变量 <span class="arithmatex">\(W_i=X_i^2\)</span>"的样本均值。把 <span class="arithmatex">\(X_i^2\)</span> 看成一族新的 i.i.d. 随机变量，直接套弱大数律——样本均值依概率收敛到它们的公共期望 <span class="arithmatex">\(E(X_1^2)\)</span>。</p>
+<p><strong>解</strong>：</p>
+<p>令 <span class="arithmatex">\(W_i=X_i^2\)</span>。由于 <span class="arithmatex">\(\{X_i\}\)</span> 独立同分布，其函数 <span class="arithmatex">\(\{W_i\}\)</span> 也独立同分布，且</p>
+<div class="arithmatex">\[
+Y_n=\frac{1}{n}\sum_{i=1}^{n}W_i
+\]</div>
+<p>正是 <span class="arithmatex">\(\{W_i\}\)</span> 的样本均值。要用弱大数律，需先确认 <span class="arithmatex">\(W_i\)</span> 的期望与方差有限。</p>
+<p>对 <span class="arithmatex">\(X\sim\mathcal{E}(\lambda)\)</span>（本课程约定为速率参数，<span class="arithmatex">\(E(X)=1/\lambda\)</span>），其矩为 <span class="arithmatex">\(E(X^m)=\dfrac{m!}{\lambda^{m}}\)</span>。这里 <span class="arithmatex">\(\lambda=2\)</span>，故</p>
+<div class="arithmatex">\[
+E(W_1)=E(X_1^2)=\frac{2!}{2^{2}}=\frac{2}{4}=\frac{1}{2}
+\]</div>
+<div class="arithmatex">\[
+E(X_1^4)=\frac{4!}{2^{4}}=\frac{24}{16}=\frac{3}{2},\qquad \text{var}(W_1)=E(X_1^4)-\big(E(X_1^2)\big)^2=\frac{3}{2}-\frac{1}{4}=\frac{5}{4}&lt;\infty
+\]</div>
+<p>（注：此步补全了对方差有限性的验证，这是 Chebyshev 版弱大数律的前提。）</p>
+<p>既然 <span class="arithmatex">\(\{W_i\}\)</span> 独立同分布、期望 <span class="arithmatex">\(\frac12\)</span>、方差 <span class="arithmatex">\(\frac54\)</span> 有限，由弱大数律</p>
+<div class="arithmatex">\[
+Y_n=\frac{1}{n}\sum_{i=1}^{n}W_i\ \xrightarrow{p}\ E(W_1)=\frac{1}{2}
+\]</div>
+<p><strong>答</strong>：<span class="arithmatex">\(Y_n\xrightarrow{p}\dfrac{1}{2}\)</span>。</p>
+<p>[!TIP] 技巧/易错
+易错点是把 <span class="arithmatex">\(Y_n\)</span> 的极限当成 <span class="arithmatex">\(\big(E X_1\big)^2=\big(\tfrac12\big)^2=\tfrac14\)</span>。极限是 <span class="arithmatex">\(E(X_1^2)\)</span> 而<strong>不是</strong> <span class="arithmatex">\((EX_1)^2\)</span>——大数律收敛到的是被平均那一族变量（这里是 <span class="arithmatex">\(X_i^2\)</span>）自身的期望。判断"<span class="arithmatex">\(Y_n\)</span> 收敛到几"先问"我在平均谁"，再对那个东西求期望。</p>
+</blockquote>
+<hr />
+<h3 id="69-hw12-6">题 6.9（来源：作业 HW12 第 6 题）<a class="headerlink" href="#69-hw12-6" title="Permanent link">&para;</a></h3>
+<p><strong>题目</strong>：设 <span class="arithmatex">\(\{X_i,\ i=1,2,\ldots\}\)</span> 独立，<span class="arithmatex">\(X_n\sim\mathcal{E}(n\lambda)\)</span>（<span class="arithmatex">\(n=1,2,3,\ldots\)</span>）。令 <span class="arithmatex">\(Y_1=X_1\)</span>，<span class="arithmatex">\(Y_k=\dfrac{k-1}{k}Y_{k-1}+X_k\)</span>。请证明 <span class="arithmatex">\(Y_k\)</span> 依概率收敛到 <span class="arithmatex">\(\dfrac{1}{\lambda}\)</span>。（Hint：先证明 <span class="arithmatex">\(EY_k=\dfrac{1}{\lambda}\)</span>，<span class="arithmatex">\(\text{var}(Y_k)=\dfrac{1}{k\lambda^2}\)</span>。）</p>
+<blockquote>
+<p>[!EXAMPLE]- 详细解答
+<strong>方法点拨</strong>：<span class="arithmatex">\(Y_k\)</span> 不是 i.i.d. 之和，不能直接套大数律。但 Hint 已指明路线：用归纳法算出 <span class="arithmatex">\(EY_k\)</span>（恒为 <span class="arithmatex">\(1/\lambda\)</span>）和 <span class="arithmatex">\(\text{var}(Y_k)\)</span>（随 <span class="arithmatex">\(k\)</span> 趋于 <span class="arithmatex">\(0\)</span>），再用 Chebyshev 不等式把"方差趋零 + 均值恒定"翻译成依概率收敛。</p>
+<p><strong>解</strong>：</p>
+<p>先记单项的矩。<span class="arithmatex">\(X_n\sim\mathcal{E}(n\lambda)\)</span> 故</p>
+<div class="arithmatex">\[
+E(X_n)=\frac{1}{n\lambda},\qquad \text{var}(X_n)=\frac{1}{(n\lambda)^2}=\frac{1}{n^2\lambda^2}
+\]</div>
+<p><strong>第一步：用归纳法证 <span class="arithmatex">\(EY_k=\dfrac{1}{\lambda}\)</span>。</strong></p>
+<p>基础：<span class="arithmatex">\(EY_1=E(X_1)=\dfrac{1}{1\cdot\lambda}=\dfrac{1}{\lambda}\)</span>。</p>
+<p>归纳：设 <span class="arithmatex">\(EY_{k-1}=\dfrac{1}{\lambda}\)</span>，则由期望线性性</p>
+<div class="arithmatex">\[
+EY_k=\frac{k-1}{k}EY_{k-1}+EX_k=\frac{k-1}{k}\cdot\frac{1}{\lambda}+\frac{1}{k\lambda}=\frac{1}{\lambda}\left(\frac{k-1}{k}+\frac{1}{k}\right)=\frac{1}{\lambda}
+\]</div>
+<p>故对一切 <span class="arithmatex">\(k\)</span> 有 <span class="arithmatex">\(EY_k=\dfrac{1}{\lambda}\)</span>。</p>
+<p><strong>第二步：用归纳法证 <span class="arithmatex">\(\text{var}(Y_k)=\dfrac{1}{k\lambda^2}\)</span>。</strong></p>
+<p>关键观察：<span class="arithmatex">\(Y_{k-1}\)</span> 只依赖 <span class="arithmatex">\(X_1,\ldots,X_{k-1}\)</span>，而 <span class="arithmatex">\(X_k\)</span> 与它们独立，故 <span class="arithmatex">\(Y_{k-1}\perp X_k\)</span>，方差可加且常数因子要平方提出。</p>
+<p>基础：<span class="arithmatex">\(\text{var}(Y_1)=\text{var}(X_1)=\dfrac{1}{1^2\lambda^2}=\dfrac{1}{\lambda^2}\)</span>，与公式 <span class="arithmatex">\(\dfrac{1}{1\cdot\lambda^2}\)</span> 一致。</p>
+<p>归纳：设 <span class="arithmatex">\(\text{var}(Y_{k-1})=\dfrac{1}{(k-1)\lambda^2}\)</span>，则</p>
+<div class="arithmatex">\[
+\text{var}(Y_k)=\left(\frac{k-1}{k}\right)^2\text{var}(Y_{k-1})+\text{var}(X_k)=\frac{(k-1)^2}{k^2}\cdot\frac{1}{(k-1)\lambda^2}+\frac{1}{k^2\lambda^2}
+\]</div>
+<div class="arithmatex">\[
+=\frac{k-1}{k^2\lambda^2}+\frac{1}{k^2\lambda^2}=\frac{k}{k^2\lambda^2}=\frac{1}{k\lambda^2}
+\]</div>
+<p><strong>第三步：用 Chebyshev 不等式收尾。</strong> 由于 <span class="arithmatex">\(EY_k=\dfrac{1}{\lambda}\)</span> 恒定，对任意 <span class="arithmatex">\(\varepsilon&gt;0\)</span></p>
+<div class="arithmatex">\[
+\mathbb{P}\left(\left|Y_k-\frac{1}{\lambda}\right|\ge\varepsilon\right)\le\frac{\text{var}(Y_k)}{\varepsilon^2}=\frac{1}{k\lambda^2\varepsilon^2}\xrightarrow{k\to\infty}0
+\]</div>
+<p>故 <span class="arithmatex">\(Y_k\xrightarrow{p}\dfrac{1}{\lambda}\)</span>。</p>
+<p><strong>答</strong>：<span class="arithmatex">\(EY_k=\dfrac{1}{\lambda}\)</span>，<span class="arithmatex">\(\text{var}(Y_k)=\dfrac{1}{k\lambda^2}\to0\)</span>，由 Chebyshev 得 <span class="arithmatex">\(Y_k\xrightarrow{p}\dfrac{1}{\lambda}\)</span>，证毕。</p>
+<p>[!TIP] 技巧/易错
+这是"非 i.i.d. 但能算出均值方差"的收敛题通用套路：<strong>均值锁定到极限值 + 方差趋零 <span class="arithmatex">\(\Rightarrow\)</span> Chebyshev 给依概率收敛</strong>。两个易错点：(1) 递推方差时常数因子 <span class="arithmatex">\(\frac{k-1}{k}\)</span> 必须<strong>平方</strong>提出，且只有在 <span class="arithmatex">\(Y_{k-1}\perp X_k\)</span> 时才能把交叉项丢掉——务必先点明这一独立性；(2) Chebyshev 之所以能直接套，是因为 <span class="arithmatex">\(EY_k\)</span> 恰好等于待证极限 <span class="arithmatex">\(1/\lambda\)</span>；若均值不等于目标值，还需先处理偏差项。</p>
+</blockquote>
+<hr />
+<h2 id="part-d">Part D：模块小结<a class="headerlink" href="#part-d" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>三条主线</strong>：① 收敛性概念（两个定义 + 关系 + 常数极限等价）；② 大数律（Chebyshev 三步证明 + Bernoulli 特例 + 定样本量）；③ CLT 计算（建模翻译 <span class="arithmatex">\(\to\)</span> 标准化 <span class="arithmatex">\(\to\)</span> 查表，三类题型见 A.9）。</li>
+<li><strong>拿分要点</strong>：CLT 计算题先写"建模三行"（<span class="arithmatex">\(X\)</span> 是什么、服从什么、所求事件翻译成 <span class="arithmatex">\(\mathbb{P}(S_n\lessgtr c)\)</span>），再标准化；离散变量记得连续性修正并写明修正依据；<span class="arithmatex">\(p\)</span> 小且 <span class="arithmatex">\(np\)</span> 不大时改用 Poisson 近似。</li>
+<li><strong>常见综合方式</strong>：样卷将 Poisson 可加性、MGF、连续性定理与 WLLN/CLT 串在一题（题 6.7），将首达时间与部分和互译（题 6.5(c)）；这类题的本质都是"先用前半学期的分布工具建模，再用本模块的极限定理收尾"。</li>
+<li><strong>多元正态提示</strong>：样卷卷首给出二元正态密度与 Slutsky、连续映射定理备查。若遇相关综合题，记三条速记结论即可：联合正态的边缘分布仍正态；联合正态下不相关 <span class="arithmatex">\(\iff\)</span> 独立；独立（或联合）正态的线性组合仍正态（如题 6.3(2) 中"独立正态之差 <span class="arithmatex">\(\sim\mathcal{N}(\mu_1-\mu_2,\sigma_1^2+\sigma_2^2)\)</span>"）。</li>
+</ul>
+<blockquote>
+<p>[!NOTE]
+作业中"教材 Ch5 习题 5.9、5.10"已按作业页给出的英文原题（Problem 9、Problem 10）完整收录为题 6.4、题 6.5（含作业注明的中文版 (a) 翻译勘误"少于 440"）。HW12 的两道依概率收敛计算题（第 5 题样本二阶矩均值、第 6 题递推序列）已补收为题 6.8、题 6.9。HW13 第 4 题（Poisson 级数极限）见题 6.7(1)、第 5 题（WiFi 共享链路）见题 6.6。其余"选做"题（教材 Ch5 5.6/5.13/5.14，作业标注"结论常用、比证明更重要"）仅需记住结论，不在此展开证明。无其他无法获取的教材引用题。</p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "navigation.indexes", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
