@@ -33,7 +33,6 @@ theme:
 plugins:
   - search:
       lang: zh
-  - roamlinks                  # 支持 Obsidian [[wikilinks]] 内部链接
 
 markdown_extensions:
   - admonition                 # 提示框
