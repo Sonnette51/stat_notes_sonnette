@@ -10,13 +10,6 @@ tags:
 
 # P03 语音识别（二）：LAS 与注意力式序列到序列模型
 
-> [!ABSTRACT] 本讲概要
-> 本讲介绍第一类端到端语音识别模型：**听-注意-拼写模型（Listen, Attend and Spell, LAS）**。它本质上是用于语音识别的 **注意力式序列到序列模型（attention-based sequence-to-sequence model）**：编码器（encoder）负责听取并压缩语音，注意力机制（attention mechanism）负责在声学序列中找当前该看的位置，解码器（decoder）负责逐词元/符号（token）拼出文字。
->
-> 本讲的重点不是“把 seq2seq 套上去就好”，而是：语音输入极长、相邻帧（frame）冗余、对齐（alignment）大体单调、推理需要搜索、训练需要教师强制（teacher forcing）。这些细节决定 LAS 能不能真正训起来。
->
-> ---
-
 ## 术语表
 
 | 中文术语 | English term | 缩写/记号 | 本讲中的含义 |
