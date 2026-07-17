@@ -1,0 +1,3456 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="清华统计课程笔记">
+      
+      
+      
+        <link rel="canonical" href="https://Sonnette51.github.io/stat_notes_sonnette/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%88lhy%EF%BC%89-%E6%9B%B4%E6%96%B0%E4%B8%AD/P1_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E7%AE%80%E4%BB%8B/">
+      
+      
+        <link rel="prev" href="../">
+      
+      
+        <link rel="next" href="../P2_%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E7%AE%80%E4%BB%8B/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>P1 第一节上：机器学习基本概念简介 - Sonnette's Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#p1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="Sonnette&#39;s Notes" class="md-header__button md-logo" aria-label="Sonnette's Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Sonnette's Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              P1 第一节上：机器学习基本概念简介
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  数据科学编程
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  初等概率论
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  机器学习（lhy）-更新中
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%26%E8%AF%AD%E9%9F%B3%E5%A4%84%E7%90%86%EF%BC%88lhy%EF%BC%89-%E6%9B%B4%E6%96%B0%E4%B8%AD/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  自然语言&语音处理（lhy）-更新中
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Sonnette&#39;s Notes" class="md-nav__button md-logo" aria-label="Sonnette's Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Sonnette's Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据科学编程
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数据科学编程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/NumPy%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NumPy 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/Pandas%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pandas 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/Database%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/LLM%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LLM 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/MiningWebData%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mining Web Data 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/TextProcessing%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Text Processing 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/DataVisualization%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Visualization 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/Advanced%20Visualization%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Advanced Visualization 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    初等概率论
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    初等概率论
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture01%20%E6%A6%82%E7%8E%87%E6%A8%A1%E5%9E%8B%E4%B8%8E%E6%80%A7%E8%B4%A8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture01 概率模型与性质
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture02%20%E6%A6%82%E7%8E%87%E7%A9%BA%E9%97%B4%E3%80%81%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture02 概率空间、条件概率
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture03%20%E7%8B%AC%E7%AB%8B%E6%80%A7%E3%80%81%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture03 独立性、随机变量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture04%20%E5%B8%B8%E8%A7%81%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture04 常见随机变量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture05%20%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0%E3%80%81%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E5%87%BD%E6%95%B0%E7%9A%84%E5%88%86%E5%B8%83%E3%80%81%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E7%9A%84%E5%88%86%E5%B8%83%28I%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture05 概率分布函数、随机变量函数的分布、随机向量的分布(I)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture06%20%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E7%9A%84%E5%88%86%E5%B8%83%28II%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture06 随机向量的分布(II)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture07%20%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E5%87%BD%E6%95%B0%E7%9A%84%E5%88%86%E5%B8%83%E3%80%81%E6%AC%A1%E5%BA%8F%E7%BB%9F%E8%AE%A1%E9%87%8F%E3%80%81p%E5%88%86%E4%BD%8D%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture07 随机向量函数的分布、次序统计量、p分位数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture08%20%E6%9C%9F%E6%9C%9B%E3%80%81%E6%96%B9%E5%B7%AE%E3%80%81%E7%9B%B8%E5%85%B3%E4%B8%8D%E7%AD%89%E5%BC%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture08 期望、方差、相关不等式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture09%20%E6%9D%A1%E4%BB%B6%E6%9C%9F%E6%9C%9B%E3%80%81%E6%9D%A1%E4%BB%B6%E6%96%B9%E5%B7%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture09 条件期望、条件方差
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture10%20%E5%8D%8F%E6%96%B9%E5%B7%AE%E3%80%81%E7%9B%B8%E5%85%B3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture10 协方差、相关
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture11%20%E6%A6%82%E7%8E%87%E6%AF%8D%E5%87%BD%E6%95%B0%E3%80%81%E7%9F%A9%E6%AF%8D%E5%87%BD%E6%95%B0%E3%80%81%E7%89%B9%E5%BE%81%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture11 概率母函数、矩母函数、特征函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture12%20%E5%A4%A7%E6%95%B0%E5%AE%9A%E5%BE%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture12 大数定律
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture13%20%E4%B8%AD%E5%BF%83%E6%9E%81%E9%99%90%E5%AE%9A%E7%90%86%E3%80%81%E6%94%B6%E6%95%9B%E6%80%A7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture13 中心极限定理、收敛性
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture14%20%E5%A4%9A%E5%85%83%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture14 多元正态分布
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%9C%9F%E6%9C%AB%E8%AE%B0%E5%BF%86%E8%A6%81%E7%82%B9%E6%B1%87%E6%80%BB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 期末记忆要点汇总
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%A8%A1%E5%9D%971%20%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E7%9A%84%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块1 随机向量的函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%A8%A1%E5%9D%972%20%E6%AC%A1%E5%BA%8F%E7%BB%9F%E8%AE%A1%E9%87%8F%E4%B8%8Ep-%E5%88%86%E4%BD%8D%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块2 次序统计量与p-分位数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%A8%A1%E5%9D%973%20%E6%9C%9F%E6%9C%9B%E4%B8%8E%E6%96%B9%E5%B7%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块3 期望与方差
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%A8%A1%E5%9D%974%20%E6%9D%A1%E4%BB%B6%E6%9C%9F%E6%9C%9B%E3%80%81%E5%8D%8F%E6%96%B9%E5%B7%AE%E4%B8%8E%E4%B8%8D%E7%AD%89%E5%BC%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块4 条件期望、协方差与不等式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%A8%A1%E5%9D%975%20%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0%E4%B8%8E%E7%89%B9%E5%BE%81%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块5 生成函数与特征函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%A8%A1%E5%9D%976%20%E6%94%B6%E6%95%9B%E6%80%A7%E3%80%81%E5%A4%A7%E6%95%B0%E5%BE%8B%E4%B8%8E%E4%B8%AD%E5%BF%83%E6%9E%81%E9%99%90%E5%AE%9A%E7%90%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块6 收敛性、大数律与中心极限定理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%A8%A1%E5%9D%977%20%E5%A4%9A%E5%85%83%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块7 多元正态分布
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    机器学习（lhy）-更新中
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    机器学习（lhy）-更新中
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P1 机器学习基本概念简介
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P1 机器学习基本概念简介
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0. 本讲主线
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 时间线总览
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 机器学习的核心定义：找函数
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 三类典型任务
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 三类典型任务">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-regression" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Regression：输出是数值
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-classification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Classification：输出是类别
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-structured-learning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Structured Learning：输出是有结构的对象
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-youtube" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 贯穿例子：预测 YouTube 频道观看数
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 第一步：写出带未知参数的 Model
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-loss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 第二步：定义 Loss
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. 第二步：定义 Loss">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 单笔资料的误差
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 多笔资料的平均误差
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-error-surface" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Error Surface：把参数好坏画出来
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. 第三步：Optimization
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-gradient-descent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Gradient Descent 的直觉
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Gradient Descent 的直觉">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-learning-rate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 Learning Rate
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 停止条件
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-gradient-descent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. 多参数 Gradient Descent
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-local-minimum-global-minimum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Local Minimum 与 Global Minimum
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. 训练误差不等于未来表现
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. 观察错误并改进 Model
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-1-56" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. 从 1 天到 56 天：模型变复杂的效果
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-linear-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Linear Model
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. 重要术语表
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. 易错点与理解提醒
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. 知识地图
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19. 复习问答
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20. 本讲总结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../P2_%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P2 深度学习基本概念简介
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../P3_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%BB%BB%E5%8A%A1%E6%94%BB%E7%95%A5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P3 机器学习任务攻略
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../P4_%E7%B1%BB%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%AD%E7%BB%83%E4%B8%8D%E8%B5%B7%E6%9D%A5%E6%80%8E%E4%B9%88%E5%8A%9E_%E5%B1%80%E9%83%A8%E6%9C%80%E5%B0%8F%E5%80%BC%E4%B8%8E%E9%9E%8D%E7%82%B9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P4 局部最小值与鞍点
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../P5_%E7%B1%BB%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%AD%E7%BB%83%E4%B8%8D%E8%B5%B7%E6%9D%A5%E6%80%8E%E4%B9%88%E5%8A%9E_Batch%E4%B8%8EMomentum/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P5 Batch 与 Momentum
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../P6_%E7%B1%BB%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%AD%E7%BB%83%E4%B8%8D%E8%B5%B7%E6%9D%A5%E6%80%8E%E4%B9%88%E5%8A%9E_%E8%87%AA%E9%80%82%E5%BA%94%E5%AD%A6%E4%B9%A0%E7%8E%87/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P6 自适应学习率
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../P7_%E7%B1%BB%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%AD%E7%BB%83%E4%B8%8D%E8%B5%B7%E6%9D%A5%E6%80%8E%E4%B9%88%E5%8A%9E_%E5%88%86%E7%B1%BB%E4%B8%8E%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P7 分类与损失函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E7%B1%BB%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%AD%E7%BB%83%E4%B8%8D%E8%B5%B7%E6%9D%A5%E6%80%8E%E4%B9%88%E5%8A%9E_%E6%80%BB%E7%BB%93/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4-7讲类神经网络训练方法总结
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%26%E8%AF%AD%E9%9F%B3%E5%A4%84%E7%90%86%EF%BC%88lhy%EF%BC%89-%E6%9B%B4%E6%96%B0%E4%B8%AD/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    自然语言&语音处理（lhy）-更新中
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    自然语言&语音处理（lhy）-更新中
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%26%E8%AF%AD%E9%9F%B3%E5%A4%84%E7%90%86%EF%BC%88lhy%EF%BC%89-%E6%9B%B4%E6%96%B0%E4%B8%AD/P01_%E8%AF%BE%E7%A8%8B%E6%80%BB%E8%A7%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P01 课程总览
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%26%E8%AF%AD%E9%9F%B3%E5%A4%84%E7%90%86%EF%BC%88lhy%EF%BC%89-%E6%9B%B4%E6%96%B0%E4%B8%AD/P02_%E8%AF%AD%E9%9F%B3%E8%AF%86%E5%88%AB%E4%B8%80_%E4%BB%BB%E5%8A%A1%E5%AE%9A%E4%B9%89%E4%B8%8E%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E8%A1%A8%E7%A4%BA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P02 语音识别：任务定义与输入输出表示
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%26%E8%AF%AD%E9%9F%B3%E5%A4%84%E7%90%86%EF%BC%88lhy%EF%BC%89-%E6%9B%B4%E6%96%B0%E4%B8%AD/P03_%E8%AF%AD%E9%9F%B3%E8%AF%86%E5%88%AB%E4%BA%8C_LAS%E4%B8%8EAttentionSeq2Seq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P03 语音识别：LAS 与 AttentionSeq2Seq
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0. 本讲主线
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 时间线总览
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 机器学习的核心定义：找函数
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 三类典型任务
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 三类典型任务">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-regression" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Regression：输出是数值
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-classification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Classification：输出是类别
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-structured-learning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Structured Learning：输出是有结构的对象
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-youtube" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 贯穿例子：预测 YouTube 频道观看数
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 第一步：写出带未知参数的 Model
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-loss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 第二步：定义 Loss
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. 第二步：定义 Loss">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 单笔资料的误差
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 多笔资料的平均误差
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-error-surface" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Error Surface：把参数好坏画出来
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. 第三步：Optimization
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-gradient-descent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Gradient Descent 的直觉
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Gradient Descent 的直觉">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-learning-rate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 Learning Rate
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 停止条件
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-gradient-descent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. 多参数 Gradient Descent
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-local-minimum-global-minimum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Local Minimum 与 Global Minimum
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. 训练误差不等于未来表现
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. 观察错误并改进 Model
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-1-56" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. 从 1 天到 56 天：模型变复杂的效果
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-linear-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Linear Model
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. 重要术语表
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. 易错点与理解提醒
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. 知识地图
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19. 复习问答
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20. 本讲总结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="p1">P1 第一节上：机器学习基本概念简介<a class="headerlink" href="#p1" title="Permanent link">&para;</a></h1>
+<p>来源：<code>P1【1、第一节 上 机器学习基本概念简介】</code></p>
+<blockquote>
+<p>[!ABSTRACT] 本讲概要
+本讲回答机器学习课程的第一个问题：机器到底在“学”什么？课程用一句话定义机器学习：让机器自动找一个函数。为了把这个抽象定义落到可操作流程上，老师用 YouTube 频道观看数预测作为贯穿例子，说明一个机器学习任务通常要经历三步：先写出带未知参数的 model，再定义衡量参数好坏的 loss，最后用 gradient descent 等 optimization 方法找出较好的参数。讲到最后，重点已经不只是“训练误差能不能变小”，而是模型在未来没看过的数据上是否仍然可靠。</p>
+</blockquote>
+<h2 id="0">0. 本讲主线<a class="headerlink" href="#0" title="Permanent link">&para;</a></h2>
+<pre class="mermaid"><code>flowchart LR
+    A["现实任务"] --&gt; B["把任务写成找函数"]
+    B --&gt; C["决定输入 feature 与输出 label"]
+    C --&gt; D["写出带未知参数的 model"]
+    D --&gt; E["定义 loss 衡量参数好坏"]
+    E --&gt; F["用 optimization 找参数"]
+    F --&gt; G["在未见资料上评估"]
+    G --&gt; H["观察错误并改进 feature/model"]</code></pre>
+<p>这条主线也是后续所有深度学习主题的基础：不管模型从线性模型变成神经网络，还是任务从数值预测变成图像生成，本质上仍然是在处理“函数、参数、损失、优化、泛化”这几个问题。</p>
+<h2 id="1">1. 时间线总览<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>00:00-03:30</td>
+<td>什么是机器学习：让机器具备找函数的能力</td>
+</tr>
+<tr>
+<td>03:30-08:20</td>
+<td>机器学习任务类型：regression、classification、structured learning</td>
+</tr>
+<tr>
+<td>08:20-10:40</td>
+<td>YouTube 频道观看数预测：把真实问题转成函数问题</td>
+</tr>
+<tr>
+<td>10:40-14:50</td>
+<td>第一步：写出带未知参数的 model</td>
+</tr>
+<tr>
+<td>14:50-24:30</td>
+<td>第二步：定义 loss，用训练资料评估参数好坏</td>
+</tr>
+<tr>
+<td>24:30-39:50</td>
+<td>第三步：用 gradient descent 解优化问题</td>
+</tr>
+<tr>
+<td>39:50-43:50</td>
+<td>训练误差与未来资料误差：评估不能只看训练资料</td>
+</tr>
+<tr>
+<td>43:50-49:50</td>
+<td>根据资料周期性改进模型：从 1 天特征扩展到 7/28/56 天特征</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2">2. 机器学习的核心定义：找函数<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<p>课程给出的核心定义非常简洁：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Machine Learning = Looking for a function
+</code></pre></div>
+<p>这里的函数不是只指数学课中一条简单曲线，而是广义的输入到输出的映射。只要一个任务可以写成“给机器某种输入，希望机器给出某种输出”，就可以先把它看成一个找函数的问题。</p>
+<table>
+<thead>
+<tr>
+<th>任务</th>
+<th>输入</th>
+<th>输出</th>
+<th>要找的函数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>语音识别</td>
+<td>一段声音信号</td>
+<td>对应文字</td>
+<td>声音到文字的映射</td>
+</tr>
+<tr>
+<td>图像识别</td>
+<td>一张图片</td>
+<td>图片类别或内容</td>
+<td>图像到标签的映射</td>
+</tr>
+<tr>
+<td>AlphaGo 下围棋</td>
+<td>当前棋盘状态</td>
+<td>下一步落子位置</td>
+<td>棋局到动作的映射</td>
+</tr>
+<tr>
+<td>观看数预测</td>
+<td>过去观看数等资讯</td>
+<td>未来观看数</td>
+<td>历史资料到未来数值的映射</td>
+</tr>
+</tbody>
+</table>
+<p>这一定义的价值在于，它把看似差异很大的任务统一起来。语音识别、图像识别、推荐系统、游戏 AI、生成文字或图像，都可以先被问成同一个问题：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>输入是什么？
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>输出是什么？
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>我们希望机器找到怎样的函数？
+</code></pre></div>
+<p>如果一个函数简单到人类能手写规则，就不一定需要机器学习。例如“摄氏温度转华氏温度”可以直接写公式。但语音转文字、图片识别、围棋落子这类函数非常复杂，人类很难手写完整规则，因此才希望机器从资料中自动找出规律。</p>
+<h2 id="3">3. 三类典型任务<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
+<h3 id="31-regression">3.1 Regression：输出是数值<a class="headerlink" href="#31-regression" title="Permanent link">&para;</a></h3>
+<p>如果函数的输出是一个数值，这类任务叫 <strong>regression</strong>。</p>
+<p>例子：预测明天中午的 PM2.5。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>输入：今天 PM2.5、今天平均温度、臭氧浓度等
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>输出：明天中午 PM2.5 数值
+</code></pre></div>
+<p>判断 regression 的关键不是输入是什么，而是输出是否为连续或可度量的数值。房价预测、温度预测、观看数预测都属于这一类。</p>
+<h3 id="32-classification">3.2 Classification：输出是类别<a class="headerlink" href="#32-classification" title="Permanent link">&para;</a></h3>
+<p>如果函数要从预先设定好的选项中选一个输出，这类任务叫 <strong>classification</strong>。</p>
+<p>例子 1：垃圾邮件分类。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>输入：一封电子邮件
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>输出：垃圾邮件 / 非垃圾邮件
+</code></pre></div>
+<p>例子 2：AlphaGo。</p>
+<p>围棋棋盘有 <code>19 x 19 = 361</code> 个可能落子位置。如果把每个位置看成一个类别，AlphaGo 下一步落子也可以被看成一个 361 类分类问题。</p>
+<p>Classification 不一定只有两个类别；只要输出是在一组固定选项中选择，就可以是分类。</p>
+<h3 id="33-structured-learning">3.3 Structured Learning：输出是有结构的对象<a class="headerlink" href="#33-structured-learning" title="Permanent link">&para;</a></h3>
+<p>如果输出不是单一数值或单一类别，而是有结构的复杂对象，就进入 <strong>structured learning</strong>。</p>
+<p>例子：</p>
+<table>
+<thead>
+<tr>
+<th>任务</th>
+<th>输出为何有结构</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>机器翻译</td>
+<td>输出是一整句文字，词序和语法有结构</td>
+</tr>
+<tr>
+<td>语音识别</td>
+<td>输出是一串文字，不是单个类别</td>
+</tr>
+<tr>
+<td>图像生成</td>
+<td>输出是一张由像素组成的图</td>
+</tr>
+<tr>
+<td>文章生成</td>
+<td>输出是一篇有段落、逻辑和语义的文字</td>
+</tr>
+</tbody>
+</table>
+<p>课程用比较直观的话说，structured learning 更像是让机器“创造”。它也是后续生成式模型、语言模型、图像生成模型的重要背景。</p>
+<h2 id="4-youtube">4. 贯穿例子：预测 YouTube 频道观看数<a class="headerlink" href="#4-youtube" title="Permanent link">&para;</a></h2>
+<p>为了说明机器学习流程，课程选择一个具体任务：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>输入：YouTube 频道过去若干天的观看数
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>输出：隔天的总观看次数
+</code></pre></div>
+<p>这个任务的好处是，它既足够简单，可以用一条线性公式解释，又有真实资料中的复杂性，例如星期周期、节假日变化、趋势变化等。</p>
+<p>先从最简单的假设开始：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>明天观看数可能和前一天观看数有关。
+</code></pre></div>
+<p>于是输入特征可以先选：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>x1 = 前一天观看数
+</code></pre></div>
+<p>输出为：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>y = 隔天观看数
+</code></pre></div>
+<p>接下来就可以套入机器学习三步骤。</p>
+<h2 id="5-model">5. 第一步：写出带未知参数的 Model<a class="headerlink" href="#5-model" title="Permanent link">&para;</a></h2>
+<p>最简单的 model 可以写成：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>y = b + w x1
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>x1</code></td>
+<td>feature，前一天观看数</td>
+</tr>
+<tr>
+<td><code>y</code></td>
+<td>预测的隔天观看数</td>
+</tr>
+<tr>
+<td><code>w</code></td>
+<td>weight，权重</td>
+</tr>
+<tr>
+<td><code>b</code></td>
+<td>bias，偏置</td>
+</tr>
+</tbody>
+</table>
+<p>这条公式的意思是：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>预测观看数 = 偏置 + 权重 x 前一天观看数
+</code></pre></div>
+<p>这里有一个重要定义：</p>
+<blockquote>
+<p>[!IMPORTANT] Model
+Model 是一个带未知参数的函数。机器学习不是直接凭空产出答案，而是在我们给定的函数形式中，利用训练资料找出合适参数。</p>
+</blockquote>
+<p>在这个例子中，<code>w</code> 和 <code>b</code> 不是人工凭感觉填进去的，而是后面要通过资料学出来。人工决定的是 model 的形式，比如“要不要只看前一天”“要不要看前七天”“要不要使用线性模型”。这些选择往往来自 <strong>domain knowledge</strong>，也就是对问题领域的理解。</p>
+<h2 id="6-loss">6. 第二步：定义 Loss<a class="headerlink" href="#6-loss" title="Permanent link">&para;</a></h2>
+<p>有了 model 后，还需要定义“这组参数好不好”。这个衡量标准叫 <strong>loss function</strong>。</p>
+<p>在本例中，loss 的输入是参数：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>L(b, w)
+</code></pre></div>
+<p>它的输出是一个数值，表示当 <code>b</code> 和 <code>w</code> 取某组值时，模型预测得有多差。loss 越大，参数越差；loss 越小，参数越好。</p>
+<h3 id="61">6.1 单笔资料的误差<a class="headerlink" href="#61" title="Permanent link">&para;</a></h3>
+<p>假设选择：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>b = 0.5K
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>w = 1
+</code></pre></div>
+<p>model 变成：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>y = 0.5K + x1
+</code></pre></div>
+<p>如果 1 月 1 日观看数为 <code>4.8K</code>，则预测 1 月 2 日观看数为：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>5.3K
+</code></pre></div>
+<p>若真实 1 月 2 日观看数是 <code>4.9K</code>，则误差为：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>|5.3K - 4.9K| = 0.4K
+</code></pre></div>
+<p>这里真实答案称为 <strong>label</strong>。</p>
+<h3 id="62">6.2 多笔资料的平均误差<a class="headerlink" href="#62" title="Permanent link">&para;</a></h3>
+<p>训练资料中有很多天的数据。对每一天都计算预测值与真实 label 的差距，再取平均，就得到整体 loss。</p>
+<p>常见 loss 包括：</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>形式直觉</th>
+<th>常见用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MAE, Mean Absolute Error</td>
+<td>绝对误差平均</td>
+<td>本讲观看数预测示例</td>
+</tr>
+<tr>
+<td>MSE, Mean Squared Error</td>
+<td>平方误差平均</td>
+<td>回归任务常用</td>
+</tr>
+<tr>
+<td>Cross Entropy</td>
+<td>概率分布差异</td>
+<td>分类任务常用</td>
+</tr>
+</tbody>
+</table>
+<p>本讲重点不是某个 loss 的细节，而是理解 loss 的角色：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>loss 把“预测得好不好”变成一个可以优化的数字。
+</code></pre></div>
+<h2 id="7-error-surface">7. Error Surface：把参数好坏画出来<a class="headerlink" href="#7-error-surface" title="Permanent link">&para;</a></h2>
+<p>因为 <code>L(b, w)</code> 的输入是两个参数，所以可以想象每一组 <code>(b, w)</code> 都对应一个 loss。把这些值画出来，就得到 <strong>error surface</strong>。</p>
+<pre class="mermaid"><code>flowchart TD
+    A["选择一组参数 b,w"] --&gt; B["把训练资料输入 model"]
+    B --&gt; C["得到预测值"]
+    C --&gt; D["与 label 比较"]
+    D --&gt; E["计算平均 loss"]
+    E --&gt; F["得到 error surface 上的一点"]</code></pre>
+<p>课程中用颜色表示 loss 大小：越红代表 loss 越大，越蓝代表 loss 越小。训练的目标就是在这张地形图上找到较低的位置。</p>
+<h2 id="8-optimization">8. 第三步：Optimization<a class="headerlink" href="#8-optimization" title="Permanent link">&para;</a></h2>
+<p>第三步是解优化问题：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>(b*, w*) = arg min L(b, w)
+</code></pre></div>
+<p>意思是：找到一组参数 <code>b*</code> 和 <code>w*</code>，使 loss 尽量小。</p>
+<p>课程介绍的基本方法是 <strong>gradient descent</strong>。</p>
+<h2 id="9-gradient-descent">9. Gradient Descent 的直觉<a class="headerlink" href="#9-gradient-descent" title="Permanent link">&para;</a></h2>
+<p>先假设只有一个参数 <code>w</code>。loss 随 <code>w</code> 改变形成一条曲线，目标是走到曲线低点。</p>
+<p>Gradient descent 的步骤是：</p>
+<ol>
+<li>随机选择初始值 <code>w0</code>。</li>
+<li>计算当前位置 loss 对 <code>w</code> 的微分。</li>
+<li>如果斜率为正，往左走；如果斜率为负，往右走。</li>
+<li>每次走一小步，反复更新。</li>
+</ol>
+<p>更新公式：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>w1 = w0 - eta * dL/dw
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>eta</code></td>
+<td>learning rate，学习率</td>
+</tr>
+<tr>
+<td><code>dL/dw</code></td>
+<td>loss 对参数 <code>w</code> 的微分</td>
+</tr>
+<tr>
+<td><code>w0</code></td>
+<td>当前参数</td>
+</tr>
+<tr>
+<td><code>w1</code></td>
+<td>更新后的参数</td>
+</tr>
+</tbody>
+</table>
+<p>这个公式中的负号很重要：微分指出 loss 上升最快的方向，负微分方向就是下降方向。</p>
+<h3 id="91-learning-rate">9.1 Learning Rate<a class="headerlink" href="#91-learning-rate" title="Permanent link">&para;</a></h3>
+<p><strong>Learning rate</strong> 决定每次更新参数走多大一步。</p>
+<table>
+<thead>
+<tr>
+<th>learning rate 状况</th>
+<th>可能结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>太大</td>
+<td>更新很快，但可能跨过低点甚至震荡</td>
+</tr>
+<tr>
+<td>太小</td>
+<td>更新稳定，但训练非常慢</td>
+</tr>
+<tr>
+<td>合适</td>
+<td>能较有效地下降 loss</td>
+</tr>
+</tbody>
+</table>
+<p>Learning rate 不是模型从资料中学出来的，而是人预先设定的训练配置，因此它属于 <strong>hyperparameter</strong>。</p>
+<blockquote>
+<p>[!NOTE] Parameter 与 Hyperparameter
+Parameter 是模型从资料中学出来的未知数，例如 <code>w</code> 和 <code>b</code>。Hyperparameter 是训练前由人设定的配置，例如 learning rate、训练次数、特征窗口长度。</p>
+</blockquote>
+<h3 id="92">9.2 停止条件<a class="headerlink" href="#92" title="Permanent link">&para;</a></h3>
+<p>理论上，当微分为 0 时参数不会再更新。但实际训练中不一定会刚好走到微分为 0 的点，因此常见做法是设定最大更新次数，或根据验证资料表现决定何时停止。</p>
+<h2 id="10-gradient-descent">10. 多参数 Gradient Descent<a class="headerlink" href="#10-gradient-descent" title="Permanent link">&para;</a></h2>
+<p>如果 model 有两个参数 <code>w</code> 和 <code>b</code>，就分别计算：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>dL/dw
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>dL/db
+</code></pre></div>
+<p>然后同时更新：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>w1 = w0 - eta * dL/dw
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>b1 = b0 - eta * dL/db
+</code></pre></div>
+<p>如果参数更多，就把所有微分合成一个向量，后续课程会称为 <strong>gradient</strong>。实际深度学习框架，例如 PyTorch，可以自动计算这些微分；学习者仍然需要理解它们在概念上代表“如何改变参数才能让 loss 下降”。</p>
+<h2 id="11-local-minimum-global-minimum">11. Local Minimum 与 Global Minimum<a class="headerlink" href="#11-local-minimum-global-minimum" title="Permanent link">&para;</a></h2>
+<p>在一维曲线图上，gradient descent 可能走到某个低点。这个低点分两类：</p>
+<table>
+<thead>
+<tr>
+<th>概念</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Global minimum</td>
+<td>整个 error surface 上 loss 最小的点</td>
+</tr>
+<tr>
+<td>Local minimum</td>
+<td>附近比它高，但全局来看不一定最低的点</td>
+</tr>
+</tbody>
+</table>
+<p>课程在这里先用图示说明 local minimum 的概念，同时预告：在深度学习实务中，训练困难不一定主要来自 local minimum；更复杂的问题会在后续课程继续讨论。</p>
+<h2 id="12">12. 训练误差不等于未来表现<a class="headerlink" href="#12" title="Permanent link">&para;</a></h2>
+<p>用 2017-2020 年的 YouTube 观看数训练最简单模型：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>y = b + w x1
+</code></pre></div>
+<p>可以得到类似结果：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>w = 0.97
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>b = 0.1K
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>训练资料平均误差 = 0.48K
+</code></pre></div>
+<p>这表示模型在已经看过的历史资料上，平均误差约为 480 人次。但课程马上提醒：这不代表模型真的好。</p>
+<p>原因是训练资料已经参与了参数选择。真正重要的是：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>模型在未来、没看过的资料上表现如何？
+</code></pre></div>
+<p>用 2021 年 1 月 1 日到 2 月 14 日的资料测试，误差变成：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>测试资料平均误差 = 0.58K
+</code></pre></div>
+<p>这说明训练 loss 通常会比未见资料误差更乐观。机器学习的目标不是背熟训练资料，而是学到能迁移到新资料的规律。</p>
+<h2 id="13-model">13. 观察错误并改进 Model<a class="headerlink" href="#13-model" title="Permanent link">&para;</a></h2>
+<p>预测图中，红线是真实观看数，蓝线是模型预测观看数。最简单模型只看前一天观看数，所以它的预测大致像是把真实曲线往后平移一天。</p>
+<p>观察资料后发现：观看数有明显的一周周期，尤其星期五、星期六观看数较低。于是可以把 feature 从“前一天”扩展成“前七天”。</p>
+<p>新模型：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>y = b + sum_j w_j x_j, j = 1...7
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>x1</code></td>
+<td>前 1 天观看数</td>
+</tr>
+<tr>
+<td><code>x2</code></td>
+<td>前 2 天观看数</td>
+</tr>
+<tr>
+<td><code>...</code></td>
+<td>...</td>
+</tr>
+<tr>
+<td><code>x7</code></td>
+<td>前 7 天观看数</td>
+</tr>
+<tr>
+<td><code>w1...w7</code></td>
+<td>各天对应权重</td>
+</tr>
+</tbody>
+</table>
+<p>这一步体现了 domain knowledge 的作用：知道资料有星期周期，就把可能相关的历史窗口加入 feature。</p>
+<h2 id="14-1-56">14. 从 1 天到 56 天：模型变复杂的效果<a class="headerlink" href="#14-1-56" title="Permanent link">&para;</a></h2>
+<p>课程比较了不同特征窗口长度的结果：</p>
+<table>
+<thead>
+<tr>
+<th>模型</th>
+<th style="text-align: right;">训练误差</th>
+<th style="text-align: right;">测试误差</th>
+<th>观察</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>只看前 1 天</td>
+<td style="text-align: right;">0.48K</td>
+<td style="text-align: right;">0.58K</td>
+<td>过于简单，几乎复制前一天</td>
+</tr>
+<tr>
+<td>看前 7 天</td>
+<td style="text-align: right;">0.38K</td>
+<td style="text-align: right;">0.49K</td>
+<td>捕捉星期周期，明显改善</td>
+</tr>
+<tr>
+<td>看前 28 天</td>
+<td style="text-align: right;">0.33K</td>
+<td style="text-align: right;">0.46K</td>
+<td>继续改善，但幅度变小</td>
+</tr>
+<tr>
+<td>看前 56 天</td>
+<td style="text-align: right;">0.32K</td>
+<td style="text-align: right;">0.46K</td>
+<td>训练更好，测试几乎不变</td>
+</tr>
+</tbody>
+</table>
+<p>这个表传达两个重要信息：</p>
+<ol>
+<li>加入合理 feature 可以同时降低训练误差和测试误差。</li>
+<li>模型或 feature 变复杂后，训练误差可能继续下降，但测试误差不一定继续改善。</li>
+</ol>
+<p>这为后续讨论 overfitting 埋下伏笔。</p>
+<h2 id="15-linear-model">15. Linear Model<a class="headerlink" href="#15-linear-model" title="Permanent link">&para;</a></h2>
+<p>本讲最后把这些模型统一为 <strong>linear model</strong>：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>y = b + w1 x1 + w2 x2 + ... + wn xn
+</code></pre></div>
+<p>Linear model 的共同形式是：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>把每个 feature 乘上对应 weight，加总后再加 bias。
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>元素</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>x_i</code></td>
+<td>第 <code>i</code> 个 feature</td>
+</tr>
+<tr>
+<td><code>w_i</code></td>
+<td>第 <code>i</code> 个 feature 的 weight</td>
+</tr>
+<tr>
+<td><code>b</code></td>
+<td>bias</td>
+</tr>
+<tr>
+<td><code>y</code></td>
+<td>预测输出</td>
+</tr>
+</tbody>
+</table>
+<p>Linear model 是理解机器学习的好起点，因为它把 feature、parameter、loss、gradient descent 都讲得很清楚。但它的表达能力有限，P2 会接着解释如何用 activation function 和 neural network 表达更复杂的函数。</p>
+<h2 id="16">16. 重要术语表<a class="headerlink" href="#16" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>术语</th>
+<th>中文</th>
+<th>本讲含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Machine Learning</td>
+<td>机器学习</td>
+<td>让机器自动找函数</td>
+</tr>
+<tr>
+<td>Function</td>
+<td>函数</td>
+<td>输入到输出的映射</td>
+</tr>
+<tr>
+<td>Regression</td>
+<td>回归</td>
+<td>输出是数值的任务</td>
+</tr>
+<tr>
+<td>Classification</td>
+<td>分类</td>
+<td>输出是类别选项的任务</td>
+</tr>
+<tr>
+<td>Structured Learning</td>
+<td>结构化学习</td>
+<td>输出是有结构的对象</td>
+</tr>
+<tr>
+<td>Feature</td>
+<td>特征</td>
+<td>输入中用于预测的资讯</td>
+</tr>
+<tr>
+<td>Label</td>
+<td>标签</td>
+<td>训练资料中的真实答案</td>
+</tr>
+<tr>
+<td>Model</td>
+<td>模型</td>
+<td>带未知参数的函数</td>
+</tr>
+<tr>
+<td>Parameter</td>
+<td>参数</td>
+<td>模型要从资料中学出的未知数</td>
+</tr>
+<tr>
+<td>Weight</td>
+<td>权重</td>
+<td>与 feature 相乘的参数</td>
+</tr>
+<tr>
+<td>Bias</td>
+<td>偏置</td>
+<td>不与 feature 相乘、直接加上的参数</td>
+</tr>
+<tr>
+<td>Loss</td>
+<td>损失</td>
+<td>衡量参数好坏的函数</td>
+</tr>
+<tr>
+<td>Error Surface</td>
+<td>误差曲面</td>
+<td>参数组合与 loss 的对应地形</td>
+</tr>
+<tr>
+<td>Optimization</td>
+<td>优化</td>
+<td>找到让 loss 小的参数</td>
+</tr>
+<tr>
+<td>Gradient Descent</td>
+<td>梯度下降</td>
+<td>沿 loss 下降方向更新参数</td>
+</tr>
+<tr>
+<td>Learning Rate</td>
+<td>学习率</td>
+<td>控制每次更新步伐大小</td>
+</tr>
+<tr>
+<td>Hyperparameter</td>
+<td>超参数</td>
+<td>人预先设定的训练配置</td>
+</tr>
+<tr>
+<td>Training Data</td>
+<td>训练资料</td>
+<td>用来找参数的已知资料</td>
+</tr>
+<tr>
+<td>Testing Data</td>
+<td>测试资料</td>
+<td>未参与训练、用来评估泛化的资料</td>
+</tr>
+<tr>
+<td>Linear Model</td>
+<td>线性模型</td>
+<td>feature 乘 weight 后加总再加 bias</td>
+</tr>
+</tbody>
+</table>
+<h2 id="17">17. 易错点与理解提醒<a class="headerlink" href="#17" title="Permanent link">&para;</a></h2>
+<ol>
+<li>机器学习不是让机器凭空变聪明，而是让机器从资料中找函数。</li>
+<li>函数可以很复杂，不必是简单的一元公式。</li>
+<li>Regression 与 classification 只覆盖部分任务，structured learning 处理更复杂输出。</li>
+<li>Model 是函数形式，parameter 是函数里的未知数。</li>
+<li>Loss 是人为定义的衡量标准，不同任务可能需要不同 loss。</li>
+<li>Gradient descent 的核心是沿着 loss 下降方向更新参数。</li>
+<li>Learning rate 是 hyperparameter，不是 model parameter。</li>
+<li>Training loss 小不代表模型真的好，必须看没见过的数据。</li>
+<li>Domain knowledge 会影响 feature 与 model 的设计。</li>
+<li>加更多 feature 可以降低训练误差，但不保证持续降低测试误差。</li>
+</ol>
+<h2 id="18">18. 知识地图<a class="headerlink" href="#18" title="Permanent link">&para;</a></h2>
+<pre class="mermaid"><code>mindmap
+  root((P1 机器学习基本概念))
+    找函数
+      Regression
+      Classification
+      Structured Learning
+    三步骤
+      Model
+        Feature
+        Weight
+        Bias
+      Loss
+        Label
+        MAE
+        MSE
+      Optimization
+        Gradient Descent
+        Learning Rate
+    评估
+      Training Data
+      Testing Data
+      Generalization
+    例子
+      YouTube观看数
+      1天特征
+      7天周期
+      Linear Model</code></pre>
+<h2 id="19">19. 复习问答<a class="headerlink" href="#19" title="Permanent link">&para;</a></h2>
+<p><strong>Q1：本讲如何定义机器学习？</strong><br />
+A：机器学习就是让机器具备找函数的能力，也就是从资料中自动找出输入到输出的映射。</p>
+<p><strong>Q2：为什么语音识别可以看作找函数？</strong><br />
+A：因为输入是一段声音信号，输出是对应文字，模型要找的是声音到文字的复杂映射。</p>
+<p><strong>Q3：Regression 与 classification 的差别是什么？</strong><br />
+A：Regression 的输出是数值；classification 的输出是预先设定的类别。</p>
+<p><strong>Q4：AlphaGo 为什么可以看作 classification？</strong><br />
+A：因为下一步落子可以视为从 361 个棋盘位置中选择一个类别。</p>
+<p><strong>Q5：什么是 model？</strong><br />
+A：Model 是一个带未知参数的函数，例如 <code>y = b + w x1</code>。</p>
+<p><strong>Q6：什么是 label？</strong><br />
+A：Label 是训练资料中的真实答案，例如真实的隔天观看数。</p>
+<p><strong>Q7：loss 的作用是什么？</strong><br />
+A：Loss 把“参数好不好”转成一个可以比较、可以优化的数值。</p>
+<p><strong>Q8：gradient descent 在做什么？</strong><br />
+A：它计算 loss 对参数的微分，并沿着让 loss 下降的方向更新参数。</p>
+<p><strong>Q9：learning rate 为什么重要？</strong><br />
+A：它决定每次更新走多大一步；太大可能不稳定，太小会训练很慢。</p>
+<p><strong>Q10：为什么不能只看训练误差？</strong><br />
+A：训练资料参与了参数选择，误差容易偏乐观；真正目标是模型在未见资料上的表现。</p>
+<h2 id="20">20. 本讲总结<a class="headerlink" href="#20" title="Permanent link">&para;</a></h2>
+<p>P1 建立了整门课的最小工作框架：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>机器学习 = 找函数
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>
+<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>第一步：写出带未知参数的 model
+<a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a>第二步：定义 loss 衡量参数好坏
+<a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a>第三步：用 optimization 找出让 loss 小的参数
+</code></pre></div>
+<p>YouTube 观看数例子对应为：</p>
+<table>
+<thead>
+<tr>
+<th>机器学习概念</th>
+<th>本讲例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Task</td>
+<td>预测隔天观看数</td>
+</tr>
+<tr>
+<td>Feature</td>
+<td>过去若干天观看数</td>
+</tr>
+<tr>
+<td>Label</td>
+<td>真实隔天观看数</td>
+</tr>
+<tr>
+<td>Model</td>
+<td><code>y = b + w x1</code> 或 <code>y = b + sum_j w_j x_j</code></td>
+</tr>
+<tr>
+<td>Loss</td>
+<td>预测值与真实值的平均误差</td>
+</tr>
+<tr>
+<td>Optimization</td>
+<td>Gradient descent</td>
+</tr>
+<tr>
+<td>Evaluation</td>
+<td>在 2021 年未见资料上测试</td>
+</tr>
+</tbody>
+</table>
+<p>本讲最应该带走的一句话是：</p>
+<blockquote>
+<p>[!IMPORTANT] 核心结论
+机器学习不是只追求训练资料上的 loss 变小，而是要通过合适的 model、loss 与 optimization，找到能在未来资料上仍然有用的函数。</p>
+</blockquote>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "navigation.indexes", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,3326 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="清华统计课程笔记">
+      
+      
+      
+        <link rel="canonical" href="https://Sonnette51.github.io/stat_notes_sonnette/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%88lhy%EF%BC%89-%E6%9B%B4%E6%96%B0%E4%B8%AD/P5_%E7%B1%BB%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%AD%E7%BB%83%E4%B8%8D%E8%B5%B7%E6%9D%A5%E6%80%8E%E4%B9%88%E5%8A%9E_Batch%E4%B8%8EMomentum/">
+      
+      
+        <link rel="prev" href="../P4_%E7%B1%BB%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%AD%E7%BB%83%E4%B8%8D%E8%B5%B7%E6%9D%A5%E6%80%8E%E4%B9%88%E5%8A%9E_%E5%B1%80%E9%83%A8%E6%9C%80%E5%B0%8F%E5%80%BC%E4%B8%8E%E9%9E%8D%E7%82%B9/">
+      
+      
+        <link rel="next" href="../P6_%E7%B1%BB%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%AD%E7%BB%83%E4%B8%8D%E8%B5%B7%E6%9D%A5%E6%80%8E%E4%B9%88%E5%8A%9E_%E8%87%AA%E9%80%82%E5%BA%94%E5%AD%A6%E4%B9%A0%E7%8E%87/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>P5 类神经网络训练不起来怎么办（二）：Batch 与 Momentum - Sonnette's Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#p5-batch-momentum" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="Sonnette&#39;s Notes" class="md-header__button md-logo" aria-label="Sonnette's Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Sonnette's Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              P5 类神经网络训练不起来怎么办（二）：Batch 与 Momentum
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  数据科学编程
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  初等概率论
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  机器学习（lhy）-更新中
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%26%E8%AF%AD%E9%9F%B3%E5%A4%84%E7%90%86%EF%BC%88lhy%EF%BC%89-%E6%9B%B4%E6%96%B0%E4%B8%AD/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  自然语言&语音处理（lhy）-更新中
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Sonnette&#39;s Notes" class="md-nav__button md-logo" aria-label="Sonnette's Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Sonnette's Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据科学编程
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数据科学编程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/NumPy%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NumPy 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/Pandas%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pandas 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/Database%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/LLM%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LLM 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/MiningWebData%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mining Web Data 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/TextProcessing%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Text Processing 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/DataVisualization%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Visualization 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/Advanced%20Visualization%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Advanced Visualization 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    初等概率论
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    初等概率论
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture01%20%E6%A6%82%E7%8E%87%E6%A8%A1%E5%9E%8B%E4%B8%8E%E6%80%A7%E8%B4%A8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture01 概率模型与性质
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture02%20%E6%A6%82%E7%8E%87%E7%A9%BA%E9%97%B4%E3%80%81%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture02 概率空间、条件概率
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture03%20%E7%8B%AC%E7%AB%8B%E6%80%A7%E3%80%81%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture03 独立性、随机变量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture04%20%E5%B8%B8%E8%A7%81%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture04 常见随机变量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture05%20%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0%E3%80%81%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E5%87%BD%E6%95%B0%E7%9A%84%E5%88%86%E5%B8%83%E3%80%81%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E7%9A%84%E5%88%86%E5%B8%83%28I%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture05 概率分布函数、随机变量函数的分布、随机向量的分布(I)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture06%20%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E7%9A%84%E5%88%86%E5%B8%83%28II%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture06 随机向量的分布(II)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture07%20%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E5%87%BD%E6%95%B0%E7%9A%84%E5%88%86%E5%B8%83%E3%80%81%E6%AC%A1%E5%BA%8F%E7%BB%9F%E8%AE%A1%E9%87%8F%E3%80%81p%E5%88%86%E4%BD%8D%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture07 随机向量函数的分布、次序统计量、p分位数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture08%20%E6%9C%9F%E6%9C%9B%E3%80%81%E6%96%B9%E5%B7%AE%E3%80%81%E7%9B%B8%E5%85%B3%E4%B8%8D%E7%AD%89%E5%BC%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture08 期望、方差、相关不等式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture09%20%E6%9D%A1%E4%BB%B6%E6%9C%9F%E6%9C%9B%E3%80%81%E6%9D%A1%E4%BB%B6%E6%96%B9%E5%B7%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture09 条件期望、条件方差
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture10%20%E5%8D%8F%E6%96%B9%E5%B7%AE%E3%80%81%E7%9B%B8%E5%85%B3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture10 协方差、相关
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture11%20%E6%A6%82%E7%8E%87%E6%AF%8D%E5%87%BD%E6%95%B0%E3%80%81%E7%9F%A9%E6%AF%8D%E5%87%BD%E6%95%B0%E3%80%81%E7%89%B9%E5%BE%81%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture11 概率母函数、矩母函数、特征函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture12%20%E5%A4%A7%E6%95%B0%E5%AE%9A%E5%BE%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture12 大数定律
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture13%20%E4%B8%AD%E5%BF%83%E6%9E%81%E9%99%90%E5%AE%9A%E7%90%86%E3%80%81%E6%94%B6%E6%95%9B%E6%80%A7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture13 中心极限定理、收敛性
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture14%20%E5%A4%9A%E5%85%83%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture14 多元正态分布
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%9C%9F%E6%9C%AB%E8%AE%B0%E5%BF%86%E8%A6%81%E7%82%B9%E6%B1%87%E6%80%BB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 期末记忆要点汇总
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%A8%A1%E5%9D%971%20%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E7%9A%84%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块1 随机向量的函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%A8%A1%E5%9D%972%20%E6%AC%A1%E5%BA%8F%E7%BB%9F%E8%AE%A1%E9%87%8F%E4%B8%8Ep-%E5%88%86%E4%BD%8D%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块2 次序统计量与p-分位数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%A8%A1%E5%9D%973%20%E6%9C%9F%E6%9C%9B%E4%B8%8E%E6%96%B9%E5%B7%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块3 期望与方差
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%A8%A1%E5%9D%974%20%E6%9D%A1%E4%BB%B6%E6%9C%9F%E6%9C%9B%E3%80%81%E5%8D%8F%E6%96%B9%E5%B7%AE%E4%B8%8E%E4%B8%8D%E7%AD%89%E5%BC%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块4 条件期望、协方差与不等式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%A8%A1%E5%9D%975%20%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0%E4%B8%8E%E7%89%B9%E5%BE%81%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块5 生成函数与特征函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%A8%A1%E5%9D%976%20%E6%94%B6%E6%95%9B%E6%80%A7%E3%80%81%E5%A4%A7%E6%95%B0%E5%BE%8B%E4%B8%8E%E4%B8%AD%E5%BF%83%E6%9E%81%E9%99%90%E5%AE%9A%E7%90%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块6 收敛性、大数律与中心极限定理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%A8%A1%E5%9D%977%20%E5%A4%9A%E5%85%83%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块7 多元正态分布
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    机器学习（lhy）-更新中
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    机器学习（lhy）-更新中
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../P1_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P1 机器学习基本概念简介
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../P2_%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P2 深度学习基本概念简介
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../P3_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%BB%BB%E5%8A%A1%E6%94%BB%E7%95%A5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P3 机器学习任务攻略
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../P4_%E7%B1%BB%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%AD%E7%BB%83%E4%B8%8D%E8%B5%B7%E6%9D%A5%E6%80%8E%E4%B9%88%E5%8A%9E_%E5%B1%80%E9%83%A8%E6%9C%80%E5%B0%8F%E5%80%BC%E4%B8%8E%E9%9E%8D%E7%82%B9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P4 局部最小值与鞍点
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P5 Batch 与 Momentum
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P5 Batch 与 Momentum
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0. 本节课一句话总结
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-p4-p7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 本讲在 P4-P7 小专题中的位置
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 时间线总览
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 术语表
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-batch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Batch 是什么
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-epoch-shuffle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Epoch 与 Shuffle
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-full-batch-vs-small-batch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Full Batch vs Small Batch
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-gpu-batch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. GPU 平行运算改变“batch 大就慢”的直觉
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-small-batch-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Small Batch 为什么可能帮助 Optimization
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-batch-size-training-performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Batch Size 与 Training Performance
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-batch-size-generalizationsharp-vs-flat-minimum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Batch Size 与 Generalization：Sharp vs Flat Minimum
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Batch Size 与 Generalization：Sharp vs Flat Minimum">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-small-batch-flat-minimum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 为什么 small batch 可能偏向 flat minimum
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-batch-batch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. 大 Batch 和小 Batch 的权衡
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-momentum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Momentum 的动机
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-momentum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Momentum 的更新公式
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-momentum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Momentum 为什么有用
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-momentum-p6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Momentum 与 P6 的关系
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. 易错点整理
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. 复习问答
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. 知识地图
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19. 本讲总结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../P6_%E7%B1%BB%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%AD%E7%BB%83%E4%B8%8D%E8%B5%B7%E6%9D%A5%E6%80%8E%E4%B9%88%E5%8A%9E_%E8%87%AA%E9%80%82%E5%BA%94%E5%AD%A6%E4%B9%A0%E7%8E%87/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P6 自适应学习率
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../P7_%E7%B1%BB%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%AD%E7%BB%83%E4%B8%8D%E8%B5%B7%E6%9D%A5%E6%80%8E%E4%B9%88%E5%8A%9E_%E5%88%86%E7%B1%BB%E4%B8%8E%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P7 分类与损失函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E7%B1%BB%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%AD%E7%BB%83%E4%B8%8D%E8%B5%B7%E6%9D%A5%E6%80%8E%E4%B9%88%E5%8A%9E_%E6%80%BB%E7%BB%93/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4-7讲类神经网络训练方法总结
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%26%E8%AF%AD%E9%9F%B3%E5%A4%84%E7%90%86%EF%BC%88lhy%EF%BC%89-%E6%9B%B4%E6%96%B0%E4%B8%AD/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    自然语言&语音处理（lhy）-更新中
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    自然语言&语音处理（lhy）-更新中
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%26%E8%AF%AD%E9%9F%B3%E5%A4%84%E7%90%86%EF%BC%88lhy%EF%BC%89-%E6%9B%B4%E6%96%B0%E4%B8%AD/P01_%E8%AF%BE%E7%A8%8B%E6%80%BB%E8%A7%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P01 课程总览
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%26%E8%AF%AD%E9%9F%B3%E5%A4%84%E7%90%86%EF%BC%88lhy%EF%BC%89-%E6%9B%B4%E6%96%B0%E4%B8%AD/P02_%E8%AF%AD%E9%9F%B3%E8%AF%86%E5%88%AB%E4%B8%80_%E4%BB%BB%E5%8A%A1%E5%AE%9A%E4%B9%89%E4%B8%8E%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E8%A1%A8%E7%A4%BA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P02 语音识别：任务定义与输入输出表示
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%26%E8%AF%AD%E9%9F%B3%E5%A4%84%E7%90%86%EF%BC%88lhy%EF%BC%89-%E6%9B%B4%E6%96%B0%E4%B8%AD/P03_%E8%AF%AD%E9%9F%B3%E8%AF%86%E5%88%AB%E4%BA%8C_LAS%E4%B8%8EAttentionSeq2Seq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P03 语音识别：LAS 与 AttentionSeq2Seq
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0. 本节课一句话总结
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-p4-p7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 本讲在 P4-P7 小专题中的位置
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 时间线总览
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 术语表
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-batch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Batch 是什么
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-epoch-shuffle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Epoch 与 Shuffle
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-full-batch-vs-small-batch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Full Batch vs Small Batch
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-gpu-batch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. GPU 平行运算改变“batch 大就慢”的直觉
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-small-batch-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Small Batch 为什么可能帮助 Optimization
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-batch-size-training-performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Batch Size 与 Training Performance
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-batch-size-generalizationsharp-vs-flat-minimum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Batch Size 与 Generalization：Sharp vs Flat Minimum
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Batch Size 与 Generalization：Sharp vs Flat Minimum">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-small-batch-flat-minimum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 为什么 small batch 可能偏向 flat minimum
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-batch-batch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. 大 Batch 和小 Batch 的权衡
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-momentum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Momentum 的动机
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-momentum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Momentum 的更新公式
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-momentum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Momentum 为什么有用
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-momentum-p6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Momentum 与 P6 的关系
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. 易错点整理
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. 复习问答
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. 知识地图
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19. 本讲总结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="p5-batch-momentum">P5 类神经网络训练不起来怎么办（二）：Batch 与 Momentum<a class="headerlink" href="#p5-batch-momentum" title="Permanent link">&para;</a></h1>
+<p>来源：<code>P5【5、类神经网络训练不起来怎么办二 批次 batch 与动量 momentum】</code></p>
+<pre class="mermaid"><code>flowchart TD
+    A["P4: loss 不降时先看 critical point"] --&gt; B["P5: 实际训练用 mini-batch"]
+    B --&gt; C["每个 batch 有自己的 loss"]
+    C --&gt; D["Gradient 变 noisy"]
+    D --&gt; E["可能帮助 optimization"]
+    D --&gt; F["可能影响 generalization"]
+    B --&gt; G["Batch size 是 hyperparameter"]
+    G --&gt; H["小 batch: noisy / update 多"]
+    G --&gt; I["大 batch: 稳定 / 平行效率高"]
+    A --&gt; J["Momentum"]
+    J --&gt; K["当前 gradient + 过去方向"]
+    K --&gt; L["改善方向估计"]
+    L --&gt; M["P6: 还要改善步伐尺度"]</code></pre>
+<h2 id="0">0. 本节课一句话总结<a class="headerlink" href="#0" title="Permanent link">&para;</a></h2>
+<p>Batch size 不只是“每次喂多少资料”的工程细节，它会改变训练路径。Small batch 的 gradient 比较 noisy，但这种噪声可能帮助模型离开某些卡住点，并更容易落在对 train/test mismatch 稳健的 flat minimum；large batch 更稳定、更适合平行运算，但可能 optimization 较困难或泛化较差。Momentum 则让更新方向不只依赖当前 gradient，而是结合过去方向，帮助参数穿过平坦区或小阻碍。P5 解决的是“gradient 方向如何被估计和修正”，P6 会继续解决“每个参数走多大”。</p>
+<h2 id="1-p4-p7">1. 本讲在 P4-P7 小专题中的位置<a class="headerlink" href="#1-p4-p7" title="Permanent link">&para;</a></h2>
+<p>P4 讨论的是：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>如果 gradient 接近 0，可能是 critical point；
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>critical point 可能是 local minimum，也可能是 saddle point。
+</code></pre></div>
+<p>但真实训练中，gradient 并不是每次都由完整 training set 精确算出来。通常我们做的是：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>从训练资料抽一个 mini-batch
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  -&gt; 算这个 batch 的 loss
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>  -&gt; 算这个 batch 的 gradient
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>  -&gt; update 参数
+</code></pre></div>
+<p>所以 P5 要回答：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>mini-batch 造成的 noisy gradient 是坏事吗？
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>过去的更新方向能不能帮助当前更新？
+</code></pre></div>
+<p>这会自然引出 P6：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Momentum 改善了方向估计；
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>但不同参数、不同方向到底该走多大，还需要 adaptive learning rate。
+</code></pre></div>
+<h2 id="2">2. 时间线总览<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th>课堂内容</th>
+<th>应该听出的主线</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>00:00-02:30</td>
+<td>batch / mini-batch / epoch / shuffle</td>
+<td>实际训练不是每次看完整训练集</td>
+</tr>
+<tr>
+<td>02:30-05:30</td>
+<td>full batch vs batch size = 1</td>
+<td>更新频率、稳定性、noisy gradient 的差别</td>
+</tr>
+<tr>
+<td>05:30-11:40</td>
+<td>GPU 平行运算改变时间直觉</td>
+<td>大 batch 单次更新不一定慢，一个 epoch 可能更快</td>
+</tr>
+<tr>
+<td>11:40-15:20</td>
+<td>noisy gradient 为什么帮助 optimization</td>
+<td>不同 batch 的 loss 不同，卡住位置不完全相同</td>
+</tr>
+<tr>
+<td>15:20-20:20</td>
+<td>batch size 与 testing performance</td>
+<td>small batch 可能更容易找到 flat minimum</td>
+</tr>
+<tr>
+<td>20:20-22:40</td>
+<td>大小 batch 的权衡</td>
+<td>batch size 是 hyperparameter，大 batch 训练需要技巧</td>
+</tr>
+<tr>
+<td>22:40-30:50</td>
+<td>momentum</td>
+<td>不只看当前 gradient，也看过去移动方向</td>
+</tr>
+</tbody>
+</table>
+<h2 id="3">3. 术语表<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>术语</th>
+<th>中文</th>
+<th>本讲中的作用</th>
+<th>容易误解处</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Batch / Mini-batch</td>
+<td>批次</td>
+<td>每次用来计算 loss 和 gradient 的资料子集</td>
+<td>本讲中 batch 和 mini-batch 基本同义</td>
+</tr>
+<tr>
+<td>Batch size</td>
+<td>批次大小</td>
+<td>一个 batch 中包含多少训练样本</td>
+<td>不是越大越好，也不是越小越好</td>
+</tr>
+<tr>
+<td>Full batch</td>
+<td>全批次</td>
+<td>每次用全部训练资料算 gradient</td>
+<td>gradient 稳定，但 update 次数少</td>
+</tr>
+<tr>
+<td>Epoch</td>
+<td>训练轮次</td>
+<td>全部训练资料被看过一遍</td>
+<td>一个 epoch 不等于一次 update</td>
+</tr>
+<tr>
+<td>Shuffle</td>
+<td>打乱</td>
+<td>每个 epoch 重新分 batch</td>
+<td>避免固定 batch 组合造成偏差</td>
+</tr>
+<tr>
+<td>Noisy gradient</td>
+<td>有噪声的梯度</td>
+<td>small batch 估计出的不稳定方向</td>
+<td>噪声不一定坏，有时能帮助训练</td>
+</tr>
+<tr>
+<td>Optimization</td>
+<td>优化</td>
+<td>training loss 能否降下来</td>
+<td>training 都差时，不是泛化问题</td>
+</tr>
+<tr>
+<td>Generalization</td>
+<td>泛化</td>
+<td>testing performance 是否好</td>
+<td>training 一样好时，testing 差异才更像泛化差异</td>
+</tr>
+<tr>
+<td>Sharp minimum</td>
+<td>尖锐极小值</td>
+<td>周围很窄，参数或数据稍变 loss 就升</td>
+<td>可能对 train/test mismatch 敏感</td>
+</tr>
+<tr>
+<td>Flat minimum</td>
+<td>平坦极小值</td>
+<td>周围一片低 loss 区域</td>
+<td>通常更稳健</td>
+</tr>
+<tr>
+<td>Momentum</td>
+<td>动量</td>
+<td>把过去更新方向纳入当前更新</td>
+<td>改的是方向估计，不是 loss function</td>
+</tr>
+</tbody>
+</table>
+<h2 id="4-batch">4. Batch 是什么<a class="headerlink" href="#4-batch" title="Permanent link">&para;</a></h2>
+<p>设训练集有 <span class="arithmatex">\(N\)</span> 笔资料。理论上可以每次用全部训练资料计算 loss：</p>
+<div class="arithmatex">\[
+L(\theta)
+=
+\frac{1}{N}\sum_{n=1}^{N} \ell(x_n,y_n;\theta)
+\]</div>
+<p>然后计算完整 gradient：</p>
+<div class="arithmatex">\[
+g
+=
+\nabla_\theta L(\theta)
+\]</div>
+<p>但实际训练常把资料切成多个 batch。若 batch <span class="arithmatex">\(B_t\)</span> 有 <span class="arithmatex">\(|B_t|\)</span> 笔资料，则这一步使用 batch loss：</p>
+<div class="arithmatex">\[
+L_{B_t}(\theta)
+=
+\frac{1}{|B_t|}
+\sum_{n\in B_t}
+\ell(x_n,y_n;\theta)
+\]</div>
+<p>对应 gradient：</p>
+<div class="arithmatex">\[
+g_{B_t}
+=
+\nabla_\theta L_{B_t}(\theta)
+\]</div>
+<p>参数更新变成：</p>
+<div class="arithmatex">\[
+\theta^{t+1}
+=
+\theta^t
+-\eta g_{B_t}
+\]</div>
+<p>也就是说，mini-batch training 不是每次沿着完整 training loss 的 gradient 走，而是沿着某个 batch 的估计方向走。</p>
+<h2 id="5-epoch-shuffle">5. Epoch 与 Shuffle<a class="headerlink" href="#5-epoch-shuffle" title="Permanent link">&para;</a></h2>
+<p>如果训练资料切成许多 batch：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>batch 1 -&gt; update
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>batch 2 -&gt; update
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>batch 3 -&gt; update
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>...
+</code></pre></div>
+<p>当所有训练资料都被看过一遍，叫一个 epoch。</p>
+<p>每个 epoch 开始前，通常会重新打乱资料并重新分 batch，这叫 shuffle。</p>
+<p>Shuffle 的作用：</p>
+<ul>
+<li>避免固定 batch 组合带来的偏差；</li>
+<li>让每个 epoch 看到不同资料组合；</li>
+<li>让 mini-batch gradient 更像随机抽样；</li>
+<li>降低训练对资料排列顺序的依赖。</li>
+</ul>
+<blockquote>
+<p>[!NOTE] 一个常见误解
+一个 epoch 不是一次 update。一个 epoch 中有多少次 update，取决于训练集大小和 batch size。</p>
+</blockquote>
+<p>如果训练集有 <span class="arithmatex">\(N\)</span> 笔，batch size 是 <span class="arithmatex">\(B\)</span>，则一个 epoch 大约有：</p>
+<div class="arithmatex">\[
+\frac{N}{B}
+\]</div>
+<p>次 update。</p>
+<h2 id="6-full-batch-vs-small-batch">6. Full Batch vs Small Batch<a class="headerlink" href="#6-full-batch-vs-small-batch" title="Permanent link">&para;</a></h2>
+<p>假设有 20 笔训练资料。</p>
+<p>Full batch：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>batch size = 20
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>看完全部资料
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>算一次 gradient
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>update 一次
+</code></pre></div>
+<p>Batch size = 1：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>每看一笔资料
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>算一次 gradient
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>update 一次
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>一个 epoch update 20 次
+</code></pre></div>
+<p>两者差异：</p>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>Full batch</th>
+<th>Small batch</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>每次更新前看的资料</td>
+<td>全部资料</td>
+<td>少量资料</td>
+</tr>
+<tr>
+<td>一个 epoch 的 update 次数</td>
+<td>少</td>
+<td>多</td>
+</tr>
+<tr>
+<td>gradient 稳定性</td>
+<td>稳定</td>
+<td>noisy</td>
+</tr>
+<tr>
+<td>单次方向准确度</td>
+<td>高</td>
+<td>低</td>
+</tr>
+<tr>
+<td>训练路径</td>
+<td>平滑</td>
+<td>抖动</td>
+</tr>
+</tbody>
+</table>
+<p>直觉上，full batch 每一步更准；small batch 每一步更吵。但这不代表 full batch 一定更好，因为训练不是只看“单步方向准不准”，还要看更新频率、硬件效率、optimization 路径和泛化。</p>
+<h2 id="7-gpu-batch">7. GPU 平行运算改变“batch 大就慢”的直觉<a class="headerlink" href="#7-gpu-batch" title="Permanent link">&para;</a></h2>
+<p>如果不考虑平行运算，batch size 大似乎一定慢：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>看 1000 笔资料
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>应该比看 1 笔资料慢 1000 倍
+</code></pre></div>
+<p>但 GPU 可以平行处理大量样本，因此在一定范围内：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>batch size = 1
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>batch size = 10
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>batch size = 100
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>batch size = 1000
+</code></pre></div>
+<p>单次 update 时间可能差不多。</p>
+<p>真正差别体现在一个 epoch 需要多少次 update。</p>
+<p>假设 <span class="arithmatex">\(N=60000\)</span>：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Batch size <span class="arithmatex">\(B\)</span></th>
+<th style="text-align: right;">一个 epoch 的 update 次数 <span class="arithmatex">\(N/B\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">60000</td>
+</tr>
+<tr>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">6000</td>
+</tr>
+<tr>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">600</td>
+</tr>
+<tr>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">60</td>
+</tr>
+<tr>
+<td style="text-align: right;">60000</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table>
+<p>所以大 batch 虽然每次看更多资料，但因为 update 次数少，一个 epoch 可能更快。</p>
+<p>当然，GPU 平行能力有上限。当 batch size 大到超过硬件可有效并行的范围，单次 update 时间仍会明显增加。</p>
+<h2 id="8-small-batch-optimization">8. Small Batch 为什么可能帮助 Optimization<a class="headerlink" href="#8-small-batch-optimization" title="Permanent link">&para;</a></h2>
+<p>看起来 large batch 有两个优势：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>gradient 稳定
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>硬件平行效率高
+</code></pre></div>
+<p>那 small batch 的 noisy gradient 为什么反而可能有帮助？</p>
+<p>关键在于：每个 batch 对应的 loss function 不一样。</p>
+<p>完整 training loss 是：</p>
+<div class="arithmatex">\[
+L(\theta)
+=
+\frac{1}{N}\sum_{n=1}^N \ell_n(\theta)
+\]</div>
+<p>某个 batch 的 loss 是：</p>
+<div class="arithmatex">\[
+L_B(\theta)
+=
+\frac{1}{|B|}\sum_{n\in B}\ell_n(\theta)
+\]</div>
+<p>不同 batch 会有不同 <span class="arithmatex">\(L_B(\theta)\)</span>，因此也有不同 gradient：</p>
+<div class="arithmatex">\[
+g_B
+=
+\nabla_\theta L_B(\theta)
+\]</div>
+<p>如果 full batch 的 gradient 在某点为 0，普通 full-batch gradient descent 会停住：</p>
+<div class="arithmatex">\[
+\nabla_\theta L(\theta) = 0
+\]</div>
+<p>但对另一个 mini-batch 来说，未必有：</p>
+<div class="arithmatex">\[
+\nabla_\theta L_B(\theta) = 0
+\]</div>
+<p>也就是说：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>对完整 training loss 是 critical point 的地方，
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>对某个 batch 的 loss 不一定是 critical point。
+</code></pre></div>
+<p>因此 small batch 的 noise 可能让参数继续移动，离开某些对 full batch 来说卡住的位置。</p>
+<blockquote>
+<p>[!IMPORTANT] 关键直觉
+Small batch 的 noise 不是单纯“错误方向”。它让训练每一步看到略微不同的 loss surface，因此有时能帮助模型绕开或离开某些不好的位置。</p>
+</blockquote>
+<h2 id="9-batch-size-training-performance">9. Batch Size 与 Training Performance<a class="headerlink" href="#9-batch-size-training-performance" title="Permanent link">&para;</a></h2>
+<p>课程中提到一些实验现象：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>batch size 越大
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>training accuracy 反而可能越差
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>validation accuracy 也可能越差
+</code></pre></div>
+<p>如果 training performance 本身就差，这不是 overfitting。因为 overfitting 的典型形式是：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>training 好
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>testing 差
+</code></pre></div>
+<p>如果是：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>training 差
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>testing 也差
+</code></pre></div>
+<p>更像 optimization 问题。</p>
+<p>这点很重要：</p>
+<table>
+<thead>
+<tr>
+<th>现象</th>
+<th>应该怎么解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>large batch training accuracy 也差</td>
+<td>优先怀疑 optimization</td>
+</tr>
+<tr>
+<td>large batch training accuracy 好，但 testing accuracy 差</td>
+<td>才更像泛化 / overfitting 差异</td>
+</tr>
+</tbody>
+</table>
+<p>所以讨论 batch size 的影响时，要先分清：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>它是没有训练好？
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>还是训练好了但泛化不好？
+</code></pre></div>
+<h2 id="10-batch-size-generalizationsharp-vs-flat-minimum">10. Batch Size 与 Generalization：Sharp vs Flat Minimum<a class="headerlink" href="#10-batch-size-generalizationsharp-vs-flat-minimum" title="Permanent link">&para;</a></h2>
+<p>一些研究会控制条件，让 small batch 和 large batch 都训练到相近的 training accuracy，再比较 testing accuracy。</p>
+<p>这时可能看到：</p>
+<table>
+<thead>
+<tr>
+<th>Batch size</th>
+<th style="text-align: right;">Training accuracy</th>
+<th style="text-align: right;">Testing accuracy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>small batch</td>
+<td style="text-align: right;">高</td>
+<td style="text-align: right;">较高</td>
+</tr>
+<tr>
+<td>large batch</td>
+<td style="text-align: right;">高</td>
+<td style="text-align: right;">较低</td>
+</tr>
+</tbody>
+</table>
+<p>这才更像泛化差异。</p>
+<p>一种常见解释是：small batch 更可能落到 flat minimum，large batch 更可能落到 sharp minimum。</p>
+<p>Sharp minimum：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>training loss 在最低点很低
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>但低 loss 区域很窄
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>参数或数据稍微变动，loss 就明显升高
+</code></pre></div>
+<p>Flat minimum：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>training loss 也很低
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>而且附近一大片区域 loss 都低
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>对扰动更稳健
+</code></pre></div>
+<p>如果 training loss 和 testing loss 有 mismatch，例如测试资料是从同一分布抽到的另一批样本，或真实分布和训练集有轻微差异，那么 sharp minimum 更脆弱：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>training 上刚好很低
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>testing surface 稍微偏移
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>loss 就可能变高
+</code></pre></div>
+<p>flat minimum 则更稳：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>附近一大片都低
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>即使 testing surface 稍微偏移
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>loss 仍不容易大幅上升
+</code></pre></div>
+<h3 id="101-small-batch-flat-minimum">10.1 为什么 small batch 可能偏向 flat minimum<a class="headerlink" href="#101-small-batch-flat-minimum" title="Permanent link">&para;</a></h3>
+<p>Small batch 的 gradient noisy，更新方向会抖。</p>
+<p>在很窄的 sharp valley 附近：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>低 loss 区域很窄
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>small batch 一抖，可能就跳出去
+</code></pre></div>
+<p>在宽的 flat basin 附近：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>低 loss 区域很宽
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>small batch 即使抖，也仍容易留在低 loss 区域
+</code></pre></div>
+<p>所以一个直觉是：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>small batch noise
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>  -&gt; 不容易被 sharp minimum 困住
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>  -&gt; 更可能停在 flat minimum
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>  -&gt; testing performance 可能更好
+</code></pre></div>
+<p>但要注意：这是一种解释，不是所有任务中的绝对定律。Batch size 的实际效果还会受到 learning rate、optimizer、训练时间、模型结构、regularization 等因素影响。</p>
+<h2 id="11-batch-batch">11. 大 Batch 和小 Batch 的权衡<a class="headerlink" href="#11-batch-batch" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>面向</th>
+<th>Small batch</th>
+<th>Large batch</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>单次 gradient</td>
+<td>noisy</td>
+<td>稳定</td>
+</tr>
+<tr>
+<td>一个 epoch 的 update 次数</td>
+<td>多</td>
+<td>少</td>
+</tr>
+<tr>
+<td>一个 epoch 时间</td>
+<td>可能较长</td>
+<td>可能较短</td>
+</tr>
+<tr>
+<td>GPU 平行效率</td>
+<td>较低</td>
+<td>较高</td>
+</tr>
+<tr>
+<td>Optimization</td>
+<td>noise 可能有帮助</td>
+<td>可能需要特别技巧</td>
+</tr>
+<tr>
+<td>Generalization</td>
+<td>可能更好</td>
+<td>可能较差</td>
+</tr>
+<tr>
+<td>调参需求</td>
+<td>需要选择合适 batch size</td>
+<td>常需配合 LR scaling / warmup 等</td>
+</tr>
+</tbody>
+</table>
+<p>所以 batch size 是 hyperparameter，不是固定答案。</p>
+<p>如果希望获得：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>large batch 的平行效率
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>small batch 的训练和泛化效果
+</code></pre></div>
+<p>通常需要额外技巧，例如 learning rate scaling、warmup、特殊 optimizer 或 schedule。P6 会进一步解释为什么 large batch training 常常和 learning rate schedule、warmup 等技巧一起出现。</p>
+<h2 id="12-momentum">12. Momentum 的动机<a class="headerlink" href="#12-momentum" title="Permanent link">&para;</a></h2>
+<p>P4 说过：如果走到 saddle point 或平坦区域，当前 gradient 可能很小。普通 gradient descent 只看当前 gradient：</p>
+<div class="arithmatex">\[
+\theta^{t+1}
+=
+\theta^t
+-\eta g^t
+\]</div>
+<p>如果：</p>
+<div class="arithmatex">\[
+g^t \approx 0
+\]</div>
+<p>普通 gradient descent 就几乎不动。</p>
+<p>Momentum 的想法是：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>不要只看当前 gradient；
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>也看过去移动的方向。
+</code></pre></div>
+<p>直觉像物理中的惯性：一个物体从高处往下运动时，即使到达某个平坦点，也不会立刻停下；它会带着过去速度继续往前。</p>
+<h2 id="13-momentum">13. Momentum 的更新公式<a class="headerlink" href="#13-momentum" title="Permanent link">&para;</a></h2>
+<p>常见写法之一：</p>
+<div class="arithmatex">\[
+m^t
+=
+\lambda m^{t-1}
+-\eta g^t
+\]</div>
+<div class="arithmatex">\[
+\theta^{t+1}
+=
+\theta^t
++m^t
+\]</div>
+<p>其中：</p>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(m^t\)</span></td>
+<td>第 <span class="arithmatex">\(t\)</span> 步累积出来的移动方向</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\lambda\)</span></td>
+<td>momentum 系数，控制过去方向保留多少</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\eta\)</span></td>
+<td>learning rate</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(g^t\)</span></td>
+<td>当前 gradient</td>
+</tr>
+</tbody>
+</table>
+<p>如果展开 <span class="arithmatex">\(m^t\)</span>，会发现它包含过去所有 gradient 的加权和：</p>
+<div class="arithmatex">\[
+m^t
+=
+-\eta g^t
+-\lambda\eta g^{t-1}
+-\lambda^2\eta g^{t-2}
+-\cdots
+\]</div>
+<p>所以 momentum 的本质是：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>当前更新方向
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>  = 当前 gradient 的反方向
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>  + 过去 gradient 方向的衰减累积
+</code></pre></div>
+<h2 id="14-momentum">14. Momentum 为什么有用<a class="headerlink" href="#14-momentum" title="Permanent link">&para;</a></h2>
+<p>Momentum 可能带来几个效果：</p>
+<table>
+<thead>
+<tr>
+<th>情况</th>
+<th>没有 momentum</th>
+<th>有 momentum</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>当前 gradient 很小</td>
+<td>几乎停下</td>
+<td>过去方向仍可能推动继续走</td>
+</tr>
+<tr>
+<td>gradient 方向来回震荡</td>
+<td>参数左右摇摆</td>
+<td>相反方向会部分抵消，路径更平滑</td>
+</tr>
+<tr>
+<td>某方向长期一致</td>
+<td>每次只走当前步</td>
+<td>动量累积，加速前进</td>
+</tr>
+<tr>
+<td>小局部阻碍</td>
+<td>可能停住</td>
+<td>可能凭惯性越过</td>
+</tr>
+</tbody>
+</table>
+<p>用 P4 的语言说：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>P4:
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>  如果 gradient 为 0，Hessian 可能指出下降方向。
+<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a>
+<a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a>P5:
+<a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a>  实际训练中，不一定要真的算 Hessian；
+<a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a>  batch noise 和 momentum 也可能帮助参数离开不好的位置。
+</code></pre></div>
+<p>这就是 momentum 在训练技巧上的意义：它不是改变 loss surface，而是改变参数如何在 surface 上移动。</p>
+<h2 id="15-momentum-p6">15. Momentum 与 P6 的关系<a class="headerlink" href="#15-momentum-p6" title="Permanent link">&para;</a></h2>
+<p>Momentum 改善的是方向估计：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>不要完全相信当前 gradient
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>把过去方向也纳入考虑
+</code></pre></div>
+<p>但它还没有解决另一个问题：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>沿着这个方向，每个参数到底该走多大？
+</code></pre></div>
+<p>如果 error surface 是狭长峡谷：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>某些方向很陡
+<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>某些方向很平
+</code></pre></div>
+<p>即使用了 momentum，所有参数仍可能共享同一个 global learning rate <span class="arithmatex">\(\eta\)</span>。这就是 P6 要继续处理的问题：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>adaptive learning rate
+</code></pre></div>
+<p>P6 中 Adam 可以粗略理解成：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>Adam = Momentum + RMSProp
+</code></pre></div>
+<p>也就是：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>Momentum:
+<a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>  负责方向估计
+<a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a>
+<a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a>RMSProp / adaptive LR:
+<a id="__codelineno-31-5" name="__codelineno-31-5" href="#__codelineno-31-5"></a>  负责每个参数的步伐缩放
+</code></pre></div>
+<h2 id="16">16. 易错点整理<a class="headerlink" href="#16" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>易错点</th>
+<th>正确理解</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>batch size 大一定更慢</td>
+<td>GPU 平行下，大 batch 单次 update 不一定慢，一个 epoch 可能更快</td>
+</tr>
+<tr>
+<td>small batch 的 noise 一定坏</td>
+<td>noise 有时帮助离开卡住点，也可能改善泛化</td>
+</tr>
+<tr>
+<td>large batch 泛化差一定是 overfitting</td>
+<td>如果 training 也差，优先是 optimization 问题</td>
+</tr>
+<tr>
+<td>一个 epoch 等于一次 update</td>
+<td>一个 epoch 包含多个 update，数量约为 <span class="arithmatex">\(N/B\)</span></td>
+</tr>
+<tr>
+<td>shuffle 只是随机打乱，无关紧要</td>
+<td>shuffle 会改变 batch 组合，降低固定顺序偏差</td>
+</tr>
+<tr>
+<td>momentum 会改变 loss function</td>
+<td>momentum 改的是更新路径，不是 loss function</td>
+</tr>
+<tr>
+<td>momentum 解决所有 optimizer 问题</td>
+<td>momentum 管方向，P6 还要管参数尺度和时间 schedule</td>
+</tr>
+<tr>
+<td>small batch 一定比 large batch 好</td>
+<td>batch size 是 hyperparameter，受硬件、LR、optimizer、任务影响</td>
+</tr>
+</tbody>
+</table>
+<h2 id="17">17. 复习问答<a class="headerlink" href="#17" title="Permanent link">&para;</a></h2>
+<p><strong>Q1：什么是 batch？</strong><br />
+A：每次用来计算 loss 和 gradient 的一组训练资料。本讲中的 batch 和 mini-batch 基本同义。</p>
+<p><strong>Q2：什么是 epoch？</strong><br />
+A：全部训练资料被看过一遍，叫一个 epoch。一个 epoch 通常包含多次 update。</p>
+<p><strong>Q3：为什么要 shuffle？</strong><br />
+A：为了让每个 epoch 的 batch 组合不同，避免固定组合和资料顺序造成偏差。</p>
+<p><strong>Q4：为什么 large batch 一个 epoch 可能更快？</strong><br />
+A：GPU 可以平行处理大量资料，而 large batch 一个 epoch 的 update 次数更少。</p>
+<p><strong>Q5：small batch 的 noisy gradient 为什么可能帮助 optimization？</strong><br />
+A：不同 batch 的 loss 不同；对 full batch 卡住的位置，对某个 mini-batch 不一定卡住，所以 noise 可能推动参数继续移动。</p>
+<p><strong>Q6：如何区分 optimization 问题和泛化问题？</strong><br />
+A：如果 training performance 也差，优先怀疑 optimization；如果 training 差不多好但 testing 差，才更像泛化差异。</p>
+<p><strong>Q7：sharp minimum 和 flat minimum 的区别是什么？</strong><br />
+A：sharp minimum 周围低 loss 区域窄，对扰动敏感；flat minimum 周围低 loss 区域宽，对 train/test mismatch 更稳健。</p>
+<p><strong>Q8：momentum 的核心想法是什么？</strong><br />
+A：更新方向不只看当前 gradient，也保留过去移动方向。</p>
+<p><strong>Q9：momentum 为什么能帮助穿过平坦区？</strong><br />
+A：即使当前 gradient 很小，过去累积的移动方向仍可能推动参数继续前进。</p>
+<p><strong>Q10：momentum 和 P6 的 adaptive learning rate 有什么区别？</strong><br />
+A：momentum 主要改善方向估计；adaptive learning rate 主要调整每个参数的步伐大小。</p>
+<h2 id="18">18. 知识地图<a class="headerlink" href="#18" title="Permanent link">&para;</a></h2>
+<pre class="mermaid"><code>mindmap
+  root((P5 Batch与Momentum))
+    MiniBatchTraining
+      Batch
+      BatchSize
+      Epoch
+      Shuffle
+    计算效率
+      GPU平行
+      单次Update
+      一个Epoch时间
+    Optimization
+      SmallBatchNoise
+      不同Batch不同Loss
+      可能离开CriticalPoint
+    Generalization
+      SharpMinimum
+      FlatMinimum
+      TrainTestMismatch
+      SmallBatch可能更稳健
+    Momentum
+      当前Gradient
+      过去方向
+      加权累积
+      改善方向估计
+    通往P6
+      方向之外
+      参数步伐尺度
+      AdaptiveLearningRate</code></pre>
+<h2 id="19">19. 本讲总结<a class="headerlink" href="#19" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>Batch:
+<a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a>  每次用一部分资料估计 loss 和 gradient
+<a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a>
+<a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a>Batch size 影响三件事:
+<a id="__codelineno-32-5" name="__codelineno-32-5" href="#__codelineno-32-5"></a>  计算效率
+<a id="__codelineno-32-6" name="__codelineno-32-6" href="#__codelineno-32-6"></a>  optimization 路径
+<a id="__codelineno-32-7" name="__codelineno-32-7" href="#__codelineno-32-7"></a>  generalization
+<a id="__codelineno-32-8" name="__codelineno-32-8" href="#__codelineno-32-8"></a>
+<a id="__codelineno-32-9" name="__codelineno-32-9" href="#__codelineno-32-9"></a>Small batch:
+<a id="__codelineno-32-10" name="__codelineno-32-10" href="#__codelineno-32-10"></a>  gradient noisy
+<a id="__codelineno-32-11" name="__codelineno-32-11" href="#__codelineno-32-11"></a>  update 次数多
+<a id="__codelineno-32-12" name="__codelineno-32-12" href="#__codelineno-32-12"></a>  noise 可能帮助离开卡住点
+<a id="__codelineno-32-13" name="__codelineno-32-13" href="#__codelineno-32-13"></a>  可能更容易落到 flat minimum
+<a id="__codelineno-32-14" name="__codelineno-32-14" href="#__codelineno-32-14"></a>
+<a id="__codelineno-32-15" name="__codelineno-32-15" href="#__codelineno-32-15"></a>Large batch:
+<a id="__codelineno-32-16" name="__codelineno-32-16" href="#__codelineno-32-16"></a>  gradient 稳定
+<a id="__codelineno-32-17" name="__codelineno-32-17" href="#__codelineno-32-17"></a>  GPU 平行效率高
+<a id="__codelineno-32-18" name="__codelineno-32-18" href="#__codelineno-32-18"></a>  一个 epoch 可能更快
+<a id="__codelineno-32-19" name="__codelineno-32-19" href="#__codelineno-32-19"></a>  但可能需要额外技巧才能训练得好
+<a id="__codelineno-32-20" name="__codelineno-32-20" href="#__codelineno-32-20"></a>
+<a id="__codelineno-32-21" name="__codelineno-32-21" href="#__codelineno-32-21"></a>Momentum:
+<a id="__codelineno-32-22" name="__codelineno-32-22" href="#__codelineno-32-22"></a>  update direction = 当前 gradient 反方向 + 过去移动方向
+<a id="__codelineno-32-23" name="__codelineno-32-23" href="#__codelineno-32-23"></a>  它改善的是方向估计
+<a id="__codelineno-32-24" name="__codelineno-32-24" href="#__codelineno-32-24"></a>
+<a id="__codelineno-32-25" name="__codelineno-32-25" href="#__codelineno-32-25"></a>通往 P6:
+<a id="__codelineno-32-26" name="__codelineno-32-26" href="#__codelineno-32-26"></a>  有了更好的方向估计还不够
+<a id="__codelineno-32-27" name="__codelineno-32-27" href="#__codelineno-32-27"></a>  还要决定每个参数到底走多大
+</code></pre></div>
+<blockquote>
+<p>[!IMPORTANT] 核心结论
+P5 的重点不是“小 batch 一定比大 batch 好”，也不是“momentum 是一个公式”。真正要带走的是：实际训练路径由 mini-batch noise、更新频率、硬件效率、过去方向共同塑造。Batch size 改变 gradient 的随机性和训练落点；momentum 改变当前更新方向如何吸收历史信息。P6 会在这个基础上继续回答：方向有了以后，每个参数的步伐尺度该如何自动调整。</p>
+</blockquote>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "navigation.indexes", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

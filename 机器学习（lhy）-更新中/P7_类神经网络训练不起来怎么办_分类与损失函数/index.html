@@ -1,0 +1,3429 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="清华统计课程笔记">
+      
+      
+      
+        <link rel="canonical" href="https://Sonnette51.github.io/stat_notes_sonnette/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%88lhy%EF%BC%89-%E6%9B%B4%E6%96%B0%E4%B8%AD/P7_%E7%B1%BB%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%AD%E7%BB%83%E4%B8%8D%E8%B5%B7%E6%9D%A5%E6%80%8E%E4%B9%88%E5%8A%9E_%E5%88%86%E7%B1%BB%E4%B8%8E%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/">
+      
+      
+        <link rel="prev" href="../P6_%E7%B1%BB%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%AD%E7%BB%83%E4%B8%8D%E8%B5%B7%E6%9D%A5%E6%80%8E%E4%B9%88%E5%8A%9E_%E8%87%AA%E9%80%82%E5%BA%94%E5%AD%A6%E4%B9%A0%E7%8E%87/">
+      
+      
+        <link rel="next" href="../%E7%B1%BB%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%AD%E7%BB%83%E4%B8%8D%E8%B5%B7%E6%9D%A5%E6%80%8E%E4%B9%88%E5%8A%9E_%E6%80%BB%E7%BB%93/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>P7 类神经网络训练不起来怎么办（四）：分类与损失函数 - Sonnette's Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#p7" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="Sonnette&#39;s Notes" class="md-header__button md-logo" aria-label="Sonnette's Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Sonnette's Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              P7 类神经网络训练不起来怎么办（四）：分类与损失函数
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  数据科学编程
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  初等概率论
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  机器学习（lhy）-更新中
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%26%E8%AF%AD%E9%9F%B3%E5%A4%84%E7%90%86%EF%BC%88lhy%EF%BC%89-%E6%9B%B4%E6%96%B0%E4%B8%AD/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  自然语言&语音处理（lhy）-更新中
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Sonnette&#39;s Notes" class="md-nav__button md-logo" aria-label="Sonnette's Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Sonnette's Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据科学编程
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数据科学编程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/NumPy%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NumPy 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/Pandas%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pandas 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/Database%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/LLM%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LLM 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/MiningWebData%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mining Web Data 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/TextProcessing%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Text Processing 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/DataVisualization%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Visualization 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/Advanced%20Visualization%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Advanced Visualization 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    初等概率论
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    初等概率论
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture01%20%E6%A6%82%E7%8E%87%E6%A8%A1%E5%9E%8B%E4%B8%8E%E6%80%A7%E8%B4%A8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture01 概率模型与性质
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture02%20%E6%A6%82%E7%8E%87%E7%A9%BA%E9%97%B4%E3%80%81%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture02 概率空间、条件概率
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture03%20%E7%8B%AC%E7%AB%8B%E6%80%A7%E3%80%81%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture03 独立性、随机变量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture04%20%E5%B8%B8%E8%A7%81%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture04 常见随机变量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture05%20%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0%E3%80%81%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E5%87%BD%E6%95%B0%E7%9A%84%E5%88%86%E5%B8%83%E3%80%81%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E7%9A%84%E5%88%86%E5%B8%83%28I%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture05 概率分布函数、随机变量函数的分布、随机向量的分布(I)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture06%20%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E7%9A%84%E5%88%86%E5%B8%83%28II%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture06 随机向量的分布(II)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture07%20%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E5%87%BD%E6%95%B0%E7%9A%84%E5%88%86%E5%B8%83%E3%80%81%E6%AC%A1%E5%BA%8F%E7%BB%9F%E8%AE%A1%E9%87%8F%E3%80%81p%E5%88%86%E4%BD%8D%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture07 随机向量函数的分布、次序统计量、p分位数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture08%20%E6%9C%9F%E6%9C%9B%E3%80%81%E6%96%B9%E5%B7%AE%E3%80%81%E7%9B%B8%E5%85%B3%E4%B8%8D%E7%AD%89%E5%BC%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture08 期望、方差、相关不等式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture09%20%E6%9D%A1%E4%BB%B6%E6%9C%9F%E6%9C%9B%E3%80%81%E6%9D%A1%E4%BB%B6%E6%96%B9%E5%B7%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture09 条件期望、条件方差
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture10%20%E5%8D%8F%E6%96%B9%E5%B7%AE%E3%80%81%E7%9B%B8%E5%85%B3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture10 协方差、相关
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture11%20%E6%A6%82%E7%8E%87%E6%AF%8D%E5%87%BD%E6%95%B0%E3%80%81%E7%9F%A9%E6%AF%8D%E5%87%BD%E6%95%B0%E3%80%81%E7%89%B9%E5%BE%81%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture11 概率母函数、矩母函数、特征函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture12%20%E5%A4%A7%E6%95%B0%E5%AE%9A%E5%BE%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture12 大数定律
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture13%20%E4%B8%AD%E5%BF%83%E6%9E%81%E9%99%90%E5%AE%9A%E7%90%86%E3%80%81%E6%94%B6%E6%95%9B%E6%80%A7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture13 中心极限定理、收敛性
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture14%20%E5%A4%9A%E5%85%83%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture14 多元正态分布
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%9C%9F%E6%9C%AB%E8%AE%B0%E5%BF%86%E8%A6%81%E7%82%B9%E6%B1%87%E6%80%BB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 期末记忆要点汇总
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%A8%A1%E5%9D%971%20%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E7%9A%84%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块1 随机向量的函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%A8%A1%E5%9D%972%20%E6%AC%A1%E5%BA%8F%E7%BB%9F%E8%AE%A1%E9%87%8F%E4%B8%8Ep-%E5%88%86%E4%BD%8D%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块2 次序统计量与p-分位数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%A8%A1%E5%9D%973%20%E6%9C%9F%E6%9C%9B%E4%B8%8E%E6%96%B9%E5%B7%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块3 期望与方差
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%A8%A1%E5%9D%974%20%E6%9D%A1%E4%BB%B6%E6%9C%9F%E6%9C%9B%E3%80%81%E5%8D%8F%E6%96%B9%E5%B7%AE%E4%B8%8E%E4%B8%8D%E7%AD%89%E5%BC%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块4 条件期望、协方差与不等式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%A8%A1%E5%9D%975%20%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0%E4%B8%8E%E7%89%B9%E5%BE%81%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块5 生成函数与特征函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%A8%A1%E5%9D%976%20%E6%94%B6%E6%95%9B%E6%80%A7%E3%80%81%E5%A4%A7%E6%95%B0%E5%BE%8B%E4%B8%8E%E4%B8%AD%E5%BF%83%E6%9E%81%E9%99%90%E5%AE%9A%E7%90%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块6 收敛性、大数律与中心极限定理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%A8%A1%E5%9D%977%20%E5%A4%9A%E5%85%83%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块7 多元正态分布
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    机器学习（lhy）-更新中
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    机器学习（lhy）-更新中
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../P1_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P1 机器学习基本概念简介
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../P2_%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P2 深度学习基本概念简介
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../P3_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%BB%BB%E5%8A%A1%E6%94%BB%E7%95%A5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P3 机器学习任务攻略
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../P4_%E7%B1%BB%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%AD%E7%BB%83%E4%B8%8D%E8%B5%B7%E6%9D%A5%E6%80%8E%E4%B9%88%E5%8A%9E_%E5%B1%80%E9%83%A8%E6%9C%80%E5%B0%8F%E5%80%BC%E4%B8%8E%E9%9E%8D%E7%82%B9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P4 局部最小值与鞍点
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../P5_%E7%B1%BB%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%AD%E7%BB%83%E4%B8%8D%E8%B5%B7%E6%9D%A5%E6%80%8E%E4%B9%88%E5%8A%9E_Batch%E4%B8%8EMomentum/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P5 Batch 与 Momentum
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../P6_%E7%B1%BB%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%AD%E7%BB%83%E4%B8%8D%E8%B5%B7%E6%9D%A5%E6%80%8E%E4%B9%88%E5%8A%9E_%E8%87%AA%E9%80%82%E5%BA%94%E5%AD%A6%E4%B9%A0%E7%8E%87/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P6 自适应学习率
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P7 分类与损失函数
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P7 分类与损失函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0. 本节课一句话总结
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 时间线总览
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 术语表
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 本讲在“训练不起来”系列中的位置
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-regression-classification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 从 Regression 到 Classification：为什么不能直接编号
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-one-hot-vector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. One-hot Vector：把类别表示成“身份”而不是“大小”
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-label" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Label 变成向量，网络输出也要变成向量
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-logits-softmax" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Logits 不是概率：为什么还要 Softmax
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Logits 不是概率：为什么还要 Softmax">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-softmax" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Softmax 的计算例子
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-sigmoid-softmax" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. 二分类：Sigmoid 和两类 Softmax 是同一件事
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-lossmse-cross-entropy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. 分类的 Loss：MSE 可以，但 Cross Entropy 更常用
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-cross-entropy-maximum-likelihood" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Cross Entropy 与 Maximum Likelihood 的关系
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-pytorch-crossentropyloss-softmax" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. PyTorch 中的实作重点：CrossEntropyLoss 已经包含 Softmax
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-cross-entropy-mse" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. 为什么 Cross Entropy 比 MSE 更适合分类
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-softmax-cross-entropy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. 梯度直觉：Softmax + Cross Entropy 为什么特别顺
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-loss-function-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Loss Function 会改变 Optimization 难度
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. 从模型训练到实际使用：完整流程
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. 分类任务的几个延伸知识
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="16. 分类任务的几个延伸知识">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#161-one-hot-label" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.1 One-hot 不是唯一的 label 表示
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#162-softmax" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.2 Softmax 适合互斥多分类，不适合所有分类问题
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#163-cross-entropy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.3 Cross entropy 的数值稳定性
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. 易错点整理
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. 复习问答
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19. 知识地图
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20. 本讲总结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E7%B1%BB%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%AD%E7%BB%83%E4%B8%8D%E8%B5%B7%E6%9D%A5%E6%80%8E%E4%B9%88%E5%8A%9E_%E6%80%BB%E7%BB%93/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4-7讲类神经网络训练方法总结
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%26%E8%AF%AD%E9%9F%B3%E5%A4%84%E7%90%86%EF%BC%88lhy%EF%BC%89-%E6%9B%B4%E6%96%B0%E4%B8%AD/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    自然语言&语音处理（lhy）-更新中
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    自然语言&语音处理（lhy）-更新中
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%26%E8%AF%AD%E9%9F%B3%E5%A4%84%E7%90%86%EF%BC%88lhy%EF%BC%89-%E6%9B%B4%E6%96%B0%E4%B8%AD/P01_%E8%AF%BE%E7%A8%8B%E6%80%BB%E8%A7%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P01 课程总览
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%26%E8%AF%AD%E9%9F%B3%E5%A4%84%E7%90%86%EF%BC%88lhy%EF%BC%89-%E6%9B%B4%E6%96%B0%E4%B8%AD/P02_%E8%AF%AD%E9%9F%B3%E8%AF%86%E5%88%AB%E4%B8%80_%E4%BB%BB%E5%8A%A1%E5%AE%9A%E4%B9%89%E4%B8%8E%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E8%A1%A8%E7%A4%BA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P02 语音识别：任务定义与输入输出表示
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%26%E8%AF%AD%E9%9F%B3%E5%A4%84%E7%90%86%EF%BC%88lhy%EF%BC%89-%E6%9B%B4%E6%96%B0%E4%B8%AD/P03_%E8%AF%AD%E9%9F%B3%E8%AF%86%E5%88%AB%E4%BA%8C_LAS%E4%B8%8EAttentionSeq2Seq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P03 语音识别：LAS 与 AttentionSeq2Seq
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0. 本节课一句话总结
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 时间线总览
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 术语表
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 本讲在“训练不起来”系列中的位置
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-regression-classification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 从 Regression 到 Classification：为什么不能直接编号
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-one-hot-vector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. One-hot Vector：把类别表示成“身份”而不是“大小”
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-label" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Label 变成向量，网络输出也要变成向量
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-logits-softmax" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Logits 不是概率：为什么还要 Softmax
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Logits 不是概率：为什么还要 Softmax">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-softmax" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Softmax 的计算例子
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-sigmoid-softmax" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. 二分类：Sigmoid 和两类 Softmax 是同一件事
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-lossmse-cross-entropy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. 分类的 Loss：MSE 可以，但 Cross Entropy 更常用
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-cross-entropy-maximum-likelihood" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Cross Entropy 与 Maximum Likelihood 的关系
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-pytorch-crossentropyloss-softmax" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. PyTorch 中的实作重点：CrossEntropyLoss 已经包含 Softmax
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-cross-entropy-mse" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. 为什么 Cross Entropy 比 MSE 更适合分类
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-softmax-cross-entropy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. 梯度直觉：Softmax + Cross Entropy 为什么特别顺
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-loss-function-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Loss Function 会改变 Optimization 难度
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. 从模型训练到实际使用：完整流程
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. 分类任务的几个延伸知识
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="16. 分类任务的几个延伸知识">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#161-one-hot-label" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.1 One-hot 不是唯一的 label 表示
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#162-softmax" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.2 Softmax 适合互斥多分类，不适合所有分类问题
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#163-cross-entropy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.3 Cross entropy 的数值稳定性
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. 易错点整理
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. 复习问答
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19. 知识地图
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20. 本讲总结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="p7">P7 类神经网络训练不起来怎么办（四）：分类与损失函数<a class="headerlink" href="#p7" title="Permanent link">&para;</a></h1>
+<p>来源：<code>P7【7、类神经网络训练不起来怎么办四 损失函数 Loss 也】</code></p>
+<pre class="mermaid"><code>flowchart TD
+    A["P4-P6: 训练不起来怎么办"] --&gt; B["检查 optimization"]
+    B --&gt; C["Critical point / Momentum / Adaptive LR"]
+    A --&gt; D["P7: 目标本身是否定义得好"]
+    D --&gt; E["Classification 不能随便当 regression"]
+    E --&gt; F["Label: one-hot vector"]
+    F --&gt; G["Network output: logits"]
+    G --&gt; H["Softmax: 概率分布"]
+    H --&gt; I["Loss: cross entropy"]
+    I --&gt; J["改变 error surface"]
+    J --&gt; K["让 gradient descent 更容易动起来"]</code></pre>
+<h2 id="0">0. 本节课一句话总结<a class="headerlink" href="#0" title="Permanent link">&para;</a></h2>
+<p>分类任务的重点不是让模型输出一个“接近类别编号”的数字，而是让模型输出对每个类别的信心分布。做法是：用 one-hot vector 表示类别，让神经网络输出 logits，再用 softmax 把 logits 转成总和为 1 的分布，最后用 cross entropy 训练。Cross entropy 不只是一个评价公式，它会改变 error surface；相较于 MSE，它通常在模型严重分错时给出更有效的 gradient，所以分类任务更容易训练起来。</p>
+<h2 id="1">1. 时间线总览<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th>课堂内容</th>
+<th>应该听出的主线</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>00:00-01:35</td>
+<td>课程从 regression 转向 classification</td>
+<td>输出形式要跟任务类型匹配</td>
+</tr>
+<tr>
+<td>01:35-03:30</td>
+<td>把 class 编成 1/2/3 再做 regression 的问题</td>
+<td>类别编号会偷塞“距离”和“顺序”假设</td>
+</tr>
+<tr>
+<td>03:30-05:35</td>
+<td>One-hot vector 与多输出神经网络</td>
+<td>分类 label 变成向量，网络最后一层也要变成向量</td>
+</tr>
+<tr>
+<td>05:35-10:05</td>
+<td>Softmax 的功能、公式、例子</td>
+<td>Logits 不是概率；softmax 把原始分数变成分布</td>
+</tr>
+<tr>
+<td>10:05-11:05</td>
+<td>二分类中的 sigmoid 与 softmax</td>
+<td>二分类 sigmoid 可以看成二类 softmax 的等价写法</td>
+</tr>
+<tr>
+<td>11:05-14:25</td>
+<td>MSE、cross entropy 与 maximum likelihood</td>
+<td>交叉熵是分类的标准 loss，也等价于最大似然</td>
+</tr>
+<tr>
+<td>14:25-15:10</td>
+<td>PyTorch 中 softmax 与 cross entropy 绑在一起</td>
+<td>实作时不要重复加 softmax</td>
+</tr>
+<tr>
+<td>15:10-19:25</td>
+<td>从 error surface 解释为什么 CE 比 MSE 好训练</td>
+<td>Loss function 本身会改变 optimization 难度</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2">2. 术语表<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>术语</th>
+<th>中文</th>
+<th>本讲中的作用</th>
+<th>容易误解处</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Regression</td>
+<td>回归</td>
+<td>输出连续数值，让预测值接近真实数值</td>
+<td>不是所有问题都适合把答案编码成一个数</td>
+</tr>
+<tr>
+<td>Classification</td>
+<td>分类</td>
+<td>输出类别</td>
+<td>类别常常没有天然大小顺序</td>
+</tr>
+<tr>
+<td>Label</td>
+<td>标签 / 正确答案</td>
+<td>课程记号中通常写作 <span class="arithmatex">\(\hat{y}\)</span></td>
+<td>不同教材可能把 model output 写成 <span class="arithmatex">\(\hat{y}\)</span>，记号没有绝对标准</td>
+</tr>
+<tr>
+<td>One-hot vector</td>
+<td>独热向量</td>
+<td>用 <code>[1,0,0]</code> 这类向量表示类别</td>
+<td>它表示“哪个类别正确”，不是类别之间的语义相似度</td>
+</tr>
+<tr>
+<td>Logits</td>
+<td>原始分数</td>
+<td>softmax 前网络输出的任意实数</td>
+<td>Logits 不是概率，可以为负，也不需要相加为 1</td>
+</tr>
+<tr>
+<td>Softmax</td>
+<td>软最大函数</td>
+<td>把 logits 转成 0 到 1 且总和为 1 的分布</td>
+<td>它不只是缩放，还会放大相对差距</td>
+</tr>
+<tr>
+<td>Sigmoid</td>
+<td>S 型函数</td>
+<td>二分类时把一个实数转成 0 到 1</td>
+<td>二分类 sigmoid 与二类 softmax 本质等价</td>
+</tr>
+<tr>
+<td>MSE</td>
+<td>均方误差</td>
+<td>一种向量距离，可用于比较预测与 label</td>
+<td>用在分类时可能让错误区域梯度很小</td>
+</tr>
+<tr>
+<td>Cross Entropy</td>
+<td>交叉熵</td>
+<td>分类最常用 loss</td>
+<td>对 one-hot label 而言，本质上惩罚正确类概率太低</td>
+</tr>
+<tr>
+<td>Maximum Likelihood</td>
+<td>最大似然</td>
+<td>cross entropy 的统计解释</td>
+<td>在分类中 maximize likelihood 与 minimize cross entropy 是同一件事的两种说法</td>
+</tr>
+<tr>
+<td>Error Surface</td>
+<td>误差地形</td>
+<td>参数或输出变化时 loss 的形状</td>
+<td>Loss function 会直接改变这张地形</td>
+</tr>
+</tbody>
+</table>
+<h2 id="3">3. 本讲在“训练不起来”系列中的位置<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
+<p>P4-P6 已经给出一条思路：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>loss 不降
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  -&gt; 不一定是 local minimum
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  -&gt; 可能是 saddle point
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>  -&gt; 可能需要 momentum
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>  -&gt; 可能是 learning rate / optimizer 不适合地形
+</code></pre></div>
+<p>P7 要补上另一条同样重要的思路：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>loss 不降
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  -&gt; 也可能是一开始定义任务的方式就让 optimization 变难
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>  -&gt; label 表示方式会影响学习目标
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>  -&gt; loss function 会改变 error surface
+</code></pre></div>
+<p>optimizer 是在既定 loss surface 上走路，而 loss function 决定了这张地形长什么样。你不能只问“用什么 optimizer”，也要问“我给 optimizer 造出来的地形是否适合它走”。</p>
+<h2 id="4-regression-classification">4. 从 Regression 到 Classification：为什么不能直接编号<a class="headerlink" href="#4-regression-classification" title="Permanent link">&para;</a></h2>
+<p>Regression 的形式很简单：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>输入 x -&gt; 神经网络 -&gt; 输出 y
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>目标：让 y 接近 label \hat{y}
+</code></pre></div>
+<p>如果硬把分类也写成 regression，似乎可以这样做：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>class 1 -&gt; 1
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>class 2 -&gt; 2
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>class 3 -&gt; 3
+</code></pre></div>
+<p>然后让模型输出一个数字 <code>y</code>，希望它接近正确类别编号。</p>
+<p>这个方法表面上可行，但它偷偷加入了一个很强的假设：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>class 1 和 class 2 比较近
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>class 1 和 class 3 比较远
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>class 2 夹在 class 1 和 class 3 中间
+</code></pre></div>
+<p>如果类别本来有顺序，这样未必荒谬。老师举的例子是：根据身高、体重预测小学生是一年级、二年级还是三年级。年级确实有自然顺序，一年级和二年级通常比一年级和三年级更接近。</p>
+<p>但多数分类任务没有这种顺序。比如：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>猫、狗、车
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>宝可梦、数码宝贝、普通动物
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>美国不同州
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>新闻类别：体育、财经、科技
+</code></pre></div>
+<p>如果把它们任意编成 1、2、3，编号只是人为排序，不应该被模型当作真实几何关系。模型会被迫学习一个不存在的距离结构，这就是把 classification 草率当成 regression 的核心问题。</p>
+<blockquote>
+<p>[!IMPORTANT] 关键判断
+当类别有真实顺序或连续程度时，可以考虑 ordinal regression 或数值回归式建模；当类别只是互斥身份时，通常应使用分类建模，而不是把类别编号当连续数值。</p>
+</blockquote>
+<h2 id="5-one-hot-vector">5. One-hot Vector：把类别表示成“身份”而不是“大小”<a class="headerlink" href="#5-one-hot-vector" title="Permanent link">&para;</a></h2>
+<p>分类任务更常用 one-hot vector 表示 label。若有三个类别：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>class 1 -&gt; [1, 0, 0]
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>class 2 -&gt; [0, 1, 0]
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>class 3 -&gt; [0, 0, 1]
+</code></pre></div>
+<p>这表示：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>正确类别所在位置为 1
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>其他类别位置为 0
+</code></pre></div>
+<p>one-hot 的好处是它不会暗示类别有大小关系。如果用欧氏距离看，三个 one-hot 类别两两距离相同：</p>
+<div class="arithmatex">\[
+\|[1,0,0] - [0,1,0]\|_2 = \sqrt{2}
+\]</div>
+<div class="arithmatex">\[
+\|[1,0,0] - [0,0,1]\|_2 = \sqrt{2}
+\]</div>
+<div class="arithmatex">\[
+\|[0,1,0] - [0,0,1]\|_2 = \sqrt{2}
+\]</div>
+<p>所以 one-hot 表示的是：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>这些类别彼此不同，但没有谁天然离谁更近。
+</code></pre></div>
+<p>当然，这并不代表真实世界中类别没有语义相似度。猫和狗可能比猫和汽车更像，但 one-hot label 不负责表达这种相似度。本讲只处理标准监督分类：训练信号告诉模型“正确类是哪一个”，不额外告诉它类别之间的语义距离。</p>
+<h2 id="6-label">6. Label 变成向量，网络输出也要变成向量<a class="headerlink" href="#6-label" title="Permanent link">&para;</a></h2>
+<p>当 label 是三维 one-hot vector 时，网络最后也要输出三个数。原来做 regression 时，最后一层可能是：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>hidden representation -&gt; 一个输出 y
+</code></pre></div>
+<p>现在做三分类，最后一层变成：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>hidden representation -&gt; y1, y2, y3
+</code></pre></div>
+<p>用矩阵形式写，就是：</p>
+<div class="arithmatex">\[
+z = W h + b
+\]</div>
+<p>其中：</p>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>h</code></td>
+<td>前面神经网络提取出的 hidden representation</td>
+</tr>
+<tr>
+<td><code>W</code></td>
+<td>最后一层权重矩阵</td>
+</tr>
+<tr>
+<td><code>b</code></td>
+<td>bias</td>
+</tr>
+<tr>
+<td><code>z = [z_1,z_2,z_3]</code></td>
+<td>每个类别的原始分数，也就是 logits</td>
+</tr>
+</tbody>
+</table>
+<p>课程中常把这些输出写成 <code>y_1, y_2, y_3</code>，现代深度学习框架里更常叫它们 logits。为了避免和 softmax 后的概率混淆，本讲后面用 <span class="arithmatex">\(z_i\)</span> 表示 logits，用 <span class="arithmatex">\(p_i\)</span> 表示 softmax 后的概率。</p>
+<pre class="mermaid"><code>flowchart LR
+    X["Input x"] --&gt; N["Neural Network"]
+    N --&gt; H["Hidden representation h"]
+    H --&gt; L["Linear layer"]
+    L --&gt; Z["Logits z1,z2,z3"]
+    Z --&gt; S["Softmax"]
+    S --&gt; P["Probabilities p1,p2,p3"]</code></pre>
+<h2 id="7-logits-softmax">7. Logits 不是概率：为什么还要 Softmax<a class="headerlink" href="#7-logits-softmax" title="Permanent link">&para;</a></h2>
+<p>网络最后一层输出的 logits 可以是任意实数：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>[-5.2, 0.7, 13.4]
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>[3, 1, -3]
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>[100, -20, 0.5]
+</code></pre></div>
+<p>但 one-hot label 只有 0 和 1，而且我们希望模型最终表达的是“各类别的相对信心”。所以分类模型通常把 logits 送进 softmax：</p>
+<div class="arithmatex">\[
+p_i = \frac{\exp(z_i)}{\sum_j \exp(z_j)}
+\]</div>
+<p>softmax 输出有两个性质：</p>
+<div class="arithmatex">\[
+0 \le p_i \le 1
+\]</div>
+<div class="arithmatex">\[
+\sum_i p_i = 1
+\]</div>
+<p>因此可以把 <span class="arithmatex">\(p_i\)</span> 理解为模型分配给第 <code>i</code> 个类别的概率或信心。</p>
+<h3 id="71-softmax">7.1 Softmax 的计算例子<a class="headerlink" href="#71-softmax" title="Permanent link">&para;</a></h3>
+<p>假设 logits 是：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>z = [3, 1, -3]
+</code></pre></div>
+<p>先取 exponential：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>exp(3)  ≈ 20.09
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>exp(1)  ≈ 2.72
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>exp(-3) ≈ 0.05
+</code></pre></div>
+<p>再除以总和：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>sum ≈ 22.86
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>p ≈ [0.88, 0.12, 0.00]
+</code></pre></div>
+<p>这说明 softmax 不只是“把数压到 0 到 1”。因为 exponential 会放大大值与小值的相对差距，原本 <code>[3, 1, -3]</code> 这种普通分数差异，会变成非常明确的类别倾向。</p>
+<blockquote>
+<p>[!NOTE] 读 softmax 的正确方式
+softmax 看的是相对大小，不是绝对大小。<code>[3,1,-3]</code> 和 <code>[13,11,7]</code> 的 softmax 一样，因为所有 logits 同时加上常数不会改变 softmax 结果。</p>
+</blockquote>
+<h2 id="8-sigmoid-softmax">8. 二分类：Sigmoid 和两类 Softmax 是同一件事<a class="headerlink" href="#8-sigmoid-softmax" title="Permanent link">&para;</a></h2>
+<p>如果只有两个类别，可以直接用二类 softmax：</p>
+<div class="arithmatex">\[
+p_1 = \frac{e^{z_1}}{e^{z_1}+e^{z_2}}, \quad
+p_2 = \frac{e^{z_2}}{e^{z_1}+e^{z_2}}
+\]</div>
+<p>把 <span class="arithmatex">\(p_1\)</span> 改写一下：</p>
+<div class="arithmatex">\[
+p_1
+= \frac{1}{1 + e^{z_2-z_1}}
+= \sigma(z_1-z_2)
+\]</div>
+<p>其中：</p>
+<div class="arithmatex">\[
+\sigma(a) = \frac{1}{1+e^{-a}}
+\]</div>
+<p>这就是 sigmoid。</p>
+<p>所以二分类时常见的两种写法本质等价：</p>
+<table>
+<thead>
+<tr>
+<th>写法</th>
+<th>网络输出</th>
+<th>输出转换</th>
+<th>常见 loss</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>二类 softmax</td>
+<td>两个 logits</td>
+<td>softmax</td>
+<td>cross entropy</td>
+</tr>
+<tr>
+<td>sigmoid binary classifier</td>
+<td>一个 logit</td>
+<td>sigmoid</td>
+<td>binary cross entropy</td>
+</tr>
+</tbody>
+</table>
+<p>课程的重点不是说二分类不能用 softmax，而是提醒：如果看到二分类使用 sigmoid，不要以为它和 softmax 是完全不同的理论；它可以看成二类 softmax 的简化形式。</p>
+<h2 id="9-lossmse-cross-entropy">9. 分类的 Loss：MSE 可以，但 Cross Entropy 更常用<a class="headerlink" href="#9-lossmse-cross-entropy" title="Permanent link">&para;</a></h2>
+<p>softmax 后，模型输出：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>p = [p1, p2, p3]
+</code></pre></div>
+<p>正确答案是：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>\hat{y} = [1, 0, 0]
+</code></pre></div>
+<p>现在要衡量 <code>p</code> 和 <span class="arithmatex">\(\hat{y}\)</span> 的距离。最直接的想法是 MSE：</p>
+<div class="arithmatex">\[
+\mathrm{MSE}(p,\hat{y}) = \sum_i (p_i - \hat{y}_i)^2
+\]</div>
+<p>如果预测和 label 一样，MSE 最小。比如：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>p = [1,0,0], \hat{y} = [1,0,0] -&gt; MSE = 0
+</code></pre></div>
+<p>但分类更常用 cross entropy：</p>
+<div class="arithmatex">\[
+\mathrm{CE}(\hat{y},p) = -\sum_i \hat{y}_i \log p_i
+\]</div>
+<p>如果 <span class="arithmatex">\(\hat{y}\)</span> 是 one-hot，假设正确类是 class 1：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>\hat{y} = [1,0,0]
+</code></pre></div>
+<p>那么：</p>
+<div class="arithmatex">\[
+\mathrm{CE} = -\log p_1
+\]</div>
+<p>也就是说，cross entropy 只关心正确类别的预测概率是否够高：</p>
+<table>
+<thead>
+<tr>
+<th>正确类概率 <span class="arithmatex">\(p_1\)</span></th>
+<th style="text-align: right;">Cross entropy <span class="arithmatex">\(-\log p_1\)</span></th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.99</td>
+<td style="text-align: right;">0.010</td>
+<td>几乎正确，惩罚很小</td>
+</tr>
+<tr>
+<td>0.80</td>
+<td style="text-align: right;">0.223</td>
+<td>还不错</td>
+</tr>
+<tr>
+<td>0.50</td>
+<td style="text-align: right;">0.693</td>
+<td>不确定</td>
+</tr>
+<tr>
+<td>0.10</td>
+<td style="text-align: right;">2.303</td>
+<td>错得明显</td>
+</tr>
+<tr>
+<td>0.01</td>
+<td style="text-align: right;">4.605</td>
+<td>非常确信地错了</td>
+</tr>
+</tbody>
+</table>
+<h2 id="10-cross-entropy-maximum-likelihood">10. Cross Entropy 与 Maximum Likelihood 的关系<a class="headerlink" href="#10-cross-entropy-maximum-likelihood" title="Permanent link">&para;</a></h2>
+<p>老师在课堂上提到，如果从更完整的统计观点来看：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>minimize cross entropy = maximize likelihood
+</code></pre></div>
+<p>这里可以补上被短版课程跳过的推理。</p>
+<p>假设一个样本的正确类别是 <code>k</code>，模型给各类的概率是：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>p1, p2, ..., pK
+</code></pre></div>
+<p>那么模型“把这个样本判为正确类别 k”的 likelihood 就是：</p>
+<div class="arithmatex">\[
+p_k
+\]</div>
+<p>如果有很多训练样本，最大似然希望让所有样本正确类别的概率乘积最大：</p>
+<div class="arithmatex">\[
+\max \prod_n p_{n, y_n}
+\]</div>
+<p>乘积不好优化，通常取 log：</p>
+<div class="arithmatex">\[
+\max \sum_n \log p_{n, y_n}
+\]</div>
+<p>深度学习训练通常写成 minimize loss，所以加负号：</p>
+<div class="arithmatex">\[
+\min -\sum_n \log p_{n, y_n}
+\]</div>
+<p>这正是 one-hot label 下的 cross entropy：</p>
+<div class="arithmatex">\[
+-\sum_n \sum_i \hat{y}_{n,i} \log p_{n,i}
+\]</div>
+<p>因此，不要把 maximum likelihood 和 cross entropy 理解成“很像但略有差别”。在这个分类设定下，它们就是同一件事情的两种语言：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>统计语言：最大化训练资料出现的概率
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>深度学习语言：最小化 cross entropy loss
+</code></pre></div>
+<h2 id="11-pytorch-crossentropyloss-softmax">11. PyTorch 中的实作重点：CrossEntropyLoss 已经包含 Softmax<a class="headerlink" href="#11-pytorch-crossentropyloss-softmax" title="Permanent link">&para;</a></h2>
+<p>课堂特别提醒：在 PyTorch 中，<code>CrossEntropyLoss</code> 常常让初学者困惑，因为它把两件事绑在一起：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>CrossEntropyLoss = LogSoftmax + Negative Log Likelihood Loss
+</code></pre></div>
+<p>所以在 PyTorch 多分类训练中，通常应该让 network 输出 raw logits：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="n">logits</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="n">loss</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">()(</span><span class="n">logits</span><span class="p">,</span> <span class="n">target_class_index</span><span class="p">)</span>
+</code></pre></div>
+<p>这里的 <code>target_class_index</code> 往往不是 one-hot，而是类别编号，例如：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>class 0, class 1, class 2
+</code></pre></div>
+<p>这不是前面批评的“把类别编号当 regression”。这里的编号只是告诉 loss 正确类别是哪一格，不是让模型输出一个连续数值去接近它。</p>
+<p>容易犯错的是在模型最后自己加 softmax：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="c1"># 容易出错：CrossEntropyLoss 里面已经会做 softmax/log_softmax</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="n">prob</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="n">loss</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">()(</span><span class="n">prob</span><span class="p">,</span> <span class="n">target_class_index</span><span class="p">)</span>
+</code></pre></div>
+<p>这样等于把概率再拿去做一次内部的 log-softmax，训练信号会变怪。实际训练多分类模型时，请记住：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>训练时:
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>  model 输出 logits
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a>  CrossEntropyLoss 接 logits
+<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a>
+<a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a>推论/显示概率时:
+<a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a>  logits 再经过 softmax
+</code></pre></div>
+<blockquote>
+<p>[!WARNING] 实作口诀
+用 PyTorch <code>CrossEntropyLoss</code> 时，模型最后一层通常不要手动加 softmax。需要概率解释时，再在 evaluation 或 inference 阶段对 logits 做 softmax。</p>
+</blockquote>
+<h2 id="12-cross-entropy-mse">12. 为什么 Cross Entropy 比 MSE 更适合分类<a class="headerlink" href="#12-cross-entropy-mse" title="Permanent link">&para;</a></h2>
+<p>MSE 和 cross entropy 有一个共同点：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>当预测分布和正确 one-hot label 一样时，loss 都小。
+</code></pre></div>
+<p>所以如果只看“最理想的终点”，它们似乎都合理。</p>
+<p>但训练神经网络不是直接跳到终点，而是靠 gradient descent 一步一步走。于是真正的问题变成：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>从错误的地方出发时，loss surface 有没有给出足够清楚的下坡方向？
+</code></pre></div>
+<p>课程用三分类例子说明：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>正确答案 = [1,0,0]
+<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a>网络输出 logits = [z1,z2,z3]
+<a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a>softmax 后 = [p1,p2,p3]
+</code></pre></div>
+<p>为了画图，固定 <code>z3 = -1000</code>，让 <code>p3</code> 几乎为 0，只观察 <code>z1</code> 和 <code>z2</code> 的变化。</p>
+<p>如果：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>z1 很大，z2 很小
+</code></pre></div>
+<p>则：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>p1 接近 1，p2 接近 0
+</code></pre></div>
+<p>这是正确区域，MSE 和 cross entropy 的 loss 都小。</p>
+<p>如果：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>z1 很小，z2 很大
+</code></pre></div>
+<p>则：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>p1 接近 0，p2 接近 1
+</code></pre></div>
+<p>模型把 class 2 当成答案，但正确答案是 class 1。这是严重错误区域，loss 应该大。</p>
+<p>关键差异在于：</p>
+<table>
+<thead>
+<tr>
+<th>Loss</th>
+<th>严重错误区域的地形</th>
+<th>对 gradient descent 的影响</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MSE</td>
+<td>可能非常平坦</td>
+<td>明明错很大，gradient 却很小，参数不容易动起来</td>
+</tr>
+<tr>
+<td>Cross entropy</td>
+<td>仍有明显斜率</td>
+<td>错得越离谱，仍能给出推动正确类 logit 上升的信号</td>
+</tr>
+</tbody>
+</table>
+<p>这就是本讲的 optimization 观点：选择 loss function 等于选择 error surface。Cross entropy 的优势不只是“分类界常用”，而是它会给 gradient descent 更适合的地形。</p>
+<h2 id="13-softmax-cross-entropy">13. 梯度直觉：Softmax + Cross Entropy 为什么特别顺<a class="headerlink" href="#13-softmax-cross-entropy" title="Permanent link">&para;</a></h2>
+<p>这一段是课堂快速带过、但理解脉络很有帮助的知识。</p>
+<p>设 logits 为 <code>z</code>，softmax 输出为：</p>
+<div class="arithmatex">\[
+p_i = \frac{e^{z_i}}{\sum_j e^{z_j}}
+\]</div>
+<p>cross entropy 为：</p>
+<div class="arithmatex">\[
+L = -\sum_i \hat{y}_i \log p_i
+\]</div>
+<p>把 softmax 和 cross entropy 合起来，对 logit <span class="arithmatex">\(z_i\)</span> 求导，会得到一个非常简洁的结果：</p>
+<div class="arithmatex">\[
+\frac{\partial L}{\partial z_i} = p_i - \hat{y}_i
+\]</div>
+<p>这行公式很重要，因为它直接说明了训练信号长什么样。</p>
+<p>假设正确答案是 class 1：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>\hat{y} = [1,0,0]
+</code></pre></div>
+<p>模型却预测：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>p = [0.01,0.98,0.01]
+</code></pre></div>
+<p>那么 logits 上的梯度是：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>p - y_hat = [-0.99, 0.98, 0.01]
+</code></pre></div>
+<p>梯度下降更新时，会把正确类 logit 往上推，把错误高分 class 2 的 logit 往下压。这个信号非常直接：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>正确类概率太低 -&gt; 大力提高正确类 logit
+<a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a>错误类概率太高 -&gt; 大力降低错误类 logit
+</code></pre></div>
+<p>这也是 softmax + cross entropy 成为经典组合的原因之一。它不只在概率解释上自然，在梯度形式上也很干净。</p>
+<blockquote>
+<p>[!NOTE] 和 MSE 的差别
+若使用 softmax 后接 MSE，梯度还会多乘上 softmax 的导数。当模型已经极端自信但方向错了时，softmax 导数可能很小，导致整体梯度变弱。这就是课堂图中 MSE 在严重错误区域仍可能很平坦的直觉来源。</p>
+</blockquote>
+<h2 id="14-loss-function-optimization">14. Loss Function 会改变 Optimization 难度<a class="headerlink" href="#14-loss-function-optimization" title="Permanent link">&para;</a></h2>
+<p>本讲最后的结论要和前几讲接起来看。</p>
+<p>P6 讲 optimizer 时，我们关注：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a>同一张 error surface 上，参数该怎么走？
+</code></pre></div>
+<p>P7 讲 loss function 时，我们关注：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a>能不能换一张更好走的 error surface？
+</code></pre></div>
+<p>这两件事不是互相替代，而是互相配合：</p>
+<table>
+<thead>
+<tr>
+<th>问题层次</th>
+<th>你能调整什么</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Label 表示</td>
+<td>正确答案怎么编码</td>
+<td>class index、one-hot、soft label</td>
+</tr>
+<tr>
+<td>Output 设计</td>
+<td>模型最后输出什么</td>
+<td>scalar、logits、probabilities</td>
+</tr>
+<tr>
+<td>Loss function</td>
+<td>怎么衡量预测错多少</td>
+<td>MSE、cross entropy</td>
+</tr>
+<tr>
+<td>Optimizer</td>
+<td>在 loss surface 上怎么走</td>
+<td>SGD、Momentum、AdaGrad、Adam</td>
+</tr>
+<tr>
+<td>Schedule</td>
+<td>训练过程中步伐如何变</td>
+<td>decay、warmup</td>
+</tr>
+</tbody>
+</table>
+<p>“可以改 loss function 来改变 optimization 的难度”提醒我们：训练不起来时，不要只在 optimizer 上打转。对于分类任务，若用 MSE 训练效果差，问题可能不是模型不够大，也不一定是学习率没调好，而是 loss 本身给的地形不适合。</p>
+<h2 id="15">15. 从模型训练到实际使用：完整流程<a class="headerlink" href="#15" title="Permanent link">&para;</a></h2>
+<p>一个标准多分类训练流程可以这样记：</p>
+<pre class="mermaid"><code>flowchart LR
+    A["Training sample x"] --&gt; B["Neural network"]
+    B --&gt; C["Logits z"]
+    C --&gt; D["CrossEntropyLoss"]
+    E["Class index / one-hot label"] --&gt; D
+    D --&gt; F["Backpropagation"]
+    F --&gt; G["Update parameters"]</code></pre>
+<p>训练时：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a>输入 x
+<a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a>  -&gt; 模型输出 logits
+<a id="__codelineno-40-3" name="__codelineno-40-3" href="#__codelineno-40-3"></a>  -&gt; loss 函数内部处理 softmax/log-softmax
+<a id="__codelineno-40-4" name="__codelineno-40-4" href="#__codelineno-40-4"></a>  -&gt; 计算 cross entropy
+<a id="__codelineno-40-5" name="__codelineno-40-5" href="#__codelineno-40-5"></a>  -&gt; backprop 更新参数
+</code></pre></div>
+<p>推论时：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a>输入 x
+<a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a>  -&gt; 模型输出 logits
+<a id="__codelineno-41-3" name="__codelineno-41-3" href="#__codelineno-41-3"></a>  -&gt; argmax(logits) 得到预测类别
+<a id="__codelineno-41-4" name="__codelineno-41-4" href="#__codelineno-41-4"></a>  -&gt; 若需要置信度，再 softmax(logits)
+</code></pre></div>
+<p>注意：如果只需要预测类别，<code>argmax(logits)</code> 和 <code>argmax(softmax(logits))</code> 的结果一样，因为 softmax 不改变 logits 的大小顺序。</p>
+<h2 id="16">16. 分类任务的几个延伸知识<a class="headerlink" href="#16" title="Permanent link">&para;</a></h2>
+<h3 id="161-one-hot-label">16.1 One-hot 不是唯一的 label 表示<a class="headerlink" href="#161-one-hot-label" title="Permanent link">&para;</a></h3>
+<p>本讲使用 one-hot，是标准多分类入门设定。但实际研究和工程中也会看到：</p>
+<table>
+<thead>
+<tr>
+<th>Label 形式</th>
+<th>例子</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>One-hot</td>
+<td><code>[1,0,0]</code></td>
+<td>标准单标签分类</td>
+</tr>
+<tr>
+<td>Soft label</td>
+<td><code>[0.8,0.1,0.1]</code></td>
+<td>label smoothing、知识蒸馏</td>
+</tr>
+<tr>
+<td>Multi-hot</td>
+<td><code>[1,0,1]</code></td>
+<td>多标签分类，一个样本可同时属于多个类别</td>
+</tr>
+<tr>
+<td>Ordinal label</td>
+<td>一星到五星</td>
+<td>类别有天然顺序</td>
+</tr>
+</tbody>
+</table>
+<p>这些扩展都在回答同一个问题：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a>label 中到底有哪些信息应该被模型学习？
+</code></pre></div>
+<p>P7 的核心原则仍然适用：label 表示会影响模型学到什么，也会影响 loss surface。</p>
+<h3 id="162-softmax">16.2 Softmax 适合互斥多分类，不适合所有分类问题<a class="headerlink" href="#162-softmax" title="Permanent link">&para;</a></h3>
+<p>softmax 的输出总和为 1，所以它天然表达：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a>这些类别互斥，只能选一个。
+</code></pre></div>
+<p>如果任务是多标签分类，例如一张图片可以同时包含“人”“车”“夜晚”，通常不用单个 softmax，而是对每个标签各自用 sigmoid，再配 binary cross entropy。</p>
+<h3 id="163-cross-entropy">16.3 Cross entropy 的数值稳定性<a class="headerlink" href="#163-cross-entropy" title="Permanent link">&para;</a></h3>
+<p>实际框架通常不先显式算 softmax 再取 log，因为：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a>exp(很大的 logit) 可能 overflow
+<a id="__codelineno-44-2" name="__codelineno-44-2" href="#__codelineno-44-2"></a>log(非常小的概率) 可能数值不稳定
+</code></pre></div>
+<p>所以框架会使用稳定的 <code>log_softmax</code> 实作。这也是 PyTorch 把 <code>LogSoftmax</code> 和 <code>NLLLoss</code> 合在 <code>CrossEntropyLoss</code> 里的原因之一。</p>
+<h2 id="17">17. 易错点整理<a class="headerlink" href="#17" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>易错点</th>
+<th>正确理解</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>把 class 1/2/3 当连续数值</td>
+<td>只有类别有真实顺序时才合理；一般分类会制造错误距离</td>
+</tr>
+<tr>
+<td>以为 one-hot 表示类别语义相似度</td>
+<td>one-hot 只表示正确类别身份，默认类别两两等距</td>
+</tr>
+<tr>
+<td>把 logits 当概率</td>
+<td>logits 是 softmax 前的任意实数</td>
+</tr>
+<tr>
+<td>以为 softmax 只是 normalization</td>
+<td>softmax 还会通过 exponential 放大相对差距</td>
+</tr>
+<tr>
+<td>二分类 sigmoid 和 softmax 完全无关</td>
+<td>sigmoid 可看作二类 softmax 的等价形式</td>
+</tr>
+<tr>
+<td>用 PyTorch CE 前手动 softmax</td>
+<td><code>CrossEntropyLoss</code> 通常要吃 raw logits</td>
+</tr>
+<tr>
+<td>认为 MSE 和 CE 终点一样所以训练效果一样</td>
+<td>终点类似不代表路好走；gradient 地形可能差很多</td>
+</tr>
+<tr>
+<td>只从评价指标理解 loss</td>
+<td>loss 也是 optimization landscape 的设计</td>
+</tr>
+</tbody>
+</table>
+<h2 id="18">18. 复习问答<a class="headerlink" href="#18" title="Permanent link">&para;</a></h2>
+<p><strong>Q1：为什么不能直接把 class 1/2/3 编成 1/2/3 做 regression？</strong><br />
+A：因为编号会暗示大小、顺序和距离。除非类别本来有自然顺序，否则这种距离关系是人为制造的，会误导模型。</p>
+<p><strong>Q2：什么时候类别编号做 regression 可能是合理的？</strong><br />
+A：当类别确实有顺序或连续程度时，例如年级、评级、严重程度等。但这类问题更准确地说常属于 ordinal regression 或有序分类，不是一般 nominal classification。</p>
+<p><strong>Q3：one-hot vector 解决了什么问题？</strong><br />
+A：它把类别表示成互斥身份，而不是连续数字。这样不会暗示 class 1 比 class 2 小，或 class 1 离 class 2 更近。</p>
+<p><strong>Q4：logits 是什么？</strong><br />
+A：logits 是 softmax 前网络最后一层输出的原始分数，可以是任意实数，不是概率。</p>
+<p><strong>Q5：softmax 的公式是什么？</strong><br />
+A：<code>p_i = exp(z_i) / sum_j exp(z_j)</code>。它输出 0 到 1 之间且总和为 1 的向量。</p>
+<p><strong>Q6：softmax 为什么会让类别倾向更明显？</strong><br />
+A：因为它先对 logits 取 exponential，大值会被指数放大，小值会相对更小，再 normalize 后差距更明显。</p>
+<p><strong>Q7：二分类为什么常用 sigmoid？</strong><br />
+A：二类 softmax 可化简为 <code>sigmoid(z1-z2)</code>，所以 sigmoid 是二分类的简洁等价写法。</p>
+<p><strong>Q8：cross entropy 对 one-hot label 会变成什么？</strong><br />
+A：如果正确类是 <code>k</code>，则 <code>CE = -log p_k</code>，也就是惩罚正确类别概率太低。</p>
+<p><strong>Q9：maximum likelihood 和 cross entropy 有什么关系？</strong><br />
+A：在多分类设定下，最大化正确类别概率的 log likelihood，等价于最小化 cross entropy。</p>
+<p><strong>Q10：为什么 MSE 用在分类上可能训练困难？</strong><br />
+A：模型严重分错时，MSE 搭配 softmax 可能出现大 loss 但小 gradient 的平坦区域，gradient descent 难以推动参数离开。</p>
+<p><strong>Q11：softmax + cross entropy 的梯度为什么漂亮？</strong><br />
+A：对 logit 的导数是 <code>p_i - y_i</code>。正确类概率低就提高它，错误类概率高就降低它，训练信号直接且稳定。</p>
+<p><strong>Q12：PyTorch 中 <code>CrossEntropyLoss</code> 的输入应该是什么？</strong><br />
+A：通常输入 raw logits，不要先手动 softmax；target 通常是类别 index。</p>
+<h2 id="19">19. 知识地图<a class="headerlink" href="#19" title="Permanent link">&para;</a></h2>
+<pre class="mermaid"><code>mindmap
+  root((P7 分类与损失函数))
+    问题背景
+      前几讲关注optimizer
+      本讲关注目标和loss
+      Loss会改变error surface
+    分类表示
+      不宜随便编号回归
+      类别编号暗示顺序距离
+      One-hot表示身份
+    网络输出
+      多类别输出多维logits
+      Logits不是概率
+      Softmax变成分布
+      Sigmoid是二分类特例
+    Loss选择
+      MSE可计算距离
+      CrossEntropy更常用
+      MaximumLikelihood等价解释
+    优化直觉
+      MSE错误区域可能平坦
+      CE保留有效梯度
+      dL/dz = p - y
+    实作提醒
+      PyTorch CE含LogSoftmax
+      训练喂logits
+      推论再softmax看概率</code></pre>
+<h2 id="20">20. 本讲总结<a class="headerlink" href="#20" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a>分类任务不是 regression 的简单换皮。
+<a id="__codelineno-45-2" name="__codelineno-45-2" href="#__codelineno-45-2"></a>
+<a id="__codelineno-45-3" name="__codelineno-45-3" href="#__codelineno-45-3"></a>如果把类别编成 1/2/3:
+<a id="__codelineno-45-4" name="__codelineno-45-4" href="#__codelineno-45-4"></a>  会制造顺序和距离假设
+<a id="__codelineno-45-5" name="__codelineno-45-5" href="#__codelineno-45-5"></a>  多数分类任务不应该这样做
+<a id="__codelineno-45-6" name="__codelineno-45-6" href="#__codelineno-45-6"></a>
+<a id="__codelineno-45-7" name="__codelineno-45-7" href="#__codelineno-45-7"></a>标准多分类流程:
+<a id="__codelineno-45-8" name="__codelineno-45-8" href="#__codelineno-45-8"></a>  label -&gt; one-hot / class index
+<a id="__codelineno-45-9" name="__codelineno-45-9" href="#__codelineno-45-9"></a>  network -&gt; logits
+<a id="__codelineno-45-10" name="__codelineno-45-10" href="#__codelineno-45-10"></a>  logits -&gt; softmax -&gt; probability distribution
+<a id="__codelineno-45-11" name="__codelineno-45-11" href="#__codelineno-45-11"></a>  loss -&gt; cross entropy
+<a id="__codelineno-45-12" name="__codelineno-45-12" href="#__codelineno-45-12"></a>
+<a id="__codelineno-45-13" name="__codelineno-45-13" href="#__codelineno-45-13"></a>为什么 cross entropy:
+<a id="__codelineno-45-14" name="__codelineno-45-14" href="#__codelineno-45-14"></a>  概率解释上 = maximize likelihood
+<a id="__codelineno-45-15" name="__codelineno-45-15" href="#__codelineno-45-15"></a>  优化角度上 = 比 MSE 更适合 gradient descent
+<a id="__codelineno-45-16" name="__codelineno-45-16" href="#__codelineno-45-16"></a>  梯度形式上 = dL/dz = p - y
+<a id="__codelineno-45-17" name="__codelineno-45-17" href="#__codelineno-45-17"></a>
+<a id="__codelineno-45-18" name="__codelineno-45-18" href="#__codelineno-45-18"></a>本讲真正的 takeaway:
+<a id="__codelineno-45-19" name="__codelineno-45-19" href="#__codelineno-45-19"></a>  训练不起来时，不只要调 optimizer
+<a id="__codelineno-45-20" name="__codelineno-45-20" href="#__codelineno-45-20"></a>  也要检查 output 表示和 loss function
+<a id="__codelineno-45-21" name="__codelineno-45-21" href="#__codelineno-45-21"></a>  因为 loss function 本身会决定 error surface 是否好走
+</code></pre></div>
+<blockquote>
+<p>[!IMPORTANT] 核心结论
+对分类任务而言，softmax + cross entropy 不是随便选出来的惯例。softmax 把 logits 解释为类别分布，cross entropy 对正确类别概率过低进行强惩罚；两者合起来还给出简洁有效的梯度 <code>p - y</code>。因此，loss function 不只是“怎么算错多少”，它也在塑造 optimization 的道路。</p>
+</blockquote>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "navigation.indexes", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

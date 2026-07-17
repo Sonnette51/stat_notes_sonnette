@@ -1,0 +1,3263 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="清华统计课程笔记">
+      
+      
+      
+        <link rel="canonical" href="https://Sonnette51.github.io/stat_notes_sonnette/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%26%E8%AF%AD%E9%9F%B3%E5%A4%84%E7%90%86%EF%BC%88lhy%EF%BC%89-%E6%9B%B4%E6%96%B0%E4%B8%AD/P02_%E8%AF%AD%E9%9F%B3%E8%AF%86%E5%88%AB%E4%B8%80_%E4%BB%BB%E5%8A%A1%E5%AE%9A%E4%B9%89%E4%B8%8E%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E8%A1%A8%E7%A4%BA/">
+      
+      
+        <link rel="prev" href="../P01_%E8%AF%BE%E7%A8%8B%E6%80%BB%E8%A7%88/">
+      
+      
+        <link rel="next" href="../P03_%E8%AF%AD%E9%9F%B3%E8%AF%86%E5%88%AB%E4%BA%8C_LAS%E4%B8%8EAttentionSeq2Seq/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>P02 语音识别（一）：任务定义与输入输出表示 - Sonnette's Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#p02" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="Sonnette&#39;s Notes" class="md-header__button md-logo" aria-label="Sonnette's Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Sonnette's Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              P02 语音识别（一）：任务定义与输入输出表示
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  数据科学编程
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  初等概率论
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%88lhy%EF%BC%89-%E6%9B%B4%E6%96%B0%E4%B8%AD/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  机器学习（lhy）-更新中
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  自然语言&语音处理（lhy）-更新中
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Sonnette&#39;s Notes" class="md-nav__button md-logo" aria-label="Sonnette's Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Sonnette's Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据科学编程
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数据科学编程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/NumPy%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NumPy 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/Pandas%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pandas 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/Database%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/LLM%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LLM 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/MiningWebData%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mining Web Data 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/TextProcessing%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Text Processing 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/DataVisualization%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Visualization 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/Advanced%20Visualization%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Advanced Visualization 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    初等概率论
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    初等概率论
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture01%20%E6%A6%82%E7%8E%87%E6%A8%A1%E5%9E%8B%E4%B8%8E%E6%80%A7%E8%B4%A8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture01 概率模型与性质
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture02%20%E6%A6%82%E7%8E%87%E7%A9%BA%E9%97%B4%E3%80%81%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture02 概率空间、条件概率
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture03%20%E7%8B%AC%E7%AB%8B%E6%80%A7%E3%80%81%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture03 独立性、随机变量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture04%20%E5%B8%B8%E8%A7%81%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture04 常见随机变量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture05%20%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0%E3%80%81%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E5%87%BD%E6%95%B0%E7%9A%84%E5%88%86%E5%B8%83%E3%80%81%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E7%9A%84%E5%88%86%E5%B8%83%28I%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture05 概率分布函数、随机变量函数的分布、随机向量的分布(I)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture06%20%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E7%9A%84%E5%88%86%E5%B8%83%28II%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture06 随机向量的分布(II)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture07%20%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E5%87%BD%E6%95%B0%E7%9A%84%E5%88%86%E5%B8%83%E3%80%81%E6%AC%A1%E5%BA%8F%E7%BB%9F%E8%AE%A1%E9%87%8F%E3%80%81p%E5%88%86%E4%BD%8D%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture07 随机向量函数的分布、次序统计量、p分位数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture08%20%E6%9C%9F%E6%9C%9B%E3%80%81%E6%96%B9%E5%B7%AE%E3%80%81%E7%9B%B8%E5%85%B3%E4%B8%8D%E7%AD%89%E5%BC%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture08 期望、方差、相关不等式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture09%20%E6%9D%A1%E4%BB%B6%E6%9C%9F%E6%9C%9B%E3%80%81%E6%9D%A1%E4%BB%B6%E6%96%B9%E5%B7%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture09 条件期望、条件方差
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture10%20%E5%8D%8F%E6%96%B9%E5%B7%AE%E3%80%81%E7%9B%B8%E5%85%B3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture10 协方差、相关
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture11%20%E6%A6%82%E7%8E%87%E6%AF%8D%E5%87%BD%E6%95%B0%E3%80%81%E7%9F%A9%E6%AF%8D%E5%87%BD%E6%95%B0%E3%80%81%E7%89%B9%E5%BE%81%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture11 概率母函数、矩母函数、特征函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture12%20%E5%A4%A7%E6%95%B0%E5%AE%9A%E5%BE%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture12 大数定律
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture13%20%E4%B8%AD%E5%BF%83%E6%9E%81%E9%99%90%E5%AE%9A%E7%90%86%E3%80%81%E6%94%B6%E6%95%9B%E6%80%A7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture13 中心极限定理、收敛性
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture14%20%E5%A4%9A%E5%85%83%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture14 多元正态分布
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%9C%9F%E6%9C%AB%E8%AE%B0%E5%BF%86%E8%A6%81%E7%82%B9%E6%B1%87%E6%80%BB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 期末记忆要点汇总
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%A8%A1%E5%9D%971%20%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E7%9A%84%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块1 随机向量的函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%A8%A1%E5%9D%972%20%E6%AC%A1%E5%BA%8F%E7%BB%9F%E8%AE%A1%E9%87%8F%E4%B8%8Ep-%E5%88%86%E4%BD%8D%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块2 次序统计量与p-分位数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%A8%A1%E5%9D%973%20%E6%9C%9F%E6%9C%9B%E4%B8%8E%E6%96%B9%E5%B7%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块3 期望与方差
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%A8%A1%E5%9D%974%20%E6%9D%A1%E4%BB%B6%E6%9C%9F%E6%9C%9B%E3%80%81%E5%8D%8F%E6%96%B9%E5%B7%AE%E4%B8%8E%E4%B8%8D%E7%AD%89%E5%BC%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块4 条件期望、协方差与不等式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%A8%A1%E5%9D%975%20%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0%E4%B8%8E%E7%89%B9%E5%BE%81%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块5 生成函数与特征函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%A8%A1%E5%9D%976%20%E6%94%B6%E6%95%9B%E6%80%A7%E3%80%81%E5%A4%A7%E6%95%B0%E5%BE%8B%E4%B8%8E%E4%B8%AD%E5%BF%83%E6%9E%81%E9%99%90%E5%AE%9A%E7%90%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块6 收敛性、大数律与中心极限定理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%A8%A1%E5%9D%977%20%E5%A4%9A%E5%85%83%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块7 多元正态分布
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%88lhy%EF%BC%89-%E6%9B%B4%E6%96%B0%E4%B8%AD/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    机器学习（lhy）-更新中
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    机器学习（lhy）-更新中
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%88lhy%EF%BC%89-%E6%9B%B4%E6%96%B0%E4%B8%AD/P1_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P1 机器学习基本概念简介
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%88lhy%EF%BC%89-%E6%9B%B4%E6%96%B0%E4%B8%AD/P2_%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P2 深度学习基本概念简介
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%88lhy%EF%BC%89-%E6%9B%B4%E6%96%B0%E4%B8%AD/P3_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%BB%BB%E5%8A%A1%E6%94%BB%E7%95%A5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P3 机器学习任务攻略
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%88lhy%EF%BC%89-%E6%9B%B4%E6%96%B0%E4%B8%AD/P4_%E7%B1%BB%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%AD%E7%BB%83%E4%B8%8D%E8%B5%B7%E6%9D%A5%E6%80%8E%E4%B9%88%E5%8A%9E_%E5%B1%80%E9%83%A8%E6%9C%80%E5%B0%8F%E5%80%BC%E4%B8%8E%E9%9E%8D%E7%82%B9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P4 局部最小值与鞍点
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%88lhy%EF%BC%89-%E6%9B%B4%E6%96%B0%E4%B8%AD/P5_%E7%B1%BB%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%AD%E7%BB%83%E4%B8%8D%E8%B5%B7%E6%9D%A5%E6%80%8E%E4%B9%88%E5%8A%9E_Batch%E4%B8%8EMomentum/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P5 Batch 与 Momentum
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%88lhy%EF%BC%89-%E6%9B%B4%E6%96%B0%E4%B8%AD/P6_%E7%B1%BB%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%AD%E7%BB%83%E4%B8%8D%E8%B5%B7%E6%9D%A5%E6%80%8E%E4%B9%88%E5%8A%9E_%E8%87%AA%E9%80%82%E5%BA%94%E5%AD%A6%E4%B9%A0%E7%8E%87/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P6 自适应学习率
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%88lhy%EF%BC%89-%E6%9B%B4%E6%96%B0%E4%B8%AD/P7_%E7%B1%BB%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%AD%E7%BB%83%E4%B8%8D%E8%B5%B7%E6%9D%A5%E6%80%8E%E4%B9%88%E5%8A%9E_%E5%88%86%E7%B1%BB%E4%B8%8E%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P7 分类与损失函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%88lhy%EF%BC%89-%E6%9B%B4%E6%96%B0%E4%B8%AD/%E7%B1%BB%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%AD%E7%BB%83%E4%B8%8D%E8%B5%B7%E6%9D%A5%E6%80%8E%E4%B9%88%E5%8A%9E_%E6%80%BB%E7%BB%93/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4-7讲类神经网络训练方法总结
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    自然语言&语音处理（lhy）-更新中
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    自然语言&语音处理（lhy）-更新中
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../P01_%E8%AF%BE%E7%A8%8B%E6%80%BB%E8%A7%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P01 课程总览
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P02 语音识别：任务定义与输入输出表示
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P02 语音识别：任务定义与输入输出表示
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        术语表
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#asr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        零、为什么 ASR 曾经被认为很难
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、语音识别的基本问题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、语音识别的基本问题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 任务定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 概率视角
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#token" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、输出文字可以用什么词元/符号（token）表示
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、输出文字可以用什么词元/符号（token）表示">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-phoneme" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 音素（phoneme）：发音单位
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-grapheme" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 字素（grapheme）：书写单位
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-word" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 词（word）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-morpheme" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 语素（morpheme）：有意义的最小单位
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-byte" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 字节（byte）：语言无关单位
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、输出单位对比
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、输出不一定只能是文字
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、输入语音如何表示
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="五、输入语音如何表示">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-waveformframe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 从原始波形（waveform）到语音帧（frame）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 常见声学特征
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、数据量：语音比图像更“吃数据”
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七、后续模型地图
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        八、本讲知识地图
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        九、自测问题
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../P03_%E8%AF%AD%E9%9F%B3%E8%AF%86%E5%88%AB%E4%BA%8C_LAS%E4%B8%8EAttentionSeq2Seq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P03 语音识别：LAS 与 AttentionSeq2Seq
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        术语表
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#asr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        零、为什么 ASR 曾经被认为很难
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、语音识别的基本问题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、语音识别的基本问题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 任务定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 概率视角
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#token" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、输出文字可以用什么词元/符号（token）表示
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、输出文字可以用什么词元/符号（token）表示">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-phoneme" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 音素（phoneme）：发音单位
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-grapheme" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 字素（grapheme）：书写单位
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-word" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 词（word）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-morpheme" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 语素（morpheme）：有意义的最小单位
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-byte" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 字节（byte）：语言无关单位
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、输出单位对比
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、输出不一定只能是文字
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、输入语音如何表示
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="五、输入语音如何表示">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-waveformframe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 从原始波形（waveform）到语音帧（frame）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 常见声学特征
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、数据量：语音比图像更“吃数据”
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七、后续模型地图
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        八、本讲知识地图
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        九、自测问题
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="p02">P02 语音识别（一）：任务定义与输入输出表示<a class="headerlink" href="#p02" title="Permanent link">&para;</a></h1>
+<h2 id="_1">术语表<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>中文术语</th>
+<th>English term</th>
+<th>缩写/记号</th>
+<th>本讲中的含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>语音识别</td>
+<td>Automatic Speech Recognition</td>
+<td>ASR</td>
+<td>把语音信号转换成文字序列</td>
+</tr>
+<tr>
+<td>词元/符号</td>
+<td>token</td>
+<td><span class="arithmatex">\(y_n\)</span></td>
+<td>模型每一步输出的基本单位，可以是音素、字素、词等</td>
+</tr>
+<tr>
+<td>声学特征</td>
+<td>acoustic feature</td>
+<td><span class="arithmatex">\(x_t\)</span></td>
+<td>从语音波形中抽出的帧级别（frame-level）向量</td>
+</tr>
+<tr>
+<td>对齐</td>
+<td>alignment</td>
+<td>-</td>
+<td>哪些声学帧对应哪些输出词元/符号（token）的关系</td>
+</tr>
+<tr>
+<td>音素</td>
+<td>phoneme</td>
+<td>-</td>
+<td>区分意义的基本发音单位</td>
+</tr>
+<tr>
+<td>字素</td>
+<td>grapheme</td>
+<td>-</td>
+<td>书写系统的基本单位，如英文字母或汉字</td>
+</tr>
+<tr>
+<td>语素</td>
+<td>morpheme</td>
+<td>-</td>
+<td>有意义的最小语言单位，如 <code>un-</code>、<code>break</code>、<code>-able</code></td>
+</tr>
+<tr>
+<td>发音词典</td>
+<td>pronunciation lexicon / lexicon</td>
+<td>-</td>
+<td>记录词和发音单位之间的映射</td>
+</tr>
+<tr>
+<td>滤波器组特征</td>
+<td>filter bank features</td>
+<td>fbank</td>
+<td>深度学习 ASR 常用的声学特征</td>
+</tr>
+<tr>
+<td>梅尔频率倒谱系数</td>
+<td>Mel-frequency cepstral coefficients</td>
+<td>MFCC</td>
+<td>传统 ASR 常用的声学特征</td>
+</tr>
+<tr>
+<td>意图分类</td>
+<td>intent classification</td>
+<td>-</td>
+<td>直接从语音判断用户想做什么</td>
+</tr>
+<tr>
+<td>槽位填充</td>
+<td>slot filling</td>
+<td>-</td>
+<td>从语音或文字中抽出时间、地点等结构化槽位</td>
+</tr>
+</tbody>
+</table>
+<h2 id="asr">零、为什么 ASR 曾经被认为很难<a class="headerlink" href="#asr" title="Permanent link">&para;</a></h2>
+<p>今天手机和电脑都能做语音识别，所以 ASR 容易被误认为只是一个普通的分类问题。但在早期研究中，语音识别曾经被严肃怀疑过。课程提到 J. R. Pierce 在 1969 年的文章 <em>Whither Speech Recognition?</em> 中对 ASR 持悲观态度，认为它可能需要极大投入却难以得到实用结果。</p>
+<p>ASR 的困难来自多个层面：</p>
+<table>
+<thead>
+<tr>
+<th>困难</th>
+<th>为什么麻烦</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>信号连续</td>
+<td>声音是高频采样的连续波形，不是天然离散符号</td>
+</tr>
+<tr>
+<td>说话差异</td>
+<td>不同人、口音、语速、情绪会改变声学表现</td>
+</tr>
+<tr>
+<td>对齐未知</td>
+<td>训练资料通常只有整句文字，没有每一帧对应的 token</td>
+</tr>
+<tr>
+<td>语言约束</td>
+<td>“听起来像什么”和“像不像一句自然语言”要同时考虑</td>
+</tr>
+<tr>
+<td>数据昂贵</td>
+<td>每段语音都要有可靠文字标注，收集和清洗成本高</td>
+</tr>
+</tbody>
+</table>
+<p>所以本讲先不讲模型细节，而是从输入、输出、token 和资料规模开始。这些设定决定了后面 LAS、CTC、RNN-T、DNN-HMM hybrid 等模型到底要解决什么问题。</p>
+<h2 id="_2">一、语音识别的基本问题<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="11">1.1 任务定义<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
+<p>语音识别的目标是把一段声音信号转换成文字序列：</p>
+<div class="arithmatex">\[
+X = (x_1, x_2, \ldots, x_T)
+\quad \longrightarrow \quad
+Y = (y_1, y_2, \ldots, y_N)
+\]</div>
+<p>其中：</p>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(X\)</span></td>
+<td>输入语音，被表示成一串声学特征向量</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(T\)</span></td>
+<td>输入序列长度，也就是声学帧（acoustic frame）的数量</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(x_t\)</span></td>
+<td>第 <span class="arithmatex">\(t\)</span> 个声学特征向量</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(Y\)</span></td>
+<td>输出文字，被表示成一串词元/符号（token）</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(N\)</span></td>
+<td>输出词元/符号（token）数量</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(y_n\)</span></td>
+<td>第 <span class="arithmatex">\(n\)</span> 个输出词元/符号（token）</td>
+</tr>
+</tbody>
+</table>
+<p>通常有：</p>
+<div class="arithmatex">\[
+T \gg N
+\]</div>
+<p>因为声学特征一般每 10 ms 取一帧，而一个文字词元/符号（token）往往对应更长时间的声音片段。</p>
+<blockquote>
+<p>[!IMPORTANT] ASR 的核心困难
+输入是长而密集的连续声学序列，输出是短得多的离散文字序列；训练资料通常只告诉你整段声音对应哪一句话，却不告诉你每一帧声音对应哪个词元/符号（token）。</p>
+</blockquote>
+<p>这就是后续连接时序分类（CTC）、注意力机制（attention）、RNN 转导器（RNN-T）等模型反复处理的问题：<strong>对齐（alignment）未知</strong>。</p>
+<h3 id="12">1.2 概率视角<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
+<p>语音识别可写成：</p>
+<div class="arithmatex">\[
+\hat{Y} = \arg\max_Y P(Y \mid X)
+\]</div>
+<p>也就是：给定声音 <span class="arithmatex">\(X\)</span>，寻找概率最大的文字序列 <span class="arithmatex">\(Y\)</span>。</p>
+<p>这个概率包含两类信息：</p>
+<table>
+<thead>
+<tr>
+<th>信息</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>声学证据</td>
+<td>这段声音听起来像哪些音、字或词</td>
+</tr>
+<tr>
+<td>语言约束</td>
+<td>哪些文字序列更像自然语言</td>
+</tr>
+</tbody>
+</table>
+<p>传统 ASR 往往把这些信息拆成多个模块；端到端 ASR 则尝试直接学习 <span class="arithmatex">\(P(Y \mid X)\)</span>。</p>
+<hr />
+<h2 id="token">二、输出文字可以用什么词元/符号（token）表示<a class="headerlink" href="#token" title="Permanent link">&para;</a></h2>
+<p>输出端的第一件事是决定：模型每一步到底输出什么单位？</p>
+<h3 id="21-phoneme">2.1 音素（phoneme）：发音单位<a class="headerlink" href="#21-phoneme" title="Permanent link">&para;</a></h3>
+<p><strong>音素（phoneme）</strong> 是语言中区分意义的基本发音单位。可以粗略类比为“音标”，但两者不完全相同：音标是书写发音的符号系统，音素则是语言系统中能区分意义的抽象声音单位。</p>
+<p>如果输出词元/符号（token）是音素（phoneme），ASR 的流程是：</p>
+<pre class="mermaid"><code>flowchart LR
+  A["语音"] --&gt; B["音素序列（phoneme sequence）"]
+  B --&gt; C["发音词典（lexicon）"]
+  C --&gt; D["文字"]</code></pre>
+<p>优点：</p>
+<ul>
+<li>音素（phoneme）与声音关系更直接；</li>
+<li>声学模型更容易学到“声音到发音单位”的对应。</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>需要发音词典（pronunciation lexicon / lexicon），把词汇映射到音素（phoneme）；</li>
+<li>需要语言学知识，不同语言甚至不同文献对音素集合（phoneme inventory）可能有不同划分；</li>
+<li>对新语言不够方便。</li>
+</ul>
+<blockquote>
+<p>[!NOTE] 直觉
+音素（phoneme）适合“先听出发音，再查词典变成文字”的路线。</p>
+</blockquote>
+<h3 id="22-grapheme">2.2 字素（grapheme）：书写单位<a class="headerlink" href="#22-grapheme" title="Permanent link">&para;</a></h3>
+<p><strong>字素（grapheme）</strong> 是书写系统的基本单位。它不一定等同于“一个发音”，而是文字系统中可用来拼写的基本符号。</p>
+<table>
+<thead>
+<tr>
+<th>语言</th>
+<th>字素（grapheme）例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>英文</td>
+<td>字母 <code>a,b,c,...</code>，还需要空格和标点</td>
+</tr>
+<tr>
+<td>中文</td>
+<td>方块字，如“你”“好”“中”“文”</td>
+</tr>
+</tbody>
+</table>
+<p>优点：</p>
+<ul>
+<li>不需要发音词典；</li>
+<li>对新语言更直接，只要有文字资料就能建立词元集合（token set）；</li>
+<li>可能拼出训练集中没见过的新词。</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>字母与声音关系不总是直接，例如英文中 /k/ 可写成 <code>c</code> 或 <code>k</code>；</li>
+<li>英文还要自己学会何时输出空格；</li>
+<li>可能出现拼写错误。</li>
+</ul>
+<blockquote>
+<p>[!TIP] 音素（phoneme）与字素（grapheme）
+音素更接近声音，但依赖语言学资源；字素更容易落地，但要求模型自己学会复杂的发音到书写关系。</p>
+</blockquote>
+<h3 id="23-word">2.3 词（word）<a class="headerlink" href="#23-word" title="Permanent link">&para;</a></h3>
+<p>直接用词（word）作为词元/符号（token），看起来最符合人类阅读习惯：</p>
+<div class="arithmatex">\[
+\text{one punch man} \rightarrow [\text{one}, \text{punch}, \text{man}]
+\]</div>
+<p>但它有明显问题：</p>
+<ul>
+<li>英文词汇量巨大；</li>
+<li>新词、专名、拼写变化会不断出现；</li>
+<li>中文等语言没有天然空格，分词本身就是问题；</li>
+<li>某些语言可通过词缀不断生成超长词，词表很难穷举。</li>
+</ul>
+<p>所以词级词元（word token）往往会面临 <strong>未登录词（out-of-vocabulary, OOV）</strong> 问题：测试时出现了训练词表中没有的词，模型就无法直接输出。</p>
+<h3 id="24-morpheme">2.4 语素（morpheme）：有意义的最小单位<a class="headerlink" href="#24-morpheme" title="Permanent link">&para;</a></h3>
+<p><strong>语素（morpheme）</strong> 是“有意义的最小语言单位”。它比词（word）小，但通常比字素（grapheme）大。</p>
+<p>例：</p>
+<div class="arithmatex">\[
+\text{unbreakable} = \text{un} + \text{break} + \text{able}
+\]</div>
+<p>优点：</p>
+<ul>
+<li>比词（word）更能处理新词；</li>
+<li>比字符/字素（character/grapheme）更有语义；</li>
+<li>对词形变化丰富的语言更有吸引力。</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>需要语言学分析或统计切分；</li>
+<li>自动切出来的片段不一定真有语义；</li>
+<li>实作复杂度高于字素（grapheme）。</li>
+</ul>
+<h3 id="25-byte">2.5 字节（byte）：语言无关单位<a class="headerlink" href="#25-byte" title="Permanent link">&para;</a></h3>
+<p>更极端的做法是用字节（byte），例如 UTF-8 字节序列。这样所有语言都能用相同词元集合（token set）表示。</p>
+<p>优点：</p>
+<ul>
+<li>词元集合（token set）小，最多 256 种字节（byte）；</li>
+<li>理论上语言无关（language-independent）；</li>
+<li>不需要针对不同语言设计不同字表。</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>字节（byte）与语言结构距离更远；</li>
+<li>输出序列更长；</li>
+<li>模型要学会从字节组合恢复文字。</li>
+</ul>
+<hr />
+<h2 id="_3">三、输出单位对比<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>输出单位</th>
+<th>粒度</th>
+<th>优点</th>
+<th>缺点</th>
+<th>适合场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>音素（phoneme）</td>
+<td>发音单位</td>
+<td>与声音关系明确</td>
+<td>需要发音词典（lexicon）和语言学知识</td>
+<td>资源充足、发音词典可靠</td>
+</tr>
+<tr>
+<td>字素（grapheme）</td>
+<td>字母/汉字</td>
+<td>简单、无需词典、可处理新词</td>
+<td>声音到文字关系复杂</td>
+<td>端到端 ASR 常用</td>
+</tr>
+<tr>
+<td>词（word）</td>
+<td>词</td>
+<td>输出自然、序列短</td>
+<td>OOV 严重、词表大</td>
+<td>封闭词表或强语言模型场景</td>
+</tr>
+<tr>
+<td>语素（morpheme）</td>
+<td>语素</td>
+<td>兼顾语义与泛化</td>
+<td>切分不易</td>
+<td>形态变化丰富语言</td>
+</tr>
+<tr>
+<td>字节（byte）</td>
+<td>字节</td>
+<td>语言无关、词表小</td>
+<td>序列长、结构远</td>
+<td>多语言统一模型</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>[!IMPORTANT] 本讲结论
+输出词元/符号（token）的选择不是细节，而是决定了模型要学什么：学发音、学拼写、学词表，还是学更底层的字节组合。</p>
+</blockquote>
+<p>课程还提到，2019 年左右的 ASR 论文中，输出单位大致呈现这样的趋势：</p>
+<table>
+<thead>
+<tr>
+<th>输出单位</th>
+<th>使用趋势</th>
+<th>直觉解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>字素（grapheme）</td>
+<td>最常见</td>
+<td>不需要发音词典，建立 token set 最直接</td>
+</tr>
+<tr>
+<td>音素（phoneme）</td>
+<td>仍然常见</td>
+<td>和声音关系清楚，但依赖 lexicon</td>
+</tr>
+<tr>
+<td>子词/语素类单位（subword / morpheme-like unit）</td>
+<td>居中</td>
+<td>介于 grapheme 和 word 之间，兼顾长度与泛化</td>
+</tr>
+<tr>
+<td>词（word）</td>
+<td>较少</td>
+<td>OOV 和巨大词表问题明显</td>
+</tr>
+<tr>
+<td>字节（byte）</td>
+<td>较特别</td>
+<td>追求语言无关，但序列更底层</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>[!NOTE] 怎么读这些趋势
+趋势统计不是说 grapheme 永远最好，而是说明实际研究会在资源成本、语言特性、词表大小和模型难度之间折中。</p>
+</blockquote>
+<hr />
+<h2 id="_4">四、输出不一定只能是文字<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p>狭义 ASR 的输出是文字。但只要输入是语音，输出不一定非要停在转写文本。课程中还提到一些更直接的端到端设定：</p>
+<table>
+<thead>
+<tr>
+<th>任务</th>
+<th>输入</th>
+<th>输出</th>
+<th>省掉了什么中间步骤</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>标准 ASR</td>
+<td>speech</td>
+<td>text</td>
+<td>-</td>
+</tr>
+<tr>
+<td>语音翻译</td>
+<td>speech</td>
+<td>translated text</td>
+<td>不必先转成源语言文字再翻译</td>
+</tr>
+<tr>
+<td>语音到语义表示</td>
+<td>speech</td>
+<td>word / sentence embedding</td>
+<td>不必显式输出可读文字</td>
+</tr>
+<tr>
+<td>意图分类</td>
+<td>speech</td>
+<td>intent label</td>
+<td>不必先转写再做 NLU</td>
+</tr>
+<tr>
+<td>槽位填充</td>
+<td>speech</td>
+<td>slot labels</td>
+<td>不必先转写再抽时间、地点等槽位</td>
+</tr>
+</tbody>
+</table>
+<p>例如订票系统中，用户说“我要买明天去台北的车票”，系统最终真正需要的可能不是完整转写，而是：</p>
+<table>
+<thead>
+<tr>
+<th>槽位</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>intent</td>
+<td>买票</td>
+</tr>
+<tr>
+<td>date</td>
+<td>明天</td>
+</tr>
+<tr>
+<td>destination</td>
+<td>台北</td>
+</tr>
+</tbody>
+</table>
+<p>传统 pipeline 会先做：</p>
+<pre class="mermaid"><code>flowchart LR
+  A["语音"] --&gt; B["ASR 转文字"]
+  B --&gt; C["NLU / intent classification / slot filling"]
+  C --&gt; D["结构化语义"]</code></pre>
+<p>端到端做法则可能直接学习：</p>
+<pre class="mermaid"><code>flowchart LR
+  A["语音"] --&gt; B["模型"]
+  B --&gt; C["意图或槽位标签"]</code></pre>
+<blockquote>
+<p>[!TIP] 和 NLP 的连接
+ASR 不只是把声音变成文字。它也可以是语音和 NLP 任务之间的接口：翻译、对话系统、语义理解都可以直接接在语音输入之后。</p>
+</blockquote>
+<hr />
+<h2 id="_5">五、输入语音如何表示<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<h3 id="51-waveformframe">5.1 从原始波形（waveform）到语音帧（frame）<a class="headerlink" href="#51-waveformframe" title="Permanent link">&para;</a></h3>
+<p>原始语音是原始波形（waveform）。若采样率为 16 kHz，则 25 ms 的窗口约有：</p>
+<div class="arithmatex">\[
+16{,}000 \times 0.025 = 400
+\]</div>
+<p>个采样点。</p>
+<p>最直接的做法是把这 400 个采样点当成一个 400 维向量，但这通常不是最常用的表示。</p>
+<p>实际 ASR 中常会：</p>
+<ol>
+<li>取一个约 25 ms 的窗口（window）；</li>
+<li>每次向右移动约 10 ms；</li>
+<li>每个 window 提取一个声学特征向量；</li>
+<li>得到一串帧级别特征（frame-level feature）。</li>
+</ol>
+<pre class="mermaid"><code>flowchart LR
+  A["原始波形（waveform）"] --&gt; B["25 ms 窗口（window）"]
+  B --&gt; C["特征提取（feature extraction）"]
+  C --&gt; D["声学特征向量（acoustic feature vector）"]
+  D --&gt; E["特征序列（feature sequence）"]</code></pre>
+<p>因为窗口有重叠，相邻语音帧的信息高度相似。这也是后续模型常做降采样（downsampling / subsampling）的原因。</p>
+<h3 id="52">5.2 常见声学特征<a class="headerlink" href="#52" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>表示</th>
+<th>含义</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>原始波形（waveform）</td>
+<td>原始波形采样点</td>
+<td>最原始，维度高，变化大</td>
+</tr>
+<tr>
+<td>频谱图（spectrogram）</td>
+<td>时间-频率表示</td>
+<td>比原始波形（waveform）更接近人类听觉分析</td>
+</tr>
+<tr>
+<td>滤波器组特征（filter bank features, fbank）</td>
+<td>滤波器组输出，常取 log</td>
+<td>深度学习 ASR 中常用</td>
+</tr>
+<tr>
+<td>梅尔频率倒谱系数（Mel-frequency cepstral coefficients, MFCC）</td>
+<td>经过 Mel 滤波、取 log、DCT 等步骤得到的特征</td>
+<td>传统 ASR 中经典特征</td>
+</tr>
+</tbody>
+</table>
+<p>早期 ASR 常用 MFCC。深度学习兴起后，fbank 特征越来越常见，因为神经网络可以自己学习后续变换，不一定需要手工设计到 MFCC 的每一步。</p>
+<blockquote>
+<p>[!NOTE] 直觉
+原始波形（waveform）太原始；频谱图（spectrogram）把声音展开到时间-频率平面；滤波器组特征（fbank）和梅尔频率倒谱系数（MFCC）进一步模仿人耳频率感知，把声音转成更适合模型处理的特征。</p>
+</blockquote>
+<p>课程也用 2019 年论文统计说明了特征选择的变化：</p>
+<table>
+<thead>
+<tr>
+<th>输入特征</th>
+<th>当时趋势</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fbank / filter bank output</td>
+<td>最常见，约占多数</td>
+<td>深度学习模型可以接手后续表示学习，不一定需要手工 DCT 到 MFCC</td>
+</tr>
+<tr>
+<td>MFCC</td>
+<td>仍有人使用，但比例下降</td>
+<td>传统 ASR 经典特征，过去长期主流</td>
+</tr>
+<tr>
+<td>原始波形（waveform）</td>
+<td>较少</td>
+<td>端到端程度更高，但学习难度和数据需求更大</td>
+</tr>
+<tr>
+<td>频谱图（spectrogram）</td>
+<td>可用但不是最主流</td>
+<td>比 waveform 结构更清楚，但通常还会继续变成 fbank 等特征</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>[!IMPORTANT] fbank 为什么流行
+不是因为 MFCC “错了”，而是深度学习模型可以从较少手工压缩的 fbank 中学习更合适的表示；MFCC 中某些手工步骤在神经网络时代不一定仍然必要。</p>
+</blockquote>
+<hr />
+<h2 id="_6">六、数据量：语音比图像更“吃数据”<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<p>语音识别需要大量成对资料：</p>
+<div class="arithmatex">\[
+(\text{speech}, \text{text})
+\]</div>
+<p>也就是每段声音都要有文字标注。</p>
+<p>课程中列举了常见英文 ASR 语料：</p>
+<table>
+<thead>
+<tr>
+<th>语料</th>
+<th>大致规模</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TIMIT</td>
+<td>约 4 小时</td>
+<td>小型基准，类似语音领域的 toy dataset</td>
+</tr>
+<tr>
+<td>Wall Street Journal</td>
+<td>约 80 小时</td>
+<td>经典英文读稿语料</td>
+</tr>
+<tr>
+<td>Switchboard</td>
+<td>约 300 小时</td>
+<td>电话对话语料</td>
+</tr>
+<tr>
+<td>LibriSpeech</td>
+<td>约 960 小时</td>
+<td>常用公开语料</td>
+</tr>
+</tbody>
+</table>
+<p>相比图像，语音数据一秒就有 16,000 个采样点，因此“小时数”背后是非常大的连续信号量。工业系统往往使用远超论文公开规模的数据。</p>
+<p>课程里还用了一个有意思的换算：如果把 MNIST、CIFAR 这类图像数据集的像素数粗略当作 16 kHz 音频采样点来看，它们对应的“语音时长”其实只有几十分钟到数小时量级。也就是说，图像领域的经典入门数据集，换成语音尺度后并不算大。</p>
+<p>进一步说，公开论文中常见的几百到几千小时语音已经不小，但大公司实际产品系统使用的资料量可能达到数万甚至十万小时级别。ASR 的工程上限很大程度受资料规模、标注质量和场景覆盖影响。</p>
+<blockquote>
+<p>[!WARNING] 数据不是附属条件
+在 ASR 中，模型结构固然重要，但数据规模、标注质量、说话人覆盖、口音覆盖、噪声场景同样决定系统上限。</p>
+</blockquote>
+<hr />
+<h2 id="_7">七、后续模型地图<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<p>本讲最后预告了几类 ASR 模型：</p>
+<table>
+<thead>
+<tr>
+<th>模型</th>
+<th>核心想法</th>
+<th>后续讲解重点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>听-注意-拼写模型（Listen, Attend and Spell, LAS）</td>
+<td>用注意力式序列到序列模型（attention seq2seq）生成文字</td>
+<td>P3</td>
+</tr>
+<tr>
+<td>连接时序分类（Connectionist Temporal Classification, CTC）</td>
+<td>每个声学帧输出词元或空白符（token/blank），再合并得到文字</td>
+<td>P4</td>
+</tr>
+<tr>
+<td>RNN 转导器（Recurrent Neural Network Transducer, RNN-T）</td>
+<td>结合声学编码器（acoustic encoder）与预测网络（prediction network），可在线识别</td>
+<td>P4/P5</td>
+</tr>
+<tr>
+<td>神经转导器（Neural Transducer）</td>
+<td>分块处理语音，兼顾在线性与注意力机制（attention）</td>
+<td>P4</td>
+</tr>
+<tr>
+<td>单调分块注意力（Monotonic Chunkwise Attention, MoChA）</td>
+<td>单调分块注意力，让窗口动态移动</td>
+<td>P4</td>
+</tr>
+<tr>
+<td>DNN-HMM 混合模型（DNN-HMM hybrid model）</td>
+<td>保留 HMM 的对齐/解码框架，用 DNN 提供声学分数</td>
+<td>P5</td>
+</tr>
+</tbody>
+</table>
+<p>这些模型都在解决同一组问题：</p>
+<ol>
+<li>输入很长，输出较短；</li>
+<li>对齐未知；</li>
+<li>需要在声学证据和语言约束之间取得平衡；</li>
+<li>要兼顾准确率、速度、模型大小和是否能在线识别。</li>
+</ol>
+<hr />
+<h2 id="_8">八、本讲知识地图<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<pre class="mermaid"><code>mindmap
+  root((ASR 任务表示))
+    输入
+      原始波形 waveform
+      频谱图 spectrogram
+      滤波器组特征 fbank
+      梅尔频率倒谱系数 MFCC
+      语音帧序列 frame sequence
+    输出
+      音素 phoneme
+      字素 grapheme
+      词 word
+      语素 morpheme
+      字节 byte
+      意图 intent
+      槽位 slot
+    困难
+      T 大于 N
+      对齐未知 alignment unknown
+      数据标注昂贵
+      语言差异
+    后续模型
+      LAS
+      CTC
+      RNN-T
+      神经转导器 Neural Transducer
+      MoChA
+      DNN-HMM hybrid</code></pre>
+<hr />
+<h2 id="_9">九、自测问题<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<ol>
+<li>为什么 ASR 输入长度 <span class="arithmatex">\(T\)</span> 通常远大于输出长度 <span class="arithmatex">\(N\)</span>？</li>
+<li>音素（phoneme）和字素（grapheme）作为输出单位分别有什么优缺点？</li>
+<li>为什么词级词元（word token）容易遇到未登录词（OOV）问题？</li>
+<li>为什么说语素（morpheme）介于词（word）和字素（grapheme）之间？</li>
+<li>字节级 ASR（byte-level ASR）为什么可以做到语言无关（language-independent）？</li>
+<li>为什么说语音模型的输出不一定只能是文字？请举一个 intent classification 或 slot filling 的例子。</li>
+<li>为什么原始波形（waveform）不一定是最方便的 ASR 输入？</li>
+<li>滤波器组特征（fbank）和梅尔频率倒谱系数（MFCC）在 ASR 中各扮演什么角色？</li>
+<li>为什么深度学习时代 fbank 比 MFCC 更常见？</li>
+<li>为什么语音识别需要大量标注数据？</li>
+<li>后续的 LAS、CTC、RNN-T 共同要解决什么根本问题？</li>
+</ol>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "navigation.indexes", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

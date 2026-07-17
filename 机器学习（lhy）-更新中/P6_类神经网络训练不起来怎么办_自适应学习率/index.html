@@ -1,0 +1,3980 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="清华统计课程笔记">
+      
+      
+      
+        <link rel="canonical" href="https://Sonnette51.github.io/stat_notes_sonnette/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%88lhy%EF%BC%89-%E6%9B%B4%E6%96%B0%E4%B8%AD/P6_%E7%B1%BB%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%AD%E7%BB%83%E4%B8%8D%E8%B5%B7%E6%9D%A5%E6%80%8E%E4%B9%88%E5%8A%9E_%E8%87%AA%E9%80%82%E5%BA%94%E5%AD%A6%E4%B9%A0%E7%8E%87/">
+      
+      
+        <link rel="prev" href="../P5_%E7%B1%BB%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%AD%E7%BB%83%E4%B8%8D%E8%B5%B7%E6%9D%A5%E6%80%8E%E4%B9%88%E5%8A%9E_Batch%E4%B8%8EMomentum/">
+      
+      
+        <link rel="next" href="../P7_%E7%B1%BB%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%AD%E7%BB%83%E4%B8%8D%E8%B5%B7%E6%9D%A5%E6%80%8E%E4%B9%88%E5%8A%9E_%E5%88%86%E7%B1%BB%E4%B8%8E%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>P6 类神经网络训练不起来怎么办（三）：自适应学习率 - Sonnette's Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#p6" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="Sonnette&#39;s Notes" class="md-header__button md-logo" aria-label="Sonnette's Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Sonnette's Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              P6 类神经网络训练不起来怎么办（三）：自适应学习率
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  数据科学编程
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  初等概率论
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  机器学习（lhy）-更新中
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%26%E8%AF%AD%E9%9F%B3%E5%A4%84%E7%90%86%EF%BC%88lhy%EF%BC%89-%E6%9B%B4%E6%96%B0%E4%B8%AD/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  自然语言&语音处理（lhy）-更新中
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Sonnette&#39;s Notes" class="md-nav__button md-logo" aria-label="Sonnette's Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Sonnette's Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据科学编程
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数据科学编程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/NumPy%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NumPy 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/Pandas%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pandas 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/Database%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/LLM%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LLM 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/MiningWebData%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mining Web Data 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/TextProcessing%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Text Processing 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/DataVisualization%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Visualization 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/Advanced%20Visualization%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Advanced Visualization 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    初等概率论
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    初等概率论
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture01%20%E6%A6%82%E7%8E%87%E6%A8%A1%E5%9E%8B%E4%B8%8E%E6%80%A7%E8%B4%A8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture01 概率模型与性质
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture02%20%E6%A6%82%E7%8E%87%E7%A9%BA%E9%97%B4%E3%80%81%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture02 概率空间、条件概率
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture03%20%E7%8B%AC%E7%AB%8B%E6%80%A7%E3%80%81%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture03 独立性、随机变量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture04%20%E5%B8%B8%E8%A7%81%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture04 常见随机变量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture05%20%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0%E3%80%81%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E5%87%BD%E6%95%B0%E7%9A%84%E5%88%86%E5%B8%83%E3%80%81%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E7%9A%84%E5%88%86%E5%B8%83%28I%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture05 概率分布函数、随机变量函数的分布、随机向量的分布(I)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture06%20%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E7%9A%84%E5%88%86%E5%B8%83%28II%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture06 随机向量的分布(II)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture07%20%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E5%87%BD%E6%95%B0%E7%9A%84%E5%88%86%E5%B8%83%E3%80%81%E6%AC%A1%E5%BA%8F%E7%BB%9F%E8%AE%A1%E9%87%8F%E3%80%81p%E5%88%86%E4%BD%8D%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture07 随机向量函数的分布、次序统计量、p分位数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture08%20%E6%9C%9F%E6%9C%9B%E3%80%81%E6%96%B9%E5%B7%AE%E3%80%81%E7%9B%B8%E5%85%B3%E4%B8%8D%E7%AD%89%E5%BC%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture08 期望、方差、相关不等式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture09%20%E6%9D%A1%E4%BB%B6%E6%9C%9F%E6%9C%9B%E3%80%81%E6%9D%A1%E4%BB%B6%E6%96%B9%E5%B7%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture09 条件期望、条件方差
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture10%20%E5%8D%8F%E6%96%B9%E5%B7%AE%E3%80%81%E7%9B%B8%E5%85%B3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture10 协方差、相关
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture11%20%E6%A6%82%E7%8E%87%E6%AF%8D%E5%87%BD%E6%95%B0%E3%80%81%E7%9F%A9%E6%AF%8D%E5%87%BD%E6%95%B0%E3%80%81%E7%89%B9%E5%BE%81%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture11 概率母函数、矩母函数、特征函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture12%20%E5%A4%A7%E6%95%B0%E5%AE%9A%E5%BE%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture12 大数定律
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture13%20%E4%B8%AD%E5%BF%83%E6%9E%81%E9%99%90%E5%AE%9A%E7%90%86%E3%80%81%E6%94%B6%E6%95%9B%E6%80%A7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture13 中心极限定理、收敛性
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture14%20%E5%A4%9A%E5%85%83%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture14 多元正态分布
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%9C%9F%E6%9C%AB%E8%AE%B0%E5%BF%86%E8%A6%81%E7%82%B9%E6%B1%87%E6%80%BB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 期末记忆要点汇总
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%A8%A1%E5%9D%971%20%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E7%9A%84%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块1 随机向量的函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%A8%A1%E5%9D%972%20%E6%AC%A1%E5%BA%8F%E7%BB%9F%E8%AE%A1%E9%87%8F%E4%B8%8Ep-%E5%88%86%E4%BD%8D%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块2 次序统计量与p-分位数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%A8%A1%E5%9D%973%20%E6%9C%9F%E6%9C%9B%E4%B8%8E%E6%96%B9%E5%B7%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块3 期望与方差
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%A8%A1%E5%9D%974%20%E6%9D%A1%E4%BB%B6%E6%9C%9F%E6%9C%9B%E3%80%81%E5%8D%8F%E6%96%B9%E5%B7%AE%E4%B8%8E%E4%B8%8D%E7%AD%89%E5%BC%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块4 条件期望、协方差与不等式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%A8%A1%E5%9D%975%20%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0%E4%B8%8E%E7%89%B9%E5%BE%81%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块5 生成函数与特征函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%A8%A1%E5%9D%976%20%E6%94%B6%E6%95%9B%E6%80%A7%E3%80%81%E5%A4%A7%E6%95%B0%E5%BE%8B%E4%B8%8E%E4%B8%AD%E5%BF%83%E6%9E%81%E9%99%90%E5%AE%9A%E7%90%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块6 收敛性、大数律与中心极限定理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%A8%A1%E5%9D%977%20%E5%A4%9A%E5%85%83%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块7 多元正态分布
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    机器学习（lhy）-更新中
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    机器学习（lhy）-更新中
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../P1_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P1 机器学习基本概念简介
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../P2_%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P2 深度学习基本概念简介
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../P3_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%BB%BB%E5%8A%A1%E6%94%BB%E7%95%A5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P3 机器学习任务攻略
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../P4_%E7%B1%BB%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%AD%E7%BB%83%E4%B8%8D%E8%B5%B7%E6%9D%A5%E6%80%8E%E4%B9%88%E5%8A%9E_%E5%B1%80%E9%83%A8%E6%9C%80%E5%B0%8F%E5%80%BC%E4%B8%8E%E9%9E%8D%E7%82%B9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P4 局部最小值与鞍点
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../P5_%E7%B1%BB%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%AD%E7%BB%83%E4%B8%8D%E8%B5%B7%E6%9D%A5%E6%80%8E%E4%B9%88%E5%8A%9E_Batch%E4%B8%8EMomentum/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P5 Batch 与 Momentum
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P6 自适应学习率
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P6 自适应学习率
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0. 本节课一句话总结
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 时间线总览
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 术语表
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-p6-p4-p7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. P6 在 P4-P7 脉络中的位置
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-loss-critical-point" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Loss 不降，不代表卡在 Critical Point
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-critical-point" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 为什么真正走到 Critical Point 反而不容易
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-convex-surface-gd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 狭长峡谷：为什么简单 Convex Surface 也会让 GD 失败
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-optimizer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Optimizer 到底在做什么
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. 自适应学习率的核心原则
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-adagrad-gradient" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. AdaGrad：用全部历史 Gradient 尺度调整步伐
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. AdaGrad：用全部历史 Gradient 尺度调整步伐">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-adagrad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 AdaGrad 为什么能解决峡谷问题
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-adagrad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 AdaGrad 的局限：历史只进不出
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-rmsprop-gradient" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. RMSProp：让近期 Gradient 更重要
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. RMSProp：让近期 Gradient 更重要">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-learning-rate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 为什么同一参数也需要动态 learning rate
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-adam" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Adam：方向估计 + 步伐缩放
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. Adam：方向估计 + 步伐缩放">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#111-momentum-sigma" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.1 为什么 momentum 和 sigma 不会互相抵消
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#112-adam-bias-correction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.2 Adam 的 Bias Correction
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#113-adam" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.3 Adam 是好默认值，但不是永远最好
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-learning-rate-scheduleeta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Learning Rate Schedule：eta 也要随时间变
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-learning-rate-decay" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Learning Rate Decay：后期踩刹车
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-warmup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Warmup：为什么一开始反而要小步走
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14. Warmup：为什么一开始反而要小步走">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#141-warmup-transformer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.1 Warmup 为什么常出现在大模型和 Transformer 中
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. 用一条公式统一本讲
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-adagradrmspropadam" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. AdaGrad、RMSProp、Adam 对比
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. 训练卡住时的诊断表
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. 实作提醒
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="18. 实作提醒">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#181-pytorch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.1 PyTorch 里常见写法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#182-adamw-weight-decay" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.2 AdamW 与 weight decay
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#183-gradient-clipping-adaptive-lr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.3 Gradient clipping 不是 adaptive LR，但常一起出现
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19. 易错点整理
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20. 复习问答
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21. 知识地图
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        22. 本讲总结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../P7_%E7%B1%BB%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%AD%E7%BB%83%E4%B8%8D%E8%B5%B7%E6%9D%A5%E6%80%8E%E4%B9%88%E5%8A%9E_%E5%88%86%E7%B1%BB%E4%B8%8E%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P7 分类与损失函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E7%B1%BB%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%AD%E7%BB%83%E4%B8%8D%E8%B5%B7%E6%9D%A5%E6%80%8E%E4%B9%88%E5%8A%9E_%E6%80%BB%E7%BB%93/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4-7讲类神经网络训练方法总结
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%26%E8%AF%AD%E9%9F%B3%E5%A4%84%E7%90%86%EF%BC%88lhy%EF%BC%89-%E6%9B%B4%E6%96%B0%E4%B8%AD/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    自然语言&语音处理（lhy）-更新中
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    自然语言&语音处理（lhy）-更新中
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%26%E8%AF%AD%E9%9F%B3%E5%A4%84%E7%90%86%EF%BC%88lhy%EF%BC%89-%E6%9B%B4%E6%96%B0%E4%B8%AD/P01_%E8%AF%BE%E7%A8%8B%E6%80%BB%E8%A7%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P01 课程总览
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%26%E8%AF%AD%E9%9F%B3%E5%A4%84%E7%90%86%EF%BC%88lhy%EF%BC%89-%E6%9B%B4%E6%96%B0%E4%B8%AD/P02_%E8%AF%AD%E9%9F%B3%E8%AF%86%E5%88%AB%E4%B8%80_%E4%BB%BB%E5%8A%A1%E5%AE%9A%E4%B9%89%E4%B8%8E%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E8%A1%A8%E7%A4%BA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P02 语音识别：任务定义与输入输出表示
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%26%E8%AF%AD%E9%9F%B3%E5%A4%84%E7%90%86%EF%BC%88lhy%EF%BC%89-%E6%9B%B4%E6%96%B0%E4%B8%AD/P03_%E8%AF%AD%E9%9F%B3%E8%AF%86%E5%88%AB%E4%BA%8C_LAS%E4%B8%8EAttentionSeq2Seq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P03 语音识别：LAS 与 AttentionSeq2Seq
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0. 本节课一句话总结
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 时间线总览
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 术语表
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-p6-p4-p7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. P6 在 P4-P7 脉络中的位置
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-loss-critical-point" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Loss 不降，不代表卡在 Critical Point
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-critical-point" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 为什么真正走到 Critical Point 反而不容易
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-convex-surface-gd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 狭长峡谷：为什么简单 Convex Surface 也会让 GD 失败
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-optimizer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Optimizer 到底在做什么
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. 自适应学习率的核心原则
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-adagrad-gradient" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. AdaGrad：用全部历史 Gradient 尺度调整步伐
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. AdaGrad：用全部历史 Gradient 尺度调整步伐">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-adagrad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 AdaGrad 为什么能解决峡谷问题
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-adagrad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 AdaGrad 的局限：历史只进不出
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-rmsprop-gradient" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. RMSProp：让近期 Gradient 更重要
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. RMSProp：让近期 Gradient 更重要">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-learning-rate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 为什么同一参数也需要动态 learning rate
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-adam" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Adam：方向估计 + 步伐缩放
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. Adam：方向估计 + 步伐缩放">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#111-momentum-sigma" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.1 为什么 momentum 和 sigma 不会互相抵消
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#112-adam-bias-correction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.2 Adam 的 Bias Correction
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#113-adam" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.3 Adam 是好默认值，但不是永远最好
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-learning-rate-scheduleeta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Learning Rate Schedule：eta 也要随时间变
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-learning-rate-decay" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Learning Rate Decay：后期踩刹车
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-warmup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Warmup：为什么一开始反而要小步走
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14. Warmup：为什么一开始反而要小步走">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#141-warmup-transformer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.1 Warmup 为什么常出现在大模型和 Transformer 中
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. 用一条公式统一本讲
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-adagradrmspropadam" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. AdaGrad、RMSProp、Adam 对比
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. 训练卡住时的诊断表
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. 实作提醒
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="18. 实作提醒">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#181-pytorch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.1 PyTorch 里常见写法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#182-adamw-weight-decay" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.2 AdamW 与 weight decay
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#183-gradient-clipping-adaptive-lr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.3 Gradient clipping 不是 adaptive LR，但常一起出现
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19. 易错点整理
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20. 复习问答
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21. 知识地图
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        22. 本讲总结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="p6">P6 类神经网络训练不起来怎么办（三）：自适应学习率<a class="headerlink" href="#p6" title="Permanent link">&para;</a></h1>
+<p>来源：<code>P6【6、类神经网络训练不起来怎么办三 自动调整学习率 Learning Rate】</code></p>
+<pre class="mermaid"><code>flowchart TD
+    A["训练卡住: loss 不再下降"] --&gt; B{"Gradient norm 小吗?"}
+    B -- "小" --&gt; C["可能接近 critical point"]
+    B -- "不小" --&gt; D["可能在峡谷两壁震荡"]
+    D --&gt; E["统一 learning rate 不适合地形"]
+    E --&gt; F["陡峭方向: 步伐太大 -&gt; 震荡"]
+    E --&gt; G["平坦方向: 步伐太小 -&gt; 走很慢"]
+    F --&gt; H["Parameter-dependent LR"]
+    G --&gt; H
+    H --&gt; I["AdaGrad: 累积历史 gradient 尺度"]
+    I --&gt; J["RMSProp: 更重视近期 gradient"]
+    J --&gt; K["Adam: Momentum + RMSProp"]
+    K --&gt; L["Schedule: decay / warmup 控制 eta_t"]</code></pre>
+<h2 id="0">0. 本节课一句话总结<a class="headerlink" href="#0" title="Permanent link">&para;</a></h2>
+<p>训练卡住时，不要立刻说“卡在 local minimum”或“卡在 saddle point”。应该先看 gradient norm：如果 gradient 仍然很大，模型可能只是因为 error surface 某些方向太陡、某些方向太平，导致同一个 learning rate 在陡峭方向震荡、在平坦方向走不动。自适应学习率的核心是让不同参数、不同时间点拥有不同的实际步伐；AdaGrad、RMSProp、Adam、decay、warmup 都是在拆解并回答“该往哪走、每个参数走多大、训练到现在整体走多大”。</p>
+<h2 id="1">1. 时间线总览<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th>课堂内容</th>
+<th>应该听出的主线</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>00:00-03:35</td>
+<td>Loss 不降不一定是 critical point</td>
+<td>训练卡住要先检查 gradient norm</td>
+</tr>
+<tr>
+<td>03:35-05:15</td>
+<td>走到真正 critical point 其实不容易</td>
+<td>多数训练问题发生在还没到 critical point 前</td>
+</tr>
+<tr>
+<td>05:15-09:20</td>
+<td>简单 convex error surface 也可能让 GD 失败</td>
+<td>统一 learning rate 在峡谷地形中很痛苦</td>
+</tr>
+<tr>
+<td>09:20-12:20</td>
+<td>Parameter-dependent learning rate</td>
+<td>每个参数应有自己的实际 learning rate</td>
+</tr>
+<tr>
+<td>12:20-17:10</td>
+<td>AdaGrad：用历史 gradient RMS 缩放步伐</td>
+<td>平坦方向放大步伐，陡峭方向缩小步伐</td>
+</tr>
+<tr>
+<td>17:10-23:05</td>
+<td>RMSProp：同一参数的 learning rate 也应随时间变</td>
+<td>用近期历史而不是全部历史决定尺度</td>
+</tr>
+<tr>
+<td>23:05-27:15</td>
+<td>Adam 与 AdaGrad 效果示例</td>
+<td>Adam 约等于 momentum + RMSProp；AdaGrad 可能后期爆冲</td>
+</tr>
+<tr>
+<td>27:15-29:00</td>
+<td>Learning rate decay</td>
+<td>全局 <code>eta</code> 后期变小，给训练踩刹车</td>
+</tr>
+<tr>
+<td>29:00-34:10</td>
+<td>Warmup</td>
+<td>初期先小步走，收集可靠的 gradient 尺度统计</td>
+</tr>
+<tr>
+<td>34:10-36:40</td>
+<td>Momentum、sigma、schedule 的统一视角</td>
+<td>Momentum 管方向，sigma 管尺度，schedule 管时间节奏</td>
+</tr>
+<tr>
+<td>36:40-37:40</td>
+<td>下一步：能不能直接改变 error surface</td>
+<td>接到后续课程：改架构、activation、loss 等</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2">2. 术语表<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>术语</th>
+<th>中文</th>
+<th>本讲中的作用</th>
+<th>容易误解处</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Optimizer</td>
+<td>优化器</td>
+<td>根据 gradient 更新参数的算法</td>
+<td>不是 loss function，也不是模型结构</td>
+</tr>
+<tr>
+<td>Gradient norm</td>
+<td>梯度长度</td>
+<td>用来判断 gradient 是否真的接近 0</td>
+<td>loss 不降时 gradient norm 不一定小</td>
+</tr>
+<tr>
+<td>Learning rate <code>eta</code></td>
+<td>学习率</td>
+<td>控制整体更新步伐</td>
+<td>太大震荡，太小走不动</td>
+</tr>
+<tr>
+<td>Parameter-dependent LR</td>
+<td>参数相关学习率</td>
+<td>每个参数有自己的实际 learning rate</td>
+<td>不是只有全局 <code>eta</code> 一个步伐</td>
+</tr>
+<tr>
+<td><code>sigma_i^t</code></td>
+<td>缩放因子</td>
+<td>用来缩放第 <code>i</code> 个参数在第 <code>t</code> 步的 learning rate</td>
+<td><code>sigma</code> 大则实际步伐小</td>
+</tr>
+<tr>
+<td>AdaGrad</td>
+<td>自适应梯度方法</td>
+<td>用历史 gradient 平方累计调整每个参数步伐</td>
+<td>历史只增不减，后期可能过小或反应慢</td>
+</tr>
+<tr>
+<td>RMSProp</td>
+<td>均方根传播</td>
+<td>用指数移动平均估计近期 gradient 尺度</td>
+<td>重点是让旧历史逐渐淡出</td>
+</tr>
+<tr>
+<td>Adam</td>
+<td>自适应矩估计</td>
+<td>Momentum + adaptive learning rate</td>
+<td>默认好用，但不代表总是最好</td>
+</tr>
+<tr>
+<td>First moment</td>
+<td>一阶动量</td>
+<td>gradient 的移动平均，负责方向估计</td>
+<td>保留正负号，因此关心方向</td>
+</tr>
+<tr>
+<td>Second moment</td>
+<td>二阶动量</td>
+<td>gradient 平方的移动平均，负责尺度估计</td>
+<td>平方后不关心方向，只关心大小</td>
+</tr>
+<tr>
+<td>Learning rate decay</td>
+<td>学习率衰减</td>
+<td>训练后期逐渐减小全局 <code>eta</code></td>
+<td>和每个参数的 adaptive scaling 是不同层次</td>
+</tr>
+<tr>
+<td>Warmup</td>
+<td>预热</td>
+<td>训练初期让 learning rate 从小逐渐变大</td>
+<td>不是为了学得慢，而是为了先稳定统计量</td>
+</tr>
+<tr>
+<td>Schedule</td>
+<td>学习率排程</td>
+<td>控制 <span class="arithmatex">\(\eta_t\)</span> 随训练时间变化</td>
+<td>解决“不同阶段整体走多大”</td>
+</tr>
+</tbody>
+</table>
+<h2 id="3-p6-p4-p7">3. P6 在 P4-P7 脉络中的位置<a class="headerlink" href="#3-p6-p4-p7" title="Permanent link">&para;</a></h2>
+<p>这一组课都在回答同一个问题：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>为什么神经网络训练不起来？
+</code></pre></div>
+<p>但每讲定位不同：</p>
+<table>
+<thead>
+<tr>
+<th>讲次</th>
+<th>关注点</th>
+<th>核心问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P4</td>
+<td>Critical point</td>
+<td>loss 不降是不是因为 gradient 为 0？</td>
+</tr>
+<tr>
+<td>P5</td>
+<td>Batch 与 Momentum</td>
+<td>gradient 方向有噪声时，怎样让方向更稳定？</td>
+</tr>
+<tr>
+<td>P6</td>
+<td>Adaptive learning rate</td>
+<td>gradient 不小但还是走不动时，步伐尺度是否合适？</td>
+</tr>
+<tr>
+<td>P7</td>
+<td>Loss function</td>
+<td>loss 本身是否造出了不好走的 error surface？</td>
+</tr>
+</tbody>
+</table>
+<p>所以 P6 的关键不是单纯背 optimizer 名称，而是补上训练诊断里的一个分支：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>不是没有方向，而是步伐尺度错了。
+</code></pre></div>
+<p>如果 P5 关心的是“方向的随机性和惯性”，P6 关心的就是“每个方向、每个参数、每个时间点应该走多大”。</p>
+<h2 id="4-loss-critical-point">4. Loss 不降，不代表卡在 Critical Point<a class="headerlink" href="#4-loss-critical-point" title="Permanent link">&para;</a></h2>
+<p>很多人看到训练曲线变平，会自然猜：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>loss 不降
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>  -&gt; gradient 变成 0
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>  -&gt; 卡在 critical point
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>  -&gt; 可能是 local minimum 或 saddle point
+</code></pre></div>
+<p>本讲一开始就提醒：这个判断太快了。</p>
+<p>如果真的卡在 critical point，应该看到：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>gradient norm 很小
+</code></pre></div>
+<p>但课堂中的实验现象是：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>loss 已经几乎不再下降
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>gradient norm 却没有接近 0
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>甚至训练末段 gradient norm 还会上升
+</code></pre></div>
+<p>这说明参数不是“没有力气动”，而是“动了也没有有效降低 loss”。它可能在 error surface 的狭长峡谷两侧来回撞，横向动得很剧烈，但纵向朝最低点推进得很慢。</p>
+<blockquote>
+<p>[!IMPORTANT] 训练诊断原则
+看到 loss plateau，不要先讲故事。先看 gradient norm。如果 gradient norm 很小，才进一步讨论 critical point；如果 gradient norm 不小，就要怀疑 learning rate、optimizer、batch noise、loss surface 形状等问题。</p>
+</blockquote>
+<h2 id="5-critical-point">5. 为什么真正走到 Critical Point 反而不容易<a class="headerlink" href="#5-critical-point" title="Permanent link">&para;</a></h2>
+<p>老师在课堂里补了一个很有意思的观察：上一讲那些分析 Hessian eigenvalue、判断 saddle point/local minimum 的实验，并不是普通 gradient descent 轻易训练出来的。</p>
+<p>原因是普通 gradient descent 很可能在还没靠近 critical point 之前，就已经因为地形和步伐问题走不下去了：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>gradient 仍然不小
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>loss 却降不动
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>参数在地形中震荡或推进很慢
+</code></pre></div>
+<p>这并不是说 critical point 不重要，而是说在实际训练中，critical point 常常不是第一只要抓的“主犯”。很多时候真正的问题更朴素：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>learning rate 不适合这张 error surface。
+</code></pre></div>
+<h2 id="6-convex-surface-gd">6. 狭长峡谷：为什么简单 Convex Surface 也会让 GD 失败<a class="headerlink" href="#6-convex-surface-gd" title="Permanent link">&para;</a></h2>
+<p>课程用一个二维 convex error surface 说明，即使地形已经非常简单，gradient descent 也可能很难走好。</p>
+<p>想象一张等高线是细长椭圆的地形：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>纵向很陡：gradient 很大
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>横向很平：gradient 很小
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>最低点在细长山谷深处
+</code></pre></div>
+<p>如果 learning rate 大：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>纵向一步太大
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>参数从一边谷壁跳到另一边谷壁
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>loss 不再有效下降
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>gradient norm 仍然很大
+</code></pre></div>
+<p>如果 learning rate 小：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>纵向终于不乱跳
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>但横向推进极慢
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>走了很多很多步仍靠近不了最低点
+</code></pre></div>
+<p>课堂中的例子甚至提到：调小 learning rate 后，参数可以滑到谷底并转向，但后面在平坦方向走得极慢，更新十万次仍然离终点很远。</p>
+<p>这说明问题不是“convex 就一定容易”，而是：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>同一个 learning rate 无法同时满足陡峭方向和平坦方向。
+</code></pre></div>
+<pre class="mermaid"><code>flowchart LR
+    A["统一 eta"] --&gt; B{"地形方向"}
+    B -- "陡峭方向" --&gt; C["gradient 大"]
+    C --&gt; D["eta * gradient 太大"]
+    D --&gt; E["震荡 / 跳过谷底"]
+    B -- "平坦方向" --&gt; F["gradient 小"]
+    F --&gt; G["eta * gradient 太小"]
+    G --&gt; H["推进缓慢"]</code></pre>
+<h2 id="7-optimizer">7. Optimizer 到底在做什么<a class="headerlink" href="#7-optimizer" title="Permanent link">&para;</a></h2>
+<p>一次训练通常可以拆成三步：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>1. forward：用当前参数算 prediction 和 loss
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>2. backward：用 backpropagation 算每个参数的 gradient
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>3. optimizer step：根据 gradient 更新参数
+</code></pre></div>
+<p>Gradient 本身只告诉你：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>loss 在当前点往哪个方向上升最快
+</code></pre></div>
+<p>Optimizer 才决定：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>要不要完全相信当前 gradient？
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>每个参数走多大？
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>训练早期和后期是否用同样步伐？
+</code></pre></div>
+<p>普通 gradient descent 对这些问题的回答非常朴素：</p>
+<div class="arithmatex">\[
+\theta_i^{t+1} = \theta_i^t - \eta g_i^t
+\]</div>
+<p>其中：</p>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\theta_i^t\)</span></td>
+<td>第 <code>i</code> 个参数在第 <code>t</code> 步的值</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(g_i^t\)</span></td>
+<td>第 <code>i</code> 个参数在第 <code>t</code> 步的 gradient</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\eta\)</span></td>
+<td>全局 learning rate</td>
+</tr>
+</tbody>
+</table>
+<p>这条公式可以拆成：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>更新方向：-g_i^t
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>更新大小：eta * |g_i^t|
+</code></pre></div>
+<p>它的问题是所有参数共享同一个 <code>eta</code>。如果某些方向很陡、某些方向很平，统一步伐自然会出问题。</p>
+<h2 id="8">8. 自适应学习率的核心原则<a class="headerlink" href="#8" title="Permanent link">&para;</a></h2>
+<p>从峡谷例子中可以抽出一个原则：</p>
+<table>
+<thead>
+<tr>
+<th>地形</th>
+<th style="text-align: right;">Gradient 大小</th>
+<th>希望的 learning rate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>平坦方向</td>
+<td style="text-align: right;">小</td>
+<td>大一点</td>
+</tr>
+<tr>
+<td>陡峭方向</td>
+<td style="text-align: right;">大</td>
+<td>小一点</td>
+</tr>
+</tbody>
+</table>
+<p>也就是说，不同参数、不同方向应该拥有不同的实际 learning rate。</p>
+<p>普通更新是：</p>
+<div class="arithmatex">\[
+\theta_i^{t+1} = \theta_i^t - \eta g_i^t
+\]</div>
+<p>自适应版本写成：</p>
+<div class="arithmatex">\[
+\theta_i^{t+1}
+= \theta_i^t - \frac{\eta}{\sigma_i^t} g_i^t
+\]</div>
+<p>于是第 <code>i</code> 个参数在第 <code>t</code> 步真正使用的实际 learning rate 是：</p>
+<div class="arithmatex">\[
+\frac{\eta}{\sigma_i^t}
+\]</div>
+<p>这里的 <span class="arithmatex">\(\sigma_i^t\)</span> 有两个重要属性：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>parameter-dependent:
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>  不同参数有不同 sigma
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>iteration-dependent:
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>  不同训练步骤有不同 sigma
+</code></pre></div>
+<p>如果某参数过去 gradient 大，说明这个方向可能陡峭：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>sigma 大 -&gt; eta / sigma 小 -&gt; 步伐小
+</code></pre></div>
+<p>如果某参数过去 gradient 小，说明这个方向可能平坦：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>sigma 小 -&gt; eta / sigma 大 -&gt; 步伐大
+</code></pre></div>
+<h2 id="9-adagrad-gradient">9. AdaGrad：用全部历史 Gradient 尺度调整步伐<a class="headerlink" href="#9-adagrad-gradient" title="Permanent link">&para;</a></h2>
+<p>AdaGrad 的想法是：用过去所有 gradient 的平方来估计某个参数方向的尺度。</p>
+<p>一种常见写法是：</p>
+<div class="arithmatex">\[
+s_i^t = \sum_{\tau=1}^{t} (g_i^\tau)^2
+\]</div>
+<p>更新：</p>
+<div class="arithmatex">\[
+\theta_i^{t+1}
+= \theta_i^t - \frac{\eta}{\sqrt{s_i^t+\epsilon}} g_i^t
+\]</div>
+<p>其中：</p>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(s_i^t\)</span></td>
+<td>第 <code>i</code> 个参数到目前为止的 gradient 平方累计</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\sqrt{s_i^t}\)</span></td>
+<td>该参数历史 gradient 尺度</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\epsilon\)</span></td>
+<td>很小的常数，避免除以 0，提高数值稳定性</td>
+</tr>
+</tbody>
+</table>
+<p>课程里用 root mean square 的形式解释：</p>
+<div class="arithmatex">\[
+\sigma_i^t
+= \sqrt{\frac{1}{t+1}\sum_{\tau=0}^{t}(g_i^\tau)^2}
+\]</div>
+<p>这和常见累计形式只差常数尺度，直觉相同：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>历史 gradient 大 -&gt; sigma 大 -&gt; 实际 learning rate 小
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>历史 gradient 小 -&gt; sigma 小 -&gt; 实际 learning rate 大
+</code></pre></div>
+<h3 id="91-adagrad">9.1 AdaGrad 为什么能解决峡谷问题<a class="headerlink" href="#91-adagrad" title="Permanent link">&para;</a></h3>
+<p>在狭长峡谷中：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>陡峭方向 gradient 常常很大
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>平坦方向 gradient 常常很小
+</code></pre></div>
+<p>AdaGrad 会自动让：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>陡峭方向:
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>  sigma 变大
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>  实际 learning rate 变小
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>  减少左右震荡
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>
+<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a>平坦方向:
+<a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a>  sigma 变小
+<a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a>  实际 learning rate 变大
+<a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a>  加快沿谷底前进
+</code></pre></div>
+<p>所以它不是简单把全局 learning rate 调大或调小，而是给每个参数一个自己的缩放。</p>
+<h3 id="92-adagrad">9.2 AdaGrad 的局限：历史只进不出<a class="headerlink" href="#92-adagrad" title="Permanent link">&para;</a></h3>
+<p>AdaGrad 的问题也来自它的优点：它记住全部历史。</p>
+<p>因为：</p>
+<div class="arithmatex">\[
+s_i^t = s_i^{t-1} + (g_i^t)^2
+\]</div>
+<p>所以 <span class="arithmatex">\(s_i^t\)</span> 基本只会越来越大，实际 learning rate：</p>
+<div class="arithmatex">\[
+\frac{\eta}{\sqrt{s_i^t+\epsilon}}
+\]</div>
+<p>会越来越小。</p>
+<p>这会带来两个问题：</p>
+<ol>
+<li>后期步伐可能过小，训练变慢。</li>
+<li>同一个参数所处的地形会随时间改变，但 AdaGrad 让很久以前的 gradient 永远留在统计量里，反应不够灵活。</li>
+</ol>
+<p>课堂中的 AdaGrad 例子很形象：它能在平坦方向继续往终点走，比普通 gradient descent 强很多；但走到某些区域后，某方向因为长期看到很小的 gradient，<code>sigma</code> 变得很小，实际步伐变得很大，最后可能突然喷出去。喷出去后又因为 gradient 变大，<code>sigma</code> 慢慢变大，步伐再缩小，于是又回到峡谷附近。</p>
+<p>这说明 AdaGrad 有用，但还不够稳定。</p>
+<h2 id="10-rmsprop-gradient">10. RMSProp：让近期 Gradient 更重要<a class="headerlink" href="#10-rmsprop-gradient" title="Permanent link">&para;</a></h2>
+<p>RMSProp 可以看成 AdaGrad 的改良：不要让所有历史 gradient 拥有同等权重，而是更重视近期 gradient。</p>
+<p>RMSProp 使用指数移动平均：</p>
+<div class="arithmatex">\[
+v_i^t
+= \alpha v_i^{t-1} + (1-\alpha)(g_i^t)^2
+\]</div>
+<p>更新：</p>
+<div class="arithmatex">\[
+\theta_i^{t+1}
+= \theta_i^t - \frac{\eta}{\sqrt{v_i^t+\epsilon}} g_i^t
+\]</div>
+<p>其中 <code>\alpha</code> 是 hyperparameter：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;"><code>\alpha</code></th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">趋近 1</td>
+<td>更相信过去，统计变化慢</td>
+</tr>
+<tr>
+<td style="text-align: right;">趋近 0</td>
+<td>更相信当前 gradient，统计变化快</td>
+</tr>
+</tbody>
+</table>
+<p>RMSProp 和 AdaGrad 的核心差别：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>记忆方式</th>
+<th>分母变化</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AdaGrad</td>
+<td>全部历史累计</td>
+<td>基本只增不减</td>
+<td>后期步伐容易越来越小，或对地形变化反应慢</td>
+</tr>
+<tr>
+<td>RMSProp</td>
+<td>近期历史的指数移动平均</td>
+<td>可随近期 gradient 变大或变小</td>
+<td>更能适应同一参数在不同阶段的地形变化</td>
+</tr>
+</tbody>
+</table>
+<h3 id="101-learning-rate">10.1 为什么同一参数也需要动态 learning rate<a class="headerlink" href="#101-learning-rate" title="Permanent link">&para;</a></h3>
+<p>课程用新月形 error surface 说明：就算是同一个参数方向，在训练不同位置上也可能一会儿陡、一会儿平。</p>
+<p>所以我们不能只说：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>这个参数永远该用大 learning rate
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>那个参数永远该用小 learning rate
+</code></pre></div>
+<p>更合理的是：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>这个参数现在处在平坦区域 -&gt; 大步
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>之后处在陡峭区域 -&gt; 小步
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>再之后回到平坦区域 -&gt; 再大步
+</code></pre></div>
+<p>RMSProp 的 <code>\alpha</code> 就是在控制“最近看到的地形”对 <code>sigma</code> 的影响速度。</p>
+<h2 id="11-adam">11. Adam：方向估计 + 步伐缩放<a class="headerlink" href="#11-adam" title="Permanent link">&para;</a></h2>
+<p>课堂把 Adam 说成：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>Adam = RMSProp + Momentum
+</code></pre></div>
+<p>这是非常好的直觉。</p>
+<p>更完整地说，Adam 同时维护两类统计量：</p>
+<div class="arithmatex">\[
+m_i^t = \beta_1 m_i^{t-1} + (1-\beta_1)g_i^t
+\]</div>
+<div class="arithmatex">\[
+v_i^t = \beta_2 v_i^{t-1} + (1-\beta_2)(g_i^t)^2
+\]</div>
+<p>其中：</p>
+<table>
+<thead>
+<tr>
+<th>统计量</th>
+<th>记录什么</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>m_i^t</code></td>
+<td>gradient 的指数移动平均</td>
+<td>一阶动量，平滑更新方向</td>
+</tr>
+<tr>
+<td><code>v_i^t</code></td>
+<td>gradient 平方的指数移动平均</td>
+<td>二阶动量，估计梯度尺度</td>
+</tr>
+</tbody>
+</table>
+<p>Adam 的更新直觉是：</p>
+<div class="arithmatex">\[
+\theta_i^{t+1}
+= \theta_i^t - \eta \frac{m_i^t}{\sqrt{v_i^t}+\epsilon}
+\]</div>
+<p>也就是：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>分子 m:
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>  决定往哪个方向走
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>
+<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a>分母 sqrt(v):
+<a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a>  决定这个参数走多大
+<a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a>
+<a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a>外面的 eta:
+<a id="__codelineno-24-8" name="__codelineno-24-8" href="#__codelineno-24-8"></a>  控制整体步伐
+</code></pre></div>
+<h3 id="111-momentum-sigma">11.1 为什么 momentum 和 sigma 不会互相抵消<a class="headerlink" href="#111-momentum-sigma" title="Permanent link">&para;</a></h3>
+<p>课堂最后特别提醒：有人可能会困惑，momentum 和 <code>sigma</code> 都在使用过去 gradient，一个放分子，一个放分母，会不会抵消？</p>
+<p>不会。因为它们使用 gradient 的方式不同：</p>
+<table>
+<thead>
+<tr>
+<th>组件</th>
+<th>使用方式</th>
+<th>是否保留方向</th>
+<th>回答的问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Momentum / <span class="arithmatex">\(m_t\)</span></td>
+<td>对 gradient 做移动平均</td>
+<td>保留正负号</td>
+<td>往哪里走</td>
+</tr>
+<tr>
+<td>RMS / <span class="arithmatex">\(v_t\)</span> / <span class="arithmatex">\(\sigma_t\)</span></td>
+<td>对 gradient 平方做移动平均</td>
+<td>不保留正负号</td>
+<td>这个方向尺度多大</td>
+</tr>
+</tbody>
+</table>
+<p>Momentum 关心：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>过去的 gradient 多数往左还是往右？
+</code></pre></div>
+<p>Second moment 关心：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>过去的 gradient 大不大？
+</code></pre></div>
+<p>所以它们不是同一件事。</p>
+<h3 id="112-adam-bias-correction">11.2 Adam 的 Bias Correction<a class="headerlink" href="#112-adam-bias-correction" title="Permanent link">&para;</a></h3>
+<p>课程没有细讲 Adam 公式，但如果要把机制想通，需要知道 Adam 还有 bias correction。</p>
+<p>因为 <span class="arithmatex">\(m_t\)</span> 和 <span class="arithmatex">\(v_t\)</span> 一开始通常从 0 初始化，训练初期的移动平均会偏小。Adam 会用：</p>
+<div class="arithmatex">\[
+\hat{m}_t = \frac{m_t}{1-\beta_1^t}
+\]</div>
+<div class="arithmatex">\[
+\hat{v}_t = \frac{v_t}{1-\beta_2^t}
+\]</div>
+<p>修正早期统计偏差。完整直觉版更新可以写成：</p>
+<div class="arithmatex">\[
+\theta_i^{t+1}
+= \theta_i^t
+- \eta
+\frac{\hat{m}_i^t}{\sqrt{\hat{v}_i^t}+\epsilon}
+\]</div>
+<p>要知道 Adam 的完整结构：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>一阶动量 m:
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>  平滑方向
+<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>
+<a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a>二阶动量 v:
+<a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a>  缩放步伐
+<a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a>
+<a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a>bias correction:
+<a id="__codelineno-27-8" name="__codelineno-27-8" href="#__codelineno-27-8"></a>  修正训练初期统计量从 0 开始造成的低估
+<a id="__codelineno-27-9" name="__codelineno-27-9" href="#__codelineno-27-9"></a>
+<a id="__codelineno-27-10" name="__codelineno-27-10" href="#__codelineno-27-10"></a>epsilon:
+<a id="__codelineno-27-11" name="__codelineno-27-11" href="#__codelineno-27-11"></a>  防止分母为 0，提升数值稳定性
+</code></pre></div>
+<h3 id="113-adam">11.3 Adam 是好默认值，但不是永远最好<a class="headerlink" href="#113-adam" title="Permanent link">&para;</a></h3>
+<p>实践上，PyTorch、TensorFlow 等框架已经把 Adam 写好，很多时候默认参数就是不错起点：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>beta1 = 0.9
+<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>beta2 = 0.999
+<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a>epsilon = 1e-8
+</code></pre></div>
+<p>但不要把 Adam 理解成“更高级所以一定更好”。它通常收敛快、调参压力小，但有些任务上 SGD + momentum 的泛化效果可能更好。课程这里真正要传达的是 Adam 的结构，而不是给出所有任务的唯一答案。</p>
+<h2 id="12-learning-rate-scheduleeta">12. Learning Rate Schedule：<code>eta</code> 也要随时间变<a class="headerlink" href="#12-learning-rate-scheduleeta" title="Permanent link">&para;</a></h2>
+<p>到目前为止，adaptive learning rate 主要解决：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>不同参数之间的相对步伐怎么调？
+</code></pre></div>
+<p>但更新公式里还有一个全局 <code>eta</code>：</p>
+<div class="arithmatex">\[
+\theta_i^{t+1}
+= \theta_i^t - \frac{\eta}{\sigma_i^t}g_i^t
+\]</div>
+<p>或 Adam 形式：</p>
+<div class="arithmatex">\[
+\theta_i^{t+1}
+= \theta_i^t
+- \eta
+\frac{\hat{m}_i^t}{\sqrt{\hat{v}_i^t}+\epsilon}
+\]</div>
+<p>这个 <code>eta</code> 不一定要固定。Learning rate schedule 的想法是：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>eta -&gt; eta_t
+</code></pre></div>
+<p>也就是让全局 learning rate 随训练时间变化。</p>
+<p>这解决的是另一个层次：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>训练到不同阶段，整体应该走大步还是小步？
+</code></pre></div>
+<h2 id="13-learning-rate-decay">13. Learning Rate Decay：后期踩刹车<a class="headerlink" href="#13-learning-rate-decay" title="Permanent link">&para;</a></h2>
+<p>Learning rate decay 的思想：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>随着训练进行，让 eta_t 逐渐变小。
+</code></pre></div>
+<p>直觉是：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>训练初期:
+<a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a>  离目标较远，可以走大步，快速降低 loss
+<a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a>
+<a id="__codelineno-33-4" name="__codelineno-33-4" href="#__codelineno-33-4"></a>训练后期:
+<a id="__codelineno-33-5" name="__codelineno-33-5" href="#__codelineno-33-5"></a>  接近较好区域，需要小步微调，避免震荡或喷出去
+</code></pre></div>
+<p>课程中 AdaGrad 的例子说明：即使有 adaptive scaling，某些方向的实际步伐也可能因为 <code>sigma</code> 很小而变得过大。Decay 可以把全局 <span class="arithmatex">\(\eta_t\)</span> 压下来：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>局部想乱喷
+<a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a>但全局 eta_t 已经很小
+<a id="__codelineno-34-3" name="__codelineno-34-3" href="#__codelineno-34-3"></a>所以整体更新被刹住
+</code></pre></div>
+<p>常见 decay 形式包括：</p>
+<table>
+<thead>
+<tr>
+<th>Schedule</th>
+<th>直觉</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Step decay</td>
+<td>每隔一段时间把 LR 乘上固定比例</td>
+</tr>
+<tr>
+<td>Exponential decay</td>
+<td>LR 按指数逐渐减小</td>
+</tr>
+<tr>
+<td>Cosine decay</td>
+<td>LR 按余弦曲线平滑减小</td>
+</tr>
+<tr>
+<td>Linear decay</td>
+<td>LR 线性减小</td>
+</tr>
+</tbody>
+</table>
+<p>本讲不要求掌握所有形式，重点是区分两层控制：</p>
+<table>
+<thead>
+<tr>
+<th>层次</th>
+<th>控制对象</th>
+<th>代表方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>参数层次</td>
+<td>不同参数谁走大步、谁走小步</td>
+<td>AdaGrad、RMSProp、Adam</td>
+</tr>
+<tr>
+<td>时间层次</td>
+<td>当前训练阶段整体激进还是保守</td>
+<td>decay、warmup</td>
+</tr>
+</tbody>
+</table>
+<h2 id="14-warmup">14. Warmup：为什么一开始反而要小步走<a class="headerlink" href="#14-warmup" title="Permanent link">&para;</a></h2>
+<p>Warmup 指：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>训练一开始 eta_t 很小
+<a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>随后逐渐增大
+<a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a>达到峰值后再进入 decay
+</code></pre></div>
+<p>整体形状常常是：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>小 -&gt; 大 -&gt; 小
+</code></pre></div>
+<p>这听起来反直觉：既然训练初期离目标远，为什么不一开始就用大 learning rate？</p>
+<p>课堂给出的可能解释是：自适应方法需要估计 <code>sigma</code> 或 <span class="arithmatex">\(v_t\)</span>，而这些统计量一开始不可靠。</p>
+<p>以 RMSProp / Adam 为例，它们都需要根据过去 gradient 估计：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>某个方向到底陡不陡？
+<a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a>某个参数该走多大？
+</code></pre></div>
+<p>但训练刚开始时：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a>看过的 gradient 很少
+<a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a>sigma / v_t 统计不准
+<a id="__codelineno-38-3" name="__codelineno-38-3" href="#__codelineno-38-3"></a>如果 eta_t 太大，可能在统计可靠前就走太远
+</code></pre></div>
+<p>所以 warmup 的作用可以理解为：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a>先小步探索
+<a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a>收集 error surface 和 gradient 尺度信息
+<a id="__codelineno-39-3" name="__codelineno-39-3" href="#__codelineno-39-3"></a>等 sigma / v_t 比较可靠后
+<a id="__codelineno-39-4" name="__codelineno-39-4" href="#__codelineno-39-4"></a>再把 eta_t 提高
+</code></pre></div>
+<blockquote>
+<p>[!NOTE] Warmup 和 Adam bias correction 的关系
+Adam 的 bias correction 会修正早期 <span class="arithmatex">\(m_t\)</span>、<span class="arithmatex">\(v_t\)</span> 从 0 开始造成的统计偏差；warmup 则是在训练系统层面进一步限制早期更新幅度。两者不矛盾：bias correction 修公式，warmup 控节奏。</p>
+</blockquote>
+<h3 id="141-warmup-transformer">14.1 Warmup 为什么常出现在大模型和 Transformer 中<a class="headerlink" href="#141-warmup-transformer" title="Permanent link">&para;</a></h3>
+<p>课堂提到 warmup 不是 BERT/Transformer 以后才出现的技巧，早期 ResNet 等论文中也已经使用。只是 Transformer、BERT 等模型让 warmup 变得更常被讨论。</p>
+<p>原因是大模型训练初期尤其不稳定：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a>参数多
+<a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a>梯度尺度复杂
+<a id="__codelineno-40-3" name="__codelineno-40-3" href="#__codelineno-40-3"></a>normalization、residual、attention 等模块相互影响
+<a id="__codelineno-40-4" name="__codelineno-40-4" href="#__codelineno-40-4"></a>一开始直接大 learning rate 容易爆掉
+</code></pre></div>
+<p>所以许多训练 recipe 会使用：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a>warmup + decay
+</code></pre></div>
+<p>先稳定，再加速，再收敛。</p>
+<h2 id="15">15. 用一条公式统一本讲<a class="headerlink" href="#15" title="Permanent link">&para;</a></h2>
+<p>本讲最适合用一条总公式来理解：</p>
+<div class="arithmatex">\[
+\Delta \theta_i^t
+=
+-\eta_t
+\cdot
+\frac{\text{direction estimate}_i^t}
+{\text{scale estimate}_i^t}
+\]</div>
+<p>也就是：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a>参数更新
+<a id="__codelineno-42-2" name="__codelineno-42-2" href="#__codelineno-42-2"></a>  = 全局时间步伐
+<a id="__codelineno-42-3" name="__codelineno-42-3" href="#__codelineno-42-3"></a>  * 方向估计
+<a id="__codelineno-42-4" name="__codelineno-42-4" href="#__codelineno-42-4"></a>  / 每个参数的尺度估计
+</code></pre></div>
+<p>不同 optimizer 其实是在改这三个部件：</p>
+<table>
+<thead>
+<tr>
+<th>部件</th>
+<th>回答的问题</th>
+<th>朴素做法</th>
+<th>改进做法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Direction estimate</td>
+<td>往哪里走？</td>
+<td>当前 gradient</td>
+<td>Momentum / Adam 一阶动量</td>
+</tr>
+<tr>
+<td>Scale estimate</td>
+<td>每个参数走多大？</td>
+<td>不缩放</td>
+<td>AdaGrad / RMSProp / Adam 二阶动量</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\eta_t\)</span> schedule</td>
+<td>训练不同阶段整体走多大？</td>
+<td>固定 LR</td>
+<td>decay / warmup</td>
+</tr>
+</tbody>
+</table>
+<p>这就是为什么课程最后说，现代 optimizer 的很多变形并没有脱离这几个核心：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a>要么换方向估计
+<a id="__codelineno-43-2" name="__codelineno-43-2" href="#__codelineno-43-2"></a>要么换 sigma / scale 估计
+<a id="__codelineno-43-3" name="__codelineno-43-3" href="#__codelineno-43-3"></a>要么换 learning rate schedule
+</code></pre></div>
+<h2 id="16-adagradrmspropadam">16. AdaGrad、RMSProp、Adam 对比<a class="headerlink" href="#16-adagradrmspropadam" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>使用的历史信息</th>
+<th>解决的问题</th>
+<th>可能的问题</th>
+<th>一句话记忆</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SGD</td>
+<td>当前 gradient</td>
+<td>最基本更新</td>
+<td>方向噪声大，统一 LR 难调</td>
+<td>只看此刻</td>
+</tr>
+<tr>
+<td>Momentum</td>
+<td>过去 gradient 的移动平均</td>
+<td>平滑方向，减少摇摆</td>
+<td>仍没有参数级尺度调整</td>
+<td>带惯性地走</td>
+</tr>
+<tr>
+<td>AdaGrad</td>
+<td>全部历史 <code>g^2</code></td>
+<td>每个参数自动调 learning rate</td>
+<td>历史只进不出，后期可能步伐过小或反应慢</td>
+<td>陡处小步，平处大步</td>
+</tr>
+<tr>
+<td>RMSProp</td>
+<td>近期 <code>g^2</code> 的移动平均</td>
+<td>让尺度估计随近期地形变化</td>
+<td>需调 <code>alpha</code>，仍需全局 schedule</td>
+<td>只让近期历史更有话语权</td>
+</tr>
+<tr>
+<td>Adam</td>
+<td>近期 <code>g</code> + 近期 <code>g^2</code></td>
+<td>同时平滑方向和缩放步伐</td>
+<td>默认好用但不总是泛化最好</td>
+<td>Momentum + RMSProp</td>
+</tr>
+</tbody>
+</table>
+<h2 id="17">17. 训练卡住时的诊断表<a class="headerlink" href="#17" title="Permanent link">&para;</a></h2>
+<p>P6 是“训练不起来”系列，因此最有用的不是只背 optimizer，而是能诊断现象。</p>
+<table>
+<thead>
+<tr>
+<th>现象</th>
+<th>可能原因</th>
+<th>优先检查 / 尝试</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>loss 不降，gradient norm 很小</td>
+<td>可能接近 critical point、activation 饱和、loss 设计问题</td>
+<td>检查 gradient norm、activation、initialization</td>
+</tr>
+<tr>
+<td>loss 不降，gradient norm 不小</td>
+<td>可能在峡谷两壁震荡，learning rate 不合适</td>
+<td>降 LR、换 Adam/RMSProp、看 loss 是否震荡</td>
+</tr>
+<tr>
+<td>loss 大幅震荡</td>
+<td>全局 LR 太大，或某方向步伐太大</td>
+<td>降 LR、加 decay、gradient clipping</td>
+</tr>
+<tr>
+<td>loss 初期直接爆炸</td>
+<td>初始 LR 太大，warmup 不够，统计量未稳定</td>
+<td>加 warmup、减小初始 LR</td>
+</tr>
+<tr>
+<td>loss 下降很慢</td>
+<td>LR 太小，平坦方向推进不足</td>
+<td>提高 LR、用 adaptive optimizer</td>
+</tr>
+<tr>
+<td>前期快，后期不稳</td>
+<td>全局 <span class="arithmatex">\(\eta_t\)</span> 后期太大</td>
+<td>加 decay / cosine schedule</td>
+</tr>
+<tr>
+<td>Adam 很快收敛但泛化一般</td>
+<td>optimizer 与 regularization 选择可能不合适</td>
+<td>试 SGD + momentum、调整 weight decay</td>
+</tr>
+</tbody>
+</table>
+<p>这个表不是替代实验，而是提醒排查顺序：先看现象，再猜原因，最后改 optimizer 或 schedule。</p>
+<h2 id="18">18. 实作提醒<a class="headerlink" href="#18" title="Permanent link">&para;</a></h2>
+<h3 id="181-pytorch">18.1 PyTorch 里常见写法<a class="headerlink" href="#181-pytorch" title="Permanent link">&para;</a></h3>
+<p>Adam 常见写法：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a><span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span>
+<a id="__codelineno-44-2" name="__codelineno-44-2" href="#__codelineno-44-2"></a>    <span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span>
+<a id="__codelineno-44-3" name="__codelineno-44-3" href="#__codelineno-44-3"></a>    <span class="n">lr</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span>
+<a id="__codelineno-44-4" name="__codelineno-44-4" href="#__codelineno-44-4"></a>    <span class="n">betas</span><span class="o">=</span><span class="p">(</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.999</span><span class="p">),</span>
+<a id="__codelineno-44-5" name="__codelineno-44-5" href="#__codelineno-44-5"></a>    <span class="n">eps</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">,</span>
+<a id="__codelineno-44-6" name="__codelineno-44-6" href="#__codelineno-44-6"></a><span class="p">)</span>
+</code></pre></div>
+<p>训练循环中：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a><span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+<a id="__codelineno-45-2" name="__codelineno-45-2" href="#__codelineno-45-2"></a><span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+<a id="__codelineno-45-3" name="__codelineno-45-3" href="#__codelineno-45-3"></a><span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+</code></pre></div>
+<p>这里 <code>loss.backward()</code> 只负责算 gradient；真正更新参数的是 <code>optimizer.step()</code>。</p>
+<h3 id="182-adamw-weight-decay">18.2 AdamW 与 weight decay<a class="headerlink" href="#182-adamw-weight-decay" title="Permanent link">&para;</a></h3>
+<p>现代训练中常看到 AdamW：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a><span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">AdamW</span><span class="p">(</span>
+<a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a>    <span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span>
+<a id="__codelineno-46-3" name="__codelineno-46-3" href="#__codelineno-46-3"></a>    <span class="n">lr</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span>
+<a id="__codelineno-46-4" name="__codelineno-46-4" href="#__codelineno-46-4"></a>    <span class="n">weight_decay</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
+<a id="__codelineno-46-5" name="__codelineno-46-5" href="#__codelineno-46-5"></a><span class="p">)</span>
+</code></pre></div>
+<p>AdamW 的核心是 decoupled weight decay：把 weight decay 从 adaptive gradient update 中解耦出来。对 Transformer/BERT 类模型，AdamW 往往比普通 Adam 加 L2 式 weight decay 更常用。</p>
+<p>这不是本讲主线，但它能帮你把课程内容和现代训练实践接起来：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a>Adam:
+<a id="__codelineno-47-2" name="__codelineno-47-2" href="#__codelineno-47-2"></a>  解决方向与参数尺度问题
+<a id="__codelineno-47-3" name="__codelineno-47-3" href="#__codelineno-47-3"></a>
+<a id="__codelineno-47-4" name="__codelineno-47-4" href="#__codelineno-47-4"></a>AdamW:
+<a id="__codelineno-47-5" name="__codelineno-47-5" href="#__codelineno-47-5"></a>  在 Adam 基础上更合理地处理 weight decay
+</code></pre></div>
+<h3 id="183-gradient-clipping-adaptive-lr">18.3 Gradient clipping 不是 adaptive LR，但常一起出现<a class="headerlink" href="#183-gradient-clipping-adaptive-lr" title="Permanent link">&para;</a></h3>
+<p>如果训练中出现梯度爆炸，常见补救是 gradient clipping：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">clip_grad_norm_</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">max_norm</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+</code></pre></div>
+<p>它和 adaptive learning rate 不是同一件事：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a>adaptive LR:
+<a id="__codelineno-49-2" name="__codelineno-49-2" href="#__codelineno-49-2"></a>  根据历史 gradient 尺度调整每个参数步伐
+<a id="__codelineno-49-3" name="__codelineno-49-3" href="#__codelineno-49-3"></a>
+<a id="__codelineno-49-4" name="__codelineno-49-4" href="#__codelineno-49-4"></a>gradient clipping:
+<a id="__codelineno-49-5" name="__codelineno-49-5" href="#__codelineno-49-5"></a>  当前 gradient norm 太大时直接截断
+</code></pre></div>
+<p>但在大模型、RNN、Transformer 等训练中，它们经常和 warmup、AdamW 一起构成训练 recipe。</p>
+<h2 id="19">19. 易错点整理<a class="headerlink" href="#19" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>易错点</th>
+<th>正确理解</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>loss 不降就等于卡在 local minimum</td>
+<td>先看 gradient norm；gradient 不小则可能是步伐或地形问题</td>
+</tr>
+<tr>
+<td>gradient 大就一定能继续降 loss</td>
+<td>方向可能在峡谷两侧来回震荡，没有有效向谷底推进</td>
+</tr>
+<tr>
+<td>learning rate 只需要调一个全局值</td>
+<td>不同参数、不同方向可能需要不同实际 learning rate</td>
+</tr>
+<tr>
+<td>AdaGrad 只是自动调大 LR</td>
+<td>AdaGrad 会根据历史 gradient 尺度同时放大平坦方向、缩小陡峭方向</td>
+</tr>
+<tr>
+<td>RMSProp 和 AdaGrad 差不多</td>
+<td>RMSProp 让近期 gradient 更重要，旧历史会逐渐淡出</td>
+</tr>
+<tr>
+<td>Adam 只是更高级的 SGD</td>
+<td>Adam 同时做方向平滑和参数尺度缩放</td>
+</tr>
+<tr>
+<td>Momentum 和 second moment 会抵消</td>
+<td>Momentum 保留方向，second moment 只看大小，不会抵消</td>
+</tr>
+<tr>
+<td>decay 和 adaptive LR 是一回事</td>
+<td>adaptive LR 管参数间相对步伐，decay 管全局时间节奏</td>
+</tr>
+<tr>
+<td>warmup 是为了让模型一开始慢慢学</td>
+<td>warmup 更重要的是让早期统计量稳定，避免一开始走太猛</td>
+</tr>
+<tr>
+<td>Adam 默认一定最好</td>
+<td>Adam 是好起点，但不同任务可能需要 SGD、AdamW 或其他 optimizer</td>
+</tr>
+</tbody>
+</table>
+<h2 id="20">20. 复习问答<a class="headerlink" href="#20" title="Permanent link">&para;</a></h2>
+<p><strong>Q1：loss 不降时，为什么不能马上说卡在 critical point？</strong><br />
+A：因为 critical point 意味着 gradient 接近 0，但实际训练中 loss plateau 时 gradient norm 可能仍然很大。此时更可能是参数在崎岖地形中震荡或步伐不合适。</p>
+<p><strong>Q2：为什么简单 convex error surface 也可能难训练？</strong><br />
+A：如果地形是狭长峡谷，陡峭方向需要小 learning rate，平坦方向需要大 learning rate。单一全局 LR 无法同时满足两个方向。</p>
+<p><strong>Q3：自适应 learning rate 的大原则是什么？</strong><br />
+A：gradient 大的方向通常较陡，实际 learning rate 应小；gradient 小的方向通常较平，实际 learning rate 应大。</p>
+<p><strong>Q4：AdaGrad 如何计算每个参数的尺度？</strong><br />
+A：它累计该参数过去 gradient 的平方，再开根号作为分母，用来缩放实际 learning rate。</p>
+<p><strong>Q5：AdaGrad 的主要问题是什么？</strong><br />
+A：它记住全部历史，累计量基本只增不减，因此后期实际 learning rate 可能过小，也可能对地形变化反应慢。</p>
+<p><strong>Q6：RMSProp 相比 AdaGrad 改进在哪里？</strong><br />
+A：RMSProp 用指数移动平均，让近期 gradient 更重要，旧历史逐渐淡出，所以同一参数的 learning rate 可以随当前地形动态调整。</p>
+<p><strong>Q7：Adam 为什么可以理解成 Momentum + RMSProp？</strong><br />
+A：Adam 用一阶动量 <span class="arithmatex">\(m_t\)</span> 平滑方向，用二阶动量 <span class="arithmatex">\(v_t\)</span> 缩放每个参数步伐，所以结合了 momentum 和 adaptive learning rate。</p>
+<p><strong>Q8：Momentum 和 <code>sigma</code> 为什么不会互相抵消？</strong><br />
+A：Momentum 保留 gradient 的正负号，关心方向；<code>sigma</code> 来自 gradient 平方，关心大小。它们回答的问题不同。</p>
+<p><strong>Q9：learning rate decay 的目的是什么？</strong><br />
+A：训练后期减小全局 <span class="arithmatex">\(\eta_t\)</span>，让参数更新变谨慎，避免在低 loss 区域震荡或因为局部尺度估计导致爆冲。</p>
+<p><strong>Q10：warmup 的可能原因是什么？</strong><br />
+A：训练初期 <code>sigma</code>、<span class="arithmatex">\(v_t\)</span> 等统计量不可靠，先用小 learning rate 收集梯度尺度信息，等统计较稳定后再提高 learning rate。</p>
+<p><strong>Q11：optimizer 的三个核心问题是什么？</strong><br />
+A：方向怎么估计、每个参数的尺度怎么估计、不同训练阶段全局步伐怎么安排。</p>
+<p><strong>Q12：AdamW 和 Adam 有什么关系？</strong><br />
+A：AdamW 在 Adam 的基础上把 weight decay 从 adaptive update 中解耦出来，是现代深度学习，尤其 Transformer 类模型中常见的 optimizer。</p>
+<h2 id="21">21. 知识地图<a class="headerlink" href="#21" title="Permanent link">&para;</a></h2>
+<pre class="mermaid"><code>mindmap
+  root((P6 自适应学习率))
+    训练卡住
+      Loss不降
+      先看GradientNorm
+      不一定CriticalPoint
+    峡谷地形
+      陡峭方向
+        Gradient大
+        需要小步
+      平坦方向
+        Gradient小
+        需要大步
+      统一LR困难
+    Optimizer三问
+      方向怎么估计
+      参数尺度怎么估计
+      时间节奏怎么安排
+    AdaptiveLR
+      ParameterDependentLR
+      Sigma缩放
+      Eta除以Sigma
+    AdaGrad
+      全部历史g平方
+      平坦方向加速
+      陡峭方向减速
+      历史只进不出
+    RMSProp
+      近期g平方
+      指数移动平均
+      Alpha控制记忆长度
+    Adam
+      Momentum
+      FirstMoment
+      SecondMoment
+      BiasCorrection
+    Schedule
+      Decay
+        后期踩刹车
+      Warmup
+        初期收集统计
+    实作
+      PyTorchOptimizerStep
+      AdamW
+      GradientClipping</code></pre>
+<h2 id="22">22. 本讲总结<a class="headerlink" href="#22" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a>训练卡住时:
+<a id="__codelineno-50-2" name="__codelineno-50-2" href="#__codelineno-50-2"></a>  不要马上说卡在 local minimum / saddle point
+<a id="__codelineno-50-3" name="__codelineno-50-3" href="#__codelineno-50-3"></a>  先检查 gradient norm
+<a id="__codelineno-50-4" name="__codelineno-50-4" href="#__codelineno-50-4"></a>
+<a id="__codelineno-50-5" name="__codelineno-50-5" href="#__codelineno-50-5"></a>如果 gradient 不小但 loss 不降:
+<a id="__codelineno-50-6" name="__codelineno-50-6" href="#__codelineno-50-6"></a>  参数可能在峡谷两壁震荡
+<a id="__codelineno-50-7" name="__codelineno-50-7" href="#__codelineno-50-7"></a>  或在平坦方向推进太慢
+<a id="__codelineno-50-8" name="__codelineno-50-8" href="#__codelineno-50-8"></a>
+<a id="__codelineno-50-9" name="__codelineno-50-9" href="#__codelineno-50-9"></a>根本问题:
+<a id="__codelineno-50-10" name="__codelineno-50-10" href="#__codelineno-50-10"></a>  单一 learning rate 不适合所有参数和所有方向
+<a id="__codelineno-50-11" name="__codelineno-50-11" href="#__codelineno-50-11"></a>
+<a id="__codelineno-50-12" name="__codelineno-50-12" href="#__codelineno-50-12"></a>自适应学习率:
+<a id="__codelineno-50-13" name="__codelineno-50-13" href="#__codelineno-50-13"></a>  theta_i &lt;- theta_i - eta / sigma_i * g_i
+<a id="__codelineno-50-14" name="__codelineno-50-14" href="#__codelineno-50-14"></a>  sigma 大 -&gt; 实际步伐小
+<a id="__codelineno-50-15" name="__codelineno-50-15" href="#__codelineno-50-15"></a>  sigma 小 -&gt; 实际步伐大
+<a id="__codelineno-50-16" name="__codelineno-50-16" href="#__codelineno-50-16"></a>
+<a id="__codelineno-50-17" name="__codelineno-50-17" href="#__codelineno-50-17"></a>AdaGrad:
+<a id="__codelineno-50-18" name="__codelineno-50-18" href="#__codelineno-50-18"></a>  用全部历史 gradient 平方估计尺度
+<a id="__codelineno-50-19" name="__codelineno-50-19" href="#__codelineno-50-19"></a>  可自动放大平坦方向、缩小陡峭方向
+<a id="__codelineno-50-20" name="__codelineno-50-20" href="#__codelineno-50-20"></a>  但历史只进不出
+<a id="__codelineno-50-21" name="__codelineno-50-21" href="#__codelineno-50-21"></a>
+<a id="__codelineno-50-22" name="__codelineno-50-22" href="#__codelineno-50-22"></a>RMSProp:
+<a id="__codelineno-50-23" name="__codelineno-50-23" href="#__codelineno-50-23"></a>  用近期 gradient 平方移动平均估计尺度
+<a id="__codelineno-50-24" name="__codelineno-50-24" href="#__codelineno-50-24"></a>  可以更快适应地形变化
+<a id="__codelineno-50-25" name="__codelineno-50-25" href="#__codelineno-50-25"></a>
+<a id="__codelineno-50-26" name="__codelineno-50-26" href="#__codelineno-50-26"></a>Adam:
+<a id="__codelineno-50-27" name="__codelineno-50-27" href="#__codelineno-50-27"></a>  一阶动量管方向
+<a id="__codelineno-50-28" name="__codelineno-50-28" href="#__codelineno-50-28"></a>  二阶动量管尺度
+<a id="__codelineno-50-29" name="__codelineno-50-29" href="#__codelineno-50-29"></a>  bias correction 修正早期统计偏差
+<a id="__codelineno-50-30" name="__codelineno-50-30" href="#__codelineno-50-30"></a>
+<a id="__codelineno-50-31" name="__codelineno-50-31" href="#__codelineno-50-31"></a>Schedule:
+<a id="__codelineno-50-32" name="__codelineno-50-32" href="#__codelineno-50-32"></a>  decay 管训练后期踩刹车
+<a id="__codelineno-50-33" name="__codelineno-50-33" href="#__codelineno-50-33"></a>  warmup 管训练初期缓启动
+<a id="__codelineno-50-34" name="__codelineno-50-34" href="#__codelineno-50-34"></a>
+<a id="__codelineno-50-35" name="__codelineno-50-35" href="#__codelineno-50-35"></a>最核心的统一公式:
+<a id="__codelineno-50-36" name="__codelineno-50-36" href="#__codelineno-50-36"></a>  update = eta_t * direction estimate / scale estimate
+</code></pre></div>
+<blockquote>
+<p>[!IMPORTANT] 核心结论
+Optimizer 不是神秘黑盒。它本质上在回答三个问题：这一步往哪里走、每个参数走多大、训练到现在整体该走多大。Momentum 改善方向估计，AdaGrad/RMSProp/Adam 改善参数尺度估计，decay/warmup 改善时间节奏。理解这三个部件，就能把本讲的 optimizer 名称串成一条清楚的训练诊断逻辑。</p>
+</blockquote>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "navigation.indexes", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

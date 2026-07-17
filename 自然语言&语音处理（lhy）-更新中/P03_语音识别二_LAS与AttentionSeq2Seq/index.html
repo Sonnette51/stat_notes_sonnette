@@ -1,0 +1,3273 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="清华统计课程笔记">
+      
+      
+      
+        <link rel="canonical" href="https://Sonnette51.github.io/stat_notes_sonnette/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%26%E8%AF%AD%E9%9F%B3%E5%A4%84%E7%90%86%EF%BC%88lhy%EF%BC%89-%E6%9B%B4%E6%96%B0%E4%B8%AD/P03_%E8%AF%AD%E9%9F%B3%E8%AF%86%E5%88%AB%E4%BA%8C_LAS%E4%B8%8EAttentionSeq2Seq/">
+      
+      
+        <link rel="prev" href="../P02_%E8%AF%AD%E9%9F%B3%E8%AF%86%E5%88%AB%E4%B8%80_%E4%BB%BB%E5%8A%A1%E5%AE%9A%E4%B9%89%E4%B8%8E%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E8%A1%A8%E7%A4%BA/">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>P03 语音识别（二）：LAS 与注意力式序列到序列模型 - Sonnette's Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#p03-las" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="Sonnette&#39;s Notes" class="md-header__button md-logo" aria-label="Sonnette's Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Sonnette's Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              P03 语音识别（二）：LAS 与注意力式序列到序列模型
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  数据科学编程
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  初等概率论
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%88lhy%EF%BC%89-%E6%9B%B4%E6%96%B0%E4%B8%AD/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  机器学习（lhy）-更新中
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  自然语言&语音处理（lhy）-更新中
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Sonnette&#39;s Notes" class="md-nav__button md-logo" aria-label="Sonnette's Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Sonnette's Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据科学编程
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数据科学编程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/NumPy%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NumPy 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/Pandas%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pandas 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/Database%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/LLM%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LLM 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/MiningWebData%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mining Web Data 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/TextProcessing%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Text Processing 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/DataVisualization%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Visualization 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/Advanced%20Visualization%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Advanced Visualization 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    初等概率论
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    初等概率论
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture01%20%E6%A6%82%E7%8E%87%E6%A8%A1%E5%9E%8B%E4%B8%8E%E6%80%A7%E8%B4%A8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture01 概率模型与性质
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture02%20%E6%A6%82%E7%8E%87%E7%A9%BA%E9%97%B4%E3%80%81%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture02 概率空间、条件概率
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture03%20%E7%8B%AC%E7%AB%8B%E6%80%A7%E3%80%81%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture03 独立性、随机变量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture04%20%E5%B8%B8%E8%A7%81%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture04 常见随机变量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture05%20%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0%E3%80%81%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E5%87%BD%E6%95%B0%E7%9A%84%E5%88%86%E5%B8%83%E3%80%81%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E7%9A%84%E5%88%86%E5%B8%83%28I%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture05 概率分布函数、随机变量函数的分布、随机向量的分布(I)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture06%20%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E7%9A%84%E5%88%86%E5%B8%83%28II%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture06 随机向量的分布(II)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture07%20%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E5%87%BD%E6%95%B0%E7%9A%84%E5%88%86%E5%B8%83%E3%80%81%E6%AC%A1%E5%BA%8F%E7%BB%9F%E8%AE%A1%E9%87%8F%E3%80%81p%E5%88%86%E4%BD%8D%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture07 随机向量函数的分布、次序统计量、p分位数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture08%20%E6%9C%9F%E6%9C%9B%E3%80%81%E6%96%B9%E5%B7%AE%E3%80%81%E7%9B%B8%E5%85%B3%E4%B8%8D%E7%AD%89%E5%BC%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture08 期望、方差、相关不等式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture09%20%E6%9D%A1%E4%BB%B6%E6%9C%9F%E6%9C%9B%E3%80%81%E6%9D%A1%E4%BB%B6%E6%96%B9%E5%B7%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture09 条件期望、条件方差
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture10%20%E5%8D%8F%E6%96%B9%E5%B7%AE%E3%80%81%E7%9B%B8%E5%85%B3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture10 协方差、相关
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture11%20%E6%A6%82%E7%8E%87%E6%AF%8D%E5%87%BD%E6%95%B0%E3%80%81%E7%9F%A9%E6%AF%8D%E5%87%BD%E6%95%B0%E3%80%81%E7%89%B9%E5%BE%81%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture11 概率母函数、矩母函数、特征函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture12%20%E5%A4%A7%E6%95%B0%E5%AE%9A%E5%BE%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture12 大数定律
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture13%20%E4%B8%AD%E5%BF%83%E6%9E%81%E9%99%90%E5%AE%9A%E7%90%86%E3%80%81%E6%94%B6%E6%95%9B%E6%80%A7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture13 中心极限定理、收敛性
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture14%20%E5%A4%9A%E5%85%83%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture14 多元正态分布
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%9C%9F%E6%9C%AB%E8%AE%B0%E5%BF%86%E8%A6%81%E7%82%B9%E6%B1%87%E6%80%BB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 期末记忆要点汇总
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%A8%A1%E5%9D%971%20%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E7%9A%84%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块1 随机向量的函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%A8%A1%E5%9D%972%20%E6%AC%A1%E5%BA%8F%E7%BB%9F%E8%AE%A1%E9%87%8F%E4%B8%8Ep-%E5%88%86%E4%BD%8D%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块2 次序统计量与p-分位数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%A8%A1%E5%9D%973%20%E6%9C%9F%E6%9C%9B%E4%B8%8E%E6%96%B9%E5%B7%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块3 期望与方差
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%A8%A1%E5%9D%974%20%E6%9D%A1%E4%BB%B6%E6%9C%9F%E6%9C%9B%E3%80%81%E5%8D%8F%E6%96%B9%E5%B7%AE%E4%B8%8E%E4%B8%8D%E7%AD%89%E5%BC%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块4 条件期望、协方差与不等式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%A8%A1%E5%9D%975%20%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0%E4%B8%8E%E7%89%B9%E5%BE%81%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块5 生成函数与特征函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%A8%A1%E5%9D%976%20%E6%94%B6%E6%95%9B%E6%80%A7%E3%80%81%E5%A4%A7%E6%95%B0%E5%BE%8B%E4%B8%8E%E4%B8%AD%E5%BF%83%E6%9E%81%E9%99%90%E5%AE%9A%E7%90%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块6 收敛性、大数律与中心极限定理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%A8%A1%E5%9D%977%20%E5%A4%9A%E5%85%83%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块7 多元正态分布
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%88lhy%EF%BC%89-%E6%9B%B4%E6%96%B0%E4%B8%AD/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    机器学习（lhy）-更新中
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    机器学习（lhy）-更新中
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%88lhy%EF%BC%89-%E6%9B%B4%E6%96%B0%E4%B8%AD/P1_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P1 机器学习基本概念简介
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%88lhy%EF%BC%89-%E6%9B%B4%E6%96%B0%E4%B8%AD/P2_%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P2 深度学习基本概念简介
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%88lhy%EF%BC%89-%E6%9B%B4%E6%96%B0%E4%B8%AD/P3_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%BB%BB%E5%8A%A1%E6%94%BB%E7%95%A5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P3 机器学习任务攻略
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%88lhy%EF%BC%89-%E6%9B%B4%E6%96%B0%E4%B8%AD/P4_%E7%B1%BB%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%AD%E7%BB%83%E4%B8%8D%E8%B5%B7%E6%9D%A5%E6%80%8E%E4%B9%88%E5%8A%9E_%E5%B1%80%E9%83%A8%E6%9C%80%E5%B0%8F%E5%80%BC%E4%B8%8E%E9%9E%8D%E7%82%B9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P4 局部最小值与鞍点
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%88lhy%EF%BC%89-%E6%9B%B4%E6%96%B0%E4%B8%AD/P5_%E7%B1%BB%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%AD%E7%BB%83%E4%B8%8D%E8%B5%B7%E6%9D%A5%E6%80%8E%E4%B9%88%E5%8A%9E_Batch%E4%B8%8EMomentum/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P5 Batch 与 Momentum
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%88lhy%EF%BC%89-%E6%9B%B4%E6%96%B0%E4%B8%AD/P6_%E7%B1%BB%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%AD%E7%BB%83%E4%B8%8D%E8%B5%B7%E6%9D%A5%E6%80%8E%E4%B9%88%E5%8A%9E_%E8%87%AA%E9%80%82%E5%BA%94%E5%AD%A6%E4%B9%A0%E7%8E%87/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P6 自适应学习率
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%88lhy%EF%BC%89-%E6%9B%B4%E6%96%B0%E4%B8%AD/P7_%E7%B1%BB%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%AD%E7%BB%83%E4%B8%8D%E8%B5%B7%E6%9D%A5%E6%80%8E%E4%B9%88%E5%8A%9E_%E5%88%86%E7%B1%BB%E4%B8%8E%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P7 分类与损失函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%88lhy%EF%BC%89-%E6%9B%B4%E6%96%B0%E4%B8%AD/%E7%B1%BB%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%AD%E7%BB%83%E4%B8%8D%E8%B5%B7%E6%9D%A5%E6%80%8E%E4%B9%88%E5%8A%9E_%E6%80%BB%E7%BB%93/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4-7讲类神经网络训练方法总结
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    自然语言&语音处理（lhy）-更新中
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    自然语言&语音处理（lhy）-更新中
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../P01_%E8%AF%BE%E7%A8%8B%E6%80%BB%E8%A7%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P01 课程总览
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../P02_%E8%AF%AD%E9%9F%B3%E8%AF%86%E5%88%AB%E4%B8%80_%E4%BB%BB%E5%8A%A1%E5%AE%9A%E4%B9%89%E4%B8%8E%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E8%A1%A8%E7%A4%BA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P02 语音识别：任务定义与输入输出表示
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P03 语音识别：LAS 与 AttentionSeq2Seq
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P03 语音识别：LAS 与 AttentionSeq2Seq
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        术语表
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#las-seq2seq" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、为什么叫 LAS，而不只叫 seq2seq
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#las" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、LAS 要解决什么问题
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#listenencoder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、Listen：编码器（encoder）如何处理语音
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、Listen：编码器（encoder）如何处理语音">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-encoder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 编码器（encoder）的作用
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 编码器可以用什么网络
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-downsampling-subsampling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 为什么需要降采样（downsampling / subsampling）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#attendattention-las" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、Attend：注意力机制（attention）在 LAS 中做什么
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="四、Attend：注意力机制（attention）在 LAS 中做什么">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-attention" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 注意力机制（attention）的基本形式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-score-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 打分函数（score function）怎么设计
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.2 打分函数（score function）怎么设计">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dot-product-attention" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        点积注意力（dot-product attention）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#additive-attention" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        加性注意力（additive attention）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 语音中的注意力应该大体单调
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-location-aware-attention" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 位置感知注意力（location-aware attention）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#spelldecoder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、Spell：解码器（decoder）如何生成文字
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#beam-search" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、推理：为什么需要束搜索（beam search）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="六、推理：为什么需要束搜索（beam search）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-greedy-decoding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 贪心解码（greedy decoding）的问题
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-beam-search" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 束搜索（beam search）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cross-entropyteacher-forcing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七、训练：交叉熵（cross entropy）与教师强制（teacher forcing）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="七、训练：交叉熵（cross entropy）与教师强制（teacher forcing）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 训练目标
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-teacher-forcing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 教师强制（teacher forcing）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decoder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        八、decoder 为什么像语言模型
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#las_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        九、LAS 的价值与局限
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十、本讲知识地图
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十一、自测问题
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        术语表
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#las-seq2seq" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、为什么叫 LAS，而不只叫 seq2seq
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#las" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、LAS 要解决什么问题
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#listenencoder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、Listen：编码器（encoder）如何处理语音
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、Listen：编码器（encoder）如何处理语音">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-encoder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 编码器（encoder）的作用
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 编码器可以用什么网络
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-downsampling-subsampling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 为什么需要降采样（downsampling / subsampling）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#attendattention-las" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、Attend：注意力机制（attention）在 LAS 中做什么
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="四、Attend：注意力机制（attention）在 LAS 中做什么">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-attention" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 注意力机制（attention）的基本形式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-score-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 打分函数（score function）怎么设计
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.2 打分函数（score function）怎么设计">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dot-product-attention" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        点积注意力（dot-product attention）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#additive-attention" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        加性注意力（additive attention）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 语音中的注意力应该大体单调
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-location-aware-attention" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 位置感知注意力（location-aware attention）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#spelldecoder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、Spell：解码器（decoder）如何生成文字
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#beam-search" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、推理：为什么需要束搜索（beam search）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="六、推理：为什么需要束搜索（beam search）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-greedy-decoding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 贪心解码（greedy decoding）的问题
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-beam-search" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 束搜索（beam search）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cross-entropyteacher-forcing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七、训练：交叉熵（cross entropy）与教师强制（teacher forcing）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="七、训练：交叉熵（cross entropy）与教师强制（teacher forcing）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 训练目标
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-teacher-forcing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 教师强制（teacher forcing）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decoder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        八、decoder 为什么像语言模型
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#las_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        九、LAS 的价值与局限
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十、本讲知识地图
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十一、自测问题
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="p03-las">P03 语音识别（二）：LAS 与注意力式序列到序列模型<a class="headerlink" href="#p03-las" title="Permanent link">&para;</a></h1>
+<h2 id="_1">术语表<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>中文术语</th>
+<th>English term</th>
+<th>缩写/记号</th>
+<th>本讲中的含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>听-注意-拼写模型</td>
+<td>Listen, Attend and Spell</td>
+<td>LAS</td>
+<td>用注意力式序列到序列模型做语音识别</td>
+</tr>
+<tr>
+<td>序列到序列模型</td>
+<td>sequence-to-sequence model</td>
+<td>seq2seq</td>
+<td>输入一个序列，输出另一个序列</td>
+</tr>
+<tr>
+<td>编码器</td>
+<td>encoder</td>
+<td>-</td>
+<td>把声学特征序列转换成隐藏表示</td>
+</tr>
+<tr>
+<td>解码器</td>
+<td>decoder</td>
+<td>-</td>
+<td>根据声学表示和历史输出逐步生成词元/符号（token）</td>
+</tr>
+<tr>
+<td>注意力机制</td>
+<td>attention mechanism</td>
+<td>attention</td>
+<td>对编码器输出加权求和，找当前最相关的声学片段</td>
+</tr>
+<tr>
+<td>上下文向量</td>
+<td>context vector</td>
+<td><span class="arithmatex">\(c_n\)</span></td>
+<td>注意力加权后得到的当前声学摘要</td>
+</tr>
+<tr>
+<td>降采样</td>
+<td>downsampling / subsampling</td>
+<td>-</td>
+<td>缩短声学序列长度，降低计算量</td>
+</tr>
+<tr>
+<td>金字塔式 RNN</td>
+<td>pyramidal RNN</td>
+<td>pRNN</td>
+<td>在层与层之间合并相邻时间步，减少序列长度</td>
+</tr>
+<tr>
+<td>延时神经网络</td>
+<td>Time Delay Neural Network</td>
+<td>TDNN</td>
+<td>语音领域常见的一维卷积式编码器</td>
+</tr>
+<tr>
+<td>受限自注意力</td>
+<td>restricted self-attention</td>
+<td>-</td>
+<td>只在局部窗口内做 self-attention，降低长语音计算量</td>
+</tr>
+<tr>
+<td>位置感知注意力</td>
+<td>location-aware attention</td>
+<td>-</td>
+<td>当前注意力分布参考前一步注意力分布的机制</td>
+</tr>
+<tr>
+<td>贪心解码</td>
+<td>greedy decoding</td>
+<td>-</td>
+<td>每一步只选当前概率最大的词元/符号</td>
+</tr>
+<tr>
+<td>束搜索</td>
+<td>beam search</td>
+<td>-</td>
+<td>每一步保留多个高分候选路径的解码方法</td>
+</tr>
+<tr>
+<td>教师强制</td>
+<td>teacher forcing</td>
+<td>-</td>
+<td>训练时把正确历史词元输入解码器</td>
+</tr>
+<tr>
+<td>语言模型</td>
+<td>language model</td>
+<td>LM</td>
+<td>根据历史文字预测后续文字的模型；LAS decoder 部分承担类似角色</td>
+</tr>
+</tbody>
+</table>
+<h2 id="las-seq2seq">一、为什么叫 LAS，而不只叫 seq2seq<a class="headerlink" href="#las-seq2seq" title="Permanent link">&para;</a></h2>
+<p>LAS 本质上确实是序列到序列模型（sequence-to-sequence model, seq2seq）：输入一串声学特征，输出一串文字 token。但在 ASR 语境里，直接说“seq2seq model”并不够明确，因为 CTC、RNN-T、Neural Transducer 也都是输入序列、输出序列。</p>
+<p>因此课程使用更具体的名称 <strong>Listen, Attend and Spell (LAS)</strong>。它指的是一类 attention-based seq2seq ASR：</p>
+<table>
+<thead>
+<tr>
+<th>名称部分</th>
+<th>对应模块</th>
+<th>做什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Listen</td>
+<td>encoder</td>
+<td>听取并编码整段语音</td>
+</tr>
+<tr>
+<td>Attend</td>
+<td>attention</td>
+<td>在编码后的声学序列中找当前相关位置</td>
+</tr>
+<tr>
+<td>Spell</td>
+<td>decoder</td>
+<td>逐 token 拼出文字</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>[!NOTE] 命名的意义
+LAS 不是“所有 seq2seq ASR”的泛称，而是特指用 attention mechanism 连接 encoder 与 decoder 的那一路模型。</p>
+</blockquote>
+<h2 id="las">二、LAS 要解决什么问题<a class="headerlink" href="#las" title="Permanent link">&para;</a></h2>
+<p>P2 已经把 ASR 写成：</p>
+<div class="arithmatex">\[
+X=(x_1,\ldots,x_T) \rightarrow Y=(y_1,\ldots,y_N)
+\]</div>
+<p>听-注意-拼写模型（Listen, Attend and Spell, LAS）的目标是直接学习：</p>
+<div class="arithmatex">\[
+P(Y\mid X)
+\]</div>
+<p>并把输出序列拆成逐步生成：</p>
+<div class="arithmatex">\[
+P(Y\mid X)=\prod_{n=1}^{N}P(y_n\mid y_{&lt;n},X)
+\]</div>
+<p>也就是说，模型每次生成一个词元/符号（token），生成下一个词元时会参考前面已经生成的词元和整段声音。</p>
+<blockquote>
+<p>[!IMPORTANT] LAS 的三段式
+Listen = 编码器（encoder）编码语音；Attend = 注意力机制（attention mechanism）寻找相关声学片段；Spell = 解码器（decoder）逐词元输出文字。</p>
+</blockquote>
+<pre class="mermaid"><code>flowchart LR
+  A["声学特征序列 X"] --&gt; B["Listen: 编码器（encoder）"]
+  B --&gt; C["隐表示 H"]
+  C --&gt; D["Attend: 注意力机制（attention）"]
+  D --&gt; E["上下文向量（context vector）"]
+  E --&gt; F["Spell: 解码器（decoder）"]
+  F --&gt; G["文字词元序列 Y"]</code></pre>
+<hr />
+<h2 id="listenencoder">三、Listen：编码器（encoder）如何处理语音<a class="headerlink" href="#listenencoder" title="Permanent link">&para;</a></h2>
+<h3 id="31-encoder">3.1 编码器（encoder）的作用<a class="headerlink" href="#31-encoder" title="Permanent link">&para;</a></h3>
+<p>编码器输入声学特征：</p>
+<div class="arithmatex">\[
+x_1,x_2,\ldots,x_T
+\]</div>
+<p>输出新的隐藏表示：</p>
+<div class="arithmatex">\[
+h_1,h_2,\ldots,h_{T'}
+\]</div>
+<p>理想上，编码器要把语音中和识别无关的变化压掉，例如说话人差异、背景噪声、录音设备差异，同时保留语言内容。</p>
+<blockquote>
+<p>[!NOTE] 直觉
+编码器不是简单换个维度，而是在把原始声学序列变成“更适合识别文字”的表示。</p>
+</blockquote>
+<h3 id="32">3.2 编码器可以用什么网络<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>架构</th>
+<th>怎么处理序列</th>
+<th>优点</th>
+<th>问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>递归神经网络 / 长短期记忆网络（RNN / LSTM）</td>
+<td>按时间递归处理</td>
+<td>适合序列，能建模上下文</td>
+<td>长序列慢，不易并行</td>
+</tr>
+<tr>
+<td>双向 RNN / 双向 LSTM（BiRNN / BiLSTM）</td>
+<td>同时看左右上下文</td>
+<td>表示更强</td>
+<td>不能严格在线</td>
+</tr>
+<tr>
+<td>一维卷积网络 / 延时神经网络（1D CNN / Time Delay Neural Network, TDNN）</td>
+<td>沿时间卷积</td>
+<td>并行、局部模式强</td>
+<td>需堆叠扩大感受野</td>
+</tr>
+<tr>
+<td>自注意力（self-attention）</td>
+<td>每个位置关注其他位置</td>
+<td>长程依赖强</td>
+<td>语音序列太长时计算昂贵</td>
+</tr>
+</tbody>
+</table>
+<p>语音中常见做法不是只用一种，而是组合。例如前几层用卷积神经网络（Convolutional Neural Network, CNN）降维/抽局部特征，后面接循环神经网络（RNN）或自注意力（self-attention）。</p>
+<h3 id="33-downsampling-subsampling">3.3 为什么需要降采样（downsampling / subsampling）<a class="headerlink" href="#33-downsampling-subsampling" title="Permanent link">&para;</a></h3>
+<p>语音帧（frame）很密，常见设置是每 10 ms 一帧。一个 10 秒句子就有约 1000 帧，而输出文字可能只有几十个词元。</p>
+<p>因此编码器常做 <strong>降采样（downsampling / subsampling）</strong>：</p>
+<div class="arithmatex">\[
+T \rightarrow T'
+\quad \text{where} \quad T' &lt; T
+\]</div>
+<p>常见方法：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>做法</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>金字塔式 RNN（pyramidal RNN）</td>
+<td>每一层把相邻隐藏状态（hidden state）合并</td>
+<td>减少后续时间步</td>
+</tr>
+<tr>
+<td>时间池化（pooling over time）</td>
+<td>每几个时间步取一个或池化</td>
+<td>降低序列长度</td>
+</tr>
+<tr>
+<td>跨步卷积（strided CNN）</td>
+<td>卷积时跨步移动</td>
+<td>抽特征同时降采样</td>
+</tr>
+<tr>
+<td>受限自注意力（restricted self-attention）</td>
+<td>只看局部窗口</td>
+<td>降低注意力计算量</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>[!IMPORTANT] 关键判断
+降采样不是“小优化”，而是语音序列到序列模型（seq2seq）能否训起来的关键。输入太长会让编码器、注意力机制、解码器都变得困难。</p>
+</blockquote>
+<p>更细一点看，语音模型常见的省计算技巧可以分成几类：</p>
+<table>
+<thead>
+<tr>
+<th>技巧</th>
+<th>解决的问题</th>
+<th>直觉</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pyramidal RNN</td>
+<td>RNN 时间步太多</td>
+<td>把相邻 hidden states 拼接或合并后送到下一层</td>
+</tr>
+<tr>
+<td>pooling over time</td>
+<td>相邻帧高度相似</td>
+<td>每几个时间步保留一个代表</td>
+</tr>
+<tr>
+<td>TDNN / 1D CNN</td>
+<td>局部声学模式重复出现</td>
+<td>用 filter 沿时间扫过语音特征，可用较少参数看局部上下文</td>
+</tr>
+<tr>
+<td>dilated / sparse temporal convolution</td>
+<td>局部窗口太密</td>
+<td>间隔取样，扩大感受野并节省计算</td>
+</tr>
+<tr>
+<td>restricted self-attention</td>
+<td>全局 self-attention 对长语音太贵</td>
+<td>当前帧只看前后固定范围，而不是整段语音</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>[!TIP] 为什么语音特别在意这些技巧
+机器翻译的输入可能只有十几个词，但 10 秒语音就可能有上千帧。LAS 如果不先缩短或限制声学序列，attention 和 decoder 都会被长输入拖垮。</p>
+</blockquote>
+<hr />
+<h2 id="attendattention-las">四、Attend：注意力机制（attention）在 LAS 中做什么<a class="headerlink" href="#attendattention-las" title="Permanent link">&para;</a></h2>
+<h3 id="41-attention">4.1 注意力机制（attention）的基本形式<a class="headerlink" href="#41-attention" title="Permanent link">&para;</a></h3>
+<p>在生成第 <span class="arithmatex">\(n\)</span> 个词元/符号（token）时，解码器有一个状态 <span class="arithmatex">\(z_n\)</span>。注意力机制用 <span class="arithmatex">\(z_n\)</span> 去和编码器输出 <span class="arithmatex">\(h_i\)</span> 比较，得到每个语音帧的权重：</p>
+<div class="arithmatex">\[
+e_{n,i} = \text{score}(z_n,h_i)
+\]</div>
+<p>再做 softmax：</p>
+<div class="arithmatex">\[
+\alpha_{n,i} =
+\frac{\exp(e_{n,i})}{\sum_j \exp(e_{n,j})}
+\]</div>
+<p>最后得到上下文向量（context vector）：</p>
+<div class="arithmatex">\[
+c_n = \sum_i \alpha_{n,i}h_i
+\]</div>
+<p>其中 <span class="arithmatex">\(c_n\)</span> 就是当前生成词元时，从语音中提取出的相关信息。</p>
+<h3 id="42-score-function">4.2 打分函数（score function）怎么设计<a class="headerlink" href="#42-score-function" title="Permanent link">&para;</a></h3>
+<p>常见有两类：</p>
+<h4 id="dot-product-attention">点积注意力（dot-product attention）<a class="headerlink" href="#dot-product-attention" title="Permanent link">&para;</a></h4>
+<p>把 <span class="arithmatex">\(z_n\)</span> 和 <span class="arithmatex">\(h_i\)</span> 变换到同一空间后做内积：</p>
+<div class="arithmatex">\[
+e_{n,i} = (W_q z_n)^\top (W_k h_i)
+\]</div>
+<p>直觉：两个向量越相似，注意力分数越高。</p>
+<h4 id="additive-attention">加性注意力（additive attention）<a class="headerlink" href="#additive-attention" title="Permanent link">&para;</a></h4>
+<p>先把两者加起来过非线性层，再输出分数：</p>
+<div class="arithmatex">\[
+e_{n,i} = v^\top \tanh(W_z z_n + W_h h_i)
+\]</div>
+<p>这类注意力机制参数更多，形式更灵活。</p>
+<h3 id="43">4.3 语音中的注意力应该大体单调<a class="headerlink" href="#43" title="Permanent link">&para;</a></h3>
+<p>翻译中，输出词可能对应输入句子的任意位置；但语音识别不同。语音从左到右展开，文字也大体从左到右生成。</p>
+<p>因此 ASR 中理想的注意力分布通常应当：</p>
+<div class="arithmatex">\[
+\text{随输出词元增加而从左向右移动}
+\]</div>
+<p>如果注意力分布在语音帧上乱跳，往往说明模型学得不稳定。</p>
+<blockquote>
+<p>[!WARNING] LAS 的潜在问题
+普通注意力机制自由度过高，而语音识别的对齐应大致单调。自由度过大可能导致漏字、重复、跳读或训练不稳定。</p>
+</blockquote>
+<h3 id="44-location-aware-attention">4.4 位置感知注意力（location-aware attention）<a class="headerlink" href="#44-location-aware-attention" title="Permanent link">&para;</a></h3>
+<p>为适应语音的单调性，可以让当前注意力分布参考前一步注意力分布：</p>
+<div class="arithmatex">\[
+\alpha_{n} \text{ depends on } \alpha_{n-1}
+\]</div>
+<p>直觉上，模型会学到：上一步看了某个位置，这一步通常应该看它附近或稍微靠右的位置。</p>
+<p>这类方法称为 <strong>位置感知注意力（location-aware attention）</strong>。</p>
+<hr />
+<h2 id="spelldecoder">五、Spell：解码器（decoder）如何生成文字<a class="headerlink" href="#spelldecoder" title="Permanent link">&para;</a></h2>
+<p>解码器每一步输出一个词元/符号（token）分布：</p>
+<div class="arithmatex">\[
+P(y_n\mid y_{&lt;n},X)
+\]</div>
+<p>如果词元集合（token set）的大小为 <span class="arithmatex">\(V\)</span>，解码器输出就是一个 <span class="arithmatex">\(V\)</span> 维 softmax 分布。</p>
+<p>这里的 <span class="arithmatex">\(V\)</span> 取决于 P02 讨论过的 token 选择：</p>
+<table>
+<thead>
+<tr>
+<th>token 选择</th>
+<th>decoder 输出分布的含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>grapheme / character</td>
+<td>每一步预测一个字母、汉字、空格、标点或 <code>&lt;eos&gt;</code></td>
+</tr>
+<tr>
+<td>phoneme</td>
+<td>每一步预测一个音素</td>
+</tr>
+<tr>
+<td>word</td>
+<td>每一步预测一个词</td>
+</tr>
+<tr>
+<td>morpheme / subword</td>
+<td>每一步预测一个子词或语素片段</td>
+</tr>
+<tr>
+<td>byte</td>
+<td>每一步预测一个 UTF-8 byte</td>
+</tr>
+</tbody>
+</table>
+<p>所以 LAS 的 decoder 不是固定“输出字母”的模块；它输出的是你定义好的 token set 上的概率分布。</p>
+<p>例如目标是 <code>cat</code>：</p>
+<pre class="mermaid"><code>flowchart LR
+  A["context c0"] --&gt; B["输出 c"]
+  B --&gt; C["context c1"]
+  C --&gt; D["输出 a"]
+  D --&gt; E["context c2"]
+  E --&gt; F["输出 t"]
+  F --&gt; G["输出 &lt;eos&gt;"]</code></pre>
+<p>解码器需要一个特殊词元：句尾符号（end-of-sentence token, <code>&lt;eos&gt;</code>），表示句子结束。否则模型不知道什么时候停止生成。</p>
+<hr />
+<h2 id="beam-search">六、推理：为什么需要束搜索（beam search）<a class="headerlink" href="#beam-search" title="Permanent link">&para;</a></h2>
+<h3 id="61-greedy-decoding">6.1 贪心解码（greedy decoding）的问题<a class="headerlink" href="#61-greedy-decoding" title="Permanent link">&para;</a></h3>
+<p>贪心解码（greedy decoding）每一步都选当前概率最大的词元/符号（token）：</p>
+<div class="arithmatex">\[
+y_n = \arg\max_y P(y\mid y_{&lt;n},X)
+\]</div>
+<p>问题是：局部最优不一定带来全局最优。第一步选了概率稍低的词元，后面可能进入更高概率的路径。</p>
+<h3 id="62-beam-search">6.2 束搜索（beam search）<a class="headerlink" href="#62-beam-search" title="Permanent link">&para;</a></h3>
+<p>束搜索（beam search）每一步保留 <span class="arithmatex">\(B\)</span> 条当前分数最高的候选路径，<span class="arithmatex">\(B\)</span> 称为束宽（beam size）。</p>
+<pre class="mermaid"><code>flowchart TB
+  A["start"] --&gt; B1["a"]
+  A --&gt; B2["b"]
+  B1 --&gt; C1["aa"]
+  B1 --&gt; C2["ab"]
+  B2 --&gt; C3["ba"]
+  B2 --&gt; C4["bb"]
+  C2 --&gt; D["保留 top-B 路径继续扩展"]
+  C4 --&gt; D</code></pre>
+<p>束宽（beam size）越大，越可能找到高分路径，但计算量越大。</p>
+<blockquote>
+<p>[!TIP] 直觉
+贪心解码（greedy decoding）像每一步只看眼前最顺的选择；束搜索（beam search）像同时保留几条看起来不错的候选路线，走一段再比较。</p>
+</blockquote>
+<hr />
+<h2 id="cross-entropyteacher-forcing">七、训练：交叉熵（cross entropy）与教师强制（teacher forcing）<a class="headerlink" href="#cross-entropyteacher-forcing" title="Permanent link">&para;</a></h2>
+<h3 id="71">7.1 训练目标<a class="headerlink" href="#71" title="Permanent link">&para;</a></h3>
+<p>训练资料给定：</p>
+<div class="arithmatex">\[
+(X, Y^*)
+\]</div>
+<p>其中 <span class="arithmatex">\(Y^*=(y_1^*,\ldots,y_N^*)\)</span> 是正确文字序列。</p>
+<p>在第 <span class="arithmatex">\(n\)</span> 步，模型输出分布 <span class="arithmatex">\(P(y_n\mid y_{&lt;n},X)\)</span>，训练目标是让正确词元的概率尽可能大。常用 <strong>交叉熵损失（cross entropy loss）</strong>：</p>
+<div class="arithmatex">\[
+\mathcal{L}
+= -\sum_{n=1}^{N}\log P(y_n^*\mid y_{&lt;n}^*,X)
+\]</div>
+<h3 id="72-teacher-forcing">7.2 教师强制（teacher forcing）<a class="headerlink" href="#72-teacher-forcing" title="Permanent link">&para;</a></h3>
+<p>训练解码器时，生成第 <span class="arithmatex">\(n\)</span> 个词元前，不把模型上一步“猜出来的词元”喂进去，而是把正确答案中的上一个词元喂进去：</p>
+<div class="arithmatex">\[
+y_{n-1}^{input}=y_{n-1}^*
+\]</div>
+<p>这叫 <strong>教师强制（teacher forcing）</strong>。</p>
+<p>为什么重要？</p>
+<p>如果训练早期模型乱输出，把错误词元继续喂给后面步骤，后面步骤学到的上下文也是乱的。教师强制（teacher forcing）让每一步都在正确前缀条件下学习。</p>
+<blockquote>
+<p>[!IMPORTANT] 教师强制（teacher forcing）的作用
+它把“学会根据正确历史预测下一个词元”这件事稳定下来，避免训练早期错误连锁传播。</p>
+</blockquote>
+<hr />
+<h2 id="decoder">八、decoder 为什么像语言模型<a class="headerlink" href="#decoder" title="Permanent link">&para;</a></h2>
+<p>传统 ASR 系统常把声学模型（acoustic model）和语言模型（language model, LM）分开：声学模型负责“这段声音像什么”，语言模型负责“这串文字自然不自然”。</p>
+<p>LAS 的 decoder 在生成第 <span class="arithmatex">\(n\)</span> 个 token 时使用历史输出：</p>
+<div class="arithmatex">\[
+P(y_n\mid y_{&lt;n},X)
+\]</div>
+<p>这里的 <span class="arithmatex">\(y_{&lt;n}\)</span> 就是语言历史。因此，decoder 不只是把 context vector 翻译成 token，它也在学习类似 language model 的能力：根据已经输出的前缀判断下一个 token 应该是什么。</p>
+<pre class="mermaid"><code>flowchart LR
+  A["历史输出 y_&lt;n"] --&gt; D["LAS decoder"]
+  B["声学上下文 c_n"] --&gt; D
+  D --&gt; C["P(y_n | y_&lt;n, X)"]</code></pre>
+<blockquote>
+<p>[!IMPORTANT] 端到端的含义
+LAS 不一定需要外接 language model，因为 decoder 已经承担了部分 LM 角色。但在实际系统或作业中，额外融合外部 LM 仍可能进一步提升识别效果。</p>
+</blockquote>
+<hr />
+<h2 id="las_1">九、LAS 的价值与局限<a class="headerlink" href="#las_1" title="Permanent link">&para;</a></h2>
+<p>LAS 后来确实可以在较大数据上取得很强结果，并且端到端系统的模型体积可能比传统多模块系统小很多。</p>
+<p>它的价值主要在于：</p>
+<table>
+<thead>
+<tr>
+<th>价值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>端到端</td>
+<td>直接学习 <span class="arithmatex">\(P(Y\mid X)\)</span>，减少传统 ASR 的多模块拼接</td>
+</tr>
+<tr>
+<td>结构直观</td>
+<td>encoder 听语音，attention 找位置，decoder 生成文字</td>
+</tr>
+<tr>
+<td>可学习对齐</td>
+<td>attention weight 常能学出从左到右移动的 alignment</td>
+</tr>
+<tr>
+<td>模型可压缩</td>
+<td>相比传统 acoustic model + pronunciation model + language model 的组合，整体系统可能更紧凑</td>
+</tr>
+</tbody>
+</table>
+<p>Google 等早期 LAS 工作中的 attention 可视化显示，模型往往能学到从左到右移动的注意力轨迹。这很重要，因为它说明 attention 虽然自由度很大，但在足够数据和合适技巧下，模型可以学出符合 ASR 直觉的 alignment。</p>
+<p>但 LAS 也有局限：</p>
+<table>
+<thead>
+<tr>
+<th>局限</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>不天然在线</td>
+<td>encoder 和 attention 往往需要看完整段输入</td>
+</tr>
+<tr>
+<td>输入太长时难训</td>
+<td>语音帧多，注意力计算重</td>
+</tr>
+<tr>
+<td>对齐太自由</td>
+<td>可能出现跳读、漏读、重复</td>
+</tr>
+<tr>
+<td>推理成本高</td>
+<td>束搜索（beam search）需要扩展多条路径</td>
+</tr>
+<tr>
+<td>训练依赖技巧</td>
+<td>降采样、教师强制、注意力设计都很关键</td>
+</tr>
+</tbody>
+</table>
+<p>在线语音识别（online ASR）要求系统边听边输出，不能等整句话结束才开始识别。LAS 的困难在于：普通 attention 会在所有 encoder outputs 上搜索相关位置；如果未来的语音还没听到，attention 的可用范围就不完整。即使限制窗口，也会带来延迟、准确率和复杂度之间的取舍。</p>
+<table>
+<thead>
+<tr>
+<th>在线需求</th>
+<th>LAS 的挑战</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>边听边出字</td>
+<td>普通 attention 依赖完整或较长输入上下文</td>
+</tr>
+<tr>
+<td>低延迟</td>
+<td>beam search 和 attention 都增加计算与等待</td>
+</tr>
+<tr>
+<td>长语音稳定识别</td>
+<td>attention 搜索范围变大，容易漏字或重复</td>
+</tr>
+</tbody>
+</table>
+<p>这就是为什么后续还要讲连接时序分类（Connectionist Temporal Classification, CTC）、RNN 转导器（Recurrent Neural Network Transducer, RNN-T）、神经转导器（Neural Transducer）等模型：它们用不同方式限制对齐、支持在线识别或降低搜索难度。</p>
+<hr />
+<h2 id="_2">十、本讲知识地图<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<pre class="mermaid"><code>mindmap
+  root((LAS))
+    Why LAS
+      attention-based seq2seq ASR
+      not generic seq2seq
+    Listen
+      RNN
+      CNN
+      TDNN
+      自注意力 self-attention
+      降采样 downsampling
+      restricted self-attention
+    Attend
+      点积注意力 dot-product
+      加性注意力 additive
+      上下文向量 context vector
+      位置感知 location-aware
+    Spell
+      解码器 decoder
+      softmax
+      eos
+      language model role
+    Inference
+      贪心解码 greedy decoding
+      束搜索 beam search
+    Training
+      交叉熵 cross entropy
+      教师强制 teacher forcing
+    Limits
+      not naturally online
+      free attention alignment</code></pre>
+<hr />
+<h2 id="_3">十一、自测问题<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<ol>
+<li>LAS 三个词 Listen、Attend、Spell 分别对应模型中的哪三个部分？</li>
+<li>为什么在 ASR 语境里不能简单把 LAS 叫作“seq2seq model”就结束？</li>
+<li>为什么语音编码器（encoder）常常需要降采样（downsampling / subsampling）？</li>
+<li>pyramidal RNN、TDNN、restricted self-attention 分别在节省什么？</li>
+<li>注意力机制中 <span class="arithmatex">\(\alpha_{n,i}\)</span> 和上下文向量 <span class="arithmatex">\(c_n\)</span> 分别代表什么？</li>
+<li>为什么 ASR 的注意力分布通常应大体从左到右移动？</li>
+<li>贪心解码（greedy decoding）为什么不一定找到最高概率序列？</li>
+<li>束宽（beam size）变大会带来什么收益和代价？</li>
+<li>教师强制（teacher forcing）为什么能稳定解码器训练？</li>
+<li>为什么 LAS decoder 可以看成某种 language model？</li>
+<li>LAS 为什么不天然适合在线识别？</li>
+</ol>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "navigation.indexes", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

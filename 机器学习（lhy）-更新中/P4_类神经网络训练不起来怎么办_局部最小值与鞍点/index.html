@@ -1,0 +1,3180 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="清华统计课程笔记">
+      
+      
+      
+        <link rel="canonical" href="https://Sonnette51.github.io/stat_notes_sonnette/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%88lhy%EF%BC%89-%E6%9B%B4%E6%96%B0%E4%B8%AD/P4_%E7%B1%BB%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%AD%E7%BB%83%E4%B8%8D%E8%B5%B7%E6%9D%A5%E6%80%8E%E4%B9%88%E5%8A%9E_%E5%B1%80%E9%83%A8%E6%9C%80%E5%B0%8F%E5%80%BC%E4%B8%8E%E9%9E%8D%E7%82%B9/">
+      
+      
+        <link rel="prev" href="../P3_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%BB%BB%E5%8A%A1%E6%94%BB%E7%95%A5/">
+      
+      
+        <link rel="next" href="../P5_%E7%B1%BB%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%AD%E7%BB%83%E4%B8%8D%E8%B5%B7%E6%9D%A5%E6%80%8E%E4%B9%88%E5%8A%9E_Batch%E4%B8%8EMomentum/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>P4 类神经网络训练不起来怎么办（一）：局部最小值与鞍点 - Sonnette's Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#p4" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="Sonnette&#39;s Notes" class="md-header__button md-logo" aria-label="Sonnette's Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Sonnette's Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              P4 类神经网络训练不起来怎么办（一）：局部最小值与鞍点
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  数据科学编程
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  初等概率论
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  机器学习（lhy）-更新中
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%26%E8%AF%AD%E9%9F%B3%E5%A4%84%E7%90%86%EF%BC%88lhy%EF%BC%89-%E6%9B%B4%E6%96%B0%E4%B8%AD/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  自然语言&语音处理（lhy）-更新中
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Sonnette&#39;s Notes" class="md-nav__button md-logo" aria-label="Sonnette's Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Sonnette's Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据科学编程
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数据科学编程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/NumPy%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NumPy 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/Pandas%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pandas 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/Database%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/LLM%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LLM 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/MiningWebData%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mining Web Data 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/TextProcessing%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Text Processing 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/DataVisualization%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Visualization 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/Advanced%20Visualization%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Advanced Visualization 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    初等概率论
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    初等概率论
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture01%20%E6%A6%82%E7%8E%87%E6%A8%A1%E5%9E%8B%E4%B8%8E%E6%80%A7%E8%B4%A8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture01 概率模型与性质
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture02%20%E6%A6%82%E7%8E%87%E7%A9%BA%E9%97%B4%E3%80%81%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture02 概率空间、条件概率
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture03%20%E7%8B%AC%E7%AB%8B%E6%80%A7%E3%80%81%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture03 独立性、随机变量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture04%20%E5%B8%B8%E8%A7%81%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture04 常见随机变量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture05%20%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0%E3%80%81%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E5%87%BD%E6%95%B0%E7%9A%84%E5%88%86%E5%B8%83%E3%80%81%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E7%9A%84%E5%88%86%E5%B8%83%28I%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture05 概率分布函数、随机变量函数的分布、随机向量的分布(I)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture06%20%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E7%9A%84%E5%88%86%E5%B8%83%28II%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture06 随机向量的分布(II)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture07%20%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E5%87%BD%E6%95%B0%E7%9A%84%E5%88%86%E5%B8%83%E3%80%81%E6%AC%A1%E5%BA%8F%E7%BB%9F%E8%AE%A1%E9%87%8F%E3%80%81p%E5%88%86%E4%BD%8D%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture07 随机向量函数的分布、次序统计量、p分位数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture08%20%E6%9C%9F%E6%9C%9B%E3%80%81%E6%96%B9%E5%B7%AE%E3%80%81%E7%9B%B8%E5%85%B3%E4%B8%8D%E7%AD%89%E5%BC%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture08 期望、方差、相关不等式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture09%20%E6%9D%A1%E4%BB%B6%E6%9C%9F%E6%9C%9B%E3%80%81%E6%9D%A1%E4%BB%B6%E6%96%B9%E5%B7%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture09 条件期望、条件方差
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture10%20%E5%8D%8F%E6%96%B9%E5%B7%AE%E3%80%81%E7%9B%B8%E5%85%B3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture10 协方差、相关
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture11%20%E6%A6%82%E7%8E%87%E6%AF%8D%E5%87%BD%E6%95%B0%E3%80%81%E7%9F%A9%E6%AF%8D%E5%87%BD%E6%95%B0%E3%80%81%E7%89%B9%E5%BE%81%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture11 概率母函数、矩母函数、特征函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture12%20%E5%A4%A7%E6%95%B0%E5%AE%9A%E5%BE%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture12 大数定律
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture13%20%E4%B8%AD%E5%BF%83%E6%9E%81%E9%99%90%E5%AE%9A%E7%90%86%E3%80%81%E6%94%B6%E6%95%9B%E6%80%A7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture13 中心极限定理、收敛性
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture14%20%E5%A4%9A%E5%85%83%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture14 多元正态分布
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%9C%9F%E6%9C%AB%E8%AE%B0%E5%BF%86%E8%A6%81%E7%82%B9%E6%B1%87%E6%80%BB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 期末记忆要点汇总
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%A8%A1%E5%9D%971%20%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E7%9A%84%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块1 随机向量的函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%A8%A1%E5%9D%972%20%E6%AC%A1%E5%BA%8F%E7%BB%9F%E8%AE%A1%E9%87%8F%E4%B8%8Ep-%E5%88%86%E4%BD%8D%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块2 次序统计量与p-分位数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%A8%A1%E5%9D%973%20%E6%9C%9F%E6%9C%9B%E4%B8%8E%E6%96%B9%E5%B7%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块3 期望与方差
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%A8%A1%E5%9D%974%20%E6%9D%A1%E4%BB%B6%E6%9C%9F%E6%9C%9B%E3%80%81%E5%8D%8F%E6%96%B9%E5%B7%AE%E4%B8%8E%E4%B8%8D%E7%AD%89%E5%BC%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块4 条件期望、协方差与不等式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%A8%A1%E5%9D%975%20%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0%E4%B8%8E%E7%89%B9%E5%BE%81%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块5 生成函数与特征函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%A8%A1%E5%9D%976%20%E6%94%B6%E6%95%9B%E6%80%A7%E3%80%81%E5%A4%A7%E6%95%B0%E5%BE%8B%E4%B8%8E%E4%B8%AD%E5%BF%83%E6%9E%81%E9%99%90%E5%AE%9A%E7%90%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块6 收敛性、大数律与中心极限定理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%A8%A1%E5%9D%977%20%E5%A4%9A%E5%85%83%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块7 多元正态分布
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    机器学习（lhy）-更新中
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    机器学习（lhy）-更新中
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../P1_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P1 机器学习基本概念简介
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../P2_%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P2 深度学习基本概念简介
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../P3_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%BB%BB%E5%8A%A1%E6%94%BB%E7%95%A5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P3 机器学习任务攻略
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P4 局部最小值与鞍点
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P4 局部最小值与鞍点
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0. 本节课一句话总结
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-p4-p7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 本讲在 P4-P7 小专题中的位置
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 时间线总览
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 术语表
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Optimization 失败到底是什么
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-local-minimum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 不要一上来就怪 Local Minimum
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-local-minimum-saddle-point" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 为什么要区分 Local Minimum 和 Saddle Point
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-taylor-expansion-gradient-0-hessian" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Taylor Expansion：为什么 Gradient 为 0 后要看 Hessian
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-hessian" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Hessian 是什么
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-hessian-critical-point" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. 用 Hessian 判断 Critical Point 类型
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-toy-network" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Toy Network：一个最小例子
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Toy Network：一个最小例子">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-critical-point" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 找 Critical Point
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-critical-point" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 判断它是哪种 Critical Point
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-saddle-point" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Saddle Point 为什么可以逃离
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-hessian" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. 为什么实际中很少直接用 Hessian
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-local-minimum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. 高维空间：为什么 Local Minimum 可能没那么常见
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-high-loss-critical-point-saddle-point" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. 经验观察：High Loss 的 Critical Point 往往像 Saddle Point
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. 本讲到下一讲的桥
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. 易错点整理
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. 复习问答
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. 知识地图
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19. 本讲总结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../P5_%E7%B1%BB%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%AD%E7%BB%83%E4%B8%8D%E8%B5%B7%E6%9D%A5%E6%80%8E%E4%B9%88%E5%8A%9E_Batch%E4%B8%8EMomentum/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P5 Batch 与 Momentum
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../P6_%E7%B1%BB%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%AD%E7%BB%83%E4%B8%8D%E8%B5%B7%E6%9D%A5%E6%80%8E%E4%B9%88%E5%8A%9E_%E8%87%AA%E9%80%82%E5%BA%94%E5%AD%A6%E4%B9%A0%E7%8E%87/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P6 自适应学习率
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../P7_%E7%B1%BB%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%AD%E7%BB%83%E4%B8%8D%E8%B5%B7%E6%9D%A5%E6%80%8E%E4%B9%88%E5%8A%9E_%E5%88%86%E7%B1%BB%E4%B8%8E%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P7 分类与损失函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E7%B1%BB%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%AD%E7%BB%83%E4%B8%8D%E8%B5%B7%E6%9D%A5%E6%80%8E%E4%B9%88%E5%8A%9E_%E6%80%BB%E7%BB%93/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4-7讲类神经网络训练方法总结
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%26%E8%AF%AD%E9%9F%B3%E5%A4%84%E7%90%86%EF%BC%88lhy%EF%BC%89-%E6%9B%B4%E6%96%B0%E4%B8%AD/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    自然语言&语音处理（lhy）-更新中
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    自然语言&语音处理（lhy）-更新中
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%26%E8%AF%AD%E9%9F%B3%E5%A4%84%E7%90%86%EF%BC%88lhy%EF%BC%89-%E6%9B%B4%E6%96%B0%E4%B8%AD/P01_%E8%AF%BE%E7%A8%8B%E6%80%BB%E8%A7%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P01 课程总览
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%26%E8%AF%AD%E9%9F%B3%E5%A4%84%E7%90%86%EF%BC%88lhy%EF%BC%89-%E6%9B%B4%E6%96%B0%E4%B8%AD/P02_%E8%AF%AD%E9%9F%B3%E8%AF%86%E5%88%AB%E4%B8%80_%E4%BB%BB%E5%8A%A1%E5%AE%9A%E4%B9%89%E4%B8%8E%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E8%A1%A8%E7%A4%BA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P02 语音识别：任务定义与输入输出表示
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%26%E8%AF%AD%E9%9F%B3%E5%A4%84%E7%90%86%EF%BC%88lhy%EF%BC%89-%E6%9B%B4%E6%96%B0%E4%B8%AD/P03_%E8%AF%AD%E9%9F%B3%E8%AF%86%E5%88%AB%E4%BA%8C_LAS%E4%B8%8EAttentionSeq2Seq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P03 语音识别：LAS 与 AttentionSeq2Seq
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0. 本节课一句话总结
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-p4-p7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 本讲在 P4-P7 小专题中的位置
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 时间线总览
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 术语表
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Optimization 失败到底是什么
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-local-minimum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 不要一上来就怪 Local Minimum
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-local-minimum-saddle-point" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 为什么要区分 Local Minimum 和 Saddle Point
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-taylor-expansion-gradient-0-hessian" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Taylor Expansion：为什么 Gradient 为 0 后要看 Hessian
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-hessian" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Hessian 是什么
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-hessian-critical-point" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. 用 Hessian 判断 Critical Point 类型
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-toy-network" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Toy Network：一个最小例子
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Toy Network：一个最小例子">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-critical-point" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 找 Critical Point
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-critical-point" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 判断它是哪种 Critical Point
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-saddle-point" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Saddle Point 为什么可以逃离
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-hessian" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. 为什么实际中很少直接用 Hessian
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-local-minimum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. 高维空间：为什么 Local Minimum 可能没那么常见
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-high-loss-critical-point-saddle-point" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. 经验观察：High Loss 的 Critical Point 往往像 Saddle Point
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. 本讲到下一讲的桥
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. 易错点整理
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. 复习问答
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. 知识地图
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19. 本讲总结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="p4">P4 类神经网络训练不起来怎么办（一）：局部最小值与鞍点<a class="headerlink" href="#p4" title="Permanent link">&para;</a></h1>
+<p>来源：<code>P4【4、类神经网络训练不起来怎么办一 局部最小值 local】</code></p>
+<pre class="mermaid"><code>flowchart TD
+    A["Training loss 不再下降"] --&gt; B{"Gradient norm 是否接近 0?"}
+    B -- "是" --&gt; C["Critical point"]
+    C --&gt; D{"Hessian eigenvalue"}
+    D -- "全部为正" --&gt; E["Local minimum"]
+    D -- "全部为负" --&gt; F["Local maximum"]
+    D -- "有正有负" --&gt; G["Saddle point"]
+    G --&gt; H["沿负 eigenvalue 的 eigenvector 可下降"]
+    B -- "否" --&gt; I["不是本讲主场"]
+    I --&gt; J["后续看 batch / momentum / learning rate / optimizer"]</code></pre>
+<h2 id="0">0. 本节课一句话总结<a class="headerlink" href="#0" title="Permanent link">&para;</a></h2>
+<p>训练卡住时，不能直接说模型卡在 local minimum。正确的第一步是检查 gradient 是否真的接近 0；如果 gradient 近似为 0，这个点叫 critical point。Critical point 还要用 Hessian 的 eigenvalue 判断：全正是 local minimum，全负是 local maximum，有正有负是 saddle point。Saddle point 并不是绝路，因为负 eigenvalue 对应的方向能让 loss 下降；在高维深度学习中，saddle point 和平坦区域往往比真正的 local minimum 更值得警惕。</p>
+<h2 id="1-p4-p7">1. 本讲在 P4-P7 小专题中的位置<a class="headerlink" href="#1-p4-p7" title="Permanent link">&para;</a></h2>
+<p>P4 是整个“训练不起来”诊断链的第一步：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>loss 不降
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  -&gt; 先问 gradient 是否接近 0
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    -&gt; 如果接近 0：进入 P4 的 critical point 分析
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    -&gt; 如果不接近 0：进入 P5/P6，检查 batch、momentum、learning rate、optimizer
+</code></pre></div>
+<p>因此，本讲并不是说训练失败一定来自 critical point，而是先建立一个判断框架：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>只有当 gradient 真的很小，
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>我们才有必要认真讨论 local minimum / saddle point。
+</code></pre></div>
+<h2 id="2">2. 时间线总览<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th>课堂内容</th>
+<th>主线</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>00:00-03:10</td>
+<td>Optimization 失败与 local minimum 误解</td>
+<td>loss 不降不能直接怪 local minimum</td>
+</tr>
+<tr>
+<td>03:10-04:20</td>
+<td>Critical point、local minimum、saddle point</td>
+<td>gradient 为 0 的点有多种类型</td>
+</tr>
+<tr>
+<td>04:20-09:20</td>
+<td>Taylor expansion 与 Hessian</td>
+<td>gradient 为 0 后，一阶项消失，要看二阶项</td>
+</tr>
+<tr>
+<td>09:20-13:40</td>
+<td>用 Hessian eigenvalue 判断地貌</td>
+<td>全正、全负、有正有负对应不同地形</td>
+</tr>
+<tr>
+<td>13:40-19:30</td>
+<td>两参数 toy network</td>
+<td>用具体例子算 critical point 和 Hessian</td>
+</tr>
+<tr>
+<td>19:30-25:30</td>
+<td>Saddle point 可以逃离</td>
+<td>负 eigenvalue 的 eigenvector 指出下降方向</td>
+</tr>
+<tr>
+<td>25:30-33:40</td>
+<td>高维空间直觉与经验观察</td>
+<td>高维中 local minimum 可能没想象中常见</td>
+</tr>
+</tbody>
+</table>
+<h2 id="3">3. 术语表<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>术语</th>
+<th>中文</th>
+<th>本讲中的作用</th>
+<th>容易误解处</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Optimization failure</td>
+<td>优化失败</td>
+<td>模型有能力，但训练没有找到好参数</td>
+<td>不等于 overfitting</td>
+</tr>
+<tr>
+<td>Gradient</td>
+<td>梯度</td>
+<td>指出 loss 上升最快方向</td>
+<td>Gradient 为 0 不代表一定是 local minimum</td>
+</tr>
+<tr>
+<td>Gradient norm</td>
+<td>梯度长度</td>
+<td>判断 gradient 是否真的接近 0</td>
+<td>loss 不降时应先看它</td>
+</tr>
+<tr>
+<td>Critical point</td>
+<td>临界点</td>
+<td>gradient 为 0 的点</td>
+<td>只是统称，不说明点的类型</td>
+</tr>
+<tr>
+<td>Local minimum</td>
+<td>局部最小值</td>
+<td>附近所有方向 loss 都更高</td>
+<td>深度学习中不一定是训练失败主因</td>
+</tr>
+<tr>
+<td>Local maximum</td>
+<td>局部最大值</td>
+<td>附近所有方向 loss 都更低</td>
+<td>理论上可能，训练中较少成为主角</td>
+</tr>
+<tr>
+<td>Saddle point</td>
+<td>鞍点</td>
+<td>有些方向 loss 上升，有些方向下降</td>
+<td>也是 gradient 为 0 的点</td>
+</tr>
+<tr>
+<td>Hessian</td>
+<td>海森矩阵</td>
+<td>loss 对参数的二阶微分矩阵</td>
+<td>用来描述局部曲率</td>
+</tr>
+<tr>
+<td>Eigenvalue</td>
+<td>特征值</td>
+<td>判断 Hessian 在某方向上的弯曲正负</td>
+<td>负值意味着存在下降方向</td>
+</tr>
+<tr>
+<td>Eigenvector</td>
+<td>特征向量</td>
+<td>对应某个曲率方向</td>
+<td>负 eigenvalue 的 eigenvector 可指示逃离方向</td>
+</tr>
+</tbody>
+</table>
+<h2 id="4-optimization">4. Optimization 失败到底是什么<a class="headerlink" href="#4-optimization" title="Permanent link">&para;</a></h2>
+<p>在训练 neural network 时，我们希望参数不断 update 后，training loss 会越来越低：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>参数 update
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>  -&gt; training loss 下降
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>  -&gt; 模型在训练集上表现更好
+</code></pre></div>
+<p>但实际可能看到：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>training loss 降到某个值后不再下降
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>可是这个 loss 仍然很高
+</code></pre></div>
+<p>这和 overfitting 不一样。Overfitting 是：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>training loss 低
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>testing loss 高
+</code></pre></div>
+<p>而 optimization failure 是：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>training loss 本身就降不下去
+</code></pre></div>
+<p>如果 deep network 甚至不如 linear model 或 shallow network，说明不是模型表达能力不够，而是训练没有把能力发挥出来。</p>
+<h2 id="5-local-minimum">5. 不要一上来就怪 Local Minimum<a class="headerlink" href="#5-local-minimum" title="Permanent link">&para;</a></h2>
+<p>看到 loss 不降，常见直觉是：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>是不是 gradient = 0？
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>是不是卡在 local minimum？
+</code></pre></div>
+<p>但这句话只对了一半。</p>
+<p>如果参数位置是 <span class="arithmatex">\(\theta'\)</span>，gradient 为：</p>
+<div class="arithmatex">\[
+g = \nabla_\theta L(\theta')
+\]</div>
+<p>当：</p>
+<div class="arithmatex">\[
+g = 0
+\]</div>
+<p>我们只能说 <span class="arithmatex">\(\theta'\)</span> 是 critical point。Critical point 包含三类：</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>附近地貌</th>
+<th>训练意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Local minimum</td>
+<td>附近所有方向 loss 都更高</td>
+<td>可能较难靠局部下降继续走</td>
+</tr>
+<tr>
+<td>Local maximum</td>
+<td>附近所有方向 loss 都更低</td>
+<td>理论上可离开，但 gradient 本身为 0</td>
+</tr>
+<tr>
+<td>Saddle point</td>
+<td>有些方向高，有些方向低</td>
+<td>仍存在能让 loss 降低的方向</td>
+</tr>
+</tbody>
+</table>
+<p>所以更准确的说法是：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>loss 不降也许是因为走到 critical point，
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>但不能直接说是 local minimum。
+</code></pre></div>
+<blockquote>
+<p>[!IMPORTANT] 本讲第一原则
+“卡住”不是一个解释，而是一个现象。要解释它，先看 gradient norm；如果 gradient 接近 0，再讨论 critical point 类型。</p>
+</blockquote>
+<h2 id="6-local-minimum-saddle-point">6. 为什么要区分 Local Minimum 和 Saddle Point<a class="headerlink" href="#6-local-minimum-saddle-point" title="Permanent link">&para;</a></h2>
+<p>如果真的到达 critical point，为什么还要继续区分？</p>
+<p>因为两者的处置直觉不同。</p>
+<p>Local minimum：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>附近所有方向 loss 都更高
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>局部看起来无路可走
+</code></pre></div>
+<p>Saddle point：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>某些方向 loss 更高
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>某些方向 loss 更低
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>只要找到下降方向，仍可以离开
+</code></pre></div>
+<p>所以，判断一个 critical point 的类型不是纯数学兴趣，而是为了回答：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>这里到底是不是真的没路了？
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>还是只是 gradient 暂时没有告诉我该往哪走？
+</code></pre></div>
+<h2 id="7-taylor-expansion-gradient-0-hessian">7. Taylor Expansion：为什么 Gradient 为 0 后要看 Hessian<a class="headerlink" href="#7-taylor-expansion-gradient-0-hessian" title="Permanent link">&para;</a></h2>
+<p>神经网络的完整 loss surface 很复杂，通常无法直接画出来。但在某个参数点 <span class="arithmatex">\(\theta'\)</span> 附近，可以用 Taylor expansion 近似：</p>
+<div class="arithmatex">\[
+L(\theta)
+\approx
+L(\theta')
++(\theta-\theta')^\top g
++\frac{1}{2}(\theta-\theta')^\top H(\theta-\theta')
+\]</div>
+<p>其中：</p>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\theta'\)</span></td>
+<td>当前参数位置</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\theta\)</span></td>
+<td>附近另一个参数位置</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(g\)</span></td>
+<td>在 <span class="arithmatex">\(\theta'\)</span> 处的 gradient</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(H\)</span></td>
+<td>在 <span class="arithmatex">\(\theta'\)</span> 处的 Hessian</td>
+</tr>
+</tbody>
+</table>
+<p>这个式子可以这样读：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>附近 loss
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>≈ 当前 loss
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>  + 一阶变化
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>  + 二阶弯曲变化
+</code></pre></div>
+<p>如果 <span class="arithmatex">\(\theta'\)</span> 是 critical point，那么：</p>
+<div class="arithmatex">\[
+g = 0
+\]</div>
+<p>于是中间的一阶项消失：</p>
+<div class="arithmatex">\[
+(\theta-\theta')^\top g = 0
+\]</div>
+<p>附近地貌主要由二阶项决定：</p>
+<div class="arithmatex">\[
+\frac{1}{2}(\theta-\theta')^\top H(\theta-\theta')
+\]</div>
+<p>这就是为什么 critical point 分析要看 Hessian：gradient 已经没信息了，只能看 loss surface 如何弯曲。</p>
+<h2 id="8-hessian">8. Hessian 是什么<a class="headerlink" href="#8-hessian" title="Permanent link">&para;</a></h2>
+<p>假设参数向量是：</p>
+<div class="arithmatex">\[
+\theta = [\theta_1,\theta_2,\ldots,\theta_n]^\top
+\]</div>
+<p>Hessian 是一个二阶微分矩阵：</p>
+<div class="arithmatex">\[
+H_{ij}
+=
+\frac{\partial^2 L}{\partial \theta_i \partial \theta_j}
+\]</div>
+<p>也就是：</p>
+<div class="arithmatex">\[
+H =
+\begin{bmatrix}
+\frac{\partial^2 L}{\partial \theta_1^2}
+&amp;
+\frac{\partial^2 L}{\partial \theta_1\partial \theta_2}
+&amp;
+\cdots
+\\
+\frac{\partial^2 L}{\partial \theta_2\partial \theta_1}
+&amp;
+\frac{\partial^2 L}{\partial \theta_2^2}
+&amp;
+\cdots
+\\
+\vdots &amp; \vdots &amp; \ddots
+\end{bmatrix}
+\]</div>
+<p>Gradient 告诉你当前点“往哪个方向上升最快”；Hessian 告诉你当前点附近“各个方向是往上弯还是往下弯”。</p>
+<h2 id="9-hessian-critical-point">9. 用 Hessian 判断 Critical Point 类型<a class="headerlink" href="#9-hessian-critical-point" title="Permanent link">&para;</a></h2>
+<p>令：</p>
+<div class="arithmatex">\[
+v = \theta - \theta'
+\]</div>
+<p>在 critical point 附近，关键看：</p>
+<div class="arithmatex">\[
+v^\top H v
+\]</div>
+<p>如果对所有非零 <span class="arithmatex">\(v\)</span> 都有：</p>
+<div class="arithmatex">\[
+v^\top H v &gt; 0
+\]</div>
+<p>那么附近所有方向 loss 都上升，<span class="arithmatex">\(\theta'\)</span> 是 local minimum。</p>
+<p>如果对所有非零 <span class="arithmatex">\(v\)</span> 都有：</p>
+<div class="arithmatex">\[
+v^\top H v &lt; 0
+\]</div>
+<p>那么附近所有方向 loss 都下降，<span class="arithmatex">\(\theta'\)</span> 是 local maximum。</p>
+<p>如果有些方向 <span class="arithmatex">\(v\)</span> 让它大于 0，有些方向让它小于 0，那么附近有高有低，<span class="arithmatex">\(\theta'\)</span> 是 saddle point。</p>
+<p>实际判断时，不需要把所有 <span class="arithmatex">\(v\)</span> 都试一遍，只要看 Hessian 的 eigenvalue：</p>
+<table>
+<thead>
+<tr>
+<th>Hessian eigenvalue</th>
+<th>结论</th>
+<th>直觉</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全部为正</td>
+<td>Local minimum</td>
+<td>所有方向往上弯</td>
+</tr>
+<tr>
+<td>全部为负</td>
+<td>Local maximum</td>
+<td>所有方向往下弯</td>
+</tr>
+<tr>
+<td>有正有负</td>
+<td>Saddle point</td>
+<td>有的方向上升，有的方向下降</td>
+</tr>
+</tbody>
+</table>
+<h2 id="10-toy-network">10. Toy Network：一个最小例子<a class="headerlink" href="#10-toy-network" title="Permanent link">&para;</a></h2>
+<p>课程用一个极简 network：</p>
+<div class="arithmatex">\[
+y = w_1 w_2 x
+\]</div>
+<p>训练资料只有一笔：</p>
+<div class="arithmatex">\[
+x = 1,\qquad \hat{y}=1
+\]</div>
+<p>使用 squared error：</p>
+<div class="arithmatex">\[
+L(w_1,w_2)
+=
+(\hat{y}-w_1w_2x)^2
+=
+(1-w_1w_2)^2
+\]</div>
+<p>这个 network 只有两个参数 <span class="arithmatex">\(w_1,w_2\)</span>，所以可以直接想象它的 error surface。</p>
+<h3 id="101-critical-point">10.1 找 Critical Point<a class="headerlink" href="#101-critical-point" title="Permanent link">&para;</a></h3>
+<p>对 <span class="arithmatex">\(w_1\)</span> 和 <span class="arithmatex">\(w_2\)</span> 求偏微分：</p>
+<div class="arithmatex">\[
+\frac{\partial L}{\partial w_1}
+=
+-2(1-w_1w_2)w_2
+\]</div>
+<div class="arithmatex">\[
+\frac{\partial L}{\partial w_2}
+=
+-2(1-w_1w_2)w_1
+\]</div>
+<p>在原点：</p>
+<div class="arithmatex">\[
+w_1 = 0,\qquad w_2 = 0
+\]</div>
+<p>两个偏微分都是 0，因此原点是 critical point。</p>
+<h3 id="102-critical-point">10.2 判断它是哪种 Critical Point<a class="headerlink" href="#102-critical-point" title="Permanent link">&para;</a></h3>
+<p>Hessian 在原点附近可以算成：</p>
+<div class="arithmatex">\[
+H(0,0)
+=
+\begin{bmatrix}
+0 &amp; -2\\
+-2 &amp; 0
+\end{bmatrix}
+\]</div>
+<p>这个矩阵的 eigenvalue 是：</p>
+<div class="arithmatex">\[
+\lambda_1 = 2,\qquad \lambda_2 = -2
+\]</div>
+<p>有正有负，所以原点不是 local minimum，而是 saddle point。</p>
+<p>这就是本讲最重要的例子：即使 gradient 为 0，也不能直接说“卡在 local minimum”。</p>
+<h2 id="11-saddle-point">11. Saddle Point 为什么可以逃离<a class="headerlink" href="#11-saddle-point" title="Permanent link">&para;</a></h2>
+<p>如果 Hessian 有负 eigenvalue，设：</p>
+<div class="arithmatex">\[
+Hu = \lambda u
+\]</div>
+<p>其中 <span class="arithmatex">\(u\)</span> 是 eigenvector，<span class="arithmatex">\(\lambda\)</span> 是对应 eigenvalue。</p>
+<p>如果：</p>
+<div class="arithmatex">\[
+\lambda &lt; 0
+\]</div>
+<p>那么：</p>
+<div class="arithmatex">\[
+u^\top H u
+=
+u^\top(\lambda u)
+=
+\lambda \|u\|^2
+&lt; 0
+\]</div>
+<p>把 <span class="arithmatex">\(v\)</span> 取成 <span class="arithmatex">\(u\)</span>，Taylor expansion 的二阶项就是负的：</p>
+<div class="arithmatex">\[
+\frac{1}{2}u^\top H u &lt; 0
+\]</div>
+<p>所以如果从 <span class="arithmatex">\(\theta'\)</span> 沿着 <span class="arithmatex">\(u\)</span> 方向移动：</p>
+<div class="arithmatex">\[
+\theta = \theta' + \epsilon u
+\]</div>
+<p>对足够小的 <span class="arithmatex">\(\epsilon\)</span>，loss 有机会下降：</p>
+<div class="arithmatex">\[
+L(\theta) &lt; L(\theta')
+\]</div>
+<p>这说明 saddle point 并不是绝路。虽然 gradient 在这个点为 0，但 Hessian 的负 eigenvalue 会告诉我们“哪里还有下坡”。</p>
+<h2 id="12-hessian">12. 为什么实际中很少直接用 Hessian<a class="headerlink" href="#12-hessian" title="Permanent link">&para;</a></h2>
+<p>虽然 Hessian 很有解释力，但实际训练大型神经网络时很少直接用它逃离 saddle point。</p>
+<p>原因是：</p>
+<ul>
+<li>Hessian 是二阶微分，计算成本高；</li>
+<li>参数数量可能是百万、千万、上亿，Hessian 规模巨大；</li>
+<li>算 eigenvalue / eigenvector 的代价更高；</li>
+<li>训练中每一步都这样做几乎不可承受。</li>
+</ul>
+<p>所以本讲讲 Hessian 的主要目的不是让你实际训练时手算它，而是建立直觉：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>如果卡在 saddle point，理论上仍有下降方向。
+</code></pre></div>
+<p>后续 P5 的 noisy mini-batch、momentum，以及 P6 的 adaptive optimizer，都是更实际的训练技巧。</p>
+<h2 id="13-local-minimum">13. 高维空间：为什么 Local Minimum 可能没那么常见<a class="headerlink" href="#13-local-minimum" title="Permanent link">&para;</a></h2>
+<p>课程用一个高维直觉说明：低维看起来封闭的地方，高维可能有路。</p>
+<p>在一维或二维图上，一个点可能看起来像 local minimum：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>左右都高
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>前后也高
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>看起来没有下降方向
+</code></pre></div>
+<p>但神经网络参数空间不是二维。参数有多少，error surface 的维度就有多少：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>1000 万个参数 -&gt; 1000 万维 error surface
+</code></pre></div>
+<p>维度越高，可能的方向越多。低维切片中看似无路的地方，在更高维方向上可能仍能下降。</p>
+<p>所以我们应该谨慎看待低维可视化：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>二维图上的 local minimum
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>不一定是高维空间里的真正 local minimum
+</code></pre></div>
+<p>它可能只是一个 saddle point，只是下降方向藏在我们没画出来的维度里。</p>
+<h2 id="14-high-loss-critical-point-saddle-point">14. 经验观察：High Loss 的 Critical Point 往往像 Saddle Point<a class="headerlink" href="#14-high-loss-critical-point-saddle-point" title="Permanent link">&para;</a></h2>
+<p>课程提到一些实验观察：</p>
+<ul>
+<li>训练多个 network，直到它们停在 gradient 很小的地方；</li>
+<li>对这些参数计算 Hessian 的 eigenvalue；</li>
+<li>观察 training loss 和 Hessian eigenvalue 的关系。</li>
+</ul>
+<p>一个常见现象是：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>loss 还很高的 critical point
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>往往有很多负 eigenvalue
+</code></pre></div>
+<p>负 eigenvalue 意味着：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>仍有方向可以让 loss 下降。
+</code></pre></div>
+<p>因此，高 loss 处的卡住往往不像真正所有方向都上升的 local minimum，而更像 saddle point 或平坦区域。</p>
+<h2 id="15">15. 本讲到下一讲的桥<a class="headerlink" href="#15" title="Permanent link">&para;</a></h2>
+<p>P4 到这里给出一个重要修正：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>不要一训练不起来就怪 local minimum。
+</code></pre></div>
+<p>但这还不是完整答案。因为 P4 主要分析的是：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>gradient 接近 0 时怎么办？
+</code></pre></div>
+<p>下一讲 P5 会换一个角度看实际训练过程：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>训练时我们通常不是用 full batch 算完整 gradient，
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>而是用 mini-batch 估计 gradient。
+</code></pre></div>
+<p>这会带来两个新问题：</p>
+<ol>
+<li>Mini-batch 的 gradient 有 noise，这个 noise 是坏事还是好事？</li>
+<li>如果当前 gradient 很小，能不能利用过去方向继续走？</li>
+</ol>
+<p>这两个问题分别引出：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>Batch size
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>Momentum
+</code></pre></div>
+<h2 id="16">16. 易错点整理<a class="headerlink" href="#16" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>易错点</th>
+<th>正确理解</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>loss 不降就等于 local minimum</td>
+<td>先看 gradient norm；gradient 为 0 也只是 critical point</td>
+</tr>
+<tr>
+<td>critical point 一定是 local minimum</td>
+<td>critical point 可能是 local minimum、local maximum 或 saddle point</td>
+</tr>
+<tr>
+<td>Hessian 是训练时常用工具</td>
+<td>Hessian 主要用于理解；大型网络中直接算通常太贵</td>
+</tr>
+<tr>
+<td>低维图上的 local minimum 就是真 local minimum</td>
+<td>高维空间可能还有未画出的下降方向</td>
+</tr>
+</tbody>
+</table>
+<h2 id="17">17. 复习问答<a class="headerlink" href="#17" title="Permanent link">&para;</a></h2>
+<p><strong>Q1：为什么不能说训练不起来就是卡在 local minimum？</strong><br />
+A：因为 loss 不降只是现象。即使 gradient 为 0，也只能说明到达 critical point；critical point 不一定是 local minimum。</p>
+<p><strong>Q2：critical point 是什么？</strong><br />
+A：Gradient 为 0 的点，也就是 <span class="arithmatex">\(\nabla_\theta L(\theta)=0\)</span> 的点。</p>
+<p><strong>Q3：critical point 有哪些类型？</strong><br />
+A：Local minimum、local maximum、saddle point。</p>
+<p><strong>Q4：为什么 critical point 附近要看 Hessian？</strong><br />
+A：因为在 critical point 处 gradient 为 0，Taylor expansion 的一阶项消失，附近地貌主要由二阶项和 Hessian 决定。</p>
+<p><strong>Q5：Hessian eigenvalue 如何判断地形？</strong><br />
+A：全正是 local minimum，全负是 local maximum，有正有负是 saddle point。</p>
+<p><strong>Q6：saddle point 为什么还能逃离？</strong><br />
+A：如果 Hessian 有负 eigenvalue，对应 eigenvector 方向会让二阶项为负，沿这个方向移动可以降低 loss。</p>
+<p><strong>Q7：为什么实际训练中很少直接计算 Hessian？</strong><br />
+A：因为 Hessian 计算量和存储量都很大，求 eigenvalue/eigenvector 代价更高。</p>
+<p><strong>Q8：为什么高维空间中 local minimum 可能没那么常见？</strong><br />
+A：维度越高，可走方向越多；低维看起来无路的地方，高维可能仍有下降方向。</p>
+<h2 id="18">18. 知识地图<a class="headerlink" href="#18" title="Permanent link">&para;</a></h2>
+<pre class="mermaid"><code>mindmap
+  root((P4 局部最小值与鞍点))
+    训练卡住
+      Loss不降
+      先看GradientNorm
+      不要直接怪LocalMinimum
+    CriticalPoint
+      Gradient为0
+      LocalMinimum
+      LocalMaximum
+      SaddlePoint
+    TaylorExpansion
+      一阶项Gradient
+      二阶项Hessian
+      CriticalPoint处一阶项消失
+    Hessian
+      Eigenvalue全正
+        LocalMinimum
+      Eigenvalue全负
+        LocalMaximum
+      Eigenvalue有正有负
+        SaddlePoint
+    SaddlePoint
+      负Eigenvalue
+      Eigenvector下降方向
+      理论可逃离
+    高维直觉
+      低维无路
+      高维可能有路
+      LocalMinimum未必常见
+    通往P5
+      MiniBatchNoise
+      Momentum</code></pre>
+<h2 id="19">19. 本讲总结<a class="headerlink" href="#19" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>训练不起来:
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>  不要马上说 local minimum
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>
+<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>第一步:
+<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>  检查 gradient norm
+<a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a>
+<a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a>如果 gradient 接近 0:
+<a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a>  这是 critical point
+<a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a>  critical point 可能是 local minimum / local maximum / saddle point
+<a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a>
+<a id="__codelineno-22-11" name="__codelineno-22-11" href="#__codelineno-22-11"></a>判断方式:
+<a id="__codelineno-22-12" name="__codelineno-22-12" href="#__codelineno-22-12"></a>  看 Hessian eigenvalue
+<a id="__codelineno-22-13" name="__codelineno-22-13" href="#__codelineno-22-13"></a>  全正 -&gt; local minimum
+<a id="__codelineno-22-14" name="__codelineno-22-14" href="#__codelineno-22-14"></a>  全负 -&gt; local maximum
+<a id="__codelineno-22-15" name="__codelineno-22-15" href="#__codelineno-22-15"></a>  有正有负 -&gt; saddle point
+<a id="__codelineno-22-16" name="__codelineno-22-16" href="#__codelineno-22-16"></a>
+<a id="__codelineno-22-17" name="__codelineno-22-17" href="#__codelineno-22-17"></a>关键直觉:
+<a id="__codelineno-22-18" name="__codelineno-22-18" href="#__codelineno-22-18"></a>  saddle point 仍有下降方向
+<a id="__codelineno-22-19" name="__codelineno-22-19" href="#__codelineno-22-19"></a>  负 eigenvalue 的 eigenvector 指出可下降方向
+<a id="__codelineno-22-20" name="__codelineno-22-20" href="#__codelineno-22-20"></a>
+<a id="__codelineno-22-21" name="__codelineno-22-21" href="#__codelineno-22-21"></a>深度学习中的重要启发:
+<a id="__codelineno-22-22" name="__codelineno-22-22" href="#__codelineno-22-22"></a>  高维空间里 local minimum 未必是最常见障碍
+<a id="__codelineno-22-23" name="__codelineno-22-23" href="#__codelineno-22-23"></a>  loss 不降还可能来自 batch、momentum、learning rate、optimizer、loss function
+</code></pre></div>
+<blockquote>
+<p>[!IMPORTANT] 核心结论
+P4 的重点不是教你把所有训练失败都解释成 Hessian 问题，而是建立第一层诊断：loss 不降时，先确认 gradient 是否真的接近 0；如果是，再讨论 critical point 的类型。Local minimum 不是唯一可能，saddle point 也会让 gradient 为 0，而且在高维神经网络中，saddle point 和平坦区域往往比真正无路可走的 local minimum 更值得关注。</p>
+</blockquote>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "navigation.indexes", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

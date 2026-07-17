@@ -1,0 +1,3761 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="清华统计课程笔记">
+      
+      
+      
+        <link rel="canonical" href="https://Sonnette51.github.io/stat_notes_sonnette/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%88lhy%EF%BC%89-%E6%9B%B4%E6%96%B0%E4%B8%AD/P3_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%BB%BB%E5%8A%A1%E6%94%BB%E7%95%A5/">
+      
+      
+        <link rel="prev" href="../P2_%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E7%AE%80%E4%BB%8B/">
+      
+      
+        <link rel="next" href="../P4_%E7%B1%BB%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%AD%E7%BB%83%E4%B8%8D%E8%B5%B7%E6%9D%A5%E6%80%8E%E4%B9%88%E5%8A%9E_%E5%B1%80%E9%83%A8%E6%9C%80%E5%B0%8F%E5%80%BC%E4%B8%8E%E9%9E%8D%E7%82%B9/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>P3 第二节：机器学习任务攻略 - Sonnette's Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#p3" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="Sonnette&#39;s Notes" class="md-header__button md-logo" aria-label="Sonnette's Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Sonnette's Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              P3 第二节：机器学习任务攻略
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  数据科学编程
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  初等概率论
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  机器学习（lhy）-更新中
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%26%E8%AF%AD%E9%9F%B3%E5%A4%84%E7%90%86%EF%BC%88lhy%EF%BC%89-%E6%9B%B4%E6%96%B0%E4%B8%AD/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  自然语言&语音处理（lhy）-更新中
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Sonnette&#39;s Notes" class="md-nav__button md-logo" aria-label="Sonnette's Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Sonnette's Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据科学编程
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数据科学编程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/NumPy%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NumPy 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/Pandas%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pandas 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/Database%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/LLM%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LLM 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/MiningWebData%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mining Web Data 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/TextProcessing%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Text Processing 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/DataVisualization%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Visualization 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%BC%96%E7%A8%8B/Advanced%20Visualization%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Advanced Visualization 讲义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    初等概率论
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    初等概率论
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture01%20%E6%A6%82%E7%8E%87%E6%A8%A1%E5%9E%8B%E4%B8%8E%E6%80%A7%E8%B4%A8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture01 概率模型与性质
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture02%20%E6%A6%82%E7%8E%87%E7%A9%BA%E9%97%B4%E3%80%81%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture02 概率空间、条件概率
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture03%20%E7%8B%AC%E7%AB%8B%E6%80%A7%E3%80%81%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture03 独立性、随机变量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture04%20%E5%B8%B8%E8%A7%81%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture04 常见随机变量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture05%20%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0%E3%80%81%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E5%87%BD%E6%95%B0%E7%9A%84%E5%88%86%E5%B8%83%E3%80%81%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E7%9A%84%E5%88%86%E5%B8%83%28I%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture05 概率分布函数、随机变量函数的分布、随机向量的分布(I)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture06%20%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E7%9A%84%E5%88%86%E5%B8%83%28II%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture06 随机向量的分布(II)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture07%20%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E5%87%BD%E6%95%B0%E7%9A%84%E5%88%86%E5%B8%83%E3%80%81%E6%AC%A1%E5%BA%8F%E7%BB%9F%E8%AE%A1%E9%87%8F%E3%80%81p%E5%88%86%E4%BD%8D%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture07 随机向量函数的分布、次序统计量、p分位数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture08%20%E6%9C%9F%E6%9C%9B%E3%80%81%E6%96%B9%E5%B7%AE%E3%80%81%E7%9B%B8%E5%85%B3%E4%B8%8D%E7%AD%89%E5%BC%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture08 期望、方差、相关不等式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture09%20%E6%9D%A1%E4%BB%B6%E6%9C%9F%E6%9C%9B%E3%80%81%E6%9D%A1%E4%BB%B6%E6%96%B9%E5%B7%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture09 条件期望、条件方差
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture10%20%E5%8D%8F%E6%96%B9%E5%B7%AE%E3%80%81%E7%9B%B8%E5%85%B3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture10 协方差、相关
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture11%20%E6%A6%82%E7%8E%87%E6%AF%8D%E5%87%BD%E6%95%B0%E3%80%81%E7%9F%A9%E6%AF%8D%E5%87%BD%E6%95%B0%E3%80%81%E7%89%B9%E5%BE%81%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture11 概率母函数、矩母函数、特征函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture12%20%E5%A4%A7%E6%95%B0%E5%AE%9A%E5%BE%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture12 大数定律
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture13%20%E4%B8%AD%E5%BF%83%E6%9E%81%E9%99%90%E5%AE%9A%E7%90%86%E3%80%81%E6%94%B6%E6%95%9B%E6%80%A7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture13 中心极限定理、收敛性
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/Lecture14%20%E5%A4%9A%E5%85%83%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture14 多元正态分布
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%9C%9F%E6%9C%AB%E8%AE%B0%E5%BF%86%E8%A6%81%E7%82%B9%E6%B1%87%E6%80%BB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 期末记忆要点汇总
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%A8%A1%E5%9D%971%20%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F%E7%9A%84%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块1 随机向量的函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%A8%A1%E5%9D%972%20%E6%AC%A1%E5%BA%8F%E7%BB%9F%E8%AE%A1%E9%87%8F%E4%B8%8Ep-%E5%88%86%E4%BD%8D%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块2 次序统计量与p-分位数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%A8%A1%E5%9D%973%20%E6%9C%9F%E6%9C%9B%E4%B8%8E%E6%96%B9%E5%B7%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块3 期望与方差
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%A8%A1%E5%9D%974%20%E6%9D%A1%E4%BB%B6%E6%9C%9F%E6%9C%9B%E3%80%81%E5%8D%8F%E6%96%B9%E5%B7%AE%E4%B8%8E%E4%B8%8D%E7%AD%89%E5%BC%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块4 条件期望、协方差与不等式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%A8%A1%E5%9D%975%20%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0%E4%B8%8E%E7%89%B9%E5%BE%81%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块5 生成函数与特征函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%A8%A1%E5%9D%976%20%E6%94%B6%E6%95%9B%E6%80%A7%E3%80%81%E5%A4%A7%E6%95%B0%E5%BE%8B%E4%B8%8E%E4%B8%AD%E5%BF%83%E6%9E%81%E9%99%90%E5%AE%9A%E7%90%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块6 收敛性、大数律与中心极限定理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%9D%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%A8%A1%E5%9D%977%20%E5%A4%9A%E5%85%83%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习 模块7 多元正态分布
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    机器学习（lhy）-更新中
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    机器学习（lhy）-更新中
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../P1_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P1 机器学习基本概念简介
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../P2_%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P2 深度学习基本概念简介
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P3 机器学习任务攻略
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P3 机器学习任务攻略
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0. 本讲主线
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 时间线总览
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 前期作业的共同结构
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-training-loss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 结果不好时，第一件事是看 Training Loss
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-training-loss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Training Loss 大：两个主要可能
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-model-bias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Model Bias：函数集合里没有好函数
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Model Bias：函数集合里没有好函数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-model-bias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 解决 Model Bias
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-optimization-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Optimization Problem：好函数存在，但没有找到
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-model-bias-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 如何区分 Model Bias 与 Optimization
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. 如何区分 Model Bias 与 Optimization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 诊断表
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-resnet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 ResNet 论文例子
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 观看数预测例子
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-training-loss-debug" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Training Loss 大时的 Debug 顺序
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-training-loss-testing-loss-overfitting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Training Loss 小、Testing Loss 大：Overfitting
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-overfit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. 为什么模型太有弹性会 Overfit
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-overfitting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. 解决 Overfitting：增加训练资料
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-data-augmentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Data Augmentation：合理创造资料
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-overfitting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. 解决 Overfitting：限制模型弹性
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13. 解决 Overfitting：限制模型弹性">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#131-cnn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.1 CNN 为什么在影像上有用
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-model-bias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. 限制太多会回到 Model Bias
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-public-leaderboard-validation-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. 不要把 Public Leaderboard 当 Validation Set
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-public-set-private-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Public Set 与 Private Set
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-validation-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. 正确做法：划分 Validation Set
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18-n-fold-cross-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. N-Fold Cross Validation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19-mismatch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19. 回看观看数预测失败：Mismatch
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#20-mismatch-overfitting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20. Mismatch 与 Overfitting 的区别
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#21-mismatch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21. 如何判断是否 Mismatch
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#22-debug" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        22. 本讲完整 Debug 流程
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        23. 重要术语表
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        24. 易错点与提醒
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        25. 知识地图
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        26. 复习问答
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#27" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        27. 本讲总结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../P4_%E7%B1%BB%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%AD%E7%BB%83%E4%B8%8D%E8%B5%B7%E6%9D%A5%E6%80%8E%E4%B9%88%E5%8A%9E_%E5%B1%80%E9%83%A8%E6%9C%80%E5%B0%8F%E5%80%BC%E4%B8%8E%E9%9E%8D%E7%82%B9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P4 局部最小值与鞍点
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../P5_%E7%B1%BB%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%AD%E7%BB%83%E4%B8%8D%E8%B5%B7%E6%9D%A5%E6%80%8E%E4%B9%88%E5%8A%9E_Batch%E4%B8%8EMomentum/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P5 Batch 与 Momentum
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../P6_%E7%B1%BB%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%AD%E7%BB%83%E4%B8%8D%E8%B5%B7%E6%9D%A5%E6%80%8E%E4%B9%88%E5%8A%9E_%E8%87%AA%E9%80%82%E5%BA%94%E5%AD%A6%E4%B9%A0%E7%8E%87/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P6 自适应学习率
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../P7_%E7%B1%BB%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%AD%E7%BB%83%E4%B8%8D%E8%B5%B7%E6%9D%A5%E6%80%8E%E4%B9%88%E5%8A%9E_%E5%88%86%E7%B1%BB%E4%B8%8E%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P7 分类与损失函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E7%B1%BB%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%AD%E7%BB%83%E4%B8%8D%E8%B5%B7%E6%9D%A5%E6%80%8E%E4%B9%88%E5%8A%9E_%E6%80%BB%E7%BB%93/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4-7讲类神经网络训练方法总结
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%26%E8%AF%AD%E9%9F%B3%E5%A4%84%E7%90%86%EF%BC%88lhy%EF%BC%89-%E6%9B%B4%E6%96%B0%E4%B8%AD/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    自然语言&语音处理（lhy）-更新中
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    自然语言&语音处理（lhy）-更新中
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%26%E8%AF%AD%E9%9F%B3%E5%A4%84%E7%90%86%EF%BC%88lhy%EF%BC%89-%E6%9B%B4%E6%96%B0%E4%B8%AD/P01_%E8%AF%BE%E7%A8%8B%E6%80%BB%E8%A7%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P01 课程总览
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%26%E8%AF%AD%E9%9F%B3%E5%A4%84%E7%90%86%EF%BC%88lhy%EF%BC%89-%E6%9B%B4%E6%96%B0%E4%B8%AD/P02_%E8%AF%AD%E9%9F%B3%E8%AF%86%E5%88%AB%E4%B8%80_%E4%BB%BB%E5%8A%A1%E5%AE%9A%E4%B9%89%E4%B8%8E%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E8%A1%A8%E7%A4%BA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P02 语音识别：任务定义与输入输出表示
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%26%E8%AF%AD%E9%9F%B3%E5%A4%84%E7%90%86%EF%BC%88lhy%EF%BC%89-%E6%9B%B4%E6%96%B0%E4%B8%AD/P03_%E8%AF%AD%E9%9F%B3%E8%AF%86%E5%88%AB%E4%BA%8C_LAS%E4%B8%8EAttentionSeq2Seq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P03 语音识别：LAS 与 AttentionSeq2Seq
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0. 本讲主线
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 时间线总览
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 前期作业的共同结构
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-training-loss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 结果不好时，第一件事是看 Training Loss
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-training-loss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Training Loss 大：两个主要可能
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-model-bias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Model Bias：函数集合里没有好函数
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Model Bias：函数集合里没有好函数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-model-bias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 解决 Model Bias
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-optimization-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Optimization Problem：好函数存在，但没有找到
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-model-bias-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 如何区分 Model Bias 与 Optimization
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. 如何区分 Model Bias 与 Optimization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 诊断表
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-resnet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 ResNet 论文例子
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 观看数预测例子
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-training-loss-debug" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Training Loss 大时的 Debug 顺序
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-training-loss-testing-loss-overfitting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Training Loss 小、Testing Loss 大：Overfitting
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-overfit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. 为什么模型太有弹性会 Overfit
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-overfitting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. 解决 Overfitting：增加训练资料
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-data-augmentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Data Augmentation：合理创造资料
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-overfitting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. 解决 Overfitting：限制模型弹性
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13. 解决 Overfitting：限制模型弹性">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#131-cnn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.1 CNN 为什么在影像上有用
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-model-bias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. 限制太多会回到 Model Bias
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-public-leaderboard-validation-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. 不要把 Public Leaderboard 当 Validation Set
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-public-set-private-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Public Set 与 Private Set
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-validation-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. 正确做法：划分 Validation Set
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18-n-fold-cross-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. N-Fold Cross Validation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19-mismatch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19. 回看观看数预测失败：Mismatch
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#20-mismatch-overfitting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20. Mismatch 与 Overfitting 的区别
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#21-mismatch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21. 如何判断是否 Mismatch
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#22-debug" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        22. 本讲完整 Debug 流程
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        23. 重要术语表
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        24. 易错点与提醒
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        25. 知识地图
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        26. 复习问答
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#27" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        27. 本讲总结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="p3">P3 第二节：机器学习任务攻略<a class="headerlink" href="#p3" title="Permanent link">&para;</a></h1>
+<p>来源：<code>P3【3、第二节 机器学习任务攻略】</code></p>
+<blockquote>
+<p>[!ABSTRACT] 本讲概要
+本讲不是介绍一个新模型，而是给出机器学习作业与竞赛的排错攻略。老师强调：当 Kaggle 或测试集分数不好时，不要立刻说“overfitting”，而要先回到 training loss。若 training loss 仍然很大，问题可能是 model bias，也可能是 optimization 没做好；若 training loss 已经很小，但 testing loss 很大，才进入 overfitting、validation set、public/private leaderboard 与 train-test mismatch 的讨论。本讲的核心能力是诊断：看到模型表现不好时，知道下一步该查什么，而不是凭感觉调参。</p>
+</blockquote>
+<h2 id="0">0. 本讲主线<a class="headerlink" href="#0" title="Permanent link">&para;</a></h2>
+<pre class="mermaid"><code>flowchart TD
+    A["Kaggle / testing 表现不好"] --&gt; B["先看 training loss"]
+    B --&gt; C{"training loss 大吗？"}
+    C -- "大" --&gt; D{"复杂模型是否比简单模型更好？"}
+    D -- "所有模型都高" --&gt; E["Model Bias：function set 中没有好函数"]
+    D -- "复杂模型反而更差" --&gt; F["Optimization：好函数存在但没找到"]
+    C -- "小" --&gt; G{"testing loss 是否大？"}
+    G -- "大" --&gt; H["Overfitting / validation 选择 / public set 过拟合"]
+    H --&gt; I{"train/test 来源是否不同？"}
+    I -- "是" --&gt; J["Mismatch：训练与测试分布不一致"]
+    G -- "不大" --&gt; K["模型可能已经合理"]</code></pre>
+<p>这张图是本讲最重要的思维工具。以后看到模型表现不佳，先不要问“我要不要换更深的模型”，而要先问：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>training loss 是大还是小？
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>testing loss 与 training loss 的差距在哪里？
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>训练资料和测试资料是否来自同一分布？
+</code></pre></div>
+<h2 id="1">1. 时间线总览<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>00:00-04:20</td>
+<td>前期作业共同格式：训练资料有 <code>X/Y</code>，测试资料只有 <code>X</code></td>
+</tr>
+<tr>
+<td>04:20-10:00</td>
+<td>作业攻略第一步：结果不好先看 training loss</td>
+</tr>
+<tr>
+<td>10:00-15:40</td>
+<td>Training loss 大：区分 model bias 与 optimization 问题</td>
+</tr>
+<tr>
+<td>15:40-21:30</td>
+<td>Training loss 小、testing loss 大：overfitting 的直觉</td>
+</tr>
+<tr>
+<td>21:30-28:00</td>
+<td>解决 overfitting：更多资料、data augmentation、限制模型</td>
+</tr>
+<tr>
+<td>28:00-31:00</td>
+<td>模型复杂度与 testing loss 的 U 形关系</td>
+</tr>
+<tr>
+<td>31:00-40:00</td>
+<td>不要用 public testing set 反复调模型</td>
+</tr>
+<tr>
+<td>40:00-46:30</td>
+<td>Validation set 与 N-fold cross validation</td>
+</tr>
+<tr>
+<td>46:30-49:30</td>
+<td>回看上节课预测观看数失败：mismatch</td>
+</tr>
+<tr>
+<td>49:30-51:20</td>
+<td>Train-test distribution mismatch 的判断与作业提醒</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2">2. 前期作业的共同结构<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<p>课程先说明，前期许多作业任务不同，但资料格式相似。</p>
+<p>训练资料通常包含输入与答案：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>(x1, y1), (x2, y2), ..., (xN, yN)
+</code></pre></div>
+<p>测试资料通常只有输入：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>x
+</code></pre></div>
+<p>也就是说，训练时你知道 <code>x</code> 和它对应的 <code>y</code>；测试时你只有 <code>x</code>，要让模型输出预测结果。</p>
+<table>
+<thead>
+<tr>
+<th>作业</th>
+<th>任务</th>
+<th><code>X</code> 是什么</th>
+<th><code>Y</code> 是什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HW1</td>
+<td>预测任务</td>
+<td>输入特征</td>
+<td>数值标签</td>
+</tr>
+<tr>
+<td>HW2</td>
+<td>语音辨识简化版</td>
+<td>一小段声音信号</td>
+<td>对应 phoneme，粗略可想成类似 KK 音标</td>
+</tr>
+<tr>
+<td>HW3</td>
+<td>影像辨识</td>
+<td>一张图片</td>
+<td>图片类别</td>
+</tr>
+<tr>
+<td>HW4</td>
+<td>语者辨识</td>
+<td>一段声音信号</td>
+<td>正在说话的人是谁</td>
+</tr>
+<tr>
+<td>HW5</td>
+<td>机器翻译</td>
+<td>某语言的一句话</td>
+<td>另一种语言的对应句子</td>
+</tr>
+</tbody>
+</table>
+<p>这些任务背后仍然是 P1/P2 的机器学习三步骤：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>1. 写出带未知参数 theta 的函数 f_theta(x)
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>2. 定义 loss L(theta)
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>3. 找 theta*，让 loss 尽量小
+</code></pre></div>
+<p>训练完成后：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>把 theta* 放回模型
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>=&gt; 对测试资料 x 输出预测
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>=&gt; 上传 Kaggle 或交作业系统
+</code></pre></div>
+<h2 id="3-training-loss">3. 结果不好时，第一件事是看 Training Loss<a class="headerlink" href="#3-training-loss" title="Permanent link">&para;</a></h2>
+<p>如果 Kaggle 分数不好，第一件事不是立刻换模型，也不是马上说 overfitting，而是：</p>
+<blockquote>
+<p>[!IMPORTANT] 第一诊断原则
+先检查模型在 training data 上的 loss。</p>
+</blockquote>
+<p>原因很简单：如果模型连训练资料都学不好，那么直接讨论测试资料表现意义不大。你必须先知道模型在“已经看过、答案已知”的资料上是否学起来。</p>
+<p>可以把问题分成两大类：</p>
+<table>
+<thead>
+<tr>
+<th>观察</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Training loss 大</td>
+<td>模型在训练资料上都没学好</td>
+</tr>
+<tr>
+<td>Training loss 小，testing loss 大</td>
+<td>模型学会训练资料，但没有泛化到测试资料</td>
+</tr>
+</tbody>
+</table>
+<p>课程特别提醒：很多同学一看到 testing 分数不好就说 overfitting，这是不严谨的。Overfitting 的前提是：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>training loss 已经小，但 testing loss 仍然大。
+</code></pre></div>
+<p>如果 training loss 本身就大，那还没资格谈 overfitting。</p>
+<h2 id="4-training-loss">4. Training Loss 大：两个主要可能<a class="headerlink" href="#4-training-loss" title="Permanent link">&para;</a></h2>
+<p>当 training loss 大时，说明模型在训练资料上都表现不好。这时主要有两种可能：</p>
+<ol>
+<li><strong>Model bias</strong></li>
+<li><strong>Optimization problem</strong></li>
+</ol>
+<p>它们表面现象一样，都是 training loss 大；但原因完全不同，解法也不同。</p>
+<h2 id="5-model-bias">5. Model Bias：函数集合里没有好函数<a class="headerlink" href="#5-model-bias" title="Permanent link">&para;</a></h2>
+<p>所谓 <strong>model bias</strong>，是指模型可以表示的函数集合太小，里面没有任何一个函数能让 loss 足够低。</p>
+<p>更形式化地说：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>选定一个 model
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>=&gt; 不同 theta 对应不同函数 f_theta
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>=&gt; 所有 f_theta 组成 function set
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>=&gt; 如果 function set 中没有好函数，就是 model bias
+</code></pre></div>
+<p>课程用“大海捞针”比喻：</p>
+<table>
+<thead>
+<tr>
+<th>比喻</th>
+<th>机器学习含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>大海</td>
+<td>这个 model 的 function set</td>
+</tr>
+<tr>
+<td>针</td>
+<td>loss 很低的好函数</td>
+</tr>
+<tr>
+<td>针不在海里</td>
+<td>model bias</td>
+</tr>
+</tbody>
+</table>
+<p>如果针不在这片海里，无论 optimization 多努力，都不可能捞到针。也就是说，模型形式太弱时，训练算法再认真也只能找到“差模型里相对最好的函数”。</p>
+<h3 id="51-model-bias">5.1 解决 Model Bias<a class="headerlink" href="#51-model-bias" title="Permanent link">&para;</a></h3>
+<p>如果问题是 model bias，方向是：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>让 model 更有弹性，让 function set 更大或更合适。
+</code></pre></div>
+<p>常见方法：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>直觉</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>加更多 feature</td>
+<td>给模型更多有用输入</td>
+</tr>
+<tr>
+<td>设计更大模型</td>
+<td>提升函数表达能力</td>
+</tr>
+<tr>
+<td>增加 neuron 数量</td>
+<td>让神经网络能表示更复杂函数</td>
+</tr>
+<tr>
+<td>增加 hidden layer</td>
+<td>用深度结构表达复杂规律</td>
+</tr>
+<tr>
+<td>换更合适架构</td>
+<td>让模型结构更贴近资料特性</td>
+</tr>
+</tbody>
+</table>
+<p>P1/P2 的观看数预测例子就是一例：只看前一天观看数时模型太简单，加入前 7 天、28 天、56 天资料后，模型表达能力变强，training/testing 表现也改善。</p>
+<h2 id="6-optimization-problem">6. Optimization Problem：好函数存在，但没有找到<a class="headerlink" href="#6-optimization-problem" title="Permanent link">&para;</a></h2>
+<p>另一种 training loss 大的原因是 <strong>optimization problem</strong>。</p>
+<p>这种情况是：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>function set 中其实有好函数
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>但 gradient descent 或其他训练方法没有找到它
+</code></pre></div>
+<p>仍用大海捞针比喻：</p>
+<table>
+<thead>
+<tr>
+<th>比喻</th>
+<th>机器学习含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>针在海里</td>
+<td>model 有能力表示好函数</td>
+</tr>
+<tr>
+<td>没捞到针</td>
+<td>optimization 没做好</td>
+</tr>
+</tbody>
+</table>
+<p>这和 model bias 完全不同。Model bias 是“没有好函数可找”；optimization problem 是“好函数存在，但训练过程没找到”。</p>
+<p>深度学习中的 optimization 可能受 learning rate、初始化、网络深度、梯度消失/爆炸、局部几何结构等因素影响。后续课程会专门讨论神经网络训练不起来时该怎么办。</p>
+<h2 id="7-model-bias-optimization">7. 如何区分 Model Bias 与 Optimization<a class="headerlink" href="#7-model-bias-optimization" title="Permanent link">&para;</a></h2>
+<p>课程给出一个实用判断方法：</p>
+<blockquote>
+<p>[!IMPORTANT] 比较简单模型与复杂模型的 training loss。</p>
+</blockquote>
+<p>直觉是：大模型通常应该至少包含小模型能做的事情。如果复杂模型在 training data 上反而比简单模型更差，就不太像 model bias，而更像 optimization 没做好。</p>
+<h3 id="71">7.1 诊断表<a class="headerlink" href="#71" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>观察</th>
+<th>更可能的问题</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>简单模型和复杂模型 training loss 都高</td>
+<td>Model bias 或 feature/model 设计不足</td>
+<td>function set 里可能没有好函数</td>
+</tr>
+<tr>
+<td>简单模型 training loss 低，复杂模型反而高</td>
+<td>Optimization problem</td>
+<td>复杂模型理论上更强，却没训练好</td>
+</tr>
+<tr>
+<td>复杂模型 training loss 明显更低</td>
+<td>Model bias 得到缓解</td>
+<td>更大的 function set 找到更好函数</td>
+</tr>
+</tbody>
+</table>
+<h3 id="72-resnet">7.2 ResNet 论文例子<a class="headerlink" href="#72-resnet" title="Permanent link">&para;</a></h3>
+<p>课程引用 ResNet 早期论文中的典型现象：</p>
+<table>
+<thead>
+<tr>
+<th>模型</th>
+<th>观察</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>20 层网络</td>
+<td>training loss 较低</td>
+</tr>
+<tr>
+<td>56 层网络</td>
+<td>training loss 反而较高</td>
+</tr>
+</tbody>
+</table>
+<p>这不是 overfitting，因为比较的是 training loss。也不应该简单说 56 层网络 model bias 更大，因为 56 层网络理论上至少可以模拟 20 层网络：前 20 层做同样事情，后面层如果能学成 identity mapping，就不会比 20 层差。</p>
+<p>因此，如果 56 层网络训练 loss 更高，重点是：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>Optimization 没有成功找到应有的好参数。
+</code></pre></div>
+<p>ResNet 的 residual connection 正是为了让深层网络更容易学到接近 identity 的映射，从而缓解深层网络训练困难。</p>
+<h3 id="73">7.3 观看数预测例子<a class="headerlink" href="#73" title="Permanent link">&para;</a></h3>
+<p>P2 中一层、两层、三层、四层网络的 training loss 逐渐下降。如果某个五层网络 training loss 反而比四层更高，也不应说五层网络 model bias 更大。</p>
+<p>原因是：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>四层能做到的事，五层理论上应该也能做到。
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>如果五层训练结果更差，多半是 optimization 失败。
+</code></pre></div>
+<h2 id="8-training-loss-debug">8. Training Loss 大时的 Debug 顺序<a class="headerlink" href="#8-training-loss-debug" title="Permanent link">&para;</a></h2>
+<p>当 training loss 大时，可以按下面顺序检查：</p>
+<ol>
+<li>先跑简单模型，例如 linear model、浅层 neural network 或传统方法。</li>
+<li>记录简单模型能把 training loss 压到多低。</li>
+<li>再跑更复杂模型，例如更深、更宽的 network。</li>
+<li>如果复杂模型 training loss 没有更低，怀疑 optimization。</li>
+<li>如果所有模型 training loss 都高，怀疑 model bias、feature 不足或任务本身资料信息不够。</li>
+</ol>
+<p>简化为：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>training loss 大
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>    ↓
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>比较简单模型与复杂模型
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>    ↓
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>简单模型也差：可能 model bias
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>复杂模型比简单模型还差：optimization 问题
+</code></pre></div>
+<blockquote>
+<p>[!NOTE] 实务提醒
+诊断模型时，简单 baseline 很重要。没有 baseline，就很难判断复杂模型到底是真的能力不足，还是训练过程出了问题。</p>
+</blockquote>
+<h2 id="9-training-loss-testing-loss-overfitting">9. Training Loss 小、Testing Loss 大：Overfitting<a class="headerlink" href="#9-training-loss-testing-loss-overfitting" title="Permanent link">&para;</a></h2>
+<p>如果 training loss 已经很小，但 testing loss 很大，这时才进入 <strong>overfitting</strong> 的讨论。</p>
+<p>定义：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>Overfitting = 模型在训练资料上表现好，但在没看过的资料上表现差。
+</code></pre></div>
+<p>课程用一个极端函数说明：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>如果输入 x 出现在训练资料里，就输出它对应的 y
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>如果输入 x 没出现在训练资料里，就随机输出
+</code></pre></div>
+<p>这个函数在 training data 上可以 loss 为 0，因为它把训练资料全背下来。但在 testing data 上，它没有学到规律，只能乱猜。</p>
+<p>这就是 overfitting 的极端版本：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>记住训练资料，不等于学到可泛化规律。
+</code></pre></div>
+<h2 id="10-overfit">10. 为什么模型太有弹性会 Overfit<a class="headerlink" href="#10-overfit" title="Permanent link">&para;</a></h2>
+<p>课程用一维函数例子建立直觉：</p>
+<p>真实关系可能是一条平滑曲线，但训练资料只给了曲线上的少量点。如果模型太有弹性，它可以刚好穿过所有训练点，让 training loss 很低；但在没有训练点约束的区间，函数可能乱弯，导致 testing loss 很大。</p>
+<p>可以概括为：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>资料少 + 模型太自由
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>=&gt; 模型可以贴住训练点
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>=&gt; 但没有学到真实规律
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>=&gt; testing loss 大
+</code></pre></div>
+<p>这解释了为什么“更复杂的模型”不是永远更好。复杂模型能降低 training loss，但也更容易利用训练资料中的偶然细节。</p>
+<h2 id="11-overfitting">11. 解决 Overfitting：增加训练资料<a class="headerlink" href="#11-overfitting" title="Permanent link">&para;</a></h2>
+<p>最直接、常常也最有效的方法是：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>增加训练资料。
+</code></pre></div>
+<p>如果训练点更多，模型就会受到更多约束，不容易在没有资料的地方乱弯。</p>
+<p>不过在课程作业中，通常不允许随便额外搜集资料。原因是作业目标是训练建模能力，不是比谁能找到更多外部数据。</p>
+<h2 id="12-data-augmentation">12. Data Augmentation：合理创造资料<a class="headerlink" href="#12-data-augmentation" title="Permanent link">&para;</a></h2>
+<p>虽然不能随便找外部资料，但可以对已有资料做 <strong>data augmentation</strong>。</p>
+<p>Data augmentation 的意思是：根据任务性质，对已有样本做合理变换，产生新的训练样本。</p>
+<p>以图像分类为例：</p>
+<table>
+<thead>
+<tr>
+<th>Augmentation</th>
+<th>是否通常合理</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>左右翻转</td>
+<td>常常合理</td>
+<td>多数物体左右翻转后类别不变</td>
+</tr>
+<tr>
+<td>小幅裁切后放大</td>
+<td>常常合理</td>
+<td>物体局部变化不应改变类别</td>
+</tr>
+<tr>
+<td>小幅旋转/平移</td>
+<td>常常合理</td>
+<td>拍摄角度可能自然变化</td>
+</tr>
+<tr>
+<td>颜色轻微扰动</td>
+<td>视任务而定</td>
+<td>可增加光照鲁棒性</td>
+</tr>
+<tr>
+<td>上下颠倒</td>
+<td>不一定合理</td>
+<td>真实世界中倒置物体分布可能不同</td>
+</tr>
+</tbody>
+</table>
+<p>关键原则：</p>
+<blockquote>
+<p>[!WARNING] Augmentation 不能乱做
+资料增强必须符合任务与真实资料分布。为了增加资料量而制造不合理样本，反而可能教坏模型。</p>
+</blockquote>
+<h2 id="13-overfitting">13. 解决 Overfitting：限制模型弹性<a class="headerlink" href="#13-overfitting" title="Permanent link">&para;</a></h2>
+<p>另一类方法是限制模型，不让它太自由。</p>
+<p>如果你对问题有先验知识，可以把模型限制在合理的函数集合中。例如你知道真实关系大概像二次曲线，就不要让模型随意拟合任意高频波动。</p>
+<p>常见限制方法：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>减少参数数量</td>
+<td>降低模型自由度</td>
+</tr>
+<tr>
+<td>减少 neuron 数量</td>
+<td>减少深度模型表达能力</td>
+</tr>
+<tr>
+<td>减少 layer 数量</td>
+<td>降低复杂度</td>
+</tr>
+<tr>
+<td>减少 feature</td>
+<td>避免模型利用无关输入乱拟合</td>
+</tr>
+<tr>
+<td>参数共享</td>
+<td>用同一组参数处理不同位置，减少自由度</td>
+</tr>
+<tr>
+<td>Regularization</td>
+<td>在 loss 中加入惩罚项，限制参数过大或过复杂</td>
+</tr>
+<tr>
+<td>Dropout</td>
+<td>训练时随机丢弃部分 neuron，减少对特定路径依赖</td>
+</tr>
+<tr>
+<td>Early stopping</td>
+<td>在 validation 表现变差前停止训练</td>
+</tr>
+</tbody>
+</table>
+<h3 id="131-cnn">13.1 CNN 为什么在影像上有用<a class="headerlink" href="#131-cnn" title="Permanent link">&para;</a></h3>
+<p>课程特别提醒：CNN 并不是因为比 fully connected network 更自由而强。相反，CNN 对模型施加了更多限制，例如局部连接、参数共享等。</p>
+<p>这些限制让 CNN 的 function set 更小，但更符合影像资料的结构：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>影像中的局部纹理、边缘、形状具有空间结构
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>CNN 的限制正好利用这些结构
+</code></pre></div>
+<p>因此，好的限制不是坏事。合适的限制可以形成有用的 <strong>inductive bias</strong>，让模型更容易泛化。</p>
+<h2 id="14-model-bias">14. 限制太多会回到 Model Bias<a class="headerlink" href="#14-model-bias" title="Permanent link">&para;</a></h2>
+<p>限制模型可以降低 overfitting，但限制过头又会造成 model bias。</p>
+<p>例如：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>真实关系是二次曲线
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>你强迫模型只能是一条直线
+</code></pre></div>
+<p>这时模型无法贴合训练资料，也无法在测试资料上表现好。</p>
+<p>模型复杂度与 loss 的关系可以这样理解：</p>
+<pre class="mermaid"><code>flowchart LR
+    A["模型太简单"] --&gt; B["Training loss 高"]
+    B --&gt; C["Model Bias"]
+    D["模型复杂度适中"] --&gt; E["Training loss 低"]
+    E --&gt; F["Testing loss 低"]
+    G["模型太复杂"] --&gt; H["Training loss 很低"]
+    H --&gt; I["Testing loss 变高"]
+    I --&gt; J["Overfitting"]</code></pre>
+<p>Testing loss 往往随模型复杂度呈 U 形：</p>
+<table>
+<thead>
+<tr>
+<th>模型复杂度</th>
+<th style="text-align: right;">Training loss</th>
+<th style="text-align: right;">Testing loss</th>
+<th>主要问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>太低</td>
+<td style="text-align: right;">高</td>
+<td style="text-align: right;">高</td>
+<td>Model bias</td>
+</tr>
+<tr>
+<td>适中</td>
+<td style="text-align: right;">低</td>
+<td style="text-align: right;">低</td>
+<td>泛化较好</td>
+</tr>
+<tr>
+<td>太高</td>
+<td style="text-align: right;">很低</td>
+<td style="text-align: right;">高</td>
+<td>Overfitting</td>
+</tr>
+</tbody>
+</table>
+<p>目标不是一味增大模型，也不是一味限制模型，而是找到适合资料与任务的复杂度。</p>
+<h2 id="15-public-leaderboard-validation-set">15. 不要把 Public Leaderboard 当 Validation Set<a class="headerlink" href="#15-public-leaderboard-validation-set" title="Permanent link">&para;</a></h2>
+<p>在 Kaggle 作业中，一个常见诱惑是：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>训练很多模型
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>全部上传
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>看 public leaderboard 哪个分数最高
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>就选那个
+</code></pre></div>
+<p>课程不建议这样做，因为 public testing set 也只是测试资料的一部分。如果你反复根据 public score 调模型，就会逐渐 fit 到 public set。</p>
+<p>极端例子：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>假设你有一兆个随机模型
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>每个模型对未见资料其实都是乱猜
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>但只要上传足够多，总会有一个碰巧在 public set 上分数很好
+</code></pre></div>
+<p>这个模型并不是真的好，只是刚好撞中了 public set。到 private set 上就可能崩。</p>
+<p>所以：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>Public leaderboard 分数好，不保证 private leaderboard 分数好。
+</code></pre></div>
+<h2 id="16-public-set-private-set">16. Public Set 与 Private Set<a class="headerlink" href="#16-public-set-private-set" title="Permanent link">&para;</a></h2>
+<p>Kaggle 常把 testing set 分成两部分：</p>
+<table>
+<thead>
+<tr>
+<th>集合</th>
+<th>作用</th>
+<th>何时可见</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Public testing set</td>
+<td>上传后即时显示分数，用于 leaderboard</td>
+<td>比赛过程中可见</td>
+</tr>
+<tr>
+<td>Private testing set</td>
+<td>最终排名依据，更接近真实泛化评估</td>
+<td>截止后公布</td>
+</tr>
+</tbody>
+</table>
+<p>如果所有 testing set 分数都公开，参赛者可以不断试答案，最后 leaderboard 会变成“谁更会刷 public set”。因此 private set 的存在是为了降低这种过拟合。</p>
+<p>课程也借此提醒：许多公开 benchmark 上的高分要谨慎理解。如果一个 benchmark 被反复使用多年，研究者可能在无意中针对它调了很多设计，导致 benchmark 分数高不一定等于真实世界表现同样好。</p>
+<h2 id="17-validation-set">17. 正确做法：划分 Validation Set<a class="headerlink" href="#17-validation-set" title="Permanent link">&para;</a></h2>
+<p>更合理的模型选择方法是：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>从 training data 中切出 validation set。
+</code></pre></div>
+<p>例如：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>90% training set
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>10% validation set
+</code></pre></div>
+<p>流程：</p>
+<pre class="mermaid"><code>flowchart TD
+    A["原始 training data"] --&gt; B["切分"]
+    B --&gt; C["真正用于训练的 training split"]
+    B --&gt; D["validation set"]
+    C --&gt; E["训练多个模型或调超参数"]
+    E --&gt; F["用 validation loss 选择模型"]
+    F --&gt; G["最后再上传 Kaggle"]</code></pre>
+<p>理想做法是：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>用 validation loss 挑模型
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>不要反复根据 public score 调模型
+</code></pre></div>
+<p>现实中，看到 public score 后完全不受影响很难，但至少要意识到：public set 不应该承担 validation set 的角色。</p>
+<h2 id="18-n-fold-cross-validation">18. N-Fold Cross Validation<a class="headerlink" href="#18-n-fold-cross-validation" title="Permanent link">&para;</a></h2>
+<p>如果担心一次 validation 切分不稳定，可以使用 <strong>N-fold cross validation</strong>。</p>
+<p>做法：</p>
+<ol>
+<li>把训练资料切成 <code>N</code> 份。</li>
+<li>每次拿其中一份当 validation set，其余 <code>N-1</code> 份当 training set。</li>
+<li>重复 <code>N</code> 次。</li>
+<li>把 <code>N</code> 次 validation 结果平均。</li>
+<li>选择平均 validation 表现最好的模型或超参数。</li>
+<li>最后用全部 training data 重新训练选出的配置，再用于 testing set。</li>
+</ol>
+<p>3-fold 例子：</p>
+<table>
+<thead>
+<tr>
+<th>第几次</th>
+<th>Training set</th>
+<th>Validation set</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>第 1、2 份</td>
+<td>第 3 份</td>
+</tr>
+<tr>
+<td>2</td>
+<td>第 1、3 份</td>
+<td>第 2 份</td>
+</tr>
+<tr>
+<td>3</td>
+<td>第 2、3 份</td>
+<td>第 1 份</td>
+</tr>
+</tbody>
+</table>
+<p>N-fold 的价值是降低“刚好切到奇怪 validation set”的风险，让模型选择更稳定。</p>
+<h2 id="19-mismatch">19. 回看观看数预测失败：Mismatch<a class="headerlink" href="#19-mismatch" title="Permanent link">&para;</a></h2>
+<p>P2 末尾，大家根据模型选择逻辑倾向选择 3 层 network 来预测 2021 年 2 月 26 日的 YouTube 观看数。但结果很差，误差约 <code>2.58K</code>。</p>
+<p>原因是模型根据过去资料学到：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>星期五观看人数通常较低。
+</code></pre></div>
+<p>所以它预测 2 月 26 日会是低点。但实际那天是观看人数高峰。</p>
+<p>这不是普通 overfitting，而是 <strong>mismatch</strong>：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>训练资料和测试资料来自不同分布。
+</code></pre></div>
+<p>如果 test data 的规律和 training data 不一样，模型在 training data 上再成功，也可能无法预测 test data。</p>
+<h2 id="20-mismatch-overfitting">20. Mismatch 与 Overfitting 的区别<a class="headerlink" href="#20-mismatch-overfitting" title="Permanent link">&para;</a></h2>
+<p>Overfitting 与 mismatch 都会导致 testing 表现差，但原因不同。</p>
+<table>
+<thead>
+<tr>
+<th>问题</th>
+<th>典型现象</th>
+<th>原因</th>
+<th>常见解法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Overfitting</td>
+<td>training loss 小，testing loss 大</td>
+<td>模型记住训练资料细节，泛化差</td>
+<td>更多同分布资料、augmentation、regularization、dropout、early stopping</td>
+</tr>
+<tr>
+<td>Mismatch</td>
+<td>training/validation 表现可能不错，但真正 test 表现差</td>
+<td>train/test 分布不同</td>
+<td>收集或适配目标分布资料、domain adaptation、重新定义训练/验证切分</td>
+</tr>
+</tbody>
+</table>
+<p>课程用 COVID-19 作业举例：如果用 2020 年资料训练、2021 年资料测试，两年的疫情状态、政策、社会行为可能不同，训练分布和测试分布就会不一致。</p>
+<p>这种情况下，单纯增加更多旧分布资料不一定有效，因为你增加的仍然不是测试分布。</p>
+<h2 id="21-mismatch">21. 如何判断是否 Mismatch<a class="headerlink" href="#21-mismatch" title="Permanent link">&para;</a></h2>
+<p>判断 mismatch 不能只看 loss 数字，还需要理解资料来源。</p>
+<p>可以检查：</p>
+<table>
+<thead>
+<tr>
+<th>问题</th>
+<th>可能的 mismatch 来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>training/testing 是否来自不同时间段？</td>
+<td>季节、政策、趋势变化</td>
+</tr>
+<tr>
+<td>是否来自不同设备？</td>
+<td>麦克风、相机、传感器差异</td>
+</tr>
+<tr>
+<td>是否来自不同环境？</td>
+<td>光照、噪声、背景差异</td>
+</tr>
+<tr>
+<td>是否来自不同人群？</td>
+<td>年龄、地区、语言习惯差异</td>
+</tr>
+<tr>
+<td>图像风格是否不同？</td>
+<td>真实照片 vs 手绘图、不同拍摄条件</td>
+</tr>
+<tr>
+<td>文字/语音领域是否不同？</td>
+<td>新闻、社群、客服、学术语料差异</td>
+</tr>
+</tbody>
+</table>
+<p>如果 train/test 的产生方式有系统差异，就要警惕 mismatch。</p>
+<p>课程也提醒：作业通常会尽量避免严重 mismatch，除非这个作业本来就是要训练你处理 mismatch，例如后续 domain adaptation 相关任务。</p>
+<h2 id="22-debug">22. 本讲完整 Debug 流程<a class="headerlink" href="#22-debug" title="Permanent link">&para;</a></h2>
+<pre class="mermaid"><code>flowchart TD
+    A["模型表现不好"] --&gt; B["检查 training loss"]
+    B --&gt; C{"training loss 大？"}
+    C -- "是" --&gt; D["比较简单模型与复杂模型"]
+    D --&gt; E{"复杂模型是否明显更好？"}
+    E -- "否，且复杂模型更差" --&gt; F["Optimization problem"]
+    E -- "否，所有模型都差" --&gt; G["Model bias / feature 不足"]
+    E -- "是" --&gt; H["继续扩大合适模型或改善 feature"]
+    C -- "否" --&gt; I{"testing loss 大？"}
+    I -- "否" --&gt; J["模型表现可能可接受"]
+    I -- "是" --&gt; K["检查 overfitting"]
+    K --&gt; L["增加资料 / augmentation / 限制模型"]
+    L --&gt; M["用 validation set 选模型"]
+    M --&gt; N{"public 与 private 差距大？"}
+    N -- "是" --&gt; O["可能 fit public set"]
+    M --&gt; P{"train/test 分布不同？"}
+    P -- "是" --&gt; Q["Mismatch / domain adaptation"]</code></pre>
+<h2 id="23">23. 重要术语表<a class="headerlink" href="#23" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>术语</th>
+<th>中文</th>
+<th>本讲含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Training loss</td>
+<td>训练损失</td>
+<td>模型在训练资料上的误差</td>
+</tr>
+<tr>
+<td>Testing loss</td>
+<td>测试损失</td>
+<td>模型在未见资料上的误差</td>
+</tr>
+<tr>
+<td>Model bias</td>
+<td>模型偏差/模型限制</td>
+<td>模型太简单，function set 中没有好函数</td>
+</tr>
+<tr>
+<td>Optimization problem</td>
+<td>优化问题</td>
+<td>好函数存在，但训练方法没有找到</td>
+</tr>
+<tr>
+<td>Function set</td>
+<td>函数集合</td>
+<td>某个 model 在所有参数取值下能表示的函数集合</td>
+</tr>
+<tr>
+<td>Baseline</td>
+<td>基准模型</td>
+<td>用来帮助诊断的简单模型</td>
+</tr>
+<tr>
+<td>Overfitting</td>
+<td>过拟合</td>
+<td>training loss 小，testing loss 大</td>
+</tr>
+<tr>
+<td>Data augmentation</td>
+<td>资料增强</td>
+<td>根据任务理解，对已有资料做合理变换</td>
+</tr>
+<tr>
+<td>Regularization</td>
+<td>正则化</td>
+<td>在训练目标或模型中加入限制，减少过拟合</td>
+</tr>
+<tr>
+<td>Dropout</td>
+<td>随机丢弃</td>
+<td>训练时随机丢弃部分 neuron，降低过度依赖</td>
+</tr>
+<tr>
+<td>Early stopping</td>
+<td>早停</td>
+<td>在模型过度贴合训练资料前停止训练</td>
+</tr>
+<tr>
+<td>Public set</td>
+<td>公开测试集</td>
+<td>上传后立即显示分数的测试部分</td>
+</tr>
+<tr>
+<td>Private set</td>
+<td>私有测试集</td>
+<td>截止后才用于最终排名的测试部分</td>
+</tr>
+<tr>
+<td>Validation set</td>
+<td>验证集</td>
+<td>从训练资料中切出，用来选择模型和超参数</td>
+</tr>
+<tr>
+<td>N-fold cross validation</td>
+<td>N 折交叉验证</td>
+<td>多次切分训练/验证并平均评估</td>
+</tr>
+<tr>
+<td>Mismatch</td>
+<td>分布不匹配</td>
+<td>training data 与 testing data 来自不同分布</td>
+</tr>
+<tr>
+<td>Domain adaptation</td>
+<td>领域适应</td>
+<td>处理 train/test 分布差异的一类方法</td>
+</tr>
+</tbody>
+</table>
+<h2 id="24">24. 易错点与提醒<a class="headerlink" href="#24" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Testing 表现差不等于 overfitting。</li>
+<li>判断 overfitting 前，必须先看 training loss。</li>
+<li>Training loss 大时，优先判断 model bias 还是 optimization。</li>
+<li>大模型 training loss 比小模型还高，通常是 optimization 做不好。</li>
+<li>Model bias 的解法是增加模型弹性或改善 feature，不是 regularization。</li>
+<li>Optimization 问题的解法是改善训练方法，不是盲目加限制。</li>
+<li>Overfitting 的解法是更多资料、合理 augmentation 或限制模型。</li>
+<li>Data augmentation 必须符合真实资料分布，不能乱变换。</li>
+<li>CNN 强不只是因为“深”，而是因为它对影像任务施加了合适限制。</li>
+<li>不要用 public leaderboard 反复调模型，否则会 fit 到 public set。</li>
+<li>Validation set 是用来选模型的，不是最终 testing set。</li>
+<li>Public score 只是参考，private score 更接近最终泛化评估。</li>
+<li>Mismatch 与 overfitting 原因不同，增加旧分布资料不一定解决 mismatch。</li>
+</ol>
+<h2 id="25">25. 知识地图<a class="headerlink" href="#25" title="Permanent link">&para;</a></h2>
+<pre class="mermaid"><code>mindmap
+  root((P3 机器学习任务攻略))
+    作业格式
+      Training data
+      Testing data
+      X和Y
+    Training loss大
+      Model Bias
+        Function set太小
+        加feature
+        加模型弹性
+      Optimization
+        好函数没找到
+        深层网络训练困难
+        ResNet例子
+    Training小Testing大
+      Overfitting
+        增加资料
+        Data Augmentation
+        Regularization
+        Dropout
+        Early Stopping
+    模型选择
+      Validation Set
+      N-fold Cross Validation
+      Public Leaderboard
+      Private Leaderboard
+    其他风险
+      Mismatch
+      Train-Test Distribution
+      Domain Adaptation</code></pre>
+<h2 id="26">26. 复习问答<a class="headerlink" href="#26" title="Permanent link">&para;</a></h2>
+<p><strong>Q1：作业结果不好时，第一件事应该做什么？</strong><br />
+A：检查 training loss，先确认模型在训练资料上是否学起来。</p>
+<p><strong>Q2：training loss 大代表什么？</strong><br />
+A：代表模型连训练资料都没有学好，可能是 model bias，也可能是 optimization 做不好。</p>
+<p><strong>Q3：model bias 是什么？</strong><br />
+A：模型太简单或 function set 不合适，导致里面没有任何函数可以让 loss 足够低。</p>
+<p><strong>Q4：optimization problem 是什么？</strong><br />
+A：模型的 function set 里有好函数，但训练算法没有找到它。</p>
+<p><strong>Q5：如何区分 model bias 与 optimization problem？</strong><br />
+A：比较简单模型和复杂模型的 training loss。如果复杂模型反而更差，通常是 optimization 问题；如果所有模型都差，可能是 model bias。</p>
+<p><strong>Q6：为什么 ResNet 例子说明 optimization 问题？</strong><br />
+A：56 层网络理论上应至少能模拟 20 层网络，若 training loss 反而更高，说明深层网络没有被成功优化。</p>
+<p><strong>Q7：overfitting 的判断条件是什么？</strong><br />
+A：training loss 小，但 testing loss 大。</p>
+<p><strong>Q8：为什么模型太有弹性容易 overfit？</strong><br />
+A：它可能记住训练点，在没有训练资料约束的地方乱弯，导致未见资料表现差。</p>
+<p><strong>Q9：data augmentation 是什么？</strong><br />
+A：根据任务理解，对已有资料做合理变换来产生更多训练样本，例如图片左右翻转或小幅裁切。</p>
+<p><strong>Q10：为什么不能只看 Kaggle public score 选模型？</strong><br />
+A：反复根据 public score 调模型会 fit 到 public set，导致 private set 表现变差。</p>
+<p><strong>Q11：validation set 的作用是什么？</strong><br />
+A：从训练资料中切出一部分，用来评估模型和选择超参数，避免把 public set 当调参依据。</p>
+<p><strong>Q12：N-fold cross validation 解决什么问题？</strong><br />
+A：减少单次 validation 切分不稳定的问题，通过多种切分平均评估模型。</p>
+<p><strong>Q13：mismatch 是什么？</strong><br />
+A：训练资料和测试资料来自不同分布，导致模型学到的规律不能很好迁移到测试资料。</p>
+<p><strong>Q14：mismatch 和 overfitting 有什么区别？</strong><br />
+A：Overfitting 是模型过度贴合训练资料；mismatch 是训练和测试分布不同。前者常可由更多同分布资料缓解，后者需要处理分布差异。</p>
+<h2 id="27">27. 本讲总结<a class="headerlink" href="#27" title="Permanent link">&para;</a></h2>
+<p>本讲最重要的作业攻略是：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>先看 training loss，再谈 testing loss。
+</code></pre></div>
+<p>如果 training loss 大：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>可能 model bias：
+<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>    模型太小、feature 不够、function set 中没有好函数
+<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a>
+<a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a>可能 optimization：
+<a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a>    模型够大，但 gradient descent 没找到好参数
+</code></pre></div>
+<p>如果 training loss 小、testing loss 大：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>可能 overfitting：
+<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a>    模型记住训练资料，没有学到泛化规律
+<a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a>
+<a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a>解法：
+<a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a>    更多资料、data augmentation、regularization、dropout、
+<a id="__codelineno-29-6" name="__codelineno-29-6" href="#__codelineno-29-6"></a>    early stopping、降低模型复杂度
+</code></pre></div>
+<p>模型选择时：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>不要拿 public leaderboard 当 validation set。
+<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>应该从 training data 中切 validation set。
+<a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a>担心切分不稳，就用 N-fold cross validation。
+</code></pre></div>
+<p>最后还要警惕：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>如果 train/test 分布不同，就是 mismatch。
+<a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>这不是普通 overfitting，单纯增加旧分布训练资料可能没用。
+</code></pre></div>
+<blockquote>
+<p>[!IMPORTANT] 核心结论
+机器学习任务失败时，真正重要的是诊断顺序：先确认训练资料是否学好，再判断是 model bias、optimization、overfitting、validation 选择问题，还是 train-test mismatch。会诊断，才知道下一步该改模型、改训练、改资料，还是改评估方式。</p>
+</blockquote>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "navigation.indexes", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
